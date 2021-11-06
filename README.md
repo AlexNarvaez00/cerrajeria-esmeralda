@@ -1,3 +1,40 @@
+# Descargar el repositorio.
+
+Para clonar el repositorio deben de dirigirse a la carpeta 
+htdocs en eldico local C:/
+
+```
+    C:\xampp\htdocs\
+```
+![HTDOCS](img/htdocs.png)
+___
+
+Una vez que esten en la carpeta de "htdocs", ejecuten el comando para clonar el 
+repositorio.
+
+```
+    git clone https://gitlab.com/NarvaezRuizAlexis/cerrajeria.git
+    cd cerrajeria
+```
+**Poner imagen de clonar.
+
+___
+
+Una vez que termine de descargar el proyecto, para comprobar que tienen todo lo que he mandado escriban el siguiente comando.
+```
+    git branch 
+```
+Si lo hicieron bien, les deberana aparecer sus nombres.
+** Insertar branch
+
+
+
+
+
+
+
+
+___
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
