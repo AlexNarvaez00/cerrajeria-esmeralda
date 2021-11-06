@@ -1,3 +1,8 @@
+# Videos que les recomeindo que vean para entender PHP.
+* [Git primeros pasos.](https://www.youtube.com/watch?v=VwhdFwrzrXo)
+* [Curso de Laravel :v jajajaja](https://www.youtube.com/watch?v=A-BL8Ir7puE&list=PLZ2ovOgdI-kWWS9aq8mfUDkJRfYib-SvF)
+
+
 # Descargar el repositorio.
 
 Para clonar el repositorio deben de dirigirse a la carpeta 
