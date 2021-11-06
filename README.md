@@ -6,7 +6,7 @@ htdocs en el dicos local C:/, desde la git bash
 ```
     C:\xampp\htdocs\
 ```
-![HTDOCS](./img/htdocs.png)
+![HTDOCS](./imgRM/htdocs.png)
 ___
 
 Una vez que esten en la carpeta de "htdocs", ejecuten el comando para clonar el 
@@ -16,7 +16,7 @@ repositorio.
     git clone https://gitlab.com/NarvaezRuizAlexis/cerrajeria.git
     cd cerrajeria
 ```
-**Poner imagen de clonar.
+![Clonar](./imgRM/clonar.png)
 
 ___
 
@@ -25,7 +25,31 @@ Una vez que termine de descargar el proyecto, para comprobar que tienen todo lo 
     git branch 
 ```
 Si lo hicieron bien, les deberana aparecer sus nombres.
-** Insertar branch
+![Clonar](./imgRM/branch.png)
+
+___
+
+Antes de probar el proyecto deben de tener el servidor apache corriendo desde el XAMPP
+(ignoren que el mysql esta en gris).
+![Clonar](./imgRM/apache.png)
+
+
+Ahora para iniciar el proyecto deben estar en la carpeta del proyecto, en la consola de git,  escriban
+
+```
+ php artisan serve
+```
+![Clonar](./imgRM/artisan.png)
+
+Ya que tengan eso, solo esperan a que les muestre la url del localhost
+```
+    http://127.0.0.1:8000
+```
+(Puede que para ustedes sea otra)
+![Clonar](./imgRM/corriendo.png)
+
+Ya al final solo abren esa URL  en el navegador.
+
 
 
 
