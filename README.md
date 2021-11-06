@@ -1,12 +1,12 @@
 # Descargar el repositorio.
 
 Para clonar el repositorio deben de dirigirse a la carpeta 
-htdocs en eldico local C:/
+htdocs en el dicos local C:/, desde la git bash
 
 ```
     C:\xampp\htdocs\
 ```
-![HTDOCS](img/htdocs.png)
+![HTDOCS](./img/htdocs.png)
 ___
 
 Una vez que esten en la carpeta de "htdocs", ejecuten el comando para clonar el 
