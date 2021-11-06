@@ -4,6 +4,38 @@
 
 
 # Descargar el repo 
+Si aun no han descargado el repo, o lo van a descargar de nuevo, deben de entrar a la 
+carpeta de htdocs
+
+```
+    C:\xampp\htdocs\
+```
+![HTDOCS](./imgRM/htdocs.png)
+
+Una vez en esa carpeta abren al aterminal y ejecuatn los comandos.
+```
+git clone https://gitlab.com/NarvaezRuizAlexis/cerrajeria.git
+git cd cerrajeria
+    ---> Esto lo deben hacer para vincular las ramas remotas con las locales.
+
+git checkout Omar 
+git checkout Jenni
+git checkout Dafne
+git checkout Roberto
+git checkout Narvaez
+
+    --> Al final deben estar parados en la rama que les corresponde
+    --> En mi caso es "Narvaez"
+
+git checkout Narvaez 
+composer install
+php artisan serve
+```
+
+Cuando ejecuten el ultimo comando, deben de pegar esa URL en el navegador y ya.
+
+
+
 
 
 
