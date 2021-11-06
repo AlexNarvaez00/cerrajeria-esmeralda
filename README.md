@@ -12,7 +12,7 @@ carpeta de htdocs
 ```
 ![HTDOCS](./imgRM/htdocs.png)
 
-Una vez en esa carpeta abren al aterminal y ejecuatn los comandos.
+Una vez en esa carpeta abren la terminal de git y ejecuatn los comandos.
 ```
 git clone https://gitlab.com/NarvaezRuizAlexis/cerrajeria.git
 git cd cerrajeria
