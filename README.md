@@ -3,7 +3,11 @@
 * [Curso de Laravel :v jajajaja](https://www.youtube.com/watch?v=A-BL8Ir7puE&list=PLZ2ovOgdI-kWWS9aq8mfUDkJRfYib-SvF)
 
 
-# Descargar el repositorio.
+# Descargar el repo 
+
+
+
+# Descargar el repositorio :v fallido.
 
 Para clonar el repositorio deben de dirigirse a la carpeta 
 htdocs en el dicos local C:/, desde la git bash
