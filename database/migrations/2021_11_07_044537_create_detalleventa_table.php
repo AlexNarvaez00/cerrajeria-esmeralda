@@ -18,8 +18,8 @@ class CreateDetalleVentaTable extends Migration
             $table->integer('cantidad');
             $table->string('idproductos',10);
             $table->string('folio_v',7);
-            $table->foreign('idproductos')->references('idproductos')-on('productos');
-            $table->foreign('folio_v')->references('folio_v')-on('venta'); 
+            $table->foreign('idproductos')->references('idproductos')->on('productos');
+            $table->foreign('folio_v')->references('folio_v')->on('venta'); 
 
         });
     }
