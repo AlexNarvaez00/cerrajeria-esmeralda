@@ -21,7 +21,7 @@ class CreateProductosTable extends Migration
             $table->integer('cantidad-existencia');
             $table->primary('clave-producto');
             $table->string('idproveedor',15);
-            $table->foreign('idproveedor')->references('idproveedor')-on('proveedor');
+            $table->foreign('idproveedor')->references('idproveedor')->on('proveedor');
         });
     }
 
