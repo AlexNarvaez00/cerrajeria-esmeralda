@@ -13,10 +13,14 @@ class CreateDetalleServicioTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicio', function (Blueprint $table) {
+        Schema::create('detalleservicio', function (Blueprint $table) {
             $table->integer('cantidad');
             $table->double('total-productos',6,2);
             $table->string('observaciones',45);
+            $table->string('clave-producto',10);
+            $table->string('idservicio',7);
+            $table->foreign('clave-producto')->references('clave-producto')-on('productos');
+            $table->foreign('idservicio')->references('idservicio')-on('servicio');
             
         });
     }
@@ -28,6 +32,6 @@ class CreateDetalleServicioTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('detalleservicio');
     }
 }
