@@ -16,8 +16,8 @@ class CreateTelefonoProveedorTable extends Migration
         Schema::create('telefono_proveedor', function (Blueprint $table) {
             $table->string('idtelefono',20);
             $table->string('telefono',20);
-            
-            $table->foreign('idprovee')->references('idproveedor')->on('proveedor');
+            $table->string('idproveedor',20);
+            $table->foreign('idproveedor')->references('idproveedor')->on('proveedor');
         });
     }
 
