@@ -17,10 +17,10 @@ class CreateVentaTable extends Migration
             $table->string('folio_v',7);
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('idusuario',7);
-            $table->string('idcliente',7);
+            $table->string('idclienteVenta',7);
             $table->primary('folio_v');
             $table->foreign('idusuario')->references('idusuario')->on('usuarios');
-            $table->foreign('idcliente')->references('idcliente')->on('cliente');           
+            $table->foreign('idclienteVenta')->references('idcliente')->on('cliente');           
         });
     }
 
