@@ -19,8 +19,8 @@ class CreateDetalleServicioTable extends Migration
             $table->string('observaciones',45);
             $table->string('clave-producto',10);
             $table->string('idservicio',7);
-            $table->foreign('clave-producto')->references('clave-producto')-on('productos');
-            $table->foreign('idservicio')->references('idservicio')-on('servicio');
+            $table->foreign('clave-producto')->references('clave-producto')->on('productos');
+            $table->foreign('idservicio')->references('idservicio')->on('servicio');
             
         });
     }
