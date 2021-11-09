@@ -18,28 +18,31 @@
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
+                <div class="card-img">
+                    <img class="card-img-top" src="./img/img1.jpg">
                 <div class="card-text">
                     <div class="container">
-                         <p class="pt-2 lead pinter">
-                         <span class="label label-warning">Productos</span>
-                        </p>
+                        <h5 class="card-title pt-3 mb-4">Prouctos</h5>
                     </div>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title h6">
+                    <h5 class="card-title h6">
                         <a class="text-decoration-none text-secondary" href="#">
                             <strong>Podras acceder a las ediciones comunes</strong>
                         </a>
-                    </h1>
+                    </h5>
+                </div>
                 </div>
             </article>
         </div>
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
+                <div class="card-img">
+                    <img class="card-img-top" src="./img/img2.jpeg">
                 <div class="card-text">
                     <div class="container">
-                         <p class="pt-2 lead pinter">
+                         <p class="pt-3 lead pinter">
                          <span class="label label-warning">Proveedores</span>
                         </p>
                     </div>
@@ -51,11 +54,14 @@
                         </a>
                     </h1>
                 </div>
+                </div>
             </article>
         </div>
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
+            <div class="card-img">
+                    <img class="card-img-top" src="./img/img3.jpg">
                 <div class="card-text">
                     <div class="container">
                          <p class="pt-2 lead pinter">
@@ -70,15 +76,18 @@
                         </a>
                     </h1>
                 </div>
+                </div>
             </article>
         </div>
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
+            <div class="card-img">
+                    <img class="card-img-top" src="./img/img4.jpg">
                 <div class="card-text">
                     <div class="container">
                          <p class="pt-2 lead pinter">
-                         <span class="label label-warning">usuarios</span>
+                         <span class="label label-warning">Usuarios</span>
                         </p>
                     </div>
                 </div>
@@ -89,11 +98,14 @@
                         </a>
                     </h1>
                 </div>
+                </div>
             </article>
         </div>
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
+            <div class="card-img">
+                    <img class="card-img-top" src="./img/img5.jpg">
                 <div class="card-text">
                     <div class="container">
                          <p class="pt-2 lead pinter">
@@ -107,6 +119,7 @@
                             <strong>Podras acceder a las ediciones comunes</strong>
                         </a>
                     </h1>
+                </div>
                 </div>
             </article>
         </div>
