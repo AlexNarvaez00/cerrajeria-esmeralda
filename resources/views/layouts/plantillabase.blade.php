@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
   <link rel="stylesheet" href="./css/bootstrap.css">
     <!-- Required meta tags -->
