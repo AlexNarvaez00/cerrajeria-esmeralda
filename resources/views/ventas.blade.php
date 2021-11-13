@@ -1,6 +1,7 @@
 @extends('rootview')
 @section('itemsmenu')
-<!--Items de la barra del menu-->    
+<!--Items de la barra del menu-->  
+<!--Falta hacerlo responsivo-->    
     <li class="nav-item">
     <a class="nav-link text-dark" href="#">Productos</a>
     </li>
@@ -39,7 +40,7 @@
 <div class="col-3">
     <input type="text" class="form-control" placeholder="PlaceHolder">
 </div>
-<button type="button" class="btn btn-light col-1">&#128269; buscar</button>
+<button type="button" class="btn btn-light col-1">&#128269; Buscar</button>
 <button type="button" class="btn btn-light col-1">&#9547; Agregar</button>   
 </div>
 
