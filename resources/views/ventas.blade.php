@@ -17,6 +17,11 @@
     <li class="nav-item">
     <a class="nav-link text-dark" href="#">&#128276; Notificaciones</a>
     </li>
+    <div>
+    <li class="nav-item">
+    <a class="btn btn-outline-success" href="#">Log Out</a>
+    </li>
+    </div>
 
 @endsection
 
