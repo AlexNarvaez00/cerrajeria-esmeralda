@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('ventas');
 });
 Route::get('/{pagina}',[RutasController::class,'showView']);
