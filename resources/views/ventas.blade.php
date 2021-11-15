@@ -39,7 +39,7 @@
 
 <h5 class="h5 text-star mt-3 mb-5 ps-3 ">Ventas</h5>
 
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <form action="" class="row d-flex justify-content-end">
         <div class="col-5">
             <input type="text" class="form-control" placeholder="PlaceHolder">
@@ -69,8 +69,7 @@
 </div> -->
 
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-12 col-md-12">
         <table class="table">
             <thead>
                 <tr>
@@ -94,8 +93,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -105,8 +104,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -116,8 +115,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -127,8 +126,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -138,8 +137,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -149,8 +148,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -160,8 +159,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -171,8 +170,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -182,8 +181,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -193,8 +192,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -204,8 +203,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -215,8 +214,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -226,8 +225,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -237,8 +236,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -248,8 +247,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -259,8 +258,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
                 <tr>
                     <th scope="row">asdcsdc</th>
@@ -270,8 +269,8 @@
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
                     <td>asdcsdc</td>
-                    <td>&#128394;</td>
-                    <td>&#10060;</td>
+                    <td><span>&#128394;</span></td>
+                    <td><span>&#10060;</span></td>
                 </tr>
             </tbody>
         </table>

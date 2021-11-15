@@ -38,8 +38,8 @@
     ¡Hola, XXXX XXXX XXXX!
 </h5>
 <!-- Genera las alertas/notificaciones para la vista de notificaciones-->
-<div class="conteiner">
-  <h2 class="h2 text-start mt-2 mb-4 ">Notificaciones</h2>
+<div class="conteiner mt-3">
+  <h5 class="h5 text-start mb-4 ps-3">Notificaciones</h5>
 
   <!-- Inicio de la notificación centrada -->
   <div class="row justify-content-center">
