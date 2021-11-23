@@ -220,7 +220,33 @@
     @slot('idModal','registroUsuariosModal')
     @slot('tituloModal','Registrar un nuevo usuario.')
     @slot('cuerpoModal')
-        <p>sdcsjkcbjshcbjsdc sdjcbjsdbchjdsc bskcdbksdjcbkj</p>
+        <p class="px-3">
+            Formulario para registrar a un uevo usuario.
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Id de Usuario</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group mb-3 col-md-12 col-sm-12">
+                    <span class="input-group-text" id="basic-addon1">Contraseña</span>
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div> 
+        </div>
     @endslot
     @slot('footerModal')
         <p>footer xd</p>
