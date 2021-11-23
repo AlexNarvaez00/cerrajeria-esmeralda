@@ -12,8 +12,18 @@ class RutasController extends Controller
 {
     public function showView($nombreVista)
     {
-        
-        return view($nombreVista);
+        switch ($nombreVista) {
+            case 'usuarios':
+                /**
+                 * En esta parte se llama al controladore de los usuarios
+                 */
+                return view('usuarios', [usuarioController::class]);
+            break;
+            
+            default:
+                return view($nombreVista);
+            break;
+        }
         // switch ($nombreVista) {
         //     case 'usuarios':
         //         # code...
