@@ -46,13 +46,13 @@
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
-        <input type="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario">
+        <input type="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
       </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="passwordUser" class="form-label">Contraseña</label>
-        <input type="email" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="Contraseña">
+        <input type="email" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese la constraseña</div> -->
       </div>
       <!--Botones del formulario-->
