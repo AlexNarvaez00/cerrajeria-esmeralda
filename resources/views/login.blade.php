@@ -6,10 +6,10 @@
     <!--Items de la barra de menu-->
     @slot('items')
       <li class="nav-item">
-        <a class="nav-link text-dark" href="#">Acerca de...</a>
+        <a class="nav-link text-dark" href="/menu">Menu</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="/menu">menu</a>
+        <a class="nav-link text-dark" href="#">Acerca de...</a>
       </li>
     @endslot
     <!--Esta parte es para mostrar el boton de log out-->

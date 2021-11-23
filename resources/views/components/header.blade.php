@@ -1,6 +1,6 @@
 <div class="container">
     <header>
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
                 <!--Logo -->
                 <a class="navbar-brand fw-bold text-dark" href="">Esmeralda</a>
@@ -9,14 +9,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!--botones de la barra de navegacion-->
-                <div class=" navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <!--Lista d elos botones de la barra de navegacion-->
                     <ul class="navbar-nav">
                         {{$items}}
                     </ul>
                 </div>
                 <div class="container-button-end">
-                    @if($visible == true)
+                    @if($visible)
                         <a class="btn btn-outline-success" href="#">Log Out</a>
                     @endif
                 </div>

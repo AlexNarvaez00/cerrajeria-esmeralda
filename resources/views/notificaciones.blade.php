@@ -5,19 +5,19 @@
   @component('components.header')
     @slot('items')
     <li class="nav-item">
-      <a class="nav-link text-dark" href="#">Productos</a>
+      <a class="nav-link" href="../productos">Productos</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-dark" href="#">Proveedores</a>
+      <a class="nav-link" href="../proveedores">Proveedores</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-dark" href="#">Ventas</a>
+      <a class="nav-link" href="../ventas">Ventas</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-dark" href="#">Usuarios</a>
+      <a class="nav-link" href="../usuarios">Usuarios</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"> 
+      <a class="nav-link active" href="../notificaciones"> 
                     <span class="">&#128276;</span> 
                     Notificaciones
       </a>
@@ -37,72 +37,60 @@
     <span>&#128075;</span> 
     ¡Hola, XXXX XXXX XXXX!
 </h5>
+<h5 class="h5 text-star mt-3 mb-5 ps-3">
+    <span>&#128276;</span>
+    Notificaciones
+</h5>
+
+
 <!-- Genera las alertas/notificaciones para la vista de notificaciones-->
-<div class="conteiner mt-3">
-  <h5 class="h5 text-start mb-4 ps-3">Notificaciones</h5>
+<div class="conteiner mt-3 d-flex justify-content-center">
+  <div class="toast-container row mb-3 flex-column ">
+    @component('components.toast')
+      @slot('tituloNotificacion','titulo 01')
+      @slot('tiempo','hace 11 minutos')
+      @slot('descripcion')
+        <strong>Producto:</strong>
+         esta por temrinarse
+      @endslot
+    @endcomponent
 
-  <!-- Inicio de la notificación centrada -->
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-lg-5">
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Producto con ID:#######</h4>
-        <p>El número de productos en almacen se encuentra en límite de llegar a la cantidad permitida</p>
-        <hr>
-        <p class="mb-0">Puedes solicitar productos yendo a proveedores</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
+    @component('components.toast')
+      @slot('tituloNotificacion','titulo 01')
+      @slot('tiempo','hace 11 minutos')
+      @slot('descripcion')
+        <strong>Producto:</strong>
+         esta por temrinarse
+      @endslot
+    @endcomponent
+
+    @component('components.toast')
+      @slot('tituloNotificacion','titulo 01')
+      @slot('tiempo','hace 11 minutos')
+      @slot('descripcion')
+        <strong>Producto:</strong>
+         esta por temrinarse
+      @endslot
+    @endcomponent
+
+    @component('components.toast')
+      @slot('tituloNotificacion','titulo 01')
+      @slot('tiempo','hace 11 minutos')
+      @slot('descripcion')
+        <strong>Producto:</strong>
+         esta por temrinarse
+      @endslot
+    @endcomponent
+
+    @component('components.toast')
+      @slot('tituloNotificacion','titulo 01')
+      @slot('tiempo','hace 11 minutos')
+      @slot('descripcion')
+        <strong>Producto:</strong>
+         esta por temrinarse
+      @endslot
+    @endcomponent
+
   </div>
-  <!-- Fin de la notificación centrada -->
-
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-lg-5">
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Producto con ID:#######</h4>
-        <p>El número de productos en almacen se encuentra en límite de llegar a la cantidad permitida</p>
-        <hr>
-        <p class="mb-0">Puedes solicitar productos yendo a proveedores</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-lg-5">
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Producto con ID:#######</h4>
-        <p>El número de productos en almacen se encuentra en límite de llegar a la cantidad permitida</p>
-        <hr>
-        <p class="mb-0">Puedes solicitar productos yendo a proveedores</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-lg-5">
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Producto con ID:#######</h4>
-        <p>El número de productos en almacen se encuentra en límite de llegar a la cantidad permitida</p>
-        <hr>
-        <p class="mb-0">Puedes solicitar productos yendo a proveedores</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-lg-5">
-      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">Producto con ID:#######</h4>
-        <p>El número de productos en almacen se encuentra en límite de llegar a la cantidad permitida</p>
-        <hr>
-        <p class="mb-0">Puedes solicitar productos yendo a proveedores</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-
 </div>
 @endsection
