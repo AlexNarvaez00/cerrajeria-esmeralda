@@ -6,6 +6,7 @@
   @component('components.header')
     @slot('items')
         <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link active" href="../productos">Productos</a>
         </li>
         <li class="nav-item">
@@ -19,6 +20,21 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="../notificaciones"> 
+=======
+            <a class="nav-link " href="#">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#">Proveedores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#">Ventas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#">Usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#"> 
+>>>>>>> f3e3fa9c8f73e2b01a022e4f84c18fa74c7d3c70
                     <span class="icon">&#128276;</span> 
                     Notificaciones
             </a>
@@ -32,14 +48,22 @@
 
 
 @section('contenido')
+<<<<<<< HEAD
+=======
+<h1>djnvkdfvnjk</h1>
+>>>>>>> f3e3fa9c8f73e2b01a022e4f84c18fa74c7d3c70
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
         ¡Hola, XXXX XXXX XXXX!
     </h5>
+<<<<<<< HEAD
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#127991;</span>
         Productos
     </h5>
+=======
+    <h5 class="h5 text-star mt-3 mb-5 ps-3 ">Productos</h5>
+>>>>>>> f3e3fa9c8f73e2b01a022e4f84c18fa74c7d3c70
 
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
@@ -215,4 +239,8 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> f3e3fa9c8f73e2b01a022e4f84c18fa74c7d3c70
