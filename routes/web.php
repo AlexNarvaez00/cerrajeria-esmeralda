@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RutasController;
+use App\Http\Controllers\usuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('acercade');
 });
+
 Route::get('/{pagina}',[RutasController::class,'showView']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Lo termine haciendo asi :,,,,,v queria pasarselo aun controlador,
+ * y que en el controlador hiciera lo de la rutas, pero no pude :,,,,,,,v 
+ * bueno no encontre como hacerlo, asi que mejor puse las rutas manualmente
+ * 
+*/
+//Route::get('/usuarios',[usuarioController::class,'index']);
