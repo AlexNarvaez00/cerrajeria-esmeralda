@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 /**
@@ -15,9 +15,13 @@ class RutasController extends Controller
         switch ($nombreVista) {
             case 'usuarios':
                 /**
-                 * En esta parte se llama al controladore de los usuarios
+                 * En esta parte se llama al controladore de los usuarios,
+                 * 
+                 * No se si este bien :v jajajajaj pero funciono,
+                 * si hay mucho pedo, luego modificamos el archivo web.app xd
                  */
-                return view('usuarios', [usuarioController::class]);
+                $controladorUsuarios = new usuarioController();
+                return $controladorUsuarios->index();
             break;
             
             default:

@@ -34,7 +34,7 @@
 @section('contenido')
 <h5 class="h5 text-star mt-5 ps-3">
     <span>&#128075;</span>
-    ¡Hola, XXXX XXXX XXXX!
+    ¡Hola, {{ $nombreUsuarioVista }}!
 </h5>
 <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
     <span>&#128101;</span>
@@ -221,7 +221,7 @@
     @slot('tituloModal','Registrar un nuevo usuario.')
     @slot('cuerpoModal')
         <p class="px-3">
-            Formulario para registrar a un uevo usuario.
+            Formulario para registrar a un nuevo usuario.
         </p>
         <div class="container-fluid">
             <div class="row">
@@ -249,7 +249,14 @@
         </div>
     @endslot
     @slot('footerModal')
-        <p>footer xd</p>
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+            <span class="me-2">&#10004;</span>
+            Registrar
+        </button>
     @endslot
     @endcomponent
 @endsection

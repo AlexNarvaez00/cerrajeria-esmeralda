@@ -18,8 +18,10 @@ class usuarioController extends Controller
     */
     public function index()
     {
+        $nombreUsuario = 'csdsdcsc';
         # code...
-        return view('usuarios')
+        return view('usuarios')->with('nombreUsuarioVista',$nombreUsuario);
+
     }
 
 
