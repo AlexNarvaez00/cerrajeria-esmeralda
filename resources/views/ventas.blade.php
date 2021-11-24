@@ -18,7 +18,7 @@
             <a class="nav-link" href="../usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="../notificaciones"> 
+            <a class="nav-link" href="../notificaciones"> 
                     <span class="icon">&#128276;</span> 
                     Notificaciones
             </a>
