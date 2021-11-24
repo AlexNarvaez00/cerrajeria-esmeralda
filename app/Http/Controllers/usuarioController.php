@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Parent_;
 
 class usuarioController extends Controller
 {
+    /**
+     * Atributos ...
+     */
+    public  $nombreUsuario;
+
     //Pagina para referenciar las cosas xd    
     //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
 
+    public function __construct()
+    {
+        $this->nombreUsuario='Narvaez ';
+
+    }
 
     /**
      * Este metodo se usa para indicar que ruta debemos mostrar.
@@ -18,9 +29,8 @@ class usuarioController extends Controller
     */
     public function index()
     {
-        $nombreUsuario = 'csdsdcsc';
         # code...
-        return view('usuarios')->with('nombreUsuarioVista',$nombreUsuario);
+        return view('usuarios')->with('nombreUsuarioVista',$this->nombreUsuario);
 
     }
 
