@@ -1,15 +1,36 @@
 @extends('rootview')
 
-@section('itemsmenu')
-<!--Items de la barra del menu-->
-<li class="nav-item">
-  <a class="nav-link text-dark" href="#">Acerca de...</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link text-dark" href="#">itemdos</a>
-</li>
+
+@section('header-seccion')
+  @component('components.header')
+    <!--Items de la barra de menu-->
+    @slot('items')
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/menu">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
+      </li>
+    @endslot
+    <!--Esta parte es para mostrar el boton de log out-->
+    @slot('visible',false)
+  @endcomponent
 @endsection
 
+<!--
+  En esta parte, son los items de la barra de navegacion
+  aun que los escribi fuera del componente, forman parte de el.
+
+  **No se si hacer esto este bien pero fue lo unico que se ocurrio,
+  la otra forma estaba muy perra :,,,,,v .
+-->
+@section('itemsmenu')
+
+@endsection
+
+
+
+<!--Seccion del contenido de la pagina donde te encuentres, este sigue siendo, lo mismo-->
 @section('contenido')
 
 <!-- <center><h1 class="text-aling-center"><svg xmlns="http://www.w3.org/2000/svg" width="57.84" height="50" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -25,19 +46,25 @@
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
-        <input type="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario">
+        <input type="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
       </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="passwordUser" class="form-label">Contraseña</label>
-        <input type="email" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="Contraseña">
+        <input type="email" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese la constraseña</div> -->
       </div>
       <!--Botones del formulario-->
       <div class="m-4 d-flex justify-content-end">
-        <button type="submit" class="btn pl-3 pr-3 border-dark me-3">Iniciar</button>
-        <button type="submit" class="btn pl-3 pr-3 border-dark">Cancelar</button>
+        <button type="submit" class="btn pl-3 pr-3 border-dark me-3">
+          <span>&#10004;</span>
+          Iniciar
+        </button>
+        <button type="submit" class="btn pl-3 pr-3 border-dark">
+          <span>&#10060;</span>
+          Cancelar
+        </button>
       </div>
     </div>
   </form>

@@ -19,7 +19,6 @@ class CreateUsuariosTable extends Migration
             $table->string('contrasena',15);
             $table->string('idjefe',7);
             $table->primary('idusuario');
-            
         });
     }
 
