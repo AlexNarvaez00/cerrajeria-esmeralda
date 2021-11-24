@@ -4,7 +4,7 @@
     <!--Items de la barra de menu-->
     @slot('items')
       <li class="nav-item">
-      <a class="btn btn-outline-success" href="/login">Log In</a>
+        <a class="btn btn-outline-success" href="/login">Log In</a>
       </li>      
     @endslot
     <!--Esta parte es para mostrar el boton de log out-->
