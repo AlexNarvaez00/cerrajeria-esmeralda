@@ -281,3 +281,54 @@
 </div>
 
 @endsection
+
+@component('components.modal')
+    @slot('idModal','registroVentasModal')
+    @slot('tituloModal','Registrar una venta.')
+    @slot('cuerpoModal')
+        <p class="px-3">
+            Formulario para el registro de ventas.
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Fecha</span>
+                        <input id="fecha" type="date" value="<?php echo date("Y-n-j"); ?>"> <!
+                    </div>
+                </div>
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Folio</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-group mb-3 col-md-12 col-sm-12">
+                    <span class="input-group-text" id="basic-addon1">Id Usuario</span>
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+             </div> 
+             <div class="row">
+                <div class="input-group mb-3 col-md-12 col-sm-12">
+                    <span class="input-group-text" id="basic-addon1">ID Cliente</span>
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div> 
+        </div>
+    @endslot
+    @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+            <span class="me-2">&#10004;</span>
+            Registrar
+        </button>
+    @endslot
+    @endcomponent
+@endsection
