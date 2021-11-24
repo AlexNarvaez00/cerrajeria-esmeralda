@@ -4,7 +4,7 @@
     <!--Items de la barra de menu-->
     @slot('items')
       <li class="nav-item">
-        <a class="nav-link text-dark" href="/login">login</a>
+      <a class="btn btn-outline-success" href="/login">Log In</a>
       </li>      
     @endslot
     <!--Esta parte es para mostrar el boton de log out-->
@@ -12,6 +12,8 @@
   @endcomponent
 @endsection
 @section('contenido')
+<h5>Acerca de nosotros ...</h5>
+<hr />
 <main class="container">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="card mb-3 col-12">
@@ -64,12 +66,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 @endsection
