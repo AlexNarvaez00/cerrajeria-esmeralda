@@ -50,6 +50,19 @@
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
                 <div class="card-img">
+                    <img src="./img/clientes.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Clientes</h5>
+                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <a href="../proveedores" class="btn btn-primary">Ir a las opciones</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <article class="card h-100 shadow">
+                <div class="card-img">
                     <img src="./img/img3.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Ventas</h5>
