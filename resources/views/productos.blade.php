@@ -53,7 +53,7 @@
                 </button>
             </div>
                 <div class="col-auto">
-                <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+                <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                     <span class="me-3">&#10133;</span>
                     Agregar
                 </button>
@@ -215,4 +215,78 @@
             </table>
         </div>
     </div>
+    @component('components.modal')
+    @slot('idModal','registroProductoModal')
+    @slot('tituloModal','Registrar un nuevo producto')
+    @slot('cuerpoModal')
+        <p class="px-3">
+            Formulario para registrar a un nuevo producto
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Clave producto</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Precio $</span>
+                        <input type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
+                        <input type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>               
+            </div> 
+            <div class="input-group mb-3">
+
+            <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+            <select class="form-select" id="inputGroupSelect01">
+                <option selected>Seleccione un proveedor</option>
+                <option value="1">Proveedor 1</option>
+                <option value="2">Proveedor 2</option>
+                <option value="3">Proveedor 3</option>
+            </select>
+            </div>
+            
+        </div>
+    @endslot
+    @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+            <span class="me-2">&#10004;</span>
+            Registrar
+        </button>
+    @endslot
+    @endcomponent
+   
 @endsection
