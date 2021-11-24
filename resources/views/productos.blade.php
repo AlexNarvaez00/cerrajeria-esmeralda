@@ -6,19 +6,19 @@
   @component('components.header')
     @slot('items')
         <li class="nav-item">
-            <a class="nav-link " href="#">Productos</a>
+            <a class="nav-link active" href="../productos">Productos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Proveedores</a>
+            <a class="nav-link" href="../proveedores">Proveedores</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Ventas</a>
+            <a class="nav-link" href="../ventas">Ventas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Usuarios</a>
+            <a class="nav-link" href="../usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="#"> 
+            <a class="nav-link" href="../notificaciones"> 
                     <span class="icon">&#128276;</span> 
                     Notificaciones
             </a>
@@ -32,13 +32,15 @@
 
 
 @section('contenido')
-
-<h1>djnvkdfvnjk</h1>
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
         ¡Hola, XXXX XXXX XXXX!
     </h5>
-    <h5 class="h5 text-star mt-3 mb-5 ps-3 ">Productos</h5>
+    <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
+        <span>&#127991;</span>
+        Productos
+    </h5>
+
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
@@ -58,6 +60,7 @@
             </div>
         </form>
     </div>
+
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
         <div class="col-12">
