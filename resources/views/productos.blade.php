@@ -38,15 +38,7 @@
         <span>&#128075;</span>   
         ¡Hola, XXXX XXXX XXXX!
     </h5>
-<<<<<<< HEAD
-    <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
-        <span>&#127991;</span>
-        Productos
-    </h5>
-=======
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">Productos</h5>
->>>>>>> f3e3fa9c8f73e2b01a022e4f84c18fa74c7d3c70
-
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
@@ -66,7 +58,6 @@
             </div>
         </form>
     </div>
-
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
         <div class="col-12">
