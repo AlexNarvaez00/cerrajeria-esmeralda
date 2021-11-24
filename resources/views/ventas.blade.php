@@ -54,7 +54,7 @@
             </button>
         </div>
         <div class="col-auto">
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroVentasModal">
                 <span class="me-3">&#10133;</span>
                 Agregar
             </button>
@@ -279,8 +279,6 @@
         </table>
     </div>
 </div>
-
-@endsection
 
 @component('components.modal')
     @slot('idModal','registroVentasModal')
