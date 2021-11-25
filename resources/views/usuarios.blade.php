@@ -229,21 +229,21 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Id de Usuario</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario">
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="input-group mb-3 col-md-12 col-sm-12">
                     <span class="input-group-text" id="basic-addon1">Contraseña</span>
-                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario">
                 </div>
             </div> 
         </div>
@@ -259,4 +259,51 @@
         </button>
     @endslot
     @endcomponent
+@endsection
+
+
+<!--En esta seccion van los scripts para cada una de las vistas-->
+@section('scritps')
+    <!--
+        En esta parte, van los scripts, pero van en una caprta aparte,
+        esa carpeta la iba a crear Omar, el chiste es que no se escriba Codigo de 
+        Javascript con el de PHP, sino que se coloque en otro archivo y que lo cargue al
+        ultimo. 
+    -->
+    <script >
+        //Esto es un objeto, bueno, una manera de hacerlos
+        const expresionesRegulares = {
+            idUsuario: /^USU-[0-9]{3}-[A-Z]{3}$/, //Esto puede cambiar
+            nombreUsuario:/^[A-Z][a-z]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
+            password: /^[A-Za-z0-9\_]{8,20}$/ //Contraseñas
+
+            //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
+        };
+
+
+        const inputIDusuario = document.getElementById('inputIDUsuario');
+        const inputNombreUsuario = document.getElementById('inputNombreUsuario');
+        const inputPasswordUsuario = document.getElementById('inputPasswordUsuario');
+
+        //Definimos la funcion que evaluara la expresion regular.
+        function evaluar(element,expresion,longitudMinima,longitudMaxima){
+            let cadena = element.target.value;//Optenemos el valor del input
+            if(expresion.test(cadena)  ){
+                //Si la expresion coincide, se pone en verde
+                element.target.classList.add('is-valid') 
+                element.target.classList.remove('is-invalid')  
+            }else{
+                //Agregamos una lista al input para que se ponga en rojo
+                element.target.classList.add('is-invalid')
+                element.target.classList.remove('is-valid')    
+            }      
+        }
+
+        //Agregamos el vento escuchador "cuando una tecla se levanta"
+        inputIDusuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.idUsuario,10,12));
+        inputNombreUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreUsuario,2,15));
+        inputPasswordUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password,10,21));
+
+
+    </script>
 @endsection
