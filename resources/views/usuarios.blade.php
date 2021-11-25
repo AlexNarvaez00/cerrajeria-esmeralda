@@ -67,15 +67,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Campo 1</th>
-                    <th scope="col">Campo 2</th>
-                    <th scope="col">Campo 3</th>
-                    <th scope="col">Campo 4</th>
-                    <th scope="col">Campo 5</th>
-                    <th scope="col">Campo 6</th>
-                    <th scope="col">Editado</th>
-                    <th scope="col">Eliminar</th>
+                    <!--
+                        Campos de la tabla 
+                        Estos lo pienso mandar desde el controlador
+                    -->
+                    @foreach ($camposVista as $campo)
+                        <th scope="col">{{$campo}}</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
@@ -221,7 +219,7 @@
     @slot('tituloModal','Registrar un nuevo usuario.')
     @slot('cuerpoModal')
         <p class="px-3">
-            Formulario para registrar a un nuevo usuario.
+            Informacion basica del usuario.
         </p>
         <div class="container-fluid">
             <div class="row">
@@ -245,7 +243,30 @@
                     <span class="input-group-text" id="basic-addon1">Contraseña</span>
                     <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario">
                 </div>
+            </div>
+            <div class="row">
+                <div class="input-group mb-3 col-md-12 col-sm-12">
+                    <span class="input-group-text" id="basic-addon1">Confirmar Contraseña</span>
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon">
+                </div>
             </div> 
+        </div>
+        <p class="px-3">
+            Rol del usuario.
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputRolUsuario">Options</label>
+                    <select class="form-select" id="inputRolUsuario">
+                        <option selected>Rol de usuario...</option>
+                        <option value="Trabajador">Trabajador</option>
+                        <option value="Encargado">Encargado</option>
+                        <option value="Servicio extra">Servicio extra</option>
+                    </select>
+                </div>
+            </div>
         </div>
     @endslot
     @slot('footerModal')
@@ -265,7 +286,7 @@
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <!--
-        En esta parte, van los scripts, pero van en una caprta aparte,
+        En esta parte, van los scripts, pero van en una carpeta aparte,
         esa carpeta la iba a crear Omar, el chiste es que no se escriba Codigo de 
         Javascript con el de PHP, sino que se coloque en otro archivo y que lo cargue al
         ultimo. 
@@ -280,15 +301,16 @@
             //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
         };
 
-
+        //Optenemos los input del formulario
         const inputIDusuario = document.getElementById('inputIDUsuario');
         const inputNombreUsuario = document.getElementById('inputNombreUsuario');
         const inputPasswordUsuario = document.getElementById('inputPasswordUsuario');
+        const inputPasswordUsuarioCon = document.getElementById('inputPasswordUsuarioCon');
 
         //Definimos la funcion que evaluara la expresion regular.
-        function evaluar(element,expresion,longitudMinima,longitudMaxima){
+        function evaluar(element,expresion){
             let cadena = element.target.value;//Optenemos el valor del input
-            if(expresion.test(cadena)  ){
+            if(expresion.test(cadena)){
                 //Si la expresion coincide, se pone en verde
                 element.target.classList.add('is-valid') 
                 element.target.classList.remove('is-invalid')  
@@ -300,9 +322,10 @@
         }
 
         //Agregamos el vento escuchador "cuando una tecla se levanta"
-        inputIDusuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.idUsuario,10,12));
-        inputNombreUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreUsuario,2,15));
-        inputPasswordUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password,10,21));
+        inputIDusuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.idUsuario));
+        inputNombreUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreUsuario));
+        inputPasswordUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password));
+        inputPasswordUsuarioCon.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password));
 
 
     </script>

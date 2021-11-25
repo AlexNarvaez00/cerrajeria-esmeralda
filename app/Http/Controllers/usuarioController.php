@@ -30,8 +30,9 @@ class usuarioController extends Controller
     public function index()
     {
         # code...
-        return view('usuarios')->with('nombreUsuarioVista',$this->nombreUsuario);
-
+        return view('usuarios')
+            ->with('camposVista',['ID','Nombre','Rol','Editar','Borrar'])
+            ->with('nombreUsuarioVista',$this->nombreUsuario);
     }
 
 
