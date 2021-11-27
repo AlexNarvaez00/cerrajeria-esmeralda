@@ -4,7 +4,7 @@
     nombreUsuario:/^[A-Z][a-z]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
     password: /^[A-Za-z0-9\_]{8,20}$/ //Contraseñas
 
-    
+    //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
 };
 
 //Optenemos los input del formulario

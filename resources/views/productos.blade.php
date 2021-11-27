@@ -67,13 +67,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Campo 1</th>
-                        <th scope="col">Campo 2</th>
-                        <th scope="col">Campo 3</th>
-                        <th scope="col">Campo 4</th>
-                        <th scope="col">Campo 5</th>
-                        <th scope="col">Campo 6</th>
+                        <th scope="col">Clave Producto</th>
+                        <th scope="col">Nombre Producto</th>
+                        <th scope="col">Clasificación</th>
+                        <th scope="col">Cantidad existencia</th>
+                        <th scope="col">Proveedor</th>                        
                         <th scope="col">Editado</th>
                         <th scope="col">Eliminar</th>
                     </tr>
@@ -84,9 +82,7 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
@@ -95,9 +91,7 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
@@ -106,111 +100,11 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
