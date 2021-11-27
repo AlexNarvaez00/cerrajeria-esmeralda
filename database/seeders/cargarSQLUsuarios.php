@@ -16,7 +16,7 @@ class cargarSQLUsuarios extends Seeder
     {
         //
         DB::table('usuarios')->insert([
-            'idusuario' => 'USU-123',
+            'idusuario' => 'USU-124',
             'nombre-usuario' => 'Alexis',
             'contrasena' => 'contraseña',
             'idjefe' => '123',
