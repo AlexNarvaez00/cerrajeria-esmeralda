@@ -122,14 +122,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input id ="inClaveProducto" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div> 
@@ -154,7 +154,7 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required pattern="\d+" min="0">
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>               
             </div> 
