@@ -72,7 +72,8 @@
 </div>
 
 
-<!--footer -->
+
+
 
 <footer class="container-fluid mt-5 bg-primary">
   <div class="container">
@@ -81,22 +82,29 @@
         <h5 class="h5 text-white ps-3">Redes sociales</h5>
         <ul class="list-unstyled">
           <li class="p-2">
+
           <img src="/img/facebook.png"> <a href="https://www.facebook.com/CerrajeroProfecional" class="text-white text-decoration-none p-2">Cerrajeria profesional Esmeralda</a>
           </li>          
+
+          
+
         </ul>
       </div>
       <div class="col-md-3 col-sm-6">
         <h5 class="h5 text-white ps-3">Télefonos de contacto.</h5>
         <ul class="list-unstyled">
           <li class="p-2">
+
             <a href="#1" class="text-white text-decoration-none p-2">951-146-8141</a>
           </li>         
+
         </ul>
       </div>
       <div class="col-md-3 col-sm-6">
         <h5 class="h5 text-white ps-3">Equipo de desarrollo.</h5>
         <ul class="list-unstyled">
           <li class="p-2">
+
             <a href="#1" class="text-white text-decoration-none p-2">Alexis Narvaez</a>
           </li>
           <li class="p-2">
@@ -109,8 +117,8 @@
             <a href="#3" class="text-white text-decoration-none p-2">Dafne Santiago</a>
           </li>
           <li class="p-2">
-            <a href="#3" class="text-white text-decoration-none p-2">Omar Silverio</a>
-          </li>
+            <a href="#3" class="text-white text-decoration-none p-2">Omar Silverio</a>            
+          </li>          
         </ul>
       </div>
     </div>
