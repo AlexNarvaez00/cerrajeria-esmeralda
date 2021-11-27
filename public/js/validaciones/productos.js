@@ -1,17 +1,16 @@
  //Esto es un objeto, bueno, una manera de hacerlos
  const expresionesRegulares = {
-    idUsuario: /^USU-[0-9]{3}-[A-Z]{3}$/, //Esto puede cambiar
-    nombreUsuario:/^[A-Z][a-z]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
-    password: /^[A-Za-z0-9\_]{8,20}$/ //Contraseñas
+    claveProducto: /[\w]{10}/
 
     
 };
 
 //Optenemos los input del formulario
-const inputIDusuario = document.getElementById('inputIDUsuario');
-const inputNombreUsuario = document.getElementById('inputNombreUsuario');
-const inputPasswordUsuario = document.getElementById('inputPasswordUsuario');
-const inputPasswordUsuarioCon = document.getElementById('inputPasswordUsuarioCon');
+const inputClaveProducto = document.getElementById('inClaveProducto');
+const inputNomProducto = document.getElementById('inNomProducto');
+const inputClasificacion = document.getElementById('inClasificacion');
+const inputPrecio = document.getElementById('inPrecio');
+const inputCantExistencia = document.getElementById('inCantExistencia');
 
 //Definimos la funcion que evaluara la expresion regular.
 function evaluar(element,expresion){
@@ -28,7 +27,4 @@ function evaluar(element,expresion){
 }
 
 //Agregamos el vento escuchador "cuando una tecla se levanta"
-inputIDusuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.idUsuario));
-inputNombreUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreUsuario));
-inputPasswordUsuario.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password));
-inputPasswordUsuarioCon.addEventListener('keyup',e => evaluar(e,expresionesRegulares.password));
+inputClaveProducto.addEventListener('keyup',e => evaluar(e,expresionesRegulares.claveProducto));

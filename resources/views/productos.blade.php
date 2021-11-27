@@ -112,7 +112,7 @@
     @component('components.modal')
     @slot('idModal','registroProductoModal')
     @slot('tituloModal','Registrar un nuevo producto')
-    @slot('cuerpoModal')
+    @slot('cuerpoModal')    
         <p class="px-3">
             Formulario para registrar a un nuevo producto
         </p>
@@ -122,14 +122,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClaveProducto" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inNomProducto" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div>
@@ -138,14 +138,14 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inPrecio" type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div> 
@@ -154,7 +154,7 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required pattern="\d+" min="0">
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required pattern="\d+" min="0">
                     </div>
                 </div>               
             </div> 
@@ -182,5 +182,7 @@
         </button>
     @endslot
     @endcomponent
-   
+@endsection
+@section('scritps')
+    <script src="./js/validaciones/productos.js"></script>
 @endsection

@@ -83,7 +83,7 @@
         <ul class="list-unstyled">
           <li class="p-2">
 
-          <img src="/img/facebook.png"> <a href="https://www.facebook.com/CerrajeroProfecional" class="text-white text-decoration-none p-2">Cerrajeria profesional Esmeralda</a>
+          <img src="./img/facebook.png"> <a href="https://www.facebook.com/CerrajeroProfecional" class="text-white text-decoration-none p-2">Cerrajeria profesional Esmeralda</a>
           </li>          
 
           
