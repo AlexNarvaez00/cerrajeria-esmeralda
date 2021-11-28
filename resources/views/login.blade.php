@@ -42,7 +42,9 @@
   <!--Codigo del formulario-->
   <form action="" class="col-lg-5 col-md-12">
     <div class="componentes-formulario">
-    <div align="center"><img src="./img/usuario.png" ></div>
+      <div class="d-flex justify-content-center">
+          <img src="./img/usuario.png" class="medida-1">
+      </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>

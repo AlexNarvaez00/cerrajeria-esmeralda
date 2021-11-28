@@ -65,7 +65,6 @@
 <div class="conteiner-fluid">
     <div class="col-12">
         <table class="table">
-            
             <thead>
                 <tr>
                     <!--
@@ -79,6 +78,30 @@
             </thead>
             <tbody>
                 <!--Aqui van los registros-->
+                @foreach($registrosVista as $fila)
+                    <!--Inicio de la Fila-->
+                    <tr>
+                        <!--ID de la tabla usuarios-->    
+                        <th scope="col">{{$fila->idusuario}}</th>
+                        <!--Los otros atributos de la tabla usuarios-->
+                        <td>{{$fila->nombreUsuario}}</td>
+                        <td>No le puse rol :v</td>
+                        <td>{{$fila->created_at}}</td>
+                        <td>{{$fila->updated_at}}</td>
+
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$fila->idusuario}}">
+                                <span>&#128394;</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                <span>&#10060;</span>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

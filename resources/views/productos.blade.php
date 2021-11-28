@@ -159,16 +159,14 @@
                 </div>               
             </div> 
             <div class="input-group mb-3">
-
-            <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected>Seleccione un proveedor</option>
-                <option value="1">Proveedor 1</option>
-                <option value="2">Proveedor 2</option>
-                <option value="3">Proveedor 3</option>
-            </select>
+                <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+                <select class="form-select" id="inputGroupSelect01">
+                    <option selected>Seleccione un proveedor</option>
+                    <option value="1">Proveedor 1</option>
+                    <option value="2">Proveedor 2</option>
+                    <option value="3">Proveedor 3</option>
+                </select>
             </div>
-            
         </div>
     @endslot
     @slot('footerModal')

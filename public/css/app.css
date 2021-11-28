@@ -1,0 +1,11 @@
+
+.medida-1{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.img-menu{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}

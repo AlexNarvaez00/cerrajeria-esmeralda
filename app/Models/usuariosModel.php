@@ -9,8 +9,7 @@ class usuariosModel extends Model
 {
     use HasFactory;
 
-    //Nombre de la tabla    
+    //Nombre de la tabla , asi se tienen que cambiar a cada uno de sus modelos  
     protected $table = 'usuarios';
-    //LLave primaria
-    protected $primaryKey = 'idusuario';
+ 
 }

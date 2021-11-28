@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Parent_;
 
 class usuarioController extends Controller
 {
-        /**
+    /**
      * Atributos ...
      */
-    public  $nombreUsuario;
+    public  $nombreUsuario;//Este atributo despues lo revisamos
+    protected  $usuariosLista;//Esta variables para guardar la lista de usuarios
+
+    private $camposVista;
+
 
     //Pagina para referenciar las cosas xd    
     //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
@@ -20,26 +22,30 @@ class usuarioController extends Controller
     public function __construct()
     {
         $this->nombreUsuario='Narvaez ';
+        $this->usuariosLista=usuariosModel::all();
+            /**
+             * Del modelo de caprta App/Http/Models
+             *  
+            */
 
+        $this->camposVista = ['ID','Nombre','Rol','Creado','Modificado','Editar','Borrar'];
     }
 
     /**
      * Este metodo se usa para indicar que ruta debemos mostrar.
-     * el nombre ya lo detecta lrabel :v es como el primer metodo que se ejecuta,
+     * el nombre ya lo detecta laravel :v es como el primer metodo que se ejecuta,
      * al mostrar las vistas.
      * 
     */
     public function index()
     {
-        $usuariosLista = new usuariosModel();
-        
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
-        return view('usuarios')
-            ->with('camposVista',['ID','Nombre','Rol','Editar','Borrar'])
-            ->with('nombreUsuarioVista',$this->nombreUsuario);
+        return view('usuarios') //Nombre de la vista
+            ->with('nombreUsuarioVista',$this->nombreUsuario)//Titulo de la vista
+            ->with('camposVista',$this->camposVista)//Campos de la tablas
+            ->with('registrosVista',$this->usuariosLista);//Registros de la tabla
     }
-
 
     public function show()
     {
