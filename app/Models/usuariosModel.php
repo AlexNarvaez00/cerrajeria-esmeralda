@@ -9,6 +9,8 @@ class usuariosModel extends Model
 {
     use HasFactory;
 
-    //Nombre de la tabla :v esto se lo tiene que cambiar segu su tabla perrines
-    protected $table = '';
+    //Nombre de la tabla    
+    protected $table = 'usuarios';
+    //LLave primaria
+    protected $primaryKey = 'idusuario';
 }
