@@ -20,15 +20,15 @@ lo que les importa es "DB_DATABASE" donde tiene que poner el nombre de la base d
 tiene que estar vacia (la deben de crear desde el DBMS), en "DB_PASSWORD" ponen la contraseña si es que tiene.
 ___
 Cuando ya tengan la tabla y las configuraciones, ejecuta el comando,
-```
+```git
     php artisan migrate
 ```
 Si ya tenian las tablas ejecuten 
-```
+```git
     php artisan migrate:fresh
 ```
 Al final de cualquiera de los dos deben de introduccir el comando.
-```
+```git 
     php artisan db:seed
 ```
 es posible que les marque un error, pero deben de checar en la tabla de 
