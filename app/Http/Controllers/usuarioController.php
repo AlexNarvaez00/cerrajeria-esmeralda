@@ -37,7 +37,6 @@ class usuarioController extends Controller
         # code...
         return view('usuarios')
             ->with('camposVista',['ID','Nombre','Rol','Editar','Borrar'])
-            ->with('registrosVista',$usuariosLista)
             ->with('nombreUsuarioVista',$this->nombreUsuario);
     }
 
