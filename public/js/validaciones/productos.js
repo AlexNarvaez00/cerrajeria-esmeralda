@@ -1,6 +1,9 @@
  //Esto es un objeto, bueno, una manera de hacerlos
  const expresionesRegulares = {
-    claveProducto: /[\w]{10}/
+    claveProducto: /^[a-zA-Z|\-|\d]*$/,
+    caracteres: /^[a-zA-Z|-]*$/,
+    cantidades:/\d/
+
 
     
 };
@@ -25,6 +28,20 @@ function evaluar(element,expresion){
         element.target.classList.remove('is-valid')    
     }      
 }
+function evaluarNumeros(element,expresion){
+    let cadena = element.target.value;    
+    if(expresion.test(cadena)&& cadena >= 0 ){
+        element.target.classList.add('is-valid') 
+        element.target.classList.remove('is-invalid')
+    }else{
+        element.target.classList.add('is-invalid')
+        element.target.classList.remove('is-valid')
+    }
+}
 
 //Agregamos el vento escuchador "cuando una tecla se levanta"
 inputClaveProducto.addEventListener('keyup',e => evaluar(e,expresionesRegulares.claveProducto));
+inputNomProducto.addEventListener('keyup', e => evaluar(e,expresionesRegulares.caracteres));
+inputCantExistencia.addEventListener('keyup', e => evaluarNumeros(e,expresionesRegulares.cantidades));
+inputPrecio.addEventListener('keyup', e => evaluarNumeros(e, expresionesRegulares.cantidades));
+inputClasificacion.addEventListener('keyup', e => evaluar(e,expresionesRegulares.caracteres));

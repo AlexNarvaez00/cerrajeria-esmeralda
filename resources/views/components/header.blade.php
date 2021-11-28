@@ -17,7 +17,7 @@
                 </div>
                 <div class="container-button-end">
                     @if($visible)
-                        <a class="btn btn-outline-success" href="#">Log Out</a>
+                        <a class="btn btn-outline-success" href="#">Cerrar sesión</a>
                     @endif
                 </div>
             </div>

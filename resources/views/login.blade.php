@@ -42,7 +42,7 @@
   <!--Codigo del formulario-->
   <form action="" class="col-lg-5 col-md-12">
     <div class="componentes-formulario">
-      <h1 class="h2 text-center mt-5">log In</h1>
+    <div align="center"><img src="./img/usuario.png" ></div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
