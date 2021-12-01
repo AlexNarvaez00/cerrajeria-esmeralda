@@ -3,6 +3,44 @@
 * [Curso de Laravel :v jajajaja](https://www.youtube.com/watch?v=A-BL8Ir7puE&list=PLZ2ovOgdI-kWWS9aq8mfUDkJRfYib-SvF)
 
 
+
+# Cargar las migraciones (Bases de datos)
+
+Para  crear las tablas que necesita la base de datos, deben de revisar el archivo _.env_
+tengo las cosas que necesita.
+```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravelcerrajeria
+    DB_USERNAME=root
+    DB_PASSWORD=narvaez
+```
+lo que les importa es "DB_DATABASE" donde tiene que poner el nombre de la base de datos,
+tiene que estar vacia (la deben de crear desde el DBMS), en "DB_PASSWORD" ponen la contraseña si es que tiene.
+___
+Cuando ya tengan la tabla y las configuraciones, ejecuta el comando,
+```git
+    php artisan migrate
+```
+Si ya tenian las tablas ejecuten 
+```git
+    php artisan migrate:fresh
+```
+Al final de cualquiera de los dos deben de introduccir el comando.
+```git 
+    php artisan db:seed
+```
+es posible que les marque un error, pero deben de checar en la tabla de 
+"usuarios", que es en donde se hicieron las inserciones.
+
+
+
+
+
+
+
+
 # Descargar el repo 
 Si aun no han descargado el repo, o lo van a descargar de nuevo, deben de entrar a la 
 carpeta de htdocs
@@ -33,70 +71,6 @@ php artisan serve
 ```
 
 Cuando ejecuten el ultimo comando, deben de pegar esa URL en el navegador y ya.
-
-
-
-
-
-
-# Descargar el repositorio :v fallido.
-
-Para clonar el repositorio deben de dirigirse a la carpeta 
-htdocs en el dicos local C:/, desde la git bash
-
-```
-    C:\xampp\htdocs\
-```
-![HTDOCS](./imgRM/htdocs.png)
-___
-
-Una vez que esten en la carpeta de "htdocs", ejecuten el comando para clonar el 
-repositorio.
-
-```
-    git clone https://gitlab.com/NarvaezRuizAlexis/cerrajeria.git
-    cd cerrajeria
-```
-![Clonar](./imgRM/clonar.png)
-
-___
-
-Una vez que termine de descargar el proyecto, para comprobar que tienen todo lo que he mandado escriban el siguiente comando.
-```
-    git branch 
-```
-Si lo hicieron bien, les deberana aparecer sus nombres.
-![Clonar](./imgRM/branch.png)
-
-___
-
-Antes de probar el proyecto deben de tener el servidor apache corriendo desde el XAMPP
-(ignoren que el mysql esta en gris).
-![Clonar](./imgRM/apache.png)
-
-
-Ahora para iniciar el proyecto deben estar en la carpeta del proyecto, en la consola de git,  escriban
-
-```
- php artisan serve
-```
-![Clonar](./imgRM/artisan.png)
-
-Ya que tengan eso, solo esperan a que les muestre la url del localhost
-```
-    http://127.0.0.1:8000
-```
-(Puede que para ustedes sea otra)
-![Clonar](./imgRM/corriendo.png)
-
-Ya al final solo abren esa URL  en el navegador.
-
-
-
-
-
-
-
 
 
 ___

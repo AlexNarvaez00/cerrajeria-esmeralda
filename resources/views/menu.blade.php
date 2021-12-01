@@ -50,7 +50,7 @@
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
                 <div class="card-img">
-                    <img src="./img/clientes.jpeg" class="card-img-top" alt="...">
+                    <img style="width:298px; height:177.967px; object-fit:cover;" src="./img/clientes.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Clientes</h5>
                         <p class="card-text">Podras acceder a las ediciones comunes.</p>

@@ -70,13 +70,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Campo 1</th>
-                        <th scope="col">Campo 2</th>
-                        <th scope="col">Campo 3</th>
-                        <th scope="col">Campo 4</th>
-                        <th scope="col">Campo 5</th>
-                        <th scope="col">Campo 6</th>
+                        <th scope="col">Clave Producto</th>
+                        <th scope="col">Nombre Producto</th>
+                        <th scope="col">Clasificación</th>
+                        <th scope="col">Cantidad existencia</th>
+                        <th scope="col">Proveedor</th>                        
                         <th scope="col">Editado</th>
                         <th scope="col">Eliminar</th>
                     </tr>
@@ -87,9 +85,7 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
@@ -98,9 +94,7 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
@@ -109,111 +103,11 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
+                        <td>asdcsdc</td>                        
                         <td><span>&#128394;</span></td>
                         <td><span>&#10060;</span></td>
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>
@@ -221,7 +115,7 @@
     @component('components.modal')
     @slot('idModal','registroProductoModal')
     @slot('tituloModal','Registrar un nuevo producto')
-    @slot('cuerpoModal')
+    @slot('cuerpoModal')    
         <p class="px-3">
             Formulario para registrar a un nuevo producto
         </p>
@@ -231,14 +125,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div>
@@ -247,14 +141,14 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Precio $</span>
-                        <input type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">Precio</span>
+                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
             </div> 
@@ -263,7 +157,7 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>               
             </div> 
@@ -291,5 +185,7 @@
         </button>
     @endslot
     @endcomponent
-   
+@endsection
+@section('scritps')
+    <script src="./js/validaciones/productos.js"></script>
 @endsection

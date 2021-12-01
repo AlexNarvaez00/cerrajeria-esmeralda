@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\usuariosModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Parent_;
 
 class usuarioController extends Controller
 {
-    /**
+        /**
      * Atributos ...
      */
     public  $nombreUsuario;
@@ -30,8 +31,9 @@ class usuarioController extends Controller
     */
     public function index()
     {
-        $usuariosLista = DB::select('select idusuario from laravelcerrajeria.usuarios');
-        # $usuariosLista = json_encode($usuariosLista);
+        $usuariosLista = new usuariosModel();
+        
+        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('usuarios')
             ->with('camposVista',['ID','Nombre','Rol','Editar','Borrar'])
