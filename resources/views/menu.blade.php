@@ -116,18 +116,19 @@
 
     @component('components.modal')
         @slot('idModal','irventas')
-        @slot('tituloModal','Ir a una opción')
+        @slot('tituloModal','¿Vas a realizar una venta?')
         @slot('cuerpoModal')
         <div class="container">
         <div class="row">
         <div class="row cards" style="width: auto; margin: auto auto;">
+
             <div class="col-1">           
                 <div class="card" style="width: 18rem;">
                     <img src="./img/productoscerrajeria.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Venta de productos</h5>
                         <p class="card-text">¿Quieres realizar ventas de productos?</p>
-                        <a href="#" class="btn btn-primary">Ir</a>
+                        <a href="../productos-ventas" class="btn btn-primary">Ir</a>
                     </div>
                 </div>
                 </div>
@@ -146,7 +147,7 @@
             </div>
         </div>
         </div>
-</div>
+        </div>
         
         @endslot
         @slot('footerModal')
