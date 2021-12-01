@@ -34,7 +34,7 @@
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
-        ¡Hola, XXXX XXXX XXXX!
+        ¡Hola, xxxxxxxxx
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#128666;</span>
@@ -67,150 +67,41 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Campo 1</th>
-                        <th scope="col">Campo 2</th>
-                        <th scope="col">Campo 3</th>
-                        <th scope="col">Campo 4</th>
-                        <th scope="col">Campo 5</th>
-                        <th scope="col">Campo 6</th>
-                        <th scope="col">Editado</th>
-                        <th scope="col">Eliminar</th>
+                        <!--
+                            Campos de la tabla 
+                            Estos lo pienso mandar desde el controlador
+                        -->
+                        @foreach ($camposTabla as $campo)
+                            <th scope="col">{{$campo}}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                    <!--Aqui van los registros-->
+                    @foreach($registrosVista as $fila)
+                        <!--Inicio de la Fila-->
+                        <tr>
+                            <!--ID de la tabla usuarios-->    
+                            <th scope="col">{{$fila->idproveedor}}</th>
+                            <!--Los otros atributos de la tabla usuarios-->
+                            <td>{{$fila->nombre}}</td>
+                            <td>{{$fila->apellidopaterno}}</td>
+                            <td>{{$fila->apellidomaterno}}</td>
+                            <td>{{$fila->correo}}</td>
+                            <td>{{$fila->iddirecproveedor}}</td>
+                            <!--Botones-->
+                                <td>
+                                    <button class="btn" data-id-db="{{$fila->idusuario}}">
+                                        <span>&#128394;</span>
+                                    </button>
+                                </td>
+                            <td>
+                                <button class="btn">
+                                    <span>&#10060;</span>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
