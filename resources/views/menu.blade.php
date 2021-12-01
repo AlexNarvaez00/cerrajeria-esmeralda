@@ -65,9 +65,22 @@
                 <div class="card-img">
                     <img src="./img/img3.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Ventas</h5>
+                        <h5 class="card-title">Reporte de Ventas</h5>
                         <p class="card-text">Podras acceder a las ediciones comunes.</p>
                         <a href="../ventas" class="btn btn-primary">Ir a las opciones</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <article class="card h-100 shadow">
+                <div class="card-img">
+                    <img src="./img/ventas.png" class="card-img-top img-menu" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Ventas</h5>
+                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <a href="../ventas" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#irventas">Ir a las opciones</a>
                     </div>
                 </div>
             </article>
@@ -100,7 +113,52 @@
         </div>
     </div>
 </div>
+
+    @component('components.modal')
+        @slot('idModal','irventas')
+        @slot('tituloModal','Ir a una opción')
+        @slot('cuerpoModal')
+        <div class="container">
+        <div class="row align-items-center">
+            <div class="col-1">           
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/productoscerrajeria.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Venta de productos</h5>
+                        <p class="card-text">¿Quieres realizar ventas de productos?</p>
+                        <a href="#" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="container mt-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/serviciocerrajeria.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Venta de servicio</h5>
+                        <p class="card-text">¿Quieres realizar ventas de un servicio?</p>
+                        <a href="#" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        
+        @endslot
+        @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cerrar
+        </button>        
+    @endslot
+    @endcomponent
+
+
 @endsection
+
+
 
 
 <!--
