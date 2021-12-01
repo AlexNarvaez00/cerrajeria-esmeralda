@@ -6,10 +6,10 @@
   @component('components.header')
     @slot('items')
         <li class="nav-item">
-            <a class="nav-link active" href="../productos">Productos</a>
+            <a class="nav-link" href="../productos">Productos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../clientes">clientes</a>
+            <a class="nav-link active" href="../clientes">clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="../proveedores">Proveedores</a>
@@ -41,7 +41,7 @@
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#127991;</span>
-        Productos
+        Clientes
     </h5>
 
     <div class="container-fluid mb-4">
@@ -56,7 +56,7 @@
                 </button>
             </div>
                 <div class="col-auto">
-                <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+                <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroClienteModal">
                     <span class="me-3">&#10133;</span>
                     Agregar
                 </button>
@@ -219,25 +219,25 @@
         </div>
     </div>
     @component('components.modal')
-    @slot('idModal','registroProductoModal')
-    @slot('tituloModal','Registrar un nuevo producto')
+    @slot('idModal','registroClienteModal')
+    @slot('tituloModal','Registrar un nuevo cliente')
     @slot('cuerpoModal')
         <p class="px-3">
-            Formulario para registrar a un nuevo producto
+            Modulo para registrar un cliente
         </p>
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clave producto</span>
+                        <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
                         <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
+                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
                         <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
@@ -246,38 +246,16 @@
             <div class="row">
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
+                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
                         <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 </div>
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Precio $</span>
-                        <input type="number" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-            </div> 
-
-            <div class="row">
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
-                </div>               
-            </div> 
-            <div class="input-group mb-3">
-
-            <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected>Seleccione un proveedor</option>
-                <option value="1">Proveedor 1</option>
-                <option value="2">Proveedor 2</option>
-                <option value="3">Proveedor 3</option>
-            </select>
-            </div>
-            
+                </div>
         </div>
     @endslot
     @slot('footerModal')

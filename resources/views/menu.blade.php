@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Clientes</h5>
                         <p class="card-text">Podras acceder a las ediciones comunes.</p>
-                        <a href="" class="btn btn-primary">Ir a las opciones</a>
+                        <a href="../clientes" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
             </article>

@@ -9,6 +9,9 @@
     <a class="nav-link" href="../productos">Productos</a>
 </li>
 <li class="nav-item">
+            <a class="nav-link" href="../clientes">clientes</a>
+        </li>
+<li class="nav-item">
     <a class="nav-link" href="../proveedores">Proveedores</a>
 </li>
 <li class="nav-item">
