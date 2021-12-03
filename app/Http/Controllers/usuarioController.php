@@ -22,7 +22,7 @@ class usuarioController extends Controller
     public function __construct()
     {
         $this->nombreUsuario='Narvaez ';
-        $this->usuariosLista=usuariosModel::all();
+        $this->usuariosLista = usuariosModel::all();
             /**
              * Del modelo de caprta App/Http/Models
              *  
@@ -45,6 +45,31 @@ class usuarioController extends Controller
             ->with('nombreUsuarioVista',$this->nombreUsuario)//Titulo de la vista
             ->with('camposVista',$this->camposVista)//Campos de la tablas
             ->with('registrosVista',$this->usuariosLista);//Registros de la tabla
+    }
+
+    /**
+     * @param $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario.
+     * 
+    */
+    public function store(Request $request){
+        //Creamos un nuevo objeto.
+        $usuario = new usuariosModel();
+
+        //Nombre del input del formulario es una tributo "name"
+        //Chequen esa parte.
+
+        //Nombre del campo BD----- Nombre input formulario
+        $usuario->idUsuario = $request->idUsuario;
+        $usuario->nombreUsuario = $request->nombreUsuario;
+        $usuario->contrasena = $request->contrasena;
+        
+        $usuario->idjefe = $request->idUsuario;
+        //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
+        //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
+        $usuario->save();
+
+        return redirect()->route('usuarios.index');
     }
 
     public function show()

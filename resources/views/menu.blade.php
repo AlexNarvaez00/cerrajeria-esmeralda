@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Clientes</h5>
                         <p class="card-text">Podras acceder a las ediciones comunes.</p>
-                        <a href="" class="btn btn-primary">Ir a las opciones</a>
+                        <a href="../clientes" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
             </article>
@@ -117,6 +117,10 @@
     @component('components.modal')
         @slot('idModal','irventas')
         @slot('tituloModal','¿Vas a realizar una venta?')
+        /**Agregar estas dos cosas a sus modales*/
+            @slot('rutaEnvio','')
+            @slot('metodoFormulario','')
+        /**Fin de los nuevo */
         @slot('cuerpoModal')
         <div class="container">
         <div class="row">
