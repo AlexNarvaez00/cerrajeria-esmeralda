@@ -42,6 +42,32 @@ class proveedorController extends Controller
             ->with('camposTabla',$this->camposTabla)//Campos de la tablas
             ->with('registrosVista',$this->proveedoresLista);//Registros de la tabla
     }
+    public function store(Request $request){
+        //Creamos un nuevo objeto.
+        $proveedor = new proveedorModelo();
+
+        //Nombre del input del formulario es una tributo "name"
+        //Chequen esa parte.
+
+        //Nombre del campo BD----- Nombre input formulario
+        $proveedor->idproveedor = $request->idproveedor;
+        $proveedor->nombre = $request->nombre;
+        $proveedor->apellidopaterno = $request->apellidopaterno;
+        $proveedor->apellidomaterno = $request->apellidomaterno;
+        $proveedor->correo = $request->correo;
+        //$proveedor->numtelefono = $request->numtelefono;
+        //$proveedor->calle = $request->calle;
+        //$proveedor->numext = $request->numext;
+        //$proveedor->ciudad = $request->ciudad;
+        //$proveedor->colonia = $request->colonia;
+        $proveedor->iddirecproveedor = "DIR-102";
+        
+        //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
+        //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
+        $proveedor->save();
+
+        return redirect()->route('proveedores.index');
+    }
 
     public function show()
     {
