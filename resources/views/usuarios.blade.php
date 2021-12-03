@@ -113,37 +113,45 @@
 @component('components.modal')
     @slot('idModal','registroUsuariosModal')
     @slot('tituloModal','Registrar un nuevo usuario.')
+    
+    /**Agregar estas dos cosas a sus modales*/
+        @slot('rutaEnvio',route('usuarios.store'))
+        @slot('metodoFormulario','POST')
+    /**Fin de los nuevo */
+    
     @slot('cuerpoModal')
         <p class="px-3">
-            Informacion basica del usuario.
+            Informacion básica del usuario.
         </p>
         <div class="container-fluid">
             <div class="row">
+                <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
+                @csrf
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Id de Usuario</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="input-group mb-3 col-md-12 col-sm-12">
                     <span class="input-group-text" id="basic-addon1">Contraseña</span>
-                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario">
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
                 </div>
             </div>
             <div class="row">
                 <div class="input-group mb-3 col-md-12 col-sm-12">
                     <span class="input-group-text" id="basic-addon1">Confirmar Contraseña</span>
-                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon">
+                    <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrsenaConfirmada">
                 </div>
             </div> 
         </div>
@@ -170,7 +178,7 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Registrar
         </button>

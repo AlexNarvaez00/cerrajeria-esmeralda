@@ -11,16 +11,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        {{$cuerpoModal}}
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    {{$footerModal}}
                     <!--
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
+                        El metodo del formulario es para enviar los datos,
+                        lo hice asi por que :v asi fue como lo entendi xd
                     -->
+                    <form action="{{$rutaEnvio}}" method="{{$metodoFormulario}}">
+                        {{$cuerpoModal}}
+                        <div class="modal-footer">
+                            {{$footerModal}}
+                            <!--
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Send message</button>
+                            -->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

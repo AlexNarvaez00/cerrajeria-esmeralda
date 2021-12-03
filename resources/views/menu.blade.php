@@ -117,6 +117,10 @@
     @component('components.modal')
         @slot('idModal','irventas')
         @slot('tituloModal','¿Vas a realizar una venta?')
+        /**Agregar estas dos cosas a sus modales*/
+            @slot('rutaEnvio','')
+            @slot('metodoFormulario','')
+        /**Fin de los nuevo */
         @slot('cuerpoModal')
         <div class="container">
         <div class="row">
