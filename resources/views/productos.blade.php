@@ -48,17 +48,13 @@
 
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Clave Producto</th>
-                        <th scope="col">Nombre Producto</th>
-                        <th scope="col">Clasificación</th>
-                        <th scope="col">Cantidad existencia</th>
-                        <th scope="col">Proveedor</th>                        
-                        <th scope="col">Editado</th>
-                        <th scope="col">Eliminar</th>
+                    @foreach ($camposVista as $campo)
+                        <th scope="col">{{$campo}}</th>
+                    @endforeach
                     </tr>
                 </thead>
                 <tbody>
@@ -110,14 +106,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave-producto" required>
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre-producto" required>
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>
                     </div>
                 </div>
             </div>
@@ -133,7 +129,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio-producto" required>
+                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
                 </div>
             </div> 
@@ -142,7 +138,7 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad-existencia" required>
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
                     </div>
                 </div>               
             </div> 

@@ -23,35 +23,37 @@
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#127991;</span>
-        Productos
+        Venta de Productos
     </h5>
 
     <div class="container-fluid mb-4">
-        <form action="" class="row d-flex justify-content-end">
-            <div class="col-5">
-                <input type="text" class="form-control" placeholder="PlaceHolder">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-                    <span class="me-3">&#128269</span>  
-                    Buscar
-                </button>
-            </div>
-                
-        </form>
+        <div class ="row">
+            <div class="col-3 d-flex justify-content-start">        
+                <button type="button" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span class="badge">4</span></button>           
+            </div> 
+            <form action="" class="col-9 d-flex justify-content-end">                   
+                <div class="col-5">
+                    <input type="text" class="form-control" placeholder="PlaceHolder">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+                        <span class="me-3">&#128269</span>  
+                        Buscar
+                    </button>
+                </div>              
+            </form>
+        </div>       
     </div>
 
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Clave Producto</th>
-                        <th scope="col">Nombre Producto</th>
-                        <th scope="col">Clasificación</th>
-                        <th scope="col">Cantidad existencia</th>                                     
-                        <th scope="col">Agregar al carrito</th>
+                    @foreach ($camposVista as $campo)
+                        <th scope="col">{{$campo}}</th>
+                    @endforeach
                     </tr>
                 </thead>
                 <tbody>
@@ -60,21 +62,21 @@
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>                                              
-                        <td><span>&#128276;</span></td>                        
+                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                        
                     </tr>
                     <tr>
                         <th scope="row">asdcsdc</th>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>                                              
-                        <td><span>&#128276;</span></td>                        
+                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
                     </tr>
                     <tr>
                         <th scope="row">asdcsdc</th>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>
                         <td>asdcsdc</td>                                              
-                        <td><span>&#128276;</span></td>                        
+                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
                     </tr>
                    
                 </tbody>
@@ -83,76 +85,33 @@
     </div>
 
     @component('components.modal')
-    @slot('idModal','registroProductoModal')
+    @slot('idModal','carritoModal')
     @slot('tituloModal','Registrar un nuevo producto')
     @slot('rutaEnvio',route('productos.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
         <p class="px-3">
-            Formulario para registrar a un nuevo producto
+            Fecha de compra:  <?php echo date("Y-n-j");?>
         </p>
-        <div class="container-fluid">
-            <div class="row">
-                
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-                </div>
-            </div> 
-
-            <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-                </div>               
-            </div> 
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-                <select class="form-select" id="inputGroupSelect01">
-                    <option selected>Seleccione un proveedor</option>
-                    <option value="1">Proveedor 1</option>
-                    <option value="2">Proveedor 2</option>
-                    <option value="3">Proveedor 3</option>
-                </select>
-            </div>
-        </div>
+        <ul class="list-group">
+  <li class="list-group-item">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item">Morbi leo risus</li>
+  <li class="list-group-item">Porta ac consectetur ac</li>
+  <li class="list-group-item">Vestibulum at eros</li>
+</ul>
     @endslot
     @slot('footerModal')
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>
+        Total a pagar: $0.00
         <button type="button" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
-            Registrar
+            Realizar venta
         </button>
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Eliminar carrito
+        </button>
+        
     @endslot
     @endcomponent
 @endsection
