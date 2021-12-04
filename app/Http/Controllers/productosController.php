@@ -42,9 +42,9 @@ class productosController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('productos') //Nombre de la vista
-            ->with('nombreUsuarioVista',$this->nombreUsuario)//Titulo de la vista
+            ->with('nombreUsuarioProductos',$this->nombreUsuario)//Titulo de la vista
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosVista',$this->usuariosLista);//Registros de la tabla
+            ->with('registrosVista',$this->productosLista);//Registros de la tabla
     }
 
     /**
