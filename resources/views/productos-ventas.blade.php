@@ -96,6 +96,7 @@
             </table>
         </div>
     </div>
+<!--
     @component('components.modal')
     @slot('idModal','registroProductoModal')
     @slot('tituloModal','Registrar un nuevo producto')
@@ -105,14 +106,14 @@
         </p>
         <div class="container-fluid">
             <div class="row">
-                <!--Columnas :v-->
+                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
                         <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
                     </div>
                 </div>
-                <!--Columnas :v-->
+                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
@@ -168,6 +169,7 @@
     @endslot
     @endcomponent
 @endsection
+-->
 @section('scritps')
     <script src="./js/validaciones/productos.js"></script>
 @endsection

@@ -14,11 +14,9 @@
                     <!--
                         El metodo del formulario es para enviar los datos,
                         lo hice asi por que :v asi fue como lo entendi xd
-                    -->
-                    <form action="{{$rutaEnvio}}" method="{{$metodoFormulario}}">
-                        {{$cuerpoModal}}
-                        <div class="modal-footer">
-                            {{$footerModal}}
+                    
+                    
+                            -->
                             <!--
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary">Send message</button>
