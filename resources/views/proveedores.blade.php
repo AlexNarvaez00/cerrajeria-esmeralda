@@ -5,39 +5,9 @@
   <!--Esta es la prte del boton de log out -->
   @component('components.header')
     @slot('items')
-<<<<<<< HEAD
         @component('components.itemsNavBar')
             @slot('active','proveedores')
         @endcomponent
-=======
-        <li class="nav-item">
-            <a class="nav-link" href="../productos">Productos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../clientes">clientes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="../proveedores">Proveedores</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Ventas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Venta de productos</a>
-                <a class="dropdown-item" href="#">Venta de servicios</a>            
-            </div>
-       </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../notificaciones"> 
-                    <span class="icon">&#128276;</span> 
-                    Notificaciones
-            </a>
-        </li>
->>>>>>> 18761610db648661522ec450776cbf62ffc3690d
     @endslot
   
     <!--Esta parte es para mostrar el boton de log out-->
