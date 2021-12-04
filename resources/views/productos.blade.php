@@ -97,7 +97,10 @@
     @component('components.modal')
     @slot('idModal','registroProductoModal')
     @slot('tituloModal','Registrar un nuevo producto')
+    @slot('rutaEnvio',route('productos.store'))
+    @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
+   
         <p class="px-3">
             Formulario para registrar a un nuevo producto
         </p>
@@ -107,14 +110,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave-producto" required>
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre-producto" required>
                     </div>
                 </div>
             </div>
@@ -123,14 +126,14 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio-producto" required>
                     </div>
                 </div>
             </div> 
@@ -139,13 +142,13 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad-existencia" required>
                     </div>
                 </div>               
             </div> 
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-                <select class="form-select" id="inputGroupSelect01">
+                <select class="form-select" id="inputGroupSelect01" name="idproveedor">
                     <option selected>Seleccione un proveedor</option>
                     <option value="1">Proveedor 1</option>
                     <option value="2">Proveedor 2</option>
@@ -159,7 +162,7 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Registrar
         </button>

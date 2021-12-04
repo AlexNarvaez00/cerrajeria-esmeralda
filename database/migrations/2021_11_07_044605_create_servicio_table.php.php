@@ -20,9 +20,9 @@ class CreateServicioTable extends Migration
             $table->double('monto',6,2);
             $table->string('descripcion',45);
             $table->string('idcliente',7);
-            $table->string('clave-producto',10);
+            $table->string('clave_producto',10);
             $table->primary('idservicio');
-            $table->foreign('clave-producto')->references('clave-producto')->on('productos');
+            $table->foreign('clave_producto')->references('clave_producto')->on('productos');
             $table->foreign('iddireccion')->references('iddireccion')->on('direccion');
             $table->foreign('idcliente')->references('idcliente')->on('cliente');
         });
