@@ -83,7 +83,7 @@
             </table>
         </div>
     </div>
-
+<!-- modal para listar los productos en el carrito-->
     @component('components.modal')
     @slot('idModal','carritoModal')
     @slot('tituloModal','Registrar un nuevo producto')
@@ -114,7 +114,21 @@
         
     @endslot
     @endcomponent
+    <!-- modal para agregar un producto al carrito-->
+    @component('components.modal')
+    @slot('idModal','agregarcarritoModal')
+    @slot('tituloModal','Agregar a carrito')
+    @slot('rutaEnvio',route('productos.store'))
+    @slot('metodoFormulario','POST')
+    @slot('cuerpoModal')
+        Hola mundo
+    @endslot
+    @slot('footerModal')
+    @endslot
+    @endcomponent
 @endsection
+
+
 
 @section('scritps')
     <script src="./js/validaciones/productos.js"></script>

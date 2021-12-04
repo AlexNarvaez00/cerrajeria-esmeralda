@@ -17,12 +17,12 @@ class CreateColoniaTable extends Migration
     public function up()
     {
         Schema::create('colonia', function (Blueprint $table) {
-            $table->string('idcolonia', 20);
+            $table->increments('idcolonia');
             $table->string('nombre', 60);
-            $table->tinyInteger('codigopostal');
-            $table->string('idmunicol', 10);
+            $table->integer('codigopostal');
+            $table->integer('idmunicol')->unsigned();
             
-            $table->primary('idcolonia');
+            
             $table->foreign('idmunicol')->references('idmunicipio')->on('municipio');
         });
     }

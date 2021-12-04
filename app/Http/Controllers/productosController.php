@@ -28,7 +28,7 @@ class productosController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Existencia','Proveedor','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','Proveedor','Editar','Borrar'];
     }
 
     /**
