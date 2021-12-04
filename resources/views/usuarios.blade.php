@@ -185,10 +185,6 @@
     @endslot
     @endcomponent
 @endsection
-@section('scritps')
-    <script src="./js/validaciones/usuarios.js"></script>
-@endsection
-
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>

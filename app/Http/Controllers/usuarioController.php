@@ -69,6 +69,8 @@ class usuarioController extends Controller
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
         $usuario->save();
 
+
+        //return $request;
         return redirect()->route('usuarios.index');
     }
 

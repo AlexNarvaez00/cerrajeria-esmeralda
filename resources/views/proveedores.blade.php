@@ -14,9 +14,15 @@
         <li class="nav-item">
             <a class="nav-link active" href="../proveedores">Proveedores</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../ventas">Ventas</a>
-        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Ventas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Venta de productos</a>
+                <a class="dropdown-item" href="#">Venta de servicios</a>            
+            </div>
+       </li>
         <li class="nav-item">
             <a class="nav-link" href="../usuarios">Usuarios</a>
         </li>
