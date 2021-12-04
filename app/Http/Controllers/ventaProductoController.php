@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\productosModelo;
 use Illuminate\Http\Request;
 
-class productosController extends Controller
+class ventaProductoController extends Controller
 {
     /**
      * Atributos ...
@@ -28,7 +27,7 @@ class productosController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','Proveedor','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Existencia','Agregar al carrito'];
     }
 
     /**
@@ -41,7 +40,7 @@ class productosController extends Controller
     {
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
-        return view('productos') //Nombre de la vista            
+        return view('productos-ventas') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
             ->with('registrosVista',$this->productosLista);//Registros de la tabla
     }
@@ -63,8 +62,7 @@ class productosController extends Controller
         $producto->nombre_producto = $request->nombre_producto;
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
-        $producto->cantidad_existencia = $request->cantidad_existencia;
-        $producto->idproveedor = $request->idproveedor;
+        $producto->cantidad_existencia = $request->cantidad_existencia;      
         
 
         
@@ -75,7 +73,7 @@ class productosController extends Controller
 
 
         //return $request;
-        return redirect()->route('productos.index');
+        return redirect()->route('productos-ventas.index');
     }
 
     public function show()

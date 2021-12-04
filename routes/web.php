@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\clienteController;
+use App\Http\Controllers\ventaProductoController;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\proveedorController;
 use App\Http\Controllers\RutasController;
@@ -31,6 +32,7 @@ Route::get('/proveedores',[proveedorController::class,'index'])->name('proveedor
 Route::get('/productos',[productosController::class,'index'])->name('productos.storeindex');
 Route::get('/clientes',[clienteController::class,'index'])->name('clientes.index');
 Route::get('/ventas',[ventasController::class,'index'])->name('ventas.index');
+Route::get('/productos-ventas',[ventaProductoController::class,'index'])->name('productos-ventas.index');
 Route::get('/{pagina}',[RutasController::class,'showView']);
 
 /** 
@@ -43,6 +45,7 @@ Route::post('/proveedores',[proveedorController::class,'store'])->name('proveedo
 Route::post('/productos',[productosController::class,'store'])->name('productos.store');
 Route::post('/clientes',[clienteController::class,'store'])->name('clientes.store');
 Route::post('/ventas',[ventasController::class,'store'])->name('ventas.store');
+Route::post('/productos-ventas',[ventaProductoController::class,'store'])->name('productos-ventas.store');
 
 
 

@@ -20,7 +20,7 @@ class CreateDireccionTable extends Migration
             $table->string('iddireccion', 30);
             $table->string('calle', 80);
             $table->tinyInteger('numero');
-            $table->string('idcoldirec', 20);    
+            $table->integer('idcoldirec')->unsigned();    
             
             $table->primary('iddireccion'); 
             $table->foreign('idcoldirec')->references('idcolonia')->on('colonia');
