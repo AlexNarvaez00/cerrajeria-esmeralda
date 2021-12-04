@@ -5,27 +5,9 @@
   <!--Esta es la prte del boton de log out -->
   @component('components.header')
     @slot('items')
-        <li class="nav-item">
-            <a class="nav-link active" href="../productos">Productos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../clientes">clientes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../proveedores">Proveedores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../ventas">Ventas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../notificaciones"> 
-                    <span class="icon">&#128276;</span> 
-                    Notificaciones
-            </a>
-        </li>
+        @component('components.itemsNavBar')
+            @slot('active','productos')
+        @endcomponent
     @endslot
   
     <!--Esta parte es para mostrar el boton de log out-->

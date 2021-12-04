@@ -5,27 +5,9 @@
   <!--Esta es la prte del boton de log out -->
   @component('components.header')
     @slot('items')
-        <li class="nav-item">
-            <a class="nav-link" href="../productos">Productos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../clientes">clientes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="../proveedores">Proveedores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../ventas">Ventas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../notificaciones"> 
-                    <span class="icon">&#128276;</span> 
-                    Notificaciones
-            </a>
-        </li>
+        @component('components.itemsNavBar')
+            @slot('active','proveedores')
+        @endcomponent
     @endslot
   
     <!--Esta parte es para mostrar el boton de log out-->
@@ -113,6 +95,8 @@
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
+    @slot('rutaEnvio',route('proveedores.store'))
+    @slot('metodoFormulario','POST')
     @slot('cuerpoModal')
         <p class="px-3">
             Formulario para registrar a un uevo proveedor.
@@ -123,10 +107,11 @@
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
+                @csrf
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Id de Proveedor</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDProveedor">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDProveedor" name="idproveedor">
                     </div>
                 </div>
             </div>
@@ -135,7 +120,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreProveedor">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreProveedor" name="nombre">
                     </div>
                 </div>    
             </div>
@@ -144,13 +129,13 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPProveedor">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPProveedor" name="apellidopaterno">
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMProveedor">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMProveedor" name="apellidomaterno">
                     </div>
                 </div>
             </div>
@@ -158,7 +143,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Número de Telefono</span>
-                        <input type="text" class="form-control" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono">
+                        <input type="text" class="form-control" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="numtelefono">
                     </div>
                 </div>
             </div> 
@@ -166,7 +151,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
-                        <input type="email" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo">
+                        <input type="email" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
                     </div>
                 </div>
             </div> 
@@ -177,26 +162,26 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text" id="basic-addon1">Calle</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle">
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle">
                     </div>
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">Número ext</span>
-                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt">
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numext">
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">Código Postal</span>
-                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCodigoP">
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCodigoP" name="codpostal">
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Ciudad</span>
-                            <select id="Ciudades" class="form-select">
+                            <select id="Ciudades" class="form-select" name="ciudad">
                                 <option value="0" selected>Selecciona</option>
                                 <option value="1">...</option>
                             </select>
@@ -205,7 +190,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Colonia</span>
-                            <select id="Colonias" class="form-select">
+                            <select id="Colonias" class="form-select" name="colonia">
                                 <option value="0" selected >Selecciona</option>
                                 <option value="1">...</option>
                             </select>
@@ -218,7 +203,7 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
