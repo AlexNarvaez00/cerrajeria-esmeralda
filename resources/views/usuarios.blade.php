@@ -27,12 +27,13 @@
 </h5>
 
 <div class="container-fluid mb-4">
-    <form class="row d-flex justify-content-end">
+    <!--Experimental-->
+    <form method="GET" action="{{route('usuarios.index')}}" class="row d-flex justify-content-end">
         <div class="col-5">
-            <input type="text" class="form-control" placeholder="PlaceHolder">
+            <input type="text" class="form-control" placeholder="burcar ID" name="inputBusqueda">
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
                 <span class="me-3">&#128269</span>
                 Buscar
             </button>

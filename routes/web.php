@@ -38,13 +38,11 @@ Route::get('/{pagina}',[RutasController::class,'showView']);
  * deben de tener cuidado :v por quisas me equivoque en cada una de sus 
  * rutas asi que pues las componen a conforme esta en "usuarios"
 */
-Route::post('/usuarios',[usuarioController::class,'store'])->name('usuarios.store');
+Route::resource('/usuarios',usuarioController::class);
 Route::post('/proveedores',[proveedorController::class,'store'])->name('proveedores.store');
 Route::post('/productos',[productosController::class,'store'])->name('productos.store');
 Route::post('/clientes',[clienteController::class,'store'])->name('clientes.store');
 Route::post('/ventas',[ventasController::class,'store'])->name('ventas.store');
-
-
 
 
 
