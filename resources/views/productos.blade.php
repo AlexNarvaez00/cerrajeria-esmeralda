@@ -66,7 +66,7 @@
                         <!--Los otros atributos de la tabla usuarios-->
                         <td>{{$producto->nombre_producto}}</td>
                         <td>{{$producto->clasificacion}}</td>
-                        <td>{{$producto->precio_producto}}</td>
+                        <td>&#36;{{$producto->precio_producto}}</td>
                         <td>{{$producto->cantidad_existencia}}</td>
                         <td>{{$producto->idproveedor}}</td>
                         <!--Botones-->

@@ -51,43 +51,42 @@
             <table class="table">
                 <thead>
                     <tr>
-                    @foreach ($camposVista as $campo)
+                    @foreach ($camposProductos as $campo)
                         <th scope="col">{{$campo}}</th>
                     @endforeach
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($registrosProductos as $producto)
+                    <!--Inicio de la Fila-->
                     <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                        
+                        <!--ID de la tabla usuarios-->    
+                        <th scope="col">{{$producto->clave_producto}}</th>
+                        <!--Los otros atributos de la tabla usuarios-->
+                        <td>{{$producto->nombre_producto}}</td>
+                        <td>{{$producto->clasificacion}}</td>
+                        <td>&#36;{{$producto->precio_producto}}</td>
+                        <td>{{$producto->cantidad_existencia}}</td>                        
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                                <span><i class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
+                            </button>
+                        </td>
+                        
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
-                    </tr>
+                @endforeach
                    
                 </tbody>
+                <!---->
             </table>
         </div>
     </div>
 <!-- modal para listar los productos en el carrito-->
     @component('components.modal')
     @slot('idModal','carritoModal')
-    @slot('tituloModal','Registrar un nuevo producto')
-    @slot('rutaEnvio',route('productos.store'))
+    @slot('tituloModal','Carrito de compras')
+    @slot('rutaEnvio',route('productos-ventas.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
         <p class="px-3">
@@ -121,7 +120,22 @@
     @slot('rutaEnvio',route('productos.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')
-        Hola mundo
+    <div class="container-fluid">
+        <div class="row">
+        @csrf
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                    <input id ="inCantExistencia" type="number" class="form-control" value="1" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Observaciones</span>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>                  
+        
+        </div>
+    <div>
     @endslot
     @slot('footerModal')
     @endslot

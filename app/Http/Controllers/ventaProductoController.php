@@ -27,7 +27,7 @@ class ventaProductoController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Existencia','Agregar al carrito'];
+        $this->camposProductos = ['Clave Producto','Nombre Producto','Clasificación','Precio','Existencia','Agregar al carrito'];
     }
 
     /**
@@ -41,8 +41,8 @@ class ventaProductoController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('productos-ventas') //Nombre de la vista            
-            ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosVista',$this->productosLista);//Registros de la tabla
+            ->with('camposProductos',$this->camposProductos)//Campos de la tablas
+            ->with('registrosProductos',$this->productosLista);//Registros de la tabla
     }
 
     /**

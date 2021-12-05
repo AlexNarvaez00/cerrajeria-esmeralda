@@ -145,7 +145,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Venta de servicio</h5>
                             <p class="card-text">¿Quieres realizar ventas de un servicio?</p>
-                            <a href="#" class="btn btn-primary">Ir</a>
+                            <a href="../servicios-ventas" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
             </div>
