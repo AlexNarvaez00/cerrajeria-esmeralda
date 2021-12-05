@@ -57,16 +57,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($registrosProductos as $producto)
+                @foreach($registrosProductosDescripcionjoin as $producto)
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
                         <th scope="col">{{$producto->clave_producto}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td>{{$producto->nombre_producto}}</td>
-                        <td>{{$producto->clasificacion}}</td>
+                        <td>{{$producto->nombre_producto}}</td>                        
                         <td>&#36;{{$producto->precio_producto}}</td>
-                        <td>{{$producto->cantidad_existencia}}</td>                        
+                        <td>{{$producto->cantidad_existencia}}</td> 
+                        <td>{{$producto->descripcion}}</td>                       
                         <!--Botones-->
                         <td>
                             <button class="btn" data-id-db="{{$producto->clave_producto}}">
@@ -143,8 +143,8 @@
         
     @endslot
     @slot('footerModal')
-    <hr>
-    <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+    <tr>
+    <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>

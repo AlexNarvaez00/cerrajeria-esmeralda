@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\productosModelo;
 use Illuminate\Http\Request;
+use App\Models\productosDescripcionModelo;
 
 class ventaProductoController extends Controller
 {
@@ -12,7 +13,8 @@ class ventaProductoController extends Controller
     public  $nombreUsuario;//Este atributo despues lo revisamos
     protected  $productosLista;//Esta variables para guardar la lista de usuarios
     protected $productosCarrito;
-
+    protected $productosDescripcionLista;
+    protected $productosjoin;
     private $camposVista;
 
 
@@ -21,14 +23,18 @@ class ventaProductoController extends Controller
 
     public function __construct()
     {
+        $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
+        ->select("*")
+        ->get();
         
         $this->productosLista = productosModelo::all();
+        $this->productosDescripcionLista = productosDescripcionModelo::all();
             /**
              * Del modelo de caprta App/Http/Models
              *  
             */
         $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
-        $this->camposProductos = ['Clave Producto','Nombre Producto','Clasificación','Precio','Existencia','Agregar al carrito'];
+        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
     }
 
     /**
@@ -44,7 +50,12 @@ class ventaProductoController extends Controller
         return view('productos-ventas') //Nombre de la vista            
             ->with('camposProductos',$this->camposProductos)//Campos de la tablas
             ->with('registrosProductos',$this->productosLista)//Registros de la tabla
+            ->with('registrosProductosDescripcion',$this->productosDescripcionLista)
+            ->with('registrosProductosDescripcionjoin',$this->productosjoin)
             ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
+    }
+    public function getDescripcion($claved){
+        echo $claved;
     }
 
     /**
@@ -60,11 +71,7 @@ class ventaProductoController extends Controller
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $producto->clave_producto = $request->clave_producto;
-        $producto->nombre_producto = $request->nombre_producto;
-        $producto->clasificacion = $request->clasificacion;
-        $producto->precio_producto = $request->precio_producto;
-        $producto->cantidad_existencia = $request->cantidad_existencia;      
+             
         
 
         
