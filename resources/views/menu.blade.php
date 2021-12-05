@@ -27,7 +27,7 @@
                     <img src="./img/img1.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Productos</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes administrar los productos. Agregar, eliminar y modificar.</p>
                         <a href="../productos" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <img src="./img/img2.jpeg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Proveedores</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes administrar a los proveedores. Agregar, eliminar y modificar.</p>
                         <a href="../proveedores" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <img src="./img/clientes.jpeg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Clientes</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes administrar a los clientes. Agregar, eliminar y modificar.</p>
                         <a href="../clientes" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <img src="./img/img3.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Reporte de Ventas</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes consultar la sección de reportes. Visualiza los reportes de ventas.</p>
                         <a href="../ventas" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                     <img src="./img/ventas.png" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Ventas</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes realizar ventas. Realiza ventas de servicios y productos.</p>
                         <a href="../ventas" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#irventas">Ir a las opciones</a>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <img src="./img/img4.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Usuarios</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes administrar a los usuarios. Agregar, eliminar y modificar.</p>
                         <a href="../usuarios" class="btn btn-primary">Ir a las opciones</a>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <img src="./img/img5.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Notificaciones</h5>
-                        <p class="card-text">Podras acceder a las ediciones comunes.</p>
+                        <p class="card-text">En esta sección puedes consultar las notificaciones sobre los productos.</p>
                         <a href="../notificaciones" class="btn btn-primary mb-1">Ir a las opciones</a>
                     </div>
                 </div>
