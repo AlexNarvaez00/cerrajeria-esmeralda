@@ -11,6 +11,7 @@ class ventaProductoController extends Controller
      */
     public  $nombreUsuario;//Este atributo despues lo revisamos
     protected  $productosLista;//Esta variables para guardar la lista de usuarios
+    protected $productosCarrito;
 
     private $camposVista;
 
@@ -26,7 +27,7 @@ class ventaProductoController extends Controller
              * Del modelo de caprta App/Http/Models
              *  
             */
-
+        $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Clasificación','Precio','Existencia','Agregar al carrito'];
     }
 
@@ -42,7 +43,8 @@ class ventaProductoController extends Controller
         # code...
         return view('productos-ventas') //Nombre de la vista            
             ->with('camposProductos',$this->camposProductos)//Campos de la tablas
-            ->with('registrosProductos',$this->productosLista);//Registros de la tabla
+            ->with('registrosProductos',$this->productosLista)//Registros de la tabla
+            ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
     }
 
     /**

@@ -90,26 +90,26 @@
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
         <p class="px-3">
-            Fecha de compra:  <?php echo date("Y-n-j");?>
+            Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
-        <ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
+        <table class="table table-success table-striped">
+            @foreach ($camposproductosCarrito  as $campo)
+                <th scope="col">{{$campo}}</th>
+            @endforeach  
+        </table>        
     @endslot
     @slot('footerModal')
-        Total a pagar: $0.00
+        
+        <div class="me-auto p-2 bd-highlight"><h6>Total a pagar: $0.00</h6></div>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
-            Realizar venta
+            Realizar pago
         </button>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Eliminar carrito
         </button>
+        
         
     @endslot
     @endcomponent
@@ -123,6 +123,10 @@
     <div class="container-fluid">
         <div class="row">
         @csrf
+            <p class="px-3">
+                <h4>Aqui va el nombre del producto</h4>
+            </p>
+            
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">Cantidad</span>
@@ -132,12 +136,22 @@
             <div class="input-group">
                 <span class="input-group-text">Observaciones</span>
                 <textarea class="form-control" aria-label="With textarea"></textarea>
-            </div>                  
+            </div>         
         
         </div>
     <div>
+        
     @endslot
     @slot('footerModal')
+    <hr>
+    <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+        <i class="bi bi-plus-lg " style="font-size:20px;"></i>
+            Agregar
+        </button>
     @endslot
     @endcomponent
 @endsection

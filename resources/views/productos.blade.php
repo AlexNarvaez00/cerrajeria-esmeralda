@@ -149,10 +149,14 @@
                     @endforeach
                 </select>
             </div>
+            <div class="input-group">
+                <span class="input-group-text">Descripcion</span>
+                <textarea class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+            </div> 
         </div>
     @endslot
     @slot('footerModal')
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
