@@ -32,7 +32,7 @@ class productosController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','Proveedor','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Editar','Borrar'];
     }
 
     /**
@@ -47,7 +47,7 @@ class productosController extends Controller
         # code...
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$this->productosLista)//Registros de la tabla
+            ->with('registrosProductos',$this->productosLista)//Registros de la tabla productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
 
@@ -69,6 +69,7 @@ class productosController extends Controller
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
         $producto->cantidad_existencia = $request->cantidad_existencia;
+        //parte la cadena y la combierte en un arreglo
         $arreProveedores = explode(" ",$request->idproveedor);
         $producto->idproveedor = $arreProveedores[0];
         

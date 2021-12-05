@@ -68,7 +68,7 @@
                         <td>{{$producto->clasificacion}}</td>
                         <td>{{$producto->precio_producto}}</td>
                         <td>{{$producto->cantidad_existencia}}</td>
-                        <td>{{$producto->idProveedor}}</td>
+                        <td>{{$producto->idproveedor}}</td>
                         <!--Botones-->
                         <td>
                             <button class="btn" data-id-db="{{$producto->clave_producto}}">
