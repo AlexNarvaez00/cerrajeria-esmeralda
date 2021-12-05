@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
-                <input type="text" class="form-control" placeholder="PlaceHolder">
+                <input type="text" class="form-control" placeholder="Buscar producto" name="inputBusqueda">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-light d-flex ps-3 pe-3">

@@ -41,13 +41,21 @@ class productosController extends Controller
      * al mostrar las vistas.
      * 
     */
-    public function index()
+    public function index(Request $request)
     {
+        $listaProductos = null;
+        if(count($request->all()) >= 0){
+            $listaProductos = productosModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
+        }else{
+            //Sino tiene nada
+            //Que lo rellene con todos los registros 
+            $listaProductos = productosModelo::all();
+        }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$this->productosLista)//Registros de la tabla productos
+            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
 
