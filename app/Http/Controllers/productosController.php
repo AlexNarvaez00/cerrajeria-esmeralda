@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\productosModelo;
+use App\Models\proveedorModelo; //proveddores para rellenarlo en la seleccion para agregar
+
 use Illuminate\Http\Request;
 
 class productosController extends Controller
@@ -12,7 +14,7 @@ class productosController extends Controller
      */
     public  $nombreUsuario;//Este atributo despues lo revisamos
     protected  $productosLista;//Esta variables para guardar la lista de usuarios
-
+    protected $proveedorLista;//Lista de proveedores
     private $camposVista;
 
 
@@ -23,6 +25,8 @@ class productosController extends Controller
     {
         
         $this->productosLista = productosModelo::all();
+        $this->proveedorLista = proveedorModelo::all();
+
             /**
              * Del modelo de caprta App/Http/Models
              *  
@@ -43,7 +47,8 @@ class productosController extends Controller
         # code...
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosVista',$this->productosLista);//Registros de la tabla
+            ->with('registrosProductos',$this->productosLista)//Registros de la tabla
+            ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
 
     /**
@@ -64,14 +69,14 @@ class productosController extends Controller
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
         $producto->cantidad_existencia = $request->cantidad_existencia;
-        $producto->idproveedor = $request->idproveedor;
-        
-
+        $arreProveedores = explode(" ",$request->idproveedor);
+        $producto->idproveedor = $arreProveedores[0];
         
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
         $producto->save();
+        
 
 
         //return $request;

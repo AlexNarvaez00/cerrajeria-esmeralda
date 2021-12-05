@@ -58,33 +58,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($registrosProductos as $producto)
+                    <!--Inicio de la Fila-->
                     <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
+                        <!--ID de la tabla usuarios-->    
+                        <th scope="col">{{$producto->clave_producto}}</th>
+                        <!--Los otros atributos de la tabla usuarios-->
+                        <td>{{$producto->nombre_producto}}</td>
+                        <td>{{$producto->clasificacion}}</td>
+                        <td>{{$producto->precio_producto}}</td>
+                        <td>{{$producto->cantidad_existencia}}</td>
+                        <td>{{$producto->idProveedor}}</td>
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                                <span>&#128394;</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                <span>&#10060;</span>
+                            </button>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                @endforeach
                    
                 </tbody>
             </table>
@@ -102,6 +99,7 @@
         </p>
         <div class="container-fluid">
             <div class="row">
+            @csrf
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
@@ -146,9 +144,9 @@
                 <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
                 <select class="form-select" id="inputGroupSelect01" name="idproveedor">
                     <option selected>Seleccione un proveedor</option>
-                    <option value="1">Proveedor 1</option>
-                    <option value="2">Proveedor 2</option>
-                    <option value="3">Proveedor 3</option>
+                    @foreach($registrosProveedores as $proveedor)
+                    <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
+                    @endforeach
                 </select>
             </div>
         </div>
