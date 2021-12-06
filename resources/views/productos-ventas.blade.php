@@ -51,66 +51,63 @@
             <table class="table">
                 <thead>
                     <tr>
-                    @foreach ($camposVista as $campo)
+                    @foreach ($camposProductos as $campo)
                         <th scope="col">{{$campo}}</th>
                     @endforeach
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($registrosProductosDescripcionjoin as $producto)
+                    <!--Inicio de la Fila-->
                     <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                        
+                        <!--registros de las tablas-->    
+                        <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
+                        <td class="dato">{{$producto->nombre_producto}}</td>                        
+                        <td class="dato">&#36;{""{$producto->precio_producto}}</td>
+                        <td class="dato">{{$producto->cantidad_existencia}}</td> 
+                        <td class="dato">{{$producto->descripcion}}</td>                       
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                                <span><i class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
+                            </button>
+                        </td>                        
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                                              
-                        <td><i class="bi bi-cart4" style="font-size:20px;"></i></td>                          
-                    </tr>
+                @endforeach
                    
                 </tbody>
+                <!---->
             </table>
         </div>
     </div>
 <!-- modal para listar los productos en el carrito-->
     @component('components.modal')
     @slot('idModal','carritoModal')
-    @slot('tituloModal','Registrar un nuevo producto')
-    @slot('rutaEnvio',route('productos.store'))
+    @slot('tituloModal','Carrito de compras')
+    @slot('rutaEnvio',route('productos-ventas.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
         <p class="px-3">
-            Fecha de compra:  <?php echo date("Y-n-j");?>
+            Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
-        <ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
+        <table class="table table-success table-striped">
+            @foreach ($camposproductosCarrito  as $campo)
+                <th scope="col">{{$campo}}</th>
+            @endforeach  
+        </table>        
     @endslot
     @slot('footerModal')
-        Total a pagar: $0.00
+        
+        <div class="me-auto p-2 bd-highlight"><h6>Total a pagar: $0.00</h6></div>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
-            Realizar venta
+            Realizar pago
         </button>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Eliminar carrito
         </button>
+        
         
     @endslot
     @endcomponent
@@ -121,9 +118,38 @@
     @slot('rutaEnvio',route('productos.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')
-        Hola mundo
+    <div class="container-fluid">
+        <div class="row">
+        @csrf
+            <p class="px-3">
+                <h4>Aqui va el nombre del producto</h4>
+            </p>
+            
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
+                    <input id ="inCantExistencia" type="number" class="form-control" value="1" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Observaciones</span>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>         
+        
+        </div>
+    <div>
+        
     @endslot
     @slot('footerModal')
+    <tr>
+    <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+        <i class="bi bi-plus-lg " style="font-size:20px;"></i>
+            Agregar
+        </button>
     @endslot
     @endcomponent
 @endsection

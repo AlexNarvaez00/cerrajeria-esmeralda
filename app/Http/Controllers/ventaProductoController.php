@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 use App\Models\productosModelo;
 use Illuminate\Http\Request;
+use App\Models\productosDescripcionModelo;
 
 class ventaProductoController extends Controller
 {
     /**
      * Atributos ...
      */
-    public  $nombreUsuario;//Este atributo despues lo revisamos
-    protected  $productosLista;//Esta variables para guardar la lista de usuarios
-
-    private $camposVista;
+    public  $nombreUsuario;//Este atributo despues lo revisamos    
+    protected $productosCarrito;//Este atributo debera contener los productos que esten en el carrito   
+   
+    
 
 
     //Pagina para referenciar las cosas xd    
@@ -20,14 +21,13 @@ class ventaProductoController extends Controller
 
     public function __construct()
     {
-        
-        $this->productosLista = productosModelo::all();
-            /**
-             * Del modelo de caprta App/Http/Models
-             *  
-            */
-
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Existencia','Agregar al carrito'];
+        //realiza un join para unir dos tablas
+        $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
+        ->select("*")
+        ->get();
+        //Son los campos de las tablas
+        $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
+        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
     }
 
     /**
@@ -41,10 +41,10 @@ class ventaProductoController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('productos-ventas') //Nombre de la vista            
-            ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosVista',$this->productosLista);//Registros de la tabla
+            ->with('camposProductos',$this->camposProductos)//Campos de la tablas           
+            ->with('registrosProductosDescripcionjoin',$this->productosjoin)
+            ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
     }
-
     /**
      * @param $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.
@@ -58,11 +58,7 @@ class ventaProductoController extends Controller
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $producto->clave_producto = $request->clave_producto;
-        $producto->nombre_producto = $request->nombre_producto;
-        $producto->clasificacion = $request->clasificacion;
-        $producto->precio_producto = $request->precio_producto;
-        $producto->cantidad_existencia = $request->cantidad_existencia;      
+             
         
 
         

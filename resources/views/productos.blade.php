@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
-                <input type="text" class="form-control" placeholder="PlaceHolder">
+                <input type="text" class="form-control" placeholder="Buscar producto" name="inputBusqueda">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
@@ -58,33 +58,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($registrosProductos as $producto)
+                    <!--Inicio de la Fila-->
                     <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
+                        <!--ID de la tabla usuarios-->    
+                        <th scope="col">{{$producto->clave_producto}}</th>
+                        <!--Los otros atributos de la tabla usuarios-->
+                        <td>{{$producto->nombre_producto}}</td>
+                        <td>{{$producto->clasificacion}}</td>
+                        <td>&#36;{{$producto->precio_producto}}</td>
+                        <td>{{$producto->cantidad_existencia}}</td>
+                        <td>{{$producto->idproveedor}}</td>
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                                <span>&#128394;</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                <span>&#10060;</span>
+                            </button>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                @endforeach
                    
                 </tbody>
             </table>
@@ -102,6 +99,7 @@
         </p>
         <div class="container-fluid">
             <div class="row">
+            @csrf
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
@@ -146,15 +144,19 @@
                 <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
                 <select class="form-select" id="inputGroupSelect01" name="idproveedor">
                     <option selected>Seleccione un proveedor</option>
-                    <option value="1">Proveedor 1</option>
-                    <option value="2">Proveedor 2</option>
-                    <option value="3">Proveedor 3</option>
+                    @foreach($registrosProveedores as $proveedor)
+                    <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
+                    @endforeach
                 </select>
             </div>
+            <div class="input-group">
+                <span class="input-group-text">Descripcion</span>
+                <textarea class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+            </div> 
         </div>
     @endslot
     @slot('footerModal')
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
