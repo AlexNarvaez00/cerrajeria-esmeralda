@@ -10,12 +10,10 @@ class ventaProductoController extends Controller
     /**
      * Atributos ...
      */
-    public  $nombreUsuario;//Este atributo despues lo revisamos
-    protected  $productosLista;//Esta variables para guardar la lista de usuarios
-    protected $productosCarrito;
-    protected $productosDescripcionLista;
-    protected $productosjoin;
-    private $camposVista;
+    public  $nombreUsuario;//Este atributo despues lo revisamos    
+    protected $productosCarrito;//Este atributo debera contener los productos que esten en el carrito   
+   
+    
 
 
     //Pagina para referenciar las cosas xd    
@@ -23,16 +21,11 @@ class ventaProductoController extends Controller
 
     public function __construct()
     {
+        //realiza un join para unir dos tablas
         $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
-        
-        $this->productosLista = productosModelo::all();
-        $this->productosDescripcionLista = productosDescripcionModelo::all();
-            /**
-             * Del modelo de caprta App/Http/Models
-             *  
-            */
+        //Son los campos de las tablas
         $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
     }
@@ -48,16 +41,10 @@ class ventaProductoController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('productos-ventas') //Nombre de la vista            
-            ->with('camposProductos',$this->camposProductos)//Campos de la tablas
-            ->with('registrosProductos',$this->productosLista)//Registros de la tabla
-            ->with('registrosProductosDescripcion',$this->productosDescripcionLista)
+            ->with('camposProductos',$this->camposProductos)//Campos de la tablas           
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
             ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
     }
-    public function getDescripcion($claved){
-        echo $claved;
-    }
-
     /**
      * @param $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.

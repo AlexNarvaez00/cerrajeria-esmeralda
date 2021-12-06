@@ -60,20 +60,18 @@
                 @foreach($registrosProductosDescripcionjoin as $producto)
                     <!--Inicio de la Fila-->
                     <tr>
-                        <!--ID de la tabla usuarios-->    
-                        <th scope="col">{{$producto->clave_producto}}</th>
-                        <!--Los otros atributos de la tabla usuarios-->
-                        <td>{{$producto->nombre_producto}}</td>                        
-                        <td>&#36;{{$producto->precio_producto}}</td>
-                        <td>{{$producto->cantidad_existencia}}</td> 
-                        <td>{{$producto->descripcion}}</td>                       
+                        <!--registros de las tablas-->    
+                        <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
+                        <td class="dato">{{$producto->nombre_producto}}</td>                        
+                        <td class="dato">&#36;{""{$producto->precio_producto}}</td>
+                        <td class="dato">{{$producto->cantidad_existencia}}</td> 
+                        <td class="dato">{{$producto->descripcion}}</td>                       
                         <!--Botones-->
                         <td>
                             <button class="btn" data-id-db="{{$producto->clave_producto}}">
                                 <span><i class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
                             </button>
-                        </td>
-                        
+                        </td>                        
                     </tr>
                 @endforeach
                    
