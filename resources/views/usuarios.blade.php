@@ -64,26 +64,28 @@
             </thead>
             <tbody>
                 <!--Aqui van los registros-->
-                @foreach($registrosVista as $fila)
+                @foreach($registrosVista as $usuario)
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
-                        <th scope="col">{{$fila->idusuario}}</th>
+                        <th class="data" scope="col">{{$usuario->idusuario}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td>{{$fila->nombreUsuario}}</td>
-                        <td>No le puse rol :v</td>
-                        <td>{{$fila->created_at}}</td>
-                        <td>{{$fila->updated_at}}</td>
+                        <td class="data">{{$usuario->nombreUsuario}}</td>
+                        <td class="data">No le puse rol :v</td>
+                        <td class="data">{{$usuario->created_at}}</td>
+                        <td class="data">{{$usuario->updated_at}}</td>
 
                         <!--Botones-->
                         <td>
-                            <button class="btn" data-id-db="{{$fila->idusuario}}">
+                            <button class="btn" data-id-db="{{$usuario->idusuario}}">
                                 <span>&#128394;</span>
                             </button>
                         </td>
                         <td>
-                            <form action="">
-                                <button class="btn delete" type="submit">
+                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
                             </form>
@@ -170,7 +172,7 @@
         @endslot
     @endcomponent
 
-    @component('components.modaSimple')
+    @component('components.modalSimple')
         @slot('idModal','confirmacionModal')
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
@@ -181,7 +183,7 @@
                 <span class="me-2">&#10060;</span>
                 Cancelar
             </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
                 <span class="me-2">&#10004;</span>
                 Confirmar
             </button>
@@ -199,14 +201,59 @@
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
     <script>
-        const botonesBorrar = document.getElementsByClassName('delete');
-        for (let index = 0; index < botonesBorrar.length; index++) {
-            const boton = botonesBorrar[index];
-            boton.addEventListener('submit',(event)=>{
-                const registros = event.target;
-                event.preventDefault();//Eviatamos que el formulario envie cosas.
-                console.log(registros);
+        /**
+         * Todo este codigo debe de ir en archivo aparte :v 
+         * pero lo puse aqui no mas para probar 
+         * 
+        */
+        const formulariosBorrar = document.getElementsByClassName('form-detele');
+        let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
+        let FORMULARIO_GLOBAL = null;
+
+        for (let index = 0; index < formulariosBorrar.length; index++) {
+            const formulario = formulariosBorrar[index];
+            //Agregamos el vento de submit a cada "formulario" de las filas 
+            //en los registros de la tabla
+            formulario.addEventListener('submit',(event)=>{
+                event.preventDefault();//Evitamos que el formulario envie cosas.
+                const filaHTML = event
+                                    .target
+                                    .parentNode
+                                    .parentNode;
+                const registros = filaHTML.getElementsByClassName('data');
+               
+                //Colocar la informacion en el modal.
+                for (let index = 0; index < registros.length; index++) {
+                    //registros[index];
+                    const filaBooststrap = document.createElement("div");
+                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
+
+                    const columnaCampo = document.createElement("div");
+                    columnaCampo.classList.add('col-6');
+                    columnaCampo.innerText = 'CampoNombre:'
+
+                    const columnaInformacion = document.createElement("div");
+                    columnaInformacion.classList.add('col-6');
+                    columnaInformacion.innerText = registros[index].innerHTML;
+                    
+                    filaBooststrap.appendChild(columnaCampo);
+                    filaBooststrap.appendChild(columnaInformacion);
+                    
+                    cuerpoModalInformacion.appendChild(filaBooststrap);
+                }
+                FORMULARIO_GLOBAL = event.target;
+                //console.log(cuerpoModalInformacion);
             });
+
+
         }
+
+        let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
+        botonModalConfirmacion.addEventListener('click',event=>{
+            console.log(FORMULARIO_GLOBAL);
+            FORMULARIO_GLOBAL.submit();
+            FORMULARIO_GLOBAL = null;
+        });
+
     </script>
 @endsection

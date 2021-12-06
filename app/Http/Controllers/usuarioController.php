@@ -91,4 +91,15 @@ class usuarioController extends Controller
     {
         
     }
+    /**
+     * Este metodo sirve para borrar los registros de la base de datos,
+     * deben de tener cuidado :v 
+     * 
+    */
+    public function destroy(usuariosModel $usuario){
+        $usuario->delete();
+        return redirect()->route('usuarios.index');
+    }
+
+
 }
