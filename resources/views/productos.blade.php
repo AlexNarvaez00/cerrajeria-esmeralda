@@ -5,27 +5,9 @@
   <!--Esta es la prte del boton de log out -->
   @component('components.header')
     @slot('items')
-        <li class="nav-item">
-            <a class="nav-link active" href="../productos">Productos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../clientes">clientes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../proveedores">Proveedores</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../ventas">Ventas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="../notificaciones"> 
-                    <span class="icon">&#128276;</span> 
-                    Notificaciones
-            </a>
-        </li>
+        @component('components.itemsNavBar')
+            @slot('active','productos')
+        @endcomponent
     @endslot
   
     <!--Esta parte es para mostrar el boton de log out-->
@@ -47,7 +29,7 @@
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
-                <input type="text" class="form-control" placeholder="PlaceHolder">
+                <input type="text" class="form-control" placeholder="Buscar producto" name="inputBusqueda">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
@@ -66,47 +48,40 @@
 
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Clave Producto</th>
-                        <th scope="col">Nombre Producto</th>
-                        <th scope="col">Clasificación</th>
-                        <th scope="col">Cantidad existencia</th>
-                        <th scope="col">Proveedor</th>                        
-                        <th scope="col">Editado</th>
-                        <th scope="col">Eliminar</th>
+                    @foreach ($camposVista as $campo)
+                        <th scope="col">{{$campo}}</th>
+                    @endforeach
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($registrosProductos as $producto)
+                    <!--Inicio de la Fila-->
                     <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
+                        <!--ID de la tabla usuarios-->    
+                        <th scope="col">{{$producto->clave_producto}}</th>
+                        <!--Los otros atributos de la tabla usuarios-->
+                        <td>{{$producto->nombre_producto}}</td>
+                        <td>{{$producto->clasificacion}}</td>
+                        <td>&#36;{{$producto->precio_producto}}</td>
+                        <td>{{$producto->cantidad_existencia}}</td>
+                        <td>{{$producto->idproveedor}}</td>
+                        <!--Botones-->
+                        <td>
+                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                                <span>&#128394;</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn">
+                                <span>&#10060;</span>
+                            </button>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">asdcsdc</th>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>
-                        <td>asdcsdc</td>                        
-                        <td><span>&#128394;</span></td>
-                        <td><span>&#10060;</span></td>
-                    </tr>
+                @endforeach
                    
                 </tbody>
             </table>
@@ -115,24 +90,28 @@
     @component('components.modal')
     @slot('idModal','registroProductoModal')
     @slot('tituloModal','Registrar un nuevo producto')
+    @slot('rutaEnvio',route('productos.store'))
+    @slot('metodoFormulario','POST')
     @slot('cuerpoModal')    
+   
         <p class="px-3">
             Formulario para registrar a un nuevo producto
         </p>
         <div class="container-fluid">
             <div class="row">
+            @csrf
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
                     </div>
                 </div>
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>
                     </div>
                 </div>
             </div>
@@ -141,14 +120,14 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
                 </div>
             </div> 
@@ -157,27 +136,31 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
                     </div>
                 </div>               
             </div> 
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-                <select class="form-select" id="inputGroupSelect01">
+                <select class="form-select" id="inputGroupSelect01" name="idproveedor">
                     <option selected>Seleccione un proveedor</option>
-                    <option value="1">Proveedor 1</option>
-                    <option value="2">Proveedor 2</option>
-                    <option value="3">Proveedor 3</option>
+                    @foreach($registrosProveedores as $proveedor)
+                    <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
+                    @endforeach
                 </select>
             </div>
+            <div class="input-group">
+                <span class="input-group-text">Descripcion</span>
+                <textarea class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+            </div> 
         </div>
     @endslot
     @slot('footerModal')
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Registrar
         </button>

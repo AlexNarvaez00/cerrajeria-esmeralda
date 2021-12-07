@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\clienteController;
+use App\Http\Controllers\ventaProductoController;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\proveedorController;
 use App\Http\Controllers\RutasController;
@@ -26,27 +27,27 @@ Route::get('/', function () {
 /** 
  * Ruta para cargar los datos en pantalla.
 */
-Route::get('/usuarios',[usuarioController::class,'index'])->name('usuarios.index');
-Route::get('/proveedores',[proveedorController::class,'index'])->name('proveedores.index');
-Route::get('/productos',[productosController::class,'index'])->name('productos.storeindex');
-Route::get('/clientes',[clienteController::class,'index'])->name('clientes.index');
-Route::get('/ventas',[ventasController::class,'index'])->name('ventas.index');
-Route::get('/{pagina}',[RutasController::class,'showView']);
+// Route::get('/usuarios',[usuarioController::class,'index'])->name('usuarios.index');
+// Route::get('/proveedores',[proveedorController::class,'index'])->name('proveedores.index');
+// Route::get('/productos',[productosController::class,'index'])->name('productos.storeindex');
+// Route::get('/clientes',[clienteController::class,'index'])->name('clientes.index');
+// Route::get('/ventas',[ventasController::class,'index'])->name('ventas.index');
+// Route::get('/productos-ventas',[ventaProductoController::class,'index'])->name('productos-ventas.index');
+
 
 /** 
  * Ruta para guardar  los datos en base de datos, 
  * deben de tener cuidado :v por quisas me equivoque en cada una de sus 
  * rutas asi que pues las componen a conforme esta en "usuarios"
 */
-Route::post('/usuarios',[usuarioController::class,'store'])->name('usuarios.store');
-Route::post('/proveedores',[proveedorController::class,'store'])->name('proveedores.store');
-Route::post('/productos',[productosController::class,'store'])->name('productos.store');
-Route::post('/clientes',[clienteController::class,'store'])->name('clientes.store');
-Route::post('/ventas',[ventasController::class,'store'])->name('ventas.store');
+Route::resource('/usuarios',usuarioController::class);
+Route::resource('/proveedores',proveedorController::class);
+Route::resource('/productos',productosController::class);
+Route::resource('/clientes',clienteController::class);
+Route::resource('/ventas',ventasController::class);
+Route::resource('/productos-ventas',ventaProductoController::class);
 
-
-
-
+Route::get('/{pagina}',[RutasController::class,'showView']);
 
 
 

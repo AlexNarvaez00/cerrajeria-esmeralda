@@ -14,9 +14,9 @@ class CreateProductosDescripcionTable extends Migration
     public function up()
     {
         Schema::create('productodescripcion', function (Blueprint $table) {
-            $table->string('descripcion',20);
-            $table->string('clave-producto',10);
-            $table->foreign('clave-producto')->references('clave-producto')->on('productos');
+            $table->text('descripcion');
+            $table->string('clave_producto',10);
+            $table->foreign('clave_producto')->references('clave_producto')->on('productos');
         });
     }
 

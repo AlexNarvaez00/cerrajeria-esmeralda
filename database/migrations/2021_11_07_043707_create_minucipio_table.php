@@ -17,11 +17,11 @@ class CreateMinucipioTable extends Migration
     public function up()
     {
         Schema::create('municipio', function (Blueprint $table) {
-            $table->string('idmunicipio', 10);
-            $table->string('nombre', 50);
-            $table->string('idestado', 10);
+            $table->increments('idmunicipio');
+            $table->string('nombre', 100);
+            $table->integer('idestado');
             
-            $table->primary('idmunicipio');
+            //$table->primary('idmunicipio');
             $table->foreign('idestado')->references('id')->on('estados');
         });
     }
