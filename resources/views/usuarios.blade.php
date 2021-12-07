@@ -193,9 +193,6 @@
 
 
 @endsection
-@section('scritps')
-    <script src="./js/validaciones/usuarios.js"></script>
-@endsection
 
 
 
