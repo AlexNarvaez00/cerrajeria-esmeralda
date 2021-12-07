@@ -60,7 +60,7 @@ class proveedorController extends Controller
         //$proveedor->numext = $request->numext;
         //$proveedor->ciudad = $request->ciudad;
         //$proveedor->colonia = $request->colonia;
-        $proveedor->iddirecproveedor = "DIR-102";
+        $proveedor->iddirecproveedor = "Dir-001";
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"

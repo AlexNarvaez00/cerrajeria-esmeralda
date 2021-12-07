@@ -125,7 +125,7 @@
         </p>
         <div class="container-fluid">
             <div class="row">
-                <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
+                <!--Directiva, basicmanete sirve como seguridad :v jajajajaj-->
                 @csrf
                 <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
@@ -185,11 +185,6 @@
     @endslot
     @endcomponent
 @endsection
-@section('scritps')
-    <script src="./js/validaciones/usuarios.js"></script>
-@endsection
-
-<!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
 @endsection
