@@ -165,6 +165,8 @@
         let cuerpoModalInformacion = document.querySelector('#agregarcarritoModal .modal-body')
         let FORMULARIO_GLOBAL = null;
         for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
+            //document.getElementById('letreroNombre').innerHTML = 'Hola :3'; 
+            //console.log(document.getElementById('letreroNombre').innerHTML);
             const productoCarrito = formulariosAgregarCarrito[index];
             //Agregamos el vento de submit a cada "formulario" de las filas 
             //en los registros de la tabla
