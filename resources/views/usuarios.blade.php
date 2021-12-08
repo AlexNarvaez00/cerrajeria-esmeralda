@@ -71,7 +71,7 @@
                         <th class="data" scope="col">{{$usuario->idusuario}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
                         <td class="data">{{$usuario->nombreUsuario}}</td>
-                        <td class="data">No le puse rol :v</td>
+                        <td class="data">{{$usuario->rol}}</td>
                         <td class="data">{{$usuario->created_at}}</td>
                         <td class="data">{{$usuario->updated_at}}</td>
 
@@ -82,7 +82,7 @@
                             </button>
                         </td>
                         <td>
-                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST">
+                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
@@ -115,29 +115,29 @@
                     <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
                     @csrf
                     <!--Columnas :v-->
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
-                            <span class="input-group-text" id="basic-addon1">Id de Usuario</span>
+                            <span class="input-group-text col-3" id="basic-addon1">Id de Usuario</span>
                             <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
                         </div>
                     </div>
                     <!--Columnas :v-->
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
-                            <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
+                            <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
                             <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Contraseña</span>
+                        <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Confirmar Contraseña</span>
+                        <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrsenaConfirmada">
                     </div>
                 </div> 
@@ -149,12 +149,12 @@
                 <div class="row">
                     <!--Columnas :v-->
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputRolUsuario">Options</label>
-                        <select class="form-select" id="inputRolUsuario">
-                            <option selected>Rol de usuario...</option>
-                            <option value="Trabajador">Trabajador</option>
-                            <option value="Encargado">Encargado</option>
-                            <option value="Servicio extra">Servicio extra</option>
+                        <label class="input-group-text" for="inputRolUsuario">Roles</label>
+                        <select class="form-select" id="inputRolUsuario" name="rolUser" value="">
+                                <option selected>Selecciones rol de Usuario</option>
+                            @foreach ($listaRoles as $rol)
+                                <option value="{{$rol}}">{{$rol}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -190,12 +190,7 @@
         @endslot
     @endcomponent
 
-
-
 @endsection
-
-
-
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
@@ -252,4 +247,5 @@
         });
 
     </script>
+    <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
 @endsection
