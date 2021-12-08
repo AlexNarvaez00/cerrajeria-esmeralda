@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\proveedorModelo;
+use App\Models\estadosModelo;
+use App\Models\municipiosModelo;
+use App\Models\coloniaModelo;
 use Illuminate\Http\Request;
 
 class proveedorController extends Controller
@@ -12,6 +15,7 @@ class proveedorController extends Controller
      */
     public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $proveedoresLista;//Esta variables para guardar la lista de proveeores
+    protected  $estadosLista;
     private $camposTabla;
 
 
@@ -21,13 +25,13 @@ class proveedorController extends Controller
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
-        //$this->proveedoresLista=proveedorModelo::all();
+        $this->estadosLista = estadosModelo::all();
             /**
              * Del modelo de caprta App/Http/Models
              *  
             */
 
-        $this->camposTabla = ['ID','Nombre','ApP','ApM','Correo','Editar','Borrar'];
+        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','Editar','Borrar'];
     }
     
     /**
@@ -45,26 +49,29 @@ class proveedorController extends Controller
         }else{
             //Sino tiene nada
             //Que lo rellene con todos los registros 
-            $listaProveedor = proveedorModelo::all();
+            $listaProveedores = proveedorModelo::all();
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
+
+        //Obtener el valor del idestado (id de la tabla en la DB) en este caso como ejemplo es "1", no sé como obtenerlo de la vista para que al momento de seleccionarlo se muestre
+        //el o los municipios de ese estado.
+        $municipiosLista=null;
+        $municipiosLista = municipiosModelo::where('idestado',1)
+        ->get();
+
+        // obtener el valor del idmunicol (id de la tabla en la DB) en este caso "327" para que se obtenga de la vista y así seleccionando se muestre la colonia
+        $coloniaLista=null;
+        $coloniaLista = coloniaModelo::where('idmunicol',327)
+        ->get();
+
         return view('proveedores') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
-            ->with('registrosVista', $listaProveedores); //Registros de la tabla
-
-
-/** 
-        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
-        # code...
-        return view('proveedores') //Nombre de la vista
-            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
-            ->with('camposTabla',$this->camposTabla)//Campos de la tablas
-            ->with('registrosVista',$this->proveedoresLista);//Registros de la tabla
-            # = DB::select('select idusuario from laravelcerrajeria.usuarios');
-            # code...
-*/
+            ->with('registrosVista', $listaProveedores) //Registros de la tabla
+            ->with('registroEstados',$this->estadosLista)
+            ->with('registroMunicipio',$municipiosLista)
+            ->with('registroColonia',$coloniaLista);
     }
     public function store(Request $request){
         //Creamos un nuevo objeto.
@@ -81,8 +88,8 @@ class proveedorController extends Controller
         $proveedor->correo = $request->correo;
         //$proveedor->numtelefono = $request->numtelefono;
         //$proveedor->calle = $request->calle;
-        //$proveedor->numext = $request->numext;
-        //$proveedor->ciudad = $request->ciudad;
+        //$proveedor->estado = $request->estado;
+        //$proveedor->municipio = $request->municipio;
         //$proveedor->colonia = $request->colonia;
         $proveedor->iddirecproveedor = "Dir-001";
         
@@ -102,8 +109,8 @@ class proveedorController extends Controller
      * deben de tener cuidado :v 
      * 
     */
-    public function destroy(proveedorModelo $proveedor){
-        $proveedor->delete();
+    public function destroy(proveedorModelo $proveedore){
+        $proveedore->delete();
         return redirect()->route('proveedores.index');
     }
 }

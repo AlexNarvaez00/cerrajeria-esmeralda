@@ -201,11 +201,7 @@
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
     <script>
-        /**
-         * Todo este codigo debe de ir en archivo aparte :v 
-         * pero lo puse aqui no mas para probar 
-         * 
-        */
+        //Ayudame San Pedro 
         const formulariosBorrar = document.getElementsByClassName('form-detele');
         let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
         let FORMULARIO_GLOBAL = null;
@@ -245,7 +241,7 @@
                 //console.log(cuerpoModalInformacion);
             });
 
-
+            
         }
 
         let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
