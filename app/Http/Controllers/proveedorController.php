@@ -10,6 +10,7 @@ class proveedorController extends Controller
      /**
      * Atributos ...
      */
+    public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $proveedoresLista;//Esta variables para guardar la lista de proveeores
     private $camposTabla;
 
@@ -19,7 +20,8 @@ class proveedorController extends Controller
 
     public function __construct()
     {
-        $this->proveedoresLista=proveedorModelo::all();
+        $this->nombreUsuario = 'Narvaez ';
+        //$this->proveedoresLista=proveedorModelo::all();
             /**
              * Del modelo de caprta App/Http/Models
              *  
@@ -34,13 +36,35 @@ class proveedorController extends Controller
      * al mostrar las vistas.
      * 
     */
-    public function index()
+    public function index(Request $request)
     {
+        $listaProveedores = null;
+        if(count($request->all()) >= 0){
+            $listaProveedores = proveedorModelo::where('idproveedor','like',$request->inputBusqueda.'%')
+                                    ->get();
+        }else{
+            //Sino tiene nada
+            //Que lo rellene con todos los registros 
+            $listaProveedor = proveedorModelo::all();
+        }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         return view('proveedores') //Nombre de la vista
+            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
+            ->with('camposTabla', $this->camposTabla) //Campos de la tablas
+            ->with('registrosVista', $listaProveedores); //Registros de la tabla
+
+
+/** 
+        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
+        # code...
+        return view('proveedores') //Nombre de la vista
+            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla',$this->camposTabla)//Campos de la tablas
             ->with('registrosVista',$this->proveedoresLista);//Registros de la tabla
+            # = DB::select('select idusuario from laravelcerrajeria.usuarios');
+            # code...
+*/
     }
     public function store(Request $request){
         //Creamos un nuevo objeto.
@@ -69,8 +93,17 @@ class proveedorController extends Controller
         return redirect()->route('proveedores.index');
     }
 
-    public function show()
+    public function show(Request $request, $proveedor)
     {
-        # code...
+        
+    }
+    /**
+     * Este metodo sirve para borrar los registros de la base de datos,
+     * deben de tener cuidado :v 
+     * 
+    */
+    public function destroy(proveedorModelo $proveedor){
+        $proveedor->delete();
+        return redirect()->route('proveedores.index');
     }
 }
