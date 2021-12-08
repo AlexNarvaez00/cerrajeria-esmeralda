@@ -57,27 +57,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($registrosProductosDescripcionjoin as $producto)
-                    <!--Inicio de la Fila-->
-                    <tr>
-                        <!--registros de las tablas-->    
-                        <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
-                        <td class="dato">{{$producto->nombre_producto}}</td>                        
-                        <td class="dato">&#36;{{$producto->precio_producto}}</td>
-                        <td class="dato">{{$producto->cantidad_existencia}}</td> 
-                        <td class="dato">{{$producto->descripcion}}</td>                       
-                        <!--Boton de carrito-->
-                        <td>
-                            <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
-                                <button type = "button" class="btn" data-id-db="{{$producto->clave_producto}}">
-                                    <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
-                                </button>     
-                            </form>                       
-                        </td>
-                                               
-                    </tr>
-                @endforeach
-                   
+                    @foreach($registrosProductosDescripcionjoin as $producto)
+                        <!--Inicio de la Fila-->
+                        <tr>
+                            <!--registros de las tablas-->    
+                            <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
+                            <td class="dato">{{$producto->nombre_producto}}</td>                        
+                            <td class="dato">&#36;{{$producto->precio_producto}}</td>
+                            <td class="dato">{{$producto->cantidad_existencia}}</td> 
+                            <td class="dato">{{$producto->descripcion}}</td>                       
+                            <!--Boton de carrito-->
+                            <td>
+                                <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
+                                    <button type="submit" class="btn" data-id-db="{{$producto->clave_producto}}" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
+                                        <span>&#128722;</span>
+                                    </button>     
+                                </form>                       
+                            </td>                
+                        </tr>
+                    @endforeach
                 </tbody>
                 <!---->
             </table>
@@ -100,7 +98,6 @@
         </table>        
     @endslot
     @slot('footerModal')
-        
         <div class="me-auto p-2 bd-highlight"><h6>Total a pagar: $0.00</h6></div>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
@@ -110,8 +107,6 @@
             <span class="me-2">&#10060;</span>
             Eliminar carrito
         </button>
-        
-        
     @endslot
     @endcomponent
     <!-- modal para agregar un producto al carrito-->
@@ -141,67 +136,19 @@
         
     @endslot
     @slot('footerModal')
-    <tr>
-    <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-        <i class="bi bi-plus-lg " style="font-size:20px;"></i>
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
+            <i class="bi bi-plus-lg " style="font-size:20px;"></i>
             Agregar
         </button>
     @endslot
     @endcomponent
 @endsection
 
-
-
 @section('scritps')
     <script src="./js/validaciones/productos.js"></script>
-    <script>
-        
-         const formulariosAgregarCarrito = document.getElementsByClassName('form-carrito');
-                 
-        let cuerpoModalInformacion = document.querySelector('#agregarcarritoModal .modal-body')
-        let FORMULARIO_GLOBAL = null;
-        for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
-            const productoCarrito = formulariosAgregarCarrito[index];
-            //Agregamos el vento de submit a cada "formulario" de las filas 
-            //en los registros de la tabla
-            productoCarrito.addEventListener('submit',(event)=>{
-                event.preventDefault();//Evitamos que el formulario envie cosas.
-                const filaHTML = event
-                                    .target
-                                    .parentNode
-                                    .parentNode;
-                const registros = filaHTML.getElementsByClassName('dato');                 
-                document.getElementById('letreroNombre').innerHTML = 'Nombre del producto: ' + registros[1].innerHTML;
-                console.log(document.getElementById('letreroNombre'));
-                //Colocar la informacion en el modal.
-                /*for (let index = 0; index < registros.length; index++) {
-                    registros[index];
-                    const filaBooststrap = document.createElement("div");
-                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
-
-                    const columnaCampo = document.createElement("div");
-                    columnaCampo.classList.add('col-6');
-                    columnaCampo.innerText = 'CampoNombre:'
-
-                    const columnaInformacion = document.createElement("div");
-                    columnaInformacion.classList.add('col-6');
-                    columnaInformacion.innerText = registros[index].innerHTML;
-                    
-                    filaBooststrap.appendChild(columnaCampo);
-                    filaBooststrap.appendChild(columnaInformacion);
-                    
-                    cuerpoModalInformacion.appendChild(filaBooststrap);                    
-
-                }*/
-                FORMULARIO_GLOBAL = event.target;                
-            });
-
-        }
-       
-
-    </script>
+    <script src="./js/modales/mostrarModalProdVentas.js" ></script>
 @endsection

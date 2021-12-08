@@ -12,7 +12,9 @@ class usuarioController extends Controller
      */
     public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $usuariosLista; //Esta variables para guardar la lista de usuarios
-
+    
+    //Arreglos constantes.
+    private $listaRoles;
     private $camposVista;
 
 
@@ -23,12 +25,8 @@ class usuarioController extends Controller
     {
         $this->nombreUsuario = 'Narvaez ';
         //$this->usuariosLista = usuariosModel::all();
-        /**
-         * Del modelo de caprta App/Http/Models
-         *  
-         */
-
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
+        $this->listaRoles =['Administrador','Empleado','Servicio XD','Siiiiiiuuuuuuu'];
     }
 
     /**
@@ -53,7 +51,8 @@ class usuarioController extends Controller
         return view('usuarios') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
-            ->with('registrosVista', $listaUsuarios); //Registros de la tabla
+            ->with('registrosVista', $listaUsuarios) //Registros de la tabla
+            ->with('listaRoles', $this->listaRoles); //Campos de la tablas
     }
 
     /**
@@ -73,10 +72,11 @@ class usuarioController extends Controller
         $usuario->idUsuario = $request->idUsuario;
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->contrasena = $request->contrasena;
-        $usuario->rol = $request->rol;
-        $usuario->idjefe = $request->idUsuario;
+        $usuario->rol = $request->rolUser;
+
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
+        //return dd($request->all());
         $usuario->save();
 
         return redirect()->route('usuarios.index');
