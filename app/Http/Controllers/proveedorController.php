@@ -45,7 +45,7 @@ class proveedorController extends Controller
         }else{
             //Sino tiene nada
             //Que lo rellene con todos los registros 
-            $listaProveedor = proveedorModelo::all();
+            $listaProveedores = proveedorModelo::all();
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
@@ -102,8 +102,8 @@ class proveedorController extends Controller
      * deben de tener cuidado :v 
      * 
     */
-    public function destroy(proveedorModelo $proveedor){
-        $proveedor->delete();
+    public function destroy(proveedorModelo $proveedore){
+        $proveedore->delete();
         return redirect()->route('proveedores.index');
     }
 }

@@ -345,7 +345,7 @@
         let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
         botonModalConfirmacion.addEventListener('click',event=>{
             console.log(FORMULARIO_GLOBAL);
-            //FORMULARIO_GLOBAL.submit();
+            FORMULARIO_GLOBAL.submit();
             FORMULARIO_GLOBAL = null;
         });
 

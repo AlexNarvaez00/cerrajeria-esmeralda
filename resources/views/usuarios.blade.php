@@ -71,7 +71,7 @@
                         <th class="data" scope="col">{{$usuario->idusuario}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
                         <td class="data">{{$usuario->nombreUsuario}}</td>
-                        <td class="data">No le puse rol :v</td>
+                        <td class="data">{{$usuario->rol}}</td>
                         <td class="data">{{$usuario->created_at}}</td>
                         <td class="data">{{$usuario->updated_at}}</td>
 
@@ -151,10 +151,10 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputRolUsuario">Options</label>
                         <select class="form-select" id="inputRolUsuario">
-                            <option selected>Rol de usuario...</option>
-                            <option value="Trabajador">Trabajador</option>
-                            <option value="Encargado">Encargado</option>
-                            <option value="Servicio extra">Servicio extra</option>
+                                <option selected>Selecciones rol de Usuario</option>
+                            @foreach ($listaRoles as $rol)
+                                <option value="{{$rol}}">{{$rol}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

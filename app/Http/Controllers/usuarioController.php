@@ -73,7 +73,7 @@ class usuarioController extends Controller
         $usuario->idUsuario = $request->idUsuario;
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->contrasena = $request->contrasena;
-
+        $usuario->rol = $request->rol;
         $usuario->idjefe = $request->idUsuario;
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
