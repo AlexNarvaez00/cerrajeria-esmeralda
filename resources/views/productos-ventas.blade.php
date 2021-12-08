@@ -63,15 +63,18 @@
                         <!--registros de las tablas-->    
                         <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
                         <td class="dato">{{$producto->nombre_producto}}</td>                        
-                        <td class="dato">&#36;{""{$producto->precio_producto}}</td>
+                        <td class="dato">&#36;{{$producto->precio_producto}}</td>
                         <td class="dato">{{$producto->cantidad_existencia}}</td> 
                         <td class="dato">{{$producto->descripcion}}</td>                       
-                        <!--Botones-->
+                        <!--Boton de carrito-->
                         <td>
-                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
-                                <span><i class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
-                            </button>
-                        </td>                        
+                            <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
+                                <button type = "button" class="btn" data-id-db="{{$producto->clave_producto}}">
+                                    <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
+                                </button>     
+                            </form>                       
+                        </td>
+                                               
                     </tr>
                 @endforeach
                    
@@ -112,17 +115,14 @@
     @endslot
     @endcomponent
     <!-- modal para agregar un producto al carrito-->
-    @component('components.modal')
+    @component('components.modalSimple')
     @slot('idModal','agregarcarritoModal')
-    @slot('tituloModal','Agregar a carrito')
-    @slot('rutaEnvio',route('productos.store'))
-    @slot('metodoFormulario','POST')
+    @slot('tituloModal','Agregar al carrito')
     @slot('cuerpoModal')
     <div class="container-fluid">
-        <div class="row">
-        @csrf
+        <div class="row">        
             <p class="px-3">
-                <h4>Aqui va el nombre del producto</h4>
+                <h4 id="letreroNombre">Aqui va el nombre del producto</h4>
             </p>
             
             <div class="col-md-6 col-sm-12">
@@ -158,4 +158,50 @@
 
 @section('scritps')
     <script src="./js/validaciones/productos.js"></script>
+    <script>
+        
+         const formulariosAgregarCarrito = document.getElementsByClassName('form-carrito');
+                 
+        let cuerpoModalInformacion = document.querySelector('#agregarcarritoModal .modal-body')
+        let FORMULARIO_GLOBAL = null;
+        for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
+            const productoCarrito = formulariosAgregarCarrito[index];
+            //Agregamos el vento de submit a cada "formulario" de las filas 
+            //en los registros de la tabla
+            productoCarrito.addEventListener('submit',(event)=>{
+                event.preventDefault();//Evitamos que el formulario envie cosas.
+                const filaHTML = event
+                                    .target
+                                    .parentNode
+                                    .parentNode;
+                const registros = filaHTML.getElementsByClassName('dato');                 
+                document.getElementById('letreroNombre').innerHTML = 'Nombre del producto: ' + registros[1].innerHTML;
+                console.log(document.getElementById('letreroNombre'));
+                //Colocar la informacion en el modal.
+                /*for (let index = 0; index < registros.length; index++) {
+                    registros[index];
+                    const filaBooststrap = document.createElement("div");
+                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
+
+                    const columnaCampo = document.createElement("div");
+                    columnaCampo.classList.add('col-6');
+                    columnaCampo.innerText = 'CampoNombre:'
+
+                    const columnaInformacion = document.createElement("div");
+                    columnaInformacion.classList.add('col-6');
+                    columnaInformacion.innerText = registros[index].innerHTML;
+                    
+                    filaBooststrap.appendChild(columnaCampo);
+                    filaBooststrap.appendChild(columnaInformacion);
+                    
+                    cuerpoModalInformacion.appendChild(filaBooststrap);                    
+
+                }*/
+                FORMULARIO_GLOBAL = event.target;                
+            });
+
+        }
+       
+
+    </script>
 @endsection

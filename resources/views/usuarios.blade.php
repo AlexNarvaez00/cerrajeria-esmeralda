@@ -82,7 +82,7 @@
                             </button>
                         </td>
                         <td>
-                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST">
+                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
