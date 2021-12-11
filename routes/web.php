@@ -48,17 +48,21 @@ Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
 
 Route::get('/{pagina}',[RutasController::class,'showView']);
+//Route::get('/proveedores','proveedorController@index');
+//Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');
 
+Route::get('',function()
+{
+    $estados = estadosModelo::all();
+    return view ('welcome')->with('estados',$estados);
+});
+Route::get('municipio/{estados_id}',function($estados_id)
+{
+    $estados = estadosModelo::find($estados_id);
+    $municipio = $estados->municipio;
+    return response (['estado'=>true,'municipio'=>$municipio]);
 
-
-
-
-
-
-
-
-
-
+})->name('municipio.get');
 
 /**
  * Lo termine haciendo asi :,,,,,v queria pasarselo aun controlador,

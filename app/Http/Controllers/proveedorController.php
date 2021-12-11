@@ -7,6 +7,7 @@ use App\Models\estadosModelo;
 use App\Models\municipiosModelo;
 use App\Models\coloniaModelo;
 use Illuminate\Http\Request;
+use DB;
 
 class proveedorController extends Controller
 {
@@ -25,7 +26,7 @@ class proveedorController extends Controller
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
-        $this->estadosLista = estadosModelo::all();
+       //$this->estadosLista = estadosModelo::all();
             /**
              * Del modelo de caprta App/Http/Models
              *  
@@ -54,25 +55,40 @@ class proveedorController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
 
+        //$municipio =DB::table('municipio');
         //Obtener el valor del idestado (id de la tabla en la DB) en este caso como ejemplo es "1", no sé como obtenerlo de la vista para que al momento de seleccionarlo se muestre
         //el o los municipios de ese estado.
-        $municipiosLista=null;
-        $municipiosLista = municipiosModelo::where('idestado',1)
-        ->get();
+
+        $municipiosLista = municipiosModelo::all();
 
         // obtener el valor del idmunicol (id de la tabla en la DB) en este caso "327" para que se obtenga de la vista y así seleccionando se muestre la colonia
-        $coloniaLista=null;
-        $coloniaLista = coloniaModelo::where('idmunicol',327)
-        ->get();
-
+        $coloniaLista = coloniaModelo::all();
+        $estadosLista =estadosModelo::all();
         return view('proveedores') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('registrosVista', $listaProveedores) //Registros de la tabla
-            ->with('registroEstados',$this->estadosLista)
+            ->with('registroEstados',$estadosLista)
             ->with('registroMunicipio',$municipiosLista)
             ->with('registroColonia',$coloniaLista);
     }
+
+    function fetch(Request $request)
+    {
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = $request->get('dependent');
+        $data = municipiosModelo::where($select,$value)
+        ->grouepBy($dependent)
+        ->get();
+        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+        }
+        echo $output;
+    }
+
     public function store(Request $request){
         //Creamos un nuevo objeto.
         $proveedor = new proveedorModelo();
@@ -100,9 +116,9 @@ class proveedorController extends Controller
         return redirect()->route('proveedores.index');
     }
 
-    public function show(Request $request, $proveedor)
+    public function show(Request $request,$proveedor)
     {
-        
+    
     }
     /**
      * Este metodo sirve para borrar los registros de la base de datos,

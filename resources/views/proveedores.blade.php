@@ -181,10 +181,10 @@
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Estado</span>
-                            <select id="Ciudades" class="form-select" name="estado">
-                                <option value="0" selected>Selecciona un estado</option>
-                                @foreach($registroEstados as $proveedor)
-                                <option value="0">{{$proveedor->nombre}} </option>                    
+                            <select id="estados" class="form-select" name="estados" class="form-control input-lg dynamic" data-dependt="municipio">
+                                <option selected value="">Selecciona un estado</option>
+                                @foreach($estados as $estados)
+                                <option value="{{ $estados->nombre }}">{{$estados->nombre}} </option>                    
                                 @endforeach
                             </select>
                 </div>
@@ -192,26 +192,23 @@
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Municipio</span>
-                            <select id="Ciudades" class="form-select" name="municipio">
-                                <option value="0" selected>Selecciona municipio</option>
-                                @foreach($registroMunicipio as $proveedor)
-                                <option>{{$proveedor->nombre}} </option>                    
-                                @endforeach
+                            <select id="municipios" class="form-select" name="municipios" class="form-control input-lg dynamic" data-dependt="colonia">
+                                
+                                
                             </select>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Colonia</span>
-                            <select id="Colonias" class="form-select" name="colonia">
-                                <option value="0" selected >Selecciona una colonia</option>
-                                @foreach($registroColonia as $proveedor)
-                                <option>{{$proveedor->nombre}} </option>                    
-                                @endforeach
+                            <select id="colonia" class="form-select" name="colonia">
+                                <option value="" selected >Selecciona una colonia</option>
+                                
                             </select>
                 </div>
             </div>
         </div>
+        {{csrf_field()}}
     @endslot
     @slot('footerModal')
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -257,7 +254,76 @@
     -->
     
     <script src="./js/validaciones/proveedores.js"></script>
-        
+
+    <script>
+        var estados = document.getElementByID('estados');
+        estados.addEventListener('change',function(e)
+        {
+            httpRequest = false;
+            if(window.XMLHttpRequest){
+                httpRequest = new XMLHttpRequest();
+            }else{
+                httpRequest = new ActiveXObject("microsfot.XMLHTTP");
+            }
+            if(httpRequest == false) return false;
+            
+            var estados_id = e.target.value;
+            var url = document.getElementById('form-ajax').action;
+            httpRequest.open('GET',url+'/'+estados_id,true);
+
+            httpRequest.onreadystatechange = function()
+            {
+                if(httpRequest.readyState == 4)
+                {
+                    if(httpRequest.status == 200)
+                    {
+                            //el servidor retornó un código 200 (ok)
+                            respuesta = JSON.parse(httpRequest.responseText);
+                            municipios = response.municipios;
+                            datos = '';
+                            for (i in municipios)
+                            {
+                                var municipio_actual = municipios[i]:
+
+                                datos +='<option value"'+ municipio_actual.id+'">';
+                                datos += municipio_actual.nombre_municipio;
+                                datos += '</option>';
+                            }
+                            var contenedor_municipios= document.getElementById('municipios');
+                            contenedor_municipios.innerHTML=datos;
+                    }else{
+                        //error 404,500 etc.
+                    }
+                }
+            }
+        });
+        </script>
+
+        <!--<script>
+            $(document).ready(function(){
+            $('.dynamic').change(function()
+            {
+                if($(this).val()!='')
+                {
+                    var select =$(this).attr("id");
+                    var value =$(this).val();
+                    var dependent =$(this).data('dependent');
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url:"{{route('proveedorController.fetch')}}",
+                        method:"POST",
+                        data:{select:select,value:value, _token:
+                        _token, dependent:dependent},
+                        success:function(result)
+                        {
+                            $('#'+dependent).html(result);
+                        }
+                    })
+                }
+            });
+        });
+            </script> 
+            -->
         <script >
             //Ayudame san pedro
         const formulariosBorrar = document.getElementsByClassName('form-detele');
