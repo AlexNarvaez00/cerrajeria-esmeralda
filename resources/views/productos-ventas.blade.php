@@ -57,6 +57,28 @@
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
+                @foreach($registrosProductosDescripcionjoin as $producto)
+                    <!--Inicio de la Fila-->
+                    <tr>
+                        <!--registros de las tablas-->    
+                        <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
+                        <td class="dato">{{$producto->nombre_producto}}</td>                        
+                        <td class="dato">&#36;{{$producto->precio_producto}}</td>
+                        <td class="dato">{{$producto->cantidad_existencia}}</td> 
+                        <td class="dato">{{$producto->descripcion}}</td>                       
+                        <!--Boton de carrito-->
+                        <td>
+                            <form class="form-carrito" method="POST">                      
+                                <button type = "button" class="btn" data-id-db="{{$producto->clave_producto}}">
+                                    <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
+                                </button>     
+                            </form>                       
+                        </td>                                               
+                    </tr>
+                @endforeach
+                   
+=======
                     @foreach($registrosProductosDescripcionjoin as $producto)
                         <!--Inicio de la Fila-->
                         <tr>
@@ -76,6 +98,7 @@
                             </td>                
                         </tr>
                     @endforeach
+>>>>>>> 845757c4986bba42ea0154e23534b41dbe5e06ef
                 </tbody>
                 <!---->
             </table>
@@ -149,6 +172,11 @@
 @endsection
 
 @section('scritps')
+    <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/validaciones/productos.js"></script>
+<<<<<<< HEAD
+    <script src="./js/funciones/funcionesProductos-ventas.js"></script>
+=======
     <script src="./js/modales/mostrarModalProdVentas.js" ></script>
+>>>>>>> 845757c4986bba42ea0154e23534b41dbe5e06ef
 @endsection
