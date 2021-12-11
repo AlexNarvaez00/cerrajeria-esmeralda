@@ -71,7 +71,7 @@
                         <th class="data" scope="col">{{$usuario->idusuario}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
                         <td class="data">{{$usuario->nombreUsuario}}</td>
-                        <td class="data">No le puse rol :v</td>
+                        <td class="data">{{$usuario->rol}}</td>
                         <td class="data">{{$usuario->created_at}}</td>
                         <td class="data">{{$usuario->updated_at}}</td>
 
@@ -115,29 +115,29 @@
                     <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
                     @csrf
                     <!--Columnas :v-->
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
-                            <span class="input-group-text" id="basic-addon1">Id de Usuario</span>
+                            <span class="input-group-text col-3" id="basic-addon1">Id de Usuario</span>
                             <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
                         </div>
                     </div>
                     <!--Columnas :v-->
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
-                            <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
+                            <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
                             <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Contraseña</span>
+                        <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Confirmar Contraseña</span>
+                        <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrsenaConfirmada">
                     </div>
                 </div> 
@@ -149,15 +149,42 @@
                 <div class="row">
                     <!--Columnas :v-->
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputRolUsuario">Options</label>
-                        <select class="form-select" id="inputRolUsuario">
-                            <option selected>Rol de usuario...</option>
-                            <option value="Trabajador">Trabajador</option>
-                            <option value="Encargado">Encargado</option>
-                            <option value="Servicio extra">Servicio extra</option>
+                        <label class="input-group-text" for="inputRolUsuario">Roles</label>
+                        <select class="form-select" id="inputRolUsuario" name="rolUser" value="">
+                                <option selected>Selecciones rol de Usuario</option>
+                            @foreach ($listaRoles as $rol)
+                                <option value="{{$rol}}">{{$rol}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
+
+                <!-- ****************************** Demostracion ****************************** -->
+                <p class="my-5">Pana ROBERTO xd</p>
+                <div class="row">
+                    <!--Columnas :v-->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputEstado">Estados</label>
+                        <select class="form-select" id="inputEstado" name="estados" value="">
+                                <option selected value="0" >-- Selecciona un estado --</option>
+                            @foreach ($estadosArreglo as $estado)
+                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <!--Selector que va a cambiar conforme a los aestados-->
+                <div class="row">
+                    <!--Columnas :v-->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="idMunicipio">Estados</label>
+                        <select class="form-select" id="idMunicipio" name="municipios" value="">
+                                <option selected value="0" >-- Selecciona un municipio --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ****************************** FIN Demostracion ****************************** -->
             </div>
         @endslot
         @slot('footerModal')
@@ -190,69 +217,83 @@
         @endslot
     @endcomponent
 
-
-
 @endsection
-
-
-
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
-    <script>
+    <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
+    
+    
+    <!--CDN :v o algo asi la neta ni me acuerdo xd-->
+    <!-- https://flouthoc.github.io/minAjax.js/ -->
+    <!--Pero esta madre se necesita para hacer AJAX mas simple -->
+    <script type="text/javascript" src="./js/minAjax.js"></script>
+
+    <script >
         /**
-         * Todo este codigo debe de ir en archivo aparte :v 
-         * pero lo puse aqui no mas para probar 
+         * ARCHIVOS QUE DEBEN DE REVISAR
          * 
+         *      usuarios.blade.php
+         *      usuariosController.php  -> la funcion "getCiudades" 
+         *      routes/web.php          -> la ruta de /estado/todo
+         * 
+         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
+         * LAS PETICIONES A LAS BASES DE DATOS  
+         * 
+         *      Models/esatdosModelo.php
+         *      Models/municipioModelo.php
         */
-        const formulariosBorrar = document.getElementsByClassName('form-detele');
-        let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
-        let FORMULARIO_GLOBAL = null;
 
-        for (let index = 0; index < formulariosBorrar.length; index++) {
-            const formulario = formulariosBorrar[index];
-            //Agregamos el vento de submit a cada "formulario" de las filas 
-            //en los registros de la tabla
-            formulario.addEventListener('submit',(event)=>{
-                event.preventDefault();//Evitamos que el formulario envie cosas.
-                const filaHTML = event
-                                    .target
-                                    .parentNode
-                                    .parentNode;
-                const registros = filaHTML.getElementsByClassName('data');
-               
-                //Colocar la informacion en el modal.
-                for (let index = 0; index < registros.length; index++) {
-                    //registros[index];
-                    const filaBooststrap = document.createElement("div");
-                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
 
-                    const columnaCampo = document.createElement("div");
-                    columnaCampo.classList.add('col-6');
-                    columnaCampo.innerText = 'CampoNombre:'
 
-                    const columnaInformacion = document.createElement("div");
-                    columnaInformacion.classList.add('col-6');
-                    columnaInformacion.innerText = registros[index].innerHTML;
+        const selectorEstado = document.getElementById('inputEstado');
+        const selectorMunicipio = document.getElementById('idMunicipio');
+
+        selectorEstado.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+
+               minAjax({
+                url:"{{route('estados.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        id:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorMunicipio = document.getElementById('idMunicipio');
                     
-                    filaBooststrap.appendChild(columnaCampo);
-                    filaBooststrap.appendChild(columnaInformacion);
-                    
-                    cuerpoModalInformacion.appendChild(filaBooststrap);
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idmunicipio;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorMunicipio.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
                 }
-                FORMULARIO_GLOBAL = event.target;
-                //console.log(cuerpoModalInformacion);
-            });
+               });
 
-
-        }
-
-        let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
-        botonModalConfirmacion.addEventListener('click',event=>{
-            console.log(FORMULARIO_GLOBAL);
-            FORMULARIO_GLOBAL.submit();
-            FORMULARIO_GLOBAL = null;
+            }
         });
 
     </script>

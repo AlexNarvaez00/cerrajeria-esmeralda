@@ -19,7 +19,7 @@
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
-        ¡Hola, xxxxxxxxx
+        ¡Hola, {{ $nombreUsuarioVista }}!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#128666;</span>
@@ -63,29 +63,33 @@
                 </thead>
                 <tbody>
                     <!--Aqui van los registros-->
-                    @foreach($registrosVista as $fila)
+                    @foreach($registrosVista as $proveedor)
                         <!--Inicio de la Fila-->
                         <tr>
-                            <!--ID de la tabla usuarios-->    
-                            <th scope="col">{{$fila->idproveedor}}</th>
-                            <!--Los otros atributos de la tabla usuarios-->
-                            <td>{{$fila->nombre}}</td>
-                            <td>{{$fila->apellidopaterno}}</td>
-                            <td>{{$fila->apellidomaterno}}</td>
-                            <td>{{$fila->correo}}</td>
-                            <td>{{$fila->iddirecproveedor}}</td>
+                            <!--ID de la tabla Proveedor-->    
+                            <th scope="col">{{$proveedor->idproveedor}}</th>
+                            <!--Los otros atributos de la tabla proveedor-->
+                            <td class="data">{{$proveedor->nombre}}</td>
+                            <td class="data">{{$proveedor->apellidopaterno}}</td>
+                            <td class="data">{{$proveedor->apellidomaterno}}</td>
+                            <td class="data">{{$proveedor->correo}}</td>
+                            <td class="data">{{$proveedor->iddirecproveedor}}</td> 
                             <!--Botones-->
-                                <td>
-                                    <button class="btn" data-id-db="{{$fila->idusuario}}">
-                                        <span>&#128394;</span>
-                                    </button>
-                                </td>
-                            <td>
-                                <button class="btn">
+                        <td>
+                            <button class="btn" data-id-db="{{$proveedor->idproveedor}}">
+                                <span>&#128394;</span>
+                            </button>
+                        </td>
+                        <td>
+                            <form class="form-detele" action="{{route('proveedores.destroy',$proveedor)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
-                            </td>
-                        </tr>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -95,8 +99,10 @@
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
+
     @slot('rutaEnvio',route('proveedores.store'))
     @slot('metodoFormulario','POST')
+
     @slot('cuerpoModal')
         <p class="px-3">
             Formulario para registrar a un uevo proveedor.
@@ -209,6 +215,27 @@
         </button>
     @endslot
     @endcomponent
+
+    @component('components.modalSimple')
+        @slot('idModal','confirmacionModal')
+        @slot('tituloModal','¿Seguro que quieres borrar este registro?')
+        @slot('cuerpoModal')
+
+        @endslot
+        @slot('footerModal')
+            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+                <span class="me-2">&#10060;</span>
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
+                <span class="me-2">&#10004;</span>
+                Confirmar
+            </button>
+        @endslot
+    @endcomponent
+
+
+
 @endsection
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
@@ -269,5 +296,59 @@
         inputCalle.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
         inputNumExt.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
         inputCodigoP.addEventListener('keyup' , e => evaluar(e, expresionesRegulares.CodigoP));
+
+
+        //Ayudame san pedro
+
+        const formulariosBorrar = document.getElementsByClassName('form-detele');
+        let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
+        let FORMULARIO_GLOBAL = null;
+
+        for (let index = 0; index < formulariosBorrar.length; index++) {
+            const formulario = formulariosBorrar[index];
+            //Agregamos el vento de submit a cada "formulario" de las filas 
+            //en los registros de la tabla
+            formulario.addEventListener('submit',(event)=>{
+                event.preventDefault();//Evitamos que el formulario envie cosas.
+                const filaHTML = event
+                                    .target
+                                    .parentNode
+                                    .parentNode;
+                const registros = filaHTML.getElementsByClassName('data');
+               
+                //Colocar la informacion en el modal.
+                for (let index = 0; index < registros.length; index++) {
+                    //registros[index];
+                    const filaBooststrap = document.createElement("div");
+                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
+
+                    const columnaCampo = document.createElement("div");
+                    columnaCampo.classList.add('col-6');
+                    columnaCampo.innerText = 'CampoNombre:'
+
+                    const columnaInformacion = document.createElement("div");
+                    columnaInformacion.classList.add('col-6');
+                    columnaInformacion.innerText = registros[index].innerHTML;
+                    
+                    filaBooststrap.appendChild(columnaCampo);
+                    filaBooststrap.appendChild(columnaInformacion);
+                    
+                    cuerpoModalInformacion.appendChild(filaBooststrap);
+                }
+                FORMULARIO_GLOBAL = event.target;
+                //console.log(cuerpoModalInformacion);
+            });
+
+
+        }
+
+        let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
+        botonModalConfirmacion.addEventListener('click',event=>{
+            console.log(FORMULARIO_GLOBAL);
+            FORMULARIO_GLOBAL.submit();
+            FORMULARIO_GLOBAL = null;
+        });
+
+
     </script>
 @endsection
