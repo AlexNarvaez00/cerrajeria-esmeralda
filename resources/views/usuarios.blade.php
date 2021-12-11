@@ -158,6 +158,33 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- ****************************** Demostracion ****************************** -->
+                <p class="my-5">Pana ROBERTO xd</p>
+                <div class="row">
+                    <!--Columnas :v-->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputEstado">Estados</label>
+                        <select class="form-select" id="inputEstado" name="estados" value="">
+                                <option selected value="0" >-- Selecciona un estado --</option>
+                            @foreach ($estadosArreglo as $estado)
+                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <!--Selector que va a cambiar conforme a los aestados-->
+                <div class="row">
+                    <!--Columnas :v-->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="idMunicipio">Estados</label>
+                        <select class="form-select" id="idMunicipio" name="municipios" value="">
+                                <option selected value="0" >-- Selecciona un municipio --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ****************************** FIN Demostracion ****************************** -->
             </div>
         @endslot
         @slot('footerModal')
@@ -196,4 +223,78 @@
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
+    
+    
+    <!--CDN :v o algo asi la neta ni me acuerdo xd-->
+    <!-- https://flouthoc.github.io/minAjax.js/ -->
+    <!--Pero esta madre se necesita para hacer AJAX mas simple -->
+    <script type="text/javascript" src="./js/minAjax.js"></script>
+
+    <script >
+        /**
+         * ARCHIVOS QUE DEBEN DE REVISAR
+         * 
+         *      usuarios.blade.php
+         *      usuariosController.php  -> la funcion "getCiudades" 
+         *      routes/web.php          -> la ruta de /estado/todo
+         * 
+         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
+         * LAS PETICIONES A LAS BASES DE DATOS  
+         * 
+         *      Models/esatdosModelo.php
+         *      Models/municipioModelo.php
+        */
+
+
+
+        const selectorEstado = document.getElementById('inputEstado');
+        const selectorMunicipio = document.getElementById('idMunicipio');
+
+        selectorEstado.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+
+               minAjax({
+                url:"{{route('estados.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        id:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorMunicipio = document.getElementById('idMunicipio');
+                    
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idmunicipio;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorMunicipio.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
+                }
+               });
+
+            }
+        });
+
+    </script>
 @endsection
