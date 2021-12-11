@@ -47,6 +47,21 @@ Route::resource('/clientes',clienteController::class);
 Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
 
+
+/**
+ * Rutas solo para AJAX :v 
+*/
+Route::post('/estado/todo',[usuarioController::class,'getCiudades'])->name('estados.todo');
+
+
+
+
+
+
+/** 
+ * Rutas de comodin
+ * 
+*/
 Route::get('/{pagina}',[RutasController::class,'showView']);
 //Route::get('/proveedores','proveedorController@index');
 //Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');

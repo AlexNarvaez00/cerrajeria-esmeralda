@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\estadosModelo;
+use App\Models\municipiosModelo;
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class usuarioController extends Controller
 {
@@ -12,7 +15,7 @@ class usuarioController extends Controller
      */
     public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $usuariosLista; //Esta variables para guardar la lista de usuarios
-    
+
     //Arreglos constantes.
     private $listaRoles;
     private $camposVista;
@@ -26,7 +29,7 @@ class usuarioController extends Controller
         $this->nombreUsuario = 'Narvaez ';
         //$this->usuariosLista = usuariosModel::all();
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
-        $this->listaRoles =['Administrador','Empleado','Servicio XD','Siiiiiiuuuuuuu'];
+        $this->listaRoles = ['Administrador', 'Empleado', 'Servicio XD', 'Siiiiiiuuuuuuu'];
     }
 
     /**
@@ -38,21 +41,28 @@ class usuarioController extends Controller
     public function index(Request $request)
     {
         $listaUsuarios = null;
-        if(count($request->all()) >= 0){
-            $listaUsuarios = usuariosModel::where('idusuario','like',$request->inputBusqueda.'%')
-                                    ->get();
-        }else{
+        if (count($request->all()) >= 0) {
+            $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
+                ->get();
+        } else {
             //Sino tiene nada
             //Que lo rellene con todos los registros 
             $listaUsuarios = usuariosModel::all();
         }
-        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
-        # code...
+
+        //Obtenemos todos los estado.
+        $estadosArreglo = estadosModelo::all();
+
+
+
         return view('usuarios') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles); //Campos de la tablas
+            ->with('listaRoles', $this->listaRoles)//; //Campos de la tablas
+
+            //Pasamos los estado a las vista
+            ->with('estadosArreglo',$estadosArreglo);
     }
 
     /**
@@ -89,17 +99,39 @@ class usuarioController extends Controller
      */
     public function show(Request $request, $usuario)
     {
-        
     }
     /**
      * Este metodo sirve para borrar los registros de la base de datos,
      * deben de tener cuidado :v 
      * 
-    */
-    public function destroy(usuariosModel $usuario){
+     */
+    public function destroy(usuariosModel $usuario)
+    {
         $usuario->delete();
         return redirect()->route('usuarios.index');
     }
 
 
+
+
+
+
+
+
+
+
+    /**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getCiudades(Request $request)
+    {
+        //Recuperamos la llave primaria de estados
+        $llavePrimaria = $request->id;
+        //Lista de municipios que coicidan con la llaveprimaria 
+        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();
+        
+        //El 200 significa que las peticiones son buenas.
+        //json_encode ---- es para que en JS se manipule mas rapido.
+        return response()->json($listaMunicipios);
+    }
 }

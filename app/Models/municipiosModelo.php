@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class municipiosModelo extends Model
 {
-    public function municipio()
-    {
-        return $this->belongsTo(estadosModelo::class);
-    }
+
+
+    protected $table = 'municipio'; 
+    protected $primaryKey = 'idmunicipio';
 }
 

@@ -13,8 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class estadosModelo extends Model
 {
-    public function estados()
-    {
-        return $this->hasMany(municipiosModelo::class);
-    }
+
+    protected $table = 'estados';
+    protected $primaryKey = 'id';
 }
