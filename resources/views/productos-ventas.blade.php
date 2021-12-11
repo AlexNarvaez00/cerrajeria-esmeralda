@@ -68,13 +68,12 @@
                         <td class="dato">{{$producto->descripcion}}</td>                       
                         <!--Boton de carrito-->
                         <td>
-                            <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
+                            <form class="form-carrito" method="POST">                      
                                 <button type = "button" class="btn" data-id-db="{{$producto->clave_producto}}">
                                     <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal"></i></span>
                                 </button>     
                             </form>                       
-                        </td>
-                                               
+                        </td>                                               
                     </tr>
                 @endforeach
                    
@@ -166,11 +165,11 @@
         let FORMULARIO_GLOBAL = null;
         for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
             //document.getElementById('letreroNombre').innerHTML = 'Hola :3'; 
-            //console.log(document.getElementById('letreroNombre').innerHTML);
+            //console.log(document.getElementById('letreroNombre').innerHTML);           
             const productoCarrito = formulariosAgregarCarrito[index];
             //Agregamos el vento de submit a cada "formulario" de las filas 
             //en los registros de la tabla
-            productoCarrito.addEventListener('submit',(event)=>{
+            productoCarrito.addEventListener('submit',(event)=>{                
                 event.preventDefault();//Evitamos que el formulario envie cosas.
                 const filaHTML = event
                                     .target
