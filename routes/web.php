@@ -52,11 +52,8 @@ Route::resource('/productos-ventas',ventaProductoController::class);
  * Rutas solo para AJAX :v 
 */
 Route::post('/estado/todo',[usuarioController::class,'getCiudades'])->name('estados.todo');
-
-
-
-
-
+Route::post('/estado/todo',[proveedorController::class,'getCiudades'])->name('estados.todo');
+Route::post('/municipio/todo',[proveedorController::class,'getColonias'])->name('municipios.todo');
 
 /** 
  * Rutas de comodin
@@ -66,18 +63,6 @@ Route::get('/{pagina}',[RutasController::class,'showView']);
 //Route::get('/proveedores','proveedorController@index');
 //Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');
 
-Route::get('',function()
-{
-    $estados = estadosModelo::all();
-    return view ('welcome')->with('estados',$estados);
-});
-Route::get('municipio/{estados_id}',function($estados_id)
-{
-    $estados = estadosModelo::find($estados_id);
-    $municipio = $estados->municipio;
-    return response (['estado'=>true,'municipio'=>$municipio]);
-
-})->name('municipio.get');
 
 /**
  * Lo termine haciendo asi :,,,,,v queria pasarselo aun controlador,

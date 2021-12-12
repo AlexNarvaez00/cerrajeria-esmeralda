@@ -180,35 +180,32 @@
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Estado</span>
-                            <select id="estados" class="form-select" name="estados" class="form-control input-lg dynamic" data-dependt="municipio">
-                                <option selected value="">Selecciona un estado</option>
-                                @foreach($estados as $estados)
-                                <option value="{{ $estados->nombre }}">{{$estados->nombre}} </option>                    
+                <label class="input-group-text" for="inputEstado">Estado</label>
+                            <select id="inputEstado" class="form-select" name="estados" value="">
+                                <option selected value="0">Selecciona un estado</option>
+                                @foreach($registroEstados as $proveedor)
+                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}} </option>                    
                                 @endforeach
                             </select>
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Municipio</span>
-                            <select id="municipios" class="form-select" name="municipios" class="form-control input-lg dynamic" data-dependt="colonia">
-                                
-                                
-                            </select>
+                <label class="input-group-text" for="idMunicipio">Municipio</label>
+                    <select id="idMunicipio" class="form-select" name="municipios">
+                        <option selected value="0">Selecciona un municipio</option>               
+                    </select>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Colonia</span>
-                            <select id="colonia" class="form-select" name="colonia">
-                                <option value="" selected >Selecciona una colonia</option>
-                                
-                            </select>
+                <label class="input-group-text" for="idColonia">Colonia</label>
+                    <select id="idColonia" class="form-select" name="colonias">
+                        <option selected value="0">Selecciona una colonia</option>
+                    </select>
                 </div>
             </div>
         </div>
-        {{csrf_field()}}
     @endslot
     @slot('footerModal')
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -254,76 +251,8 @@
     -->
     
     <script src="./js/validaciones/proveedores.js"></script>
-
-    <script>
-        var estados = document.getElementByID('estados');
-        estados.addEventListener('change',function(e)
-        {
-            httpRequest = false;
-            if(window.XMLHttpRequest){
-                httpRequest = new XMLHttpRequest();
-            }else{
-                httpRequest = new ActiveXObject("microsfot.XMLHTTP");
-            }
-            if(httpRequest == false) return false;
-            
-            var estados_id = e.target.value;
-            var url = document.getElementById('form-ajax').action;
-            httpRequest.open('GET',url+'/'+estados_id,true);
-
-            httpRequest.onreadystatechange = function()
-            {
-                if(httpRequest.readyState == 4)
-                {
-                    if(httpRequest.status == 200)
-                    {
-                            //el servidor retornó un código 200 (ok)
-                            respuesta = JSON.parse(httpRequest.responseText);
-                            municipios = response.municipios;
-                            datos = '';
-                            for (i in municipios)
-                            {
-                                var municipio_actual = municipios[i]:
-
-                                datos +='<option value"'+ municipio_actual.id+'">';
-                                datos += municipio_actual.nombre_municipio;
-                                datos += '</option>';
-                            }
-                            var contenedor_municipios= document.getElementById('municipios');
-                            contenedor_municipios.innerHTML=datos;
-                    }else{
-                        //error 404,500 etc.
-                    }
-                }
-            }
-        });
-        </script>
-
-        <!--<script>
-            $(document).ready(function(){
-            $('.dynamic').change(function()
-            {
-                if($(this).val()!='')
-                {
-                    var select =$(this).attr("id");
-                    var value =$(this).val();
-                    var dependent =$(this).data('dependent');
-                    var _token = $('input[name="_token"]').val();
-                    $.ajax({
-                        url:"{{route('proveedorController.fetch')}}",
-                        method:"POST",
-                        data:{select:select,value:value, _token:
-                        _token, dependent:dependent},
-                        success:function(result)
-                        {
-                            $('#'+dependent).html(result);
-                        }
-                    })
-                }
-            });
-        });
-            </script> 
-            -->
+        
+        
         <script >
             //Ayudame san pedro
         const formulariosBorrar = document.getElementsByClassName('form-detele');
@@ -374,7 +303,121 @@
             FORMULARIO_GLOBAL.submit();
             FORMULARIO_GLOBAL = null;
         });
-
-
     </script>
+
+
+    <!--CDN :v o algo asi la neta ni me acuerdo xd-->
+    <!-- https://flouthoc.github.io/minAjax.js/ -->
+    <!--Pero esta madre se necesita para hacer AJAX mas simple -->
+<script type="text/javascript" src="./js/minAjax.js"></script>
+<script >
+        /**
+         * ARCHIVOS QUE DEBEN DE REVISAR
+         * 
+         *      usuarios.blade.php
+         *      usuariosController.php  -> la funcion "getCiudades" 
+         *      routes/web.php          -> la ruta de /estado/todo
+         * 
+         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
+         * LAS PETICIONES A LAS BASES DE DATOS  
+         * 
+         *      Models/esatdosModelo.php
+         *      Models/municipioModelo.php
+        */
+        const selectorEstado = document.getElementById('inputEstado');
+        const selectorMunicipio = document.getElementById('idMunicipio');
+        const selectorColonia = document.getElementById('idColonia');
+
+        selectorEstado.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+
+               minAjax({
+                url:"{{route('estados.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        id:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorMunicipio = document.getElementById('idMunicipio');
+                    
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idmunicipio;
+                        console.log = data[index].idmunicipio;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorMunicipio.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
+                }
+               });
+            }
+        });
+
+        selectorMunicipio.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            alert (valor)
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+               minAjax({
+                url:"{{route('municipios.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        idmunicipio:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                    success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorColonia = document.getElementById('idColonia');
+                    
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona una colonia --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idcolonia;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorColonia.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorColonia.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
+                }
+               });
+              
+            }
+        });
+</script>
 @endsection

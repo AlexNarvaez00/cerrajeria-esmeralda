@@ -7,7 +7,7 @@ use App\Models\estadosModelo;
 use App\Models\municipiosModelo;
 use App\Models\coloniaModelo;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Http\Response;
 
 class proveedorController extends Controller
 {
@@ -16,7 +16,6 @@ class proveedorController extends Controller
      */
     public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $proveedoresLista;//Esta variables para guardar la lista de proveeores
-    protected  $estadosLista;
     private $camposTabla;
 
 
@@ -26,12 +25,6 @@ class proveedorController extends Controller
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
-       //$this->estadosLista = estadosModelo::all();
-            /**
-             * Del modelo de caprta App/Http/Models
-             *  
-            */
-
         $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','Editar','Borrar'];
     }
     
@@ -55,39 +48,18 @@ class proveedorController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
 
-        //$municipio =DB::table('municipio');
-        //Obtener el valor del idestado (id de la tabla en la DB) en este caso como ejemplo es "1", no sé como obtenerlo de la vista para que al momento de seleccionarlo se muestre
-        //el o los municipios de ese estado.
-
-        $municipiosLista = municipiosModelo::all();
-
-        // obtener el valor del idmunicol (id de la tabla en la DB) en este caso "327" para que se obtenga de la vista y así seleccionando se muestre la colonia
-        $coloniaLista = coloniaModelo::all();
-        $estadosLista =estadosModelo::all();
+        
+        $estadosLista = estadosModelo::all();
+        
+        
+        
         return view('proveedores') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('registrosVista', $listaProveedores) //Registros de la tabla
-            ->with('registroEstados',$estadosLista)
-            ->with('registroMunicipio',$municipiosLista)
-            ->with('registroColonia',$coloniaLista);
+            ->with('registroEstados',$estadosLista);
     }
 
-    function fetch(Request $request)
-    {
-        $select = $request->get('select');
-        $value = $request->get('value');
-        $dependent = $request->get('dependent');
-        $data = municipiosModelo::where($select,$value)
-        ->grouepBy($dependent)
-        ->get();
-        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
-        foreach($data as $row)
-        {
-            $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
-        }
-        echo $output;
-    }
 
     public function store(Request $request){
         //Creamos un nuevo objeto.
@@ -129,4 +101,26 @@ class proveedorController extends Controller
         $proveedore->delete();
         return redirect()->route('proveedores.index');
     }
+
+/**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getCiudades(Request $request)
+    {
+        //Recuperamos la llave primaria de estados
+        $llavePrimaria = $request->id;
+        //Lista de municipios que coicidan con la llaveprimaria 
+        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();
+        //El 200 significa que las peticiones son buenas.
+        //json_encode ---- es para que en JS se manipule mas rapido.
+        return response()->json($listaMunicipios);
+
+    }
+    public function getColonias(Request $request)
+    {
+        $llavePrimaria = $request->idmunicipio;
+        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
+        return response()->json($listaColonias);
+    }
+
 }
