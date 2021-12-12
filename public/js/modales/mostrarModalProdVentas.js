@@ -57,8 +57,7 @@ function agregarCarro(registros){
         fila='<tr><td> ' +registros[0].innerHTML+'</td><td>'+registros[1].innerHTML+'</td><td>'+$("#inCantExistencia").val()+'</td><td>'+observacion + '</td> <td>'+'$'+totalProducto+ '</td></tr>';
         $('#tabla tr:last').after(fila);
         cont ++;
-        $("#conProductos").text(cont);        
-        
+        $("#conProductos").text(cont);       
         registros = "";
     }catch(error){
 
