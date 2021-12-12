@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class direccionModelo extends Model
 {
     use HasFactory;
+    protected $table = 'direccion';
+
+    protected $primaryKey = 'iddireccion';
+    public $incrementing = false;
+    public $timestamps = false;
 }

@@ -376,7 +376,6 @@
 
         selectorMunicipio.addEventListener("change",(event)=>{
             let valor = event.target.value;
-            alert (valor)
             //Este input, es el input oculto de la linea 116
             //let _token = $('');
             
