@@ -26,7 +26,7 @@ class ventaProductoController extends Controller
         ->select("*")
         ->get();
         //Son los campos de las tablas
-        $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
+        $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
     }
 
@@ -75,5 +75,19 @@ class ventaProductoController extends Controller
     public function show()
     {
         # code...
+    }
+    /**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getProducto(Request $request)
+    {
+        //Recuperamos la llave primaria de productos
+       
+        //Lista de municipios que coicidan con la llaveprimaria 
+        $productocarrito = productosModelo::where('clave_producto','=',$llavePrimaria)->get();
+        
+        //El 200 significa que las peticiones son buenas.
+        //json_encode ---- es para que en JS se manipule mas rapido.
+        return response()->json($productocarrito);
     }
 }

@@ -1,6 +1,4 @@
-    $(document).ready(function(){
-        alert("Hola Mundo");
-    });
+   
     /*const formulariosAgregarCarrito = document.getElementsByClassName('form-carrito'); //Recupera todos los form-carritos de la lista                 
         let cuerpoModalInformacion = document.querySelector('#agregarcarritoModal .modal-body'); //Recuper el cuerpo del modal
         let FORMULARIO_GLOBAL = null;
