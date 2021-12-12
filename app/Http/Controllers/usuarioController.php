@@ -59,10 +59,10 @@ class usuarioController extends Controller
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles)//; //Campos de la tablas
+            ->with('listaRoles', $this->listaRoles);//; //Campos de la tablas
 
             //Pasamos los estado a las vista
-            ->with('estadosArreglo',$estadosArreglo);
+            //->with('estadosArreglo',$estadosArreglo);
     }
 
     /**
@@ -112,7 +112,18 @@ class usuarioController extends Controller
     }
 
 
+    public function edit(usuariosModel $usuario)
+    {
 
+        $listaUsuarios = usuariosModel::find($usuario);
+
+        return view('usuarios') //Nombre de la vista
+                    ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
+                    ->with('camposVista', $this->camposVista) //Campos de la tablas
+                    ->with('registrosVista', $listaUsuarios) //Registros de la tabla
+                    ->with('listaRoles', $this->listaRoles)// //Campos de la tablas
+                    ->with('usuarioEdit',$usuario);
+    }
 
 
 
