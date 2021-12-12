@@ -77,7 +77,7 @@
 
                         <!--Botones-->
                         <td>
-                            <a class="btn" href="{{route('usuarios.edit',$usuario)}}">
+                            <a class="btn" href="#" onClick="modal()">
                                 <span>&#128394;</span>
                             </a>
                         </td>
@@ -200,132 +200,18 @@
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
-    <script>
-        //Ayudame San Pedro 
-        const formulariosBorrar = document.getElementsByClassName('form-detele');
-        let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
-        let FORMULARIO_GLOBAL = null;
-
-        for (let index = 0; index < formulariosBorrar.length; index++) {
-            const formulario = formulariosBorrar[index];
-            //Agregamos el vento de submit a cada "formulario" de las filas 
-            //en los registros de la tabla
-            formulario.addEventListener('submit',(event)=>{
-                event.preventDefault();//Evitamos que el formulario envie cosas.
-                const filaHTML = event
-                                    .target
-                                    .parentNode
-                                    .parentNode;
-                const registros = filaHTML.getElementsByClassName('data');
-               
-                //Colocar la informacion en el modal.
-                for (let index = 0; index < registros.length; index++) {
-                    //registros[index];
-                    const filaBooststrap = document.createElement("div");
-                    filaBooststrap.classList.add('row');//Agregamos la clase de booststrap
-
-                    const columnaCampo = document.createElement("div");
-                    columnaCampo.classList.add('col-6');
-                    columnaCampo.innerText = 'CampoNombre:'
-
-                    const columnaInformacion = document.createElement("div");
-                    columnaInformacion.classList.add('col-6');
-                    columnaInformacion.innerText = registros[index].innerHTML;
-                    
-                    filaBooststrap.appendChild(columnaCampo);
-                    filaBooststrap.appendChild(columnaInformacion);
-                    
-                    cuerpoModalInformacion.appendChild(filaBooststrap);
-                }
-                FORMULARIO_GLOBAL = event.target;
-                //console.log(cuerpoModalInformacion);
-            });
-
-            
-        }
-
-        let botonModalConfirmacion = document.getElementById('botonModalConfirmacion');
-        botonModalConfirmacion.addEventListener('click',event=>{
-            console.log(FORMULARIO_GLOBAL);
-            FORMULARIO_GLOBAL.submit();
-            FORMULARIO_GLOBAL = null;
-        });
-
-    </script>
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
-    
-    
     
     <!--CDN :v o algo asi la neta ni me acuerdo xd-->
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
     <script type="text/javascript" src="./js/minAjax.js"></script>
+    <script>
+        function modal(){
+            var myModal = new bootstrap.Modal(document.getElementById('registroUsuariosModal'), {});
+            myModal.show();    
+        }
 
-    <!-- <script >
-        /**
-         * ARCHIVOS QUE DEBEN DE REVISAR
-         * 
-         *      usuarios.blade.php
-         *      usuariosController.php  -> la funcion "getCiudades" 
-         *      routes/web.php          -> la ruta de /estado/todo
-         * 
-         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
-         * LAS PETICIONES A LAS BASES DE DATOS  
-         * 
-         *      Models/esatdosModelo.php
-         *      Models/municipioModelo.php
-        */
+    </script>
 
-
-
-        const selectorEstado = document.getElementById('inputEstado');
-        const selectorMunicipio = document.getElementById('idMunicipio');
-
-        selectorEstado.addEventListener("change",(event)=>{
-            let valor = event.target.value;
-            //Este input, es el input oculto de la linea 116
-            //let _token = $('');
-            
-            if(valor != '0'){
-
-               minAjax({
-                url:"{{route('estados.todo')}}", 
-                type:"POST",
-                data:{
-                        _token: document.querySelector('input[name="_token"]').value,
-                        id:valor
-                },
-                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
-                success: function(data){
-                    data = JSON.parse(data);
-
-                    let selectorMunicipio = document.getElementById('idMunicipio');
-                    
-                    let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
-                    textoSelectorOP1.value = 0;
-
-                    let opcionesSeleccion = [textoSelectorOP1];
-
-                    for (let index = 0; index < data.length; index++) {
-                        let opcion =  document.createElement('option');
-                        opcion.innerHTML = data[index].nombre;                       
-                        opcion.value = data[index].idmunicipio;
-
-                        opcionesSeleccion.push(opcion);                      
-                    }
-
-                    selectorMunicipio.innerHTML = '';
-
-                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
-                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
-                    }
-
-                }
-               });
-
-            }
-        });
-
-    </script> -->
 @endsection
