@@ -358,7 +358,6 @@
                         let opcion =  document.createElement('option');
                         opcion.innerHTML = data[index].nombre;                       
                         opcion.value = data[index].idmunicipio;
-                        console.log = data[index].idmunicipio;
 
                         opcionesSeleccion.push(opcion);                      
                     }
@@ -376,7 +375,6 @@
 
         selectorMunicipio.addEventListener("change",(event)=>{
             let valor = event.target.value;
-            alert (valor)
             //Este input, es el input oculto de la linea 116
             //let _token = $('');
             
