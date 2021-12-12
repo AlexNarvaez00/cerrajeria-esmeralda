@@ -77,9 +77,9 @@
 
                         <!--Botones-->
                         <td>
-                            <button class="btn" data-id-db="{{$usuario->idusuario}}">
+                            <a class="btn" href="{{route('usuarios.edit',$usuario)}}">
                                 <span>&#128394;</span>
-                            </button>
+                            </a>
                         </td>
                         <td>
                             <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
@@ -118,7 +118,13 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
                             <span class="input-group-text col-3" id="basic-addon1">Id de Usuario</span>
-                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
+                            @if(Request::is('usuarios/*/edit'))
+                                <!--Modo edicion-->
+                            @else
+                                <!--Modo registro-->
+                                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
+                            @endif
+
                         </div>
                     </div>
                     <!--Columnas :v-->
@@ -158,33 +164,6 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- ****************************** Demostracion ****************************** -->
-                <p class="my-5">Pana ROBERTO xd</p>
-                <div class="row">
-                    <!--Columnas :v-->
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstado">Estados</label>
-                        <select class="form-select" id="inputEstado" name="estados" value="">
-                                <option selected value="0" >-- Selecciona un estado --</option>
-                            @foreach ($estadosArreglo as $estado)
-                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <!--Selector que va a cambiar conforme a los aestados-->
-                <div class="row">
-                    <!--Columnas :v-->
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipio">Estados</label>
-                        <select class="form-select" id="idMunicipio" name="municipios" value="">
-                                <option selected value="0" >-- Selecciona un municipio --</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- ****************************** FIN Demostracion ****************************** -->
             </div>
         @endslot
         @slot('footerModal')
@@ -216,7 +195,6 @@
             </button>
         @endslot
     @endcomponent
-
 @endsection
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
@@ -277,12 +255,13 @@
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
     
     
+    
     <!--CDN :v o algo asi la neta ni me acuerdo xd-->
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
     <script type="text/javascript" src="./js/minAjax.js"></script>
 
-    <script >
+    <!-- <script >
         /**
          * ARCHIVOS QUE DEBEN DE REVISAR
          * 
@@ -348,5 +327,5 @@
             }
         });
 
-    </script>
+    </script> -->
 @endsection

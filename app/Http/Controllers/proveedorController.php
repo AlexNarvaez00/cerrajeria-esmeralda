@@ -6,6 +6,7 @@ use App\Models\proveedorModelo;
 use App\Models\estadosModelo;
 use App\Models\municipiosModelo;
 use App\Models\coloniaModelo;
+use App\Models\direccionModelo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -79,7 +80,17 @@ class proveedorController extends Controller
         //$proveedor->estado = $request->estado;
         //$proveedor->municipio = $request->municipio;
         //$proveedor->colonia = $request->colonia;
-        $proveedor->iddirecproveedor = "Dir-001";
+        $direccion = new direccionModelo();
+        $direccion->iddireccion = "DIC-".$request->numext."-".$request->idproveedor;
+        
+        $PRYKEY = $direccion->iddireccion;
+        
+        $direccion->calle=$request->calle;
+        $direccion->numero= $request->numext;
+        $direccion->idcoldirec = $request->colonias;
+        $direccion->save();
+
+        $proveedor->iddirecproveedor = $PRYKEY;
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
