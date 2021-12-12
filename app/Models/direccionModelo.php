@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-
-class estadosModelo extends Model
+class direccionModelo extends Model
 {
     use HasFactory;
+
     protected $table = 'direccion';
     protected $primaryKey = 'iddireccion';
     public $incrementing = false;
