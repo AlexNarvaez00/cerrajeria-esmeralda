@@ -27,16 +27,16 @@
     </h5>
 
     <div class="container-fluid mb-4">
-        <form action="" class="row d-flex justify-content-end">
-            <div class="col-5">
-                <input type="text" class="form-control" placeholder="PlaceHolder">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-                    <span class="me-3">&#128269</span>  
-                    Buscar
-                </button>
-            </div>
+    <form method="GET" action="{{route('proveedores.index')}}" class="row d-flex justify-content-end">
+        <div class="col-5">
+            <input type="text" class="form-control" placeholder="burcar ID" name="inputBusqueda">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+                <span class="me-3">&#128269</span>
+                Buscar
+            </button>
+        </div>
                 <div class="col-auto">
                 <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroProveedorModal">
                     <span class="me-3">&#10133;</span>
@@ -179,27 +179,30 @@
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3 ">
-                    <span class="input-group-text" id="basic-addon1">Código Postal</span>
-                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCodigoP" name="codpostal">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="inputEstado">Estado</label>
+                            <select id="inputEstado" class="form-select" name="estados" value="">
+                                <option selected value="0">Selecciona un estado</option>
+                                @foreach($registroEstados as $proveedor)
+                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}} </option>                    
+                                @endforeach
+                            </select>
                 </div>
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Ciudad</span>
-                            <select id="Ciudades" class="form-select" name="ciudad">
-                                <option value="0" selected>Selecciona</option>
-                                <option value="1">...</option>
-                            </select>
+                <label class="input-group-text" for="idMunicipio">Municipio</label>
+                    <select id="idMunicipio" class="form-select" name="municipios">
+                        <option selected value="0">Selecciona un municipio</option>               
+                    </select>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Colonia</span>
-                            <select id="Colonias" class="form-select" name="colonia">
-                                <option value="0" selected >Selecciona</option>
-                                <option value="1">...</option>
-                            </select>
+                <label class="input-group-text" for="idColonia">Colonia</label>
+                    <select id="idColonia" class="form-select" name="colonias">
+                        <option selected value="0">Selecciona una colonia</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -246,60 +249,12 @@
         Javascript con el de PHP, sino que se coloque en otro archivo y que lo cargue al
         ultimo. 
     -->
-    <script >
-        //Esto es un objeto, bueno, una manera de hacerlos
-        const expresionesRegulares = {
-            idProveedor: /^PROV+-[0-9]{3}[A-Z]{3}/, //Esto puede cambiar Por ahora está para que empieze como PROV-(esto a la de ahuevo) despues 3 números 3 letras
-            nombreProveedor:/^[A-Z][a-zÀ-ÿ\s]{1,40}/, //Letras y espacios, pueden llevar acentos  ----Los nombres solo pueden iniciar con mayusculas. /^[A-Z][a-z]{2,25}$/,
-            ApellidoPProveedor:/^[A-Z][a-zÀ-ÿ]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
-            ApellidoMProveedor:/^[A-Z][a-zÀ-ÿ]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
-            NumTelefono:/^[0-9]{10}$/, //Los números de telefono tiene 10 números
-            Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,   // Correo electrónico
-            Calle: /^[A-Z][a-zÀ-ÿ\s]{1,40}/, //Letras y espacios, pueden llevar acentos
-            NumExt:/^[0-9]{3}$/, // Números exteriores hasta 999
-            CodigoP:/^[0-9]{5,6}$/ // Números exteriores que conozco son de 5 ej: 68120 o 70980 o 70989
-            //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
-        };
-
-        //Optenemos los input del formulario
-        const inputIDproveedor = document.getElementById('inputIDProveedor');
-        const inputNombreProveedor = document.getElementById('inputNombreProveedor');
-        const inputApellidoPProveedor = document.getElementById('inputApellidoPProveedor');
-        const inputApellidoMProveedor = document.getElementById('inputApellidoMProveedor');
-        const inputNumTelefono = document.getElementById('inputNumTelefono');
-        const inputCorreo = document.getElementById('inputCorreo');
-        const inputCalle = document.getElementById('inputCalle');
-        const inputNumExt = document.getElementById('inputNumExt');
-        const inputCodigoP = document.getElementById('inputCodigoP');
-
-        //Definimos la funcion que evaluara la expresion regular.
-        function evaluar(element,expresion){
-            let cadena = element.target.value;//Optenemos el valor del input
-            if(expresion.test(cadena)){
-                //Si la expresion coincide, se pone en verde
-                element.target.classList.add('is-valid') 
-                element.target.classList.remove('is-invalid')  
-            }else{
-                //Agregamos una lista al input para que se ponga en rojo
-                element.target.classList.add('is-invalid')
-                element.target.classList.remove('is-valid')    
-            }      
-        }
-
-        //Agregamos el vento escuchador "cuando una tecla se levanta"
-        inputIDproveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.idProveedor));
-        inputNombreProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreProveedor));
-        inputApellidoPProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoPProveedor));
-        inputApellidoMProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoMProveedor));
-        inputNumTelefono.addEventListener('keyup',e => evaluar(e,expresionesRegulares.NumTelefono));
-        inputCorreo.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Correo));
-        inputCalle.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
-        inputNumExt.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
-        inputCodigoP.addEventListener('keyup' , e => evaluar(e, expresionesRegulares.CodigoP));
-
-
-        //Ayudame san pedro
-
+    
+    <script src="./js/validaciones/proveedores.js"></script>
+        
+        
+        <script >
+            //Ayudame san pedro
         const formulariosBorrar = document.getElementsByClassName('form-detele');
         let cuerpoModalInformacion = document.querySelector('#confirmacionModal .modal-body')
         let FORMULARIO_GLOBAL = null;
@@ -348,7 +303,121 @@
             FORMULARIO_GLOBAL.submit();
             FORMULARIO_GLOBAL = null;
         });
-
-
     </script>
+
+
+    <!--CDN :v o algo asi la neta ni me acuerdo xd-->
+    <!-- https://flouthoc.github.io/minAjax.js/ -->
+    <!--Pero esta madre se necesita para hacer AJAX mas simple -->
+<script type="text/javascript" src="./js/minAjax.js"></script>
+<script >
+        /**
+         * ARCHIVOS QUE DEBEN DE REVISAR
+         * 
+         *      usuarios.blade.php
+         *      usuariosController.php  -> la funcion "getCiudades" 
+         *      routes/web.php          -> la ruta de /estado/todo
+         * 
+         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
+         * LAS PETICIONES A LAS BASES DE DATOS  
+         * 
+         *      Models/esatdosModelo.php
+         *      Models/municipioModelo.php
+        */
+        const selectorEstado = document.getElementById('inputEstado');
+        const selectorMunicipio = document.getElementById('idMunicipio');
+        const selectorColonia = document.getElementById('idColonia');
+
+        selectorEstado.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+
+               minAjax({
+                url:"{{route('estados.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        id:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorMunicipio = document.getElementById('idMunicipio');
+                    
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idmunicipio;
+                        console.log = data[index].idmunicipio;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorMunicipio.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
+                }
+               });
+            }
+        });
+
+        selectorMunicipio.addEventListener("change",(event)=>{
+            let valor = event.target.value;
+            alert (valor)
+            //Este input, es el input oculto de la linea 116
+            //let _token = $('');
+            
+            if(valor != '0'){
+               minAjax({
+                url:"{{route('municipios.todo')}}", 
+                type:"POST",
+                data:{
+                        _token: document.querySelector('input[name="_token"]').value,
+                        idmunicipio:valor
+                },
+                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+                    success: function(data){
+                    data = JSON.parse(data);
+
+                    let selectorColonia = document.getElementById('idColonia');
+                    
+                    let textoSelectorOP1 = document.createElement('option');
+                    textoSelectorOP1.innerHTML = "-- Selecciona una colonia --";
+                    textoSelectorOP1.value = 0;
+
+                    let opcionesSeleccion = [textoSelectorOP1];
+
+                    for (let index = 0; index < data.length; index++) {
+                        let opcion =  document.createElement('option');
+                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.value = data[index].idcolonia;
+
+                        opcionesSeleccion.push(opcion);                      
+                    }
+
+                    selectorColonia.innerHTML = '';
+
+                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                            selectorColonia.appendChild(opcionesSeleccion[idx]);                    
+                    }
+
+                }
+               });
+              
+            }
+        });
+</script>
 @endsection
