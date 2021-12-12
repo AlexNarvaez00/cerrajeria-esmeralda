@@ -1,4 +1,5 @@
 const formulariosAgregarCarrito = document.getElementsByClassName("form-carrito");
+const eliminarCarro  = document.getElementById("btnEliminarCarrito");
 var total = 0; //Obtiene el total a pagar
 var cont = 0;
 
@@ -23,11 +24,19 @@ for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
                 agregarCarro(registros);             
                 registros = "";
             });                    
-        }          
-             
+        }             
     });
-
 }
+//elimina todo el carrito
+eliminarCarro.addEventListener("click",(event)=>{
+    event.preventDefault();
+    $('#tabla tr:not(:first)').remove();
+    total = 0;
+    $("#letreroTotal").text("Total a pagar: $" + total);
+    cont = 0;
+    $("#conProductos").text(cont);  
+
+});
 
 //Obteiene el total a pagar
 function obtenerTotal(totalProducto){    
@@ -59,7 +68,7 @@ function agregarCarro(registros){
 //bloquea las entradas si la cantidad en el inventario es 0
 function bloquear(){
     $("#inCantExistencia").val("0");
-    $("#letreroNombre").text("Agregue productos al inventario");          
+    $("#letreroNombre").text("Agregué productos al inventario");          
     $( "#botonModalConfirmacion" ).prop( "disabled", true );
     $( "#areaObservaciones" ).prop( "disabled", true );
     $( "#inCantExistencia" ).prop( "disabled", true );
@@ -75,5 +84,3 @@ function limpiar(){
     $("#areaObservaciones" ).prop("disabled", false);
     $("#inCantExistencia" ).prop( "disabled", false);  
 }
-
-

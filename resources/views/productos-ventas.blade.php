@@ -91,11 +91,15 @@
         <p class="px-3">
             Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
-        <table id = "tabla" class="table table-success table-striped">
-            @foreach ($camposproductosCarrito  as $campo)
-                <th scope="col">{{$campo}}</th>
-            @endforeach  
-        </table>        
+        <div class="col-12 text-center">
+            <table id = "tabla" class="table table-success table-striped">
+                @foreach ($camposproductosCarrito  as $campo)
+                    <th scope="col">{{$campo}}</th>
+                @endforeach  
+                <tbody>
+                </tbody>
+            </table>   
+        </div>     
     @endslot
     @slot('footerModal')
         <div class="me-auto p-2 bd-highlight"><h6 id="letreroTotal">Total a pagar: $0.00</h6></div>
@@ -103,7 +107,7 @@
             <span class="me-2">&#10004;</span>
             Realizar pago
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button id="btnEliminarCarrito"type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Eliminar carrito
         </button>
@@ -143,7 +147,7 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion" data-bs-dismiss="modal">
             <i class="bi bi-plus-lg " style="font-size:20px;"></i>
             Agregar
         </button>

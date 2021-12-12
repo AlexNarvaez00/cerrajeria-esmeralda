@@ -26,7 +26,7 @@ class ventaProductoController extends Controller
         ->select("*")
         ->get();
         //Son los campos de las tablas
-        $this->camposproductosCarrito = ['Calve Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
+        $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
     }
 
