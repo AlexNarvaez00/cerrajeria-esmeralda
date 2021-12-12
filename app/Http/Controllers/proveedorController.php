@@ -80,6 +80,7 @@ class proveedorController extends Controller
         //$proveedor->estado = $request->estado;
         //$proveedor->municipio = $request->municipio;
         //$proveedor->colonia = $request->colonia;
+        
         $direccion = new direccionModelo();
         $direccion->iddireccion = "DIC-".$request->numext."-".$request->idproveedor;
         
