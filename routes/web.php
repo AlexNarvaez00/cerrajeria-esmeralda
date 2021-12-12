@@ -52,6 +52,7 @@ Route::resource('/productos-ventas',ventaProductoController::class);
  * Rutas solo para AJAX :v 
 */
 Route::post('/estado/todo',[usuarioController::class,'getCiudades'])->name('estados.todo');
+Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->name('producto.todo');
 
 
 

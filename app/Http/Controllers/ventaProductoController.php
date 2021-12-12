@@ -76,4 +76,18 @@ class ventaProductoController extends Controller
     {
         # code...
     }
+    /**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getProducto(Request $request)
+    {
+        //Recuperamos la llave primaria de productos
+       
+        //Lista de municipios que coicidan con la llaveprimaria 
+        $productocarrito = productosModelo::where('clave_producto','=',$llavePrimaria)->get();
+        
+        //El 200 significa que las peticiones son buenas.
+        //json_encode ---- es para que en JS se manipule mas rapido.
+        return response()->json($productocarrito);
+    }
 }
