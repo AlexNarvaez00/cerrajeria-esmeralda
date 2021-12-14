@@ -3,11 +3,11 @@ const expresionesRegulares = {
     idUsuario: /^USU-[0-9]{3}$/, //Esto puede cambiar
     nombreUsuario: /^[A-Z][a-z]{2,14}$/, //Los nombres solo pueden iniciar con mayusculas.
     password: /^[A-Za-z0-9\_]{8,14}$/, //Contraseñas
-
-    //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
 };
 
-//Optenemos los input del formulario
+/**
+ *  Inputs del modal de Agregación 
+ */
 const inputIDusuario = document.getElementById("inputIDUsuario");
 const inputNombreUsuario = document.getElementById("inputNombreUsuario");
 const inputPasswordUsuario = document.getElementById("inputPasswordUsuario");
@@ -54,6 +54,51 @@ inputRolUsuario.addEventListener('change',(e)=>{
         e.target.classList.remove('is-valid')
     }
 })
+
+
+//====================== Inputs del modal de edicion ============================================
+
+
+/**
+ *  Inputs del modal de Edición 
+ */
+ const inputIDusuariEditar = document.getElementById("inputIDUsuarioEditar");
+ const inputNombreUsuarioEditar = document.getElementById("inputNombreUsuarioEditar");
+ const inputPasswordUsuarioEditar = document.getElementById("inputPasswordUsuarioEditar");
+ const inputPasswordUsuarioConEditar = document.getElementById(
+     "inputPasswordUsuarioConEditar"
+ );
+ const inputRolUsuarioEditar = document.getElementById('inputRolUsuarioEditar');
+
+ inputIDusuarioEditar.addEventListener("keyup", (e) =>
+    evaluar(e, expresionesRegulares.idUsuario)
+);
+inputNombreUsuarioEditar.addEventListener("keyup", (e) =>
+    evaluar(e, expresionesRegulares.nombreUsuario)
+);
+inputPasswordUsuarioEditar.addEventListener("keyup", (e) =>
+    evaluar(e, expresionesRegulares.password)
+);
+inputPasswordUsuarioConEditar.addEventListener("keyup", (e) =>
+    evaluar(e, expresionesRegulares.password)
+);
+inputRolUsuarioEditar.addEventListener('change',(e)=>{
+    if(e.target.value != 0){
+        e.target.classList.add('is-valid')
+        e.target.classList.remove('is-invalid')
+    }else{
+        e.target.classList.add('is-invalid')
+        e.target.classList.remove('is-valid')
+    }
+})
+
+
+
+
+
+
+
+
 //======================Eventos que se ejecutara el modal ============================================
 
 
