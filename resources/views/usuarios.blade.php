@@ -77,15 +77,26 @@
 
                         <!--Botones-->
                         <td>
-                            <a class="btn" href="#" onClick="modal()">
+                            <button class="btn boton-editar" 
+                                data-id="{{$usuario->idusuario}}"
+                                data-nombre="{{$usuario->nombreUsuario}}"
+                                data-rol="{{$usuario->rol}}"
+                                
+                                data-bs-toggle="modal" 
+                                data-bs-target="#registroUsuariosModal"
+
+                            >
                                 <span>&#128394;</span>
-                            </a>
+                            </button>
                         </td>
                         <td>
                             <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
+                                <button type="submit" 
+                                    class="btn delete" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
                             </form>
@@ -96,11 +107,9 @@
         </table>
     </div>
 </div>
-
     @component('components.modal')
         @slot('idModal','registroUsuariosModal')
         @slot('tituloModal','Registrar un nuevo usuario.')
-        
         /**Agregar estas dos cosas a sus modales*/
             @slot('rutaEnvio',route('usuarios.store'))
             @slot('metodoFormulario','POST')
@@ -114,19 +123,8 @@
                 <div class="row">
                     <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
                     @csrf
-                    <!--Columnas :v-->
-                    <div class="col-md-12 col-sm-12">
-                        <div class="input-group mb-3 ">
-                            <span class="input-group-text col-3" id="basic-addon1">Id de Usuario</span>
-                            @if(Request::is('usuarios/*/edit'))
-                                <!--Modo edicion-->
-                            @else
-                                <!--Modo registro-->
-                                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
-                            @endif
-
-                        </div>
-                    </div>
+                    <!--Input oculto para el IDE del usuario-->
+                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
@@ -157,7 +155,7 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputRolUsuario">Roles</label>
                         <select class="form-select" id="inputRolUsuario" name="rolUser" value="">
-                                <option selected>Selecciones rol de Usuario</option>
+                                <option selected value="0">Selecciones rol de Usuario</option>
                             @foreach ($listaRoles as $rol)
                                 <option value="{{$rol}}">{{$rol}}</option>
                             @endforeach
@@ -167,7 +165,7 @@
             </div>
         @endslot
         @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
                 <span class="me-2">&#10060;</span>
                 Cancelar
             </button>
@@ -201,17 +199,13 @@
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
-    
+    <script src="./js/funciones/editarUsuario.js"></script>
+
+
+
     <!--CDN :v o algo asi la neta ni me acuerdo xd-->
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
-    <script type="text/javascript" src="./js/minAjax.js"></script>
-    <script>
-        function modal(){
-            var myModal = new bootstrap.Modal(document.getElementById('registroUsuariosModal'), {});
-            myModal.show();    
-        }
-
-    </script>
+    <!-- <script type="text/javascript" src="./js/minAjax.js"></script> -->
 
 @endsection

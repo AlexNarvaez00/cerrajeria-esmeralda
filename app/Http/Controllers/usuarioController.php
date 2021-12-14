@@ -72,14 +72,20 @@ class usuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //Creamos un nuevo objeto.
-        $usuario = new usuariosModel();
+        $usuario = usuariosModel::find($request->idUsuario);
+
+        if($usuario == null){
+            //Sino existe, crealo.
+            //Creamos un nuevo objeto. 
+            $usuario = new usuariosModel();
+            $usuario->idUsuario = $request->idUsuario;
+        }
 
         //Nombre del input del formulario es una tributo "name"
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $usuario->idUsuario = $request->idUsuario;
+        
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->contrasena = $request->contrasena;
         $usuario->rol = $request->rolUser;
@@ -115,14 +121,6 @@ class usuarioController extends Controller
     public function edit(usuariosModel $usuario)
     {
 
-        $listaUsuarios = usuariosModel::find($usuario);
-
-        return view('usuarios') //Nombre de la vista
-                    ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
-                    ->with('camposVista', $this->camposVista) //Campos de la tablas
-                    ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-                    ->with('listaRoles', $this->listaRoles)// //Campos de la tablas
-                    ->with('usuarioEdit',$usuario);
     }
 
 
