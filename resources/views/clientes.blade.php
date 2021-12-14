@@ -94,23 +94,18 @@
     </div>
     @component('components.modal')
     @slot('idModal','registroClienteModal')
-    @slot('tituloModal','Registrar un nuevo cliente')
+    @slot('tituloModal','Modulo para registrar un cliente')
     @slot('rutaEnvio',route('clientes.store'))
     @slot('metodoFormulario','POST')
     @slot('cuerpoModal')
         <p class="px-3">
-            Modulo para registrar un cliente
+            Formulario para registrar un cliente
         </p>
         <div class="container-fluid">
             <div class="row">
                 @csrf
                 <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Id de Cliente</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDCliente" name="idcliente">
-                    </div>
-                </div>
+                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
