@@ -62,3 +62,37 @@ if (inputClasificacion) {
         evaluar(e, expresionesRegulares.caracteres)
     );
 }
+//Obtiene los valores de las filas
+$(document).ready(function() {
+    $(".btnEditar").click(function() {
+        $("#btnRegistrarProducto").hide();
+        $("#btnGuardarCambios").show();
+        var claveProducto = $(this).parents("tr").find("th")[0].innerHTML;            
+        var nombreProducto = $(this).parents("tr").find("td")[0].innerHTML;
+        var clasificacion = $(this).parents("tr").find("td")[1].innerHTML;
+        var precio = $(this).parents("tr").find("td")[2].innerHTML;
+        var existencia = $(this).parents("tr").find("td")[3].innerHTML;
+        var proveedor = $(this).parents("tr").find("td")[4].innerHTML; 
+        var descripcion = $(this).parents("tr").find("td")[5].innerHTML;                      
+        $("#inClaveProducto").val(claveProducto); 
+        $("#inClaveProducto").prop("disabled", true); 
+        $("#inNomProducto").val(nombreProducto);
+        $("#inClasificacion").val(clasificacion); 
+        $("#inPrecio").val(precio.replace("$","")); 
+        $("#inCantExistencia").val(existencia);             
+        $("#inDescripcion").val(descripcion);    
+        
+    });
+});
+//Limpiar las entradas para que no quede reciduo
+function limpiar(){
+    $("#btnRegistrarProducto").show();
+    $("#btnGuardarCambios").hide();
+    $("#inClaveProducto").val(""); 
+    $("#inClaveProducto").prop("disabled", false); 
+    $("#inNomProducto").val("");
+    $("#inClasificacion").val(""); 
+    $("#inPrecio").val("0.00"); 
+    $("#inCantExistencia").val("0");             
+    $("#inDescripcion").val("");
+}

@@ -155,12 +155,10 @@
     @endcomponent
 @endsection
 
-@section('scritps')
-   
+@section('scritps')   
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="./js/minAjax.js"></script>
     <script src="./js/validaciones/productos.js"></script>
     <script src="./js/funciones/funcionesProductos-ventas.js"></script>
     <script src="./js/modales/mostrarModalProdVentas.js" ></script>
-
 @endsection

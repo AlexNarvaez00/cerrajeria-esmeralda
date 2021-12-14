@@ -83,3 +83,8 @@ function limpiar(){
     $("#areaObservaciones" ).prop("disabled", false);
     $("#inCantExistencia" ).prop( "disabled", false);  
 }
+
+//verificar si ya se agrego un producto al carrito
+function verificar(){
+    
+}
