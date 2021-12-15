@@ -100,7 +100,12 @@ class productosController extends Controller
         //return $request;
         return redirect()->route('productos.index');
     }
+    public function edit($clave_producto){
+        $producto=productosModelo::findOrFail($clave_producto);
+        return $producto;
 
+    }
+    
     public function show()
     {
         # code...

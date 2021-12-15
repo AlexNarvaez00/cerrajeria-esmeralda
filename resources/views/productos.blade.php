@@ -73,7 +73,7 @@
                         
                         <!--Botones-->
                         <td class="btnEditar">
-                            <button class="btn" data-id-db="{{$producto->clave_producto}}"  data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                                 <span>&#128394;</span>
                             </button>
                         </td>
@@ -183,6 +183,4 @@
 @section('scritps')
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/validaciones/productos.js"></script>
-    
-
 @endsection
