@@ -26,9 +26,9 @@
     </h5>
 
     <div class="container-fluid mb-4">
-        <form action="" class="row d-flex justify-content-end">
+        <form method="GET" action="{{route('clientes.index')}}" class="row d-flex justify-content-end">
             <div class="col-5">
-                <input type="text" class="form-control" placeholder="ID del cliente que desea buscar">
+                <input type="text" class="form-control" placeholder="ID del cliente que desea buscar" name="inputBusqueda">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
@@ -64,7 +64,7 @@
                     @foreach($registrosVista as $cliente)
                         <!--Inicio de la Fila-->
                         <tr>
-                            <!--ID de la tabla usuarios-->    
+                            <!--ID de la tabla clientes-->    
                             <th scope="col">{{$cliente->idcliente}}</th>
                             <!--Los otros atributos de la tabla usuarios-->
                             <td>{{$cliente->nombre}}</td>
@@ -73,7 +73,11 @@
                             <td>{{$cliente->telefono}}</td>
                             <!--Botones-->
                                 <td>
-                                    <button class="btn" data-id-db="{{$fila->idcliente}}">
+                                    <button class="btn boton-editar" 
+                                        data-id-db="{{$cliente->idcliente}}"
+
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editarClientesModal">
                                         <span>&#128394;</span>
                                     </button>
                                 </td>
@@ -81,7 +85,10 @@
                             <form class="form-detele" action="{{route('clientes.destroy',$cliente)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
+                                <button type="submit" 
+                                    class="btn delete" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
                                 </form>
@@ -94,23 +101,19 @@
     </div>
     @component('components.modal')
     @slot('idModal','registroClienteModal')
-    @slot('tituloModal','Registrar un nuevo cliente')
+    @slot('tituloModal','Modulo para registrar un cliente')
     @slot('rutaEnvio',route('clientes.store'))
     @slot('metodoFormulario','POST')
+
     @slot('cuerpoModal')
         <p class="px-3">
-            Modulo para registrar un cliente
+            Formulario para registrar un cliente
         </p>
         <div class="container-fluid">
             <div class="row">
                 @csrf
                 <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Id de Cliente</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDCliente" name="idcliente">
-                    </div>
-                </div>
+                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
@@ -140,24 +143,26 @@
                     </div>
                 </div>
         </div>
-    @endslot
+        @endslot
     @slot('footerModal')
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
     @endslot
     @endcomponent
 
-    @component('components.modalSimple')
+<!-- ####################################### Modal de confirmacion de un Usuario ####################################### -->
+
+@component('components.modalSimple')
         @slot('idModal','confirmacionModal')
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
-
+            <!-- Cuerpo del modal-->
         @endslot
         @slot('footerModal')
             <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -170,6 +175,73 @@
             </button>
         @endslot
     @endcomponent
-   
+    
+
+   <!-- ####################################### Modal de edicion de un Usuario ####################################### -->
+    
+   @component('components.modal')
+        @slot('idModal','editarClientesModal')
+        @slot('tituloModal','Editar un cliente.')
+        @slot('rutaEnvio','')
+        @slot('metodoFormulario','POST')
+
+        @slot('cuerpoModal')
+        <p class="px-3">
+            Formulario para registrar un cliente
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                @csrf
+                @method('PUT')
+                <!--Columnas :v-->
+                
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre">
+                    </div>
+                </div>
+                <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoPaterno">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoMaterno">
+                    </div>
+                </div>
+            <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
+                        <input type="text" class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
+                    </div>
+                </div>
+        </div>
+        @endslot
+        @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+            <span class="me-2">&#10004;</span>
+            Registrar
+        </button>
+    @endslot
+    @endcomponent
+
 @endsection
 
+
+<!--En esta seccion van los scripts para cada una de las vistas-->
+@section('scritps')
+    <script src="./js/validaciones/clientes.js"></script>
+    <script src="./js/funciones/editarCliente.js"></script>
+@endsection
