@@ -85,7 +85,9 @@
                                 data-id="{{$usuario->idusuario}}"
                                 data-nombre="{{$usuario->nombreUsuario}}"
                                 data-rol="{{$usuario->rol}}"
-                                
+                                data-route-url="{{route('usuarios.update',$usuario)}}"
+
+
                                 data-bs-toggle="modal" 
                                 data-bs-target="#editarUsuariosModal">
                                 <span>&#128394;</span>
@@ -203,7 +205,7 @@
 @component('components.modal')
         @slot('idModal','editarUsuariosModal')
         @slot('tituloModal','Editar un usuario.')
-        @slot('rutaEnvio',route('usuarios.store'))
+        @slot('rutaEnvio','')
         @slot('metodoFormulario','POST')
         
         @slot('cuerpoModal')
@@ -214,8 +216,9 @@
                 <div class="row">
                     <!--Directiva, basicmanete -->
                     @csrf
+                    @method('PUT')
                     <!--Input oculto para el IDE del usuario-->
-                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuarioEditar" name="idUsuarioEditar">
+                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuarioEditar" name="idUsuario">
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">

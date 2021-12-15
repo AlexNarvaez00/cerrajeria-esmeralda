@@ -1,26 +1,23 @@
 let botonesEditar = document.getElementsByClassName('boton-editar');
+const modal = document.getElementById('editarUsuariosModal');
 
 //Funcion flecha
 const mostarInformacion = (e) =>{
-    let boton = e.target;
-    
-    if(boton.tagName.toLowerCase() == 'span'){
-        boton = boton.parentElement;
+    //let inputIDUsuario = document.getElementById('inputIDUsuarioEditar');
+   
+    let data = null;
+    if(e.target.nodeName == 'SPAN'){
+        data = e.target.parentElement.dataset;
+    }else{
+        data = e.target.dataset;
     }
-    //let fomularioEnvio = document.getElementById('registroUsuariosModal');
-    
-    let inputIdUsuario = document.getElementById('inputIDUsuario');
-    let inputNombreUsuario = document.getElementById('inputNombreUsuario');
-    let inputRol = document.getElementById('inputRolUsuario');
 
+    let formulario = modal.getElementsByTagName('form')[0];
+    formulario.action = data.routeUrl;
 
-    inputIdUsuario.value = boton.dataset.id;
-    
-    inputNombreUsuario.value = boton.dataset.nombre; 
-    inputNombreUsuario.classList.add('is-valid');
-    
-    inputRol.value = boton.dataset.rol; 
-    inputRol.classList.add('is-valid');
+    //Inputs
+    //7let inputIDUsuarioEditar = document.getElementById('inputIDUsuarioEditar');
+    //inputIDUsuarioEditar.value = data.id;
 
 };
 
@@ -29,4 +26,11 @@ for (let index = 0; index < botonesEditar.length; index++) {
     const boton = botonesEditar[index];
     boton.addEventListener('click',mostarInformacion);
 }
+
+modal.addEventListener('hide.bs.modal',e=>{
+    let inputsValidos = modal.getElementsByClassName('is-valid');
+    for (let index = 0; index < inputsValidos.length; index++) {
+        inputsValidos[index].classList.remove('is-valid');
+    }
+});
 

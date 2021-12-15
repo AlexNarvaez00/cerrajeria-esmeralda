@@ -62,7 +62,7 @@ inputRolUsuario.addEventListener('change',(e)=>{
 /**
  *  Inputs del modal de Edición 
  */
- const inputIDusuariEditar = document.getElementById("inputIDUsuarioEditar");
+ const inputIDusuarioEditar = document.getElementById("inputIDUsuarioEditar");
  const inputNombreUsuarioEditar = document.getElementById("inputNombreUsuarioEditar");
  const inputPasswordUsuarioEditar = document.getElementById("inputPasswordUsuarioEditar");
  const inputPasswordUsuarioConEditar = document.getElementById(
