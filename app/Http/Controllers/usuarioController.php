@@ -59,39 +59,38 @@ class usuarioController extends Controller
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles)//; //Campos de la tablas
+            ->with('listaRoles', $this->listaRoles); //; //Campos de la tablas
 
-            //Pasamos los estado a las vista
-            ->with('estadosArreglo',$estadosArreglo);
+        //Pasamos los estado a las vista
+        //->with('estadosArreglo',$estadosArreglo);
     }
 
     /**
+     * Funcion para guardar un nuevo registro en la base de datos.
+     * 
      * @param $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.
      * 
      */
     public function store(Request $request)
     {
-        //Creamos un nuevo objeto.
-        $usuario = new usuariosModel();
-
-        //Nombre del input del formulario es una tributo "name"
-        //Chequen esa parte.
-
+        
+        $llavePrimaria = '';
+        do{
+            //Significa que la llave primaria ya fue registrada
+            $llavePrimaria = 'USU-'.$this->getNumber();
+        }while(usuariosModel::find($llavePrimaria) != null);
+        
         //Nombre del campo BD----- Nombre input formulario
-        $usuario->idUsuario = $request->idUsuario;
+        $usuario = new usuariosModel();
+        $usuario->idUsuario =  $llavePrimaria;
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->contrasena = $request->contrasena;
         $usuario->rol = $request->rolUser;
-
-        //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
-        //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
-        //return dd($request->all());
         $usuario->save();
 
         return redirect()->route('usuarios.index');
     }
-
 
     /**
      * 
@@ -111,9 +110,25 @@ class usuarioController extends Controller
         return redirect()->route('usuarios.index');
     }
 
+    public function update(Request $request,usuariosModel $usuario)
+    {
+        $usuario->nombreUsuario = $request->nombreUsuarioEditar;
+        $usuario->save();
+
+        return redirect()->route('usuarios.index');
+    }
 
 
+    public function edit(usuariosModel $usuario)
+    {
+    }
 
+    /**
+     * @return Regresa un numero de tres cifas aleatorio del 000-999
+     */
+    public function getNumber(){
+        return random_int(0,9).''.random_int(0,9).''.random_int(0,9);
+    }
 
 
 
@@ -128,8 +143,8 @@ class usuarioController extends Controller
         //Recuperamos la llave primaria de estados
         $llavePrimaria = $request->id;
         //Lista de municipios que coicidan con la llaveprimaria 
-        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();
-        
+        $listaMunicipios = municipiosModelo::where('idestado', '=', $llavePrimaria)->get();
+
         //El 200 significa que las peticiones son buenas.
         //json_encode ---- es para que en JS se manipule mas rapido.
         return response()->json($listaMunicipios);

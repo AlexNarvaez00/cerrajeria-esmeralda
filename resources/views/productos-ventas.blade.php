@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <div class ="row">
             <div class="col-3 d-flex justify-content-start">        
-                <button type="button" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span class="badge">4</span></button>           
+                <button type="button" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span id ="conProductos" class="badge">0</span></button>           
             </div> 
             <form action="" class="col-9 d-flex justify-content-end">                   
                 <div class="col-5">
@@ -69,8 +69,8 @@
                             <!--Boton de carrito-->
                             <td>
                                 <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
-                                    <button type="submit" class="btn" data-id-db="{{$producto->clave_producto}}" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
-                                        <span>&#128722;</span>
+                                    <button id="btnCarrito" type="submit" class="btn" data-id-db="{{$producto->clave_producto}}" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
                                     </button>     
                                 </form>                       
                             </td>                
@@ -87,23 +87,27 @@
     @slot('tituloModal','Carrito de compras')
     @slot('rutaEnvio',route('productos-ventas.store'))
     @slot('metodoFormulario','POST')
-    @slot('cuerpoModal')    
+    @slot('cuerpoModal')           
         <p class="px-3">
             Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
-        <table class="table table-success table-striped">
-            @foreach ($camposproductosCarrito  as $campo)
-                <th scope="col">{{$campo}}</th>
-            @endforeach  
-        </table>        
+        <div class="col-12 text-center">
+            <table id = "tabla" class="table table-success table-striped">
+                @foreach ($camposproductosCarrito  as $campo)
+                    <th scope="col">{{$campo}}</th>
+                @endforeach  
+                <tbody>
+                </tbody>
+            </table>   
+        </div>     
     @endslot
     @slot('footerModal')
-        <div class="me-auto p-2 bd-highlight"><h6>Total a pagar: $0.00</h6></div>
+        <div class="me-auto p-2 bd-highlight"><h6 id="letreroTotal">Total a pagar: $0.00</h6></div>
         <button type="button" class="btn btn-light d-flex ps-3 pe-3">
             <span class="me-2">&#10004;</span>
             Realizar pago
         </button>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <button id="btnEliminarCarrito"type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Eliminar carrito
         </button>
@@ -114,10 +118,13 @@
     @slot('idModal','agregarcarritoModal')
     @slot('tituloModal','Agregar al carrito')
     @slot('cuerpoModal')
+    @csrf
     <div class="container-fluid">
+    
         <div class="row">        
             <p class="px-3">
-                <h4 id="letreroNombre">Aqui va el nombre del producto</h4>
+                <h5 id="letreroNombre"></h5>
+                <h6 id="letreroPrecio"></h6>
             </p>
             
             <div class="col-md-6 col-sm-12">
@@ -128,7 +135,7 @@
             </div>
             <div class="input-group">
                 <span class="input-group-text">Observaciones</span>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
+                <textarea id="areaObservaciones" class="form-control" aria-label="With textarea"></textarea>
             </div>         
         
         </div>
@@ -140,7 +147,7 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion" data-bs-dismiss="modal">
             <i class="bi bi-plus-lg " style="font-size:20px;"></i>
             Agregar
         </button>
@@ -148,7 +155,10 @@
     @endcomponent
 @endsection
 
-@section('scritps')
+@section('scritps')   
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/minAjax.js"></script>
     <script src="./js/validaciones/productos.js"></script>
+    <script src="./js/funciones/funcionesProductos-ventas.js"></script>
     <script src="./js/modales/mostrarModalProdVentas.js" ></script>
 @endsection

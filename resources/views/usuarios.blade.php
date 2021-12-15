@@ -17,6 +17,8 @@
 
 
 @section('contenido')
+
+<!--################################ Ttiulos d ela ventana ##############################################-->
 <h5 class="h5 text-star mt-5 ps-3">
     <span>&#128075;</span>
     ¡Hola, {{ $nombreUsuarioVista }}!
@@ -26,8 +28,10 @@
     Usuarios
 </h5>
 
+
+<!-- #################################### Cuerpo de la pagina #################################### -->
 <div class="container-fluid mb-4">
-    <!--Experimental-->
+    <!--Botones principales de busqueda y agregar-->
     <form method="GET" action="{{route('usuarios.index')}}" class="row d-flex justify-content-end">
         <div class="col-5">
             <input type="text" class="form-control" placeholder="burcar ID" name="inputBusqueda">
@@ -47,7 +51,7 @@
     </form>
 </div>
 
-<!--Seccion de la tabla-->
+<!--#################################### Seccion de la tabla #################################### -->
 <div class="conteiner-fluid">
     <div class="col-12">
         <table class="table">
@@ -77,7 +81,15 @@
 
                         <!--Botones-->
                         <td>
-                            <button class="btn" data-id-db="{{$usuario->idusuario}}">
+                            <button class="btn boton-editar" 
+                                data-id="{{$usuario->idusuario}}"
+                                data-nombre="{{$usuario->nombreUsuario}}"
+                                data-rol="{{$usuario->rol}}"
+                                data-route-url="{{route('usuarios.update',$usuario)}}"
+
+
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editarUsuariosModal">
                                 <span>&#128394;</span>
                             </button>
                         </td>
@@ -85,7 +97,10 @@
                             <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
+                                <button type="submit" 
+                                    class="btn delete" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
                             </form>
@@ -97,14 +112,13 @@
     </div>
 </div>
 
+<!-- ####################################### Modal de registro de un Usuario ####################################### -->
+
     @component('components.modal')
         @slot('idModal','registroUsuariosModal')
         @slot('tituloModal','Registrar un nuevo usuario.')
-        
-        /**Agregar estas dos cosas a sus modales*/
-            @slot('rutaEnvio',route('usuarios.store'))
-            @slot('metodoFormulario','POST')
-        /**Fin de los nuevo */
+        @slot('rutaEnvio',route('usuarios.store'))
+        @slot('metodoFormulario','POST')
         
         @slot('cuerpoModal')
             <p class="px-3">
@@ -114,13 +128,8 @@
                 <div class="row">
                     <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
                     @csrf
-                    <!--Columnas :v-->
-                    <div class="col-md-12 col-sm-12">
-                        <div class="input-group mb-3 ">
-                            <span class="input-group-text col-3" id="basic-addon1">Id de Usuario</span>
-                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDUsuario" name="idUsuario">
-                        </div>
-                    </div>
+                    <!--Input oculto para el IDE del usuario-->
+                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
@@ -151,44 +160,17 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputRolUsuario">Roles</label>
                         <select class="form-select" id="inputRolUsuario" name="rolUser" value="">
-                                <option selected>Selecciones rol de Usuario</option>
+                                <option selected value="0">Selecciones rol de Usuario</option>
                             @foreach ($listaRoles as $rol)
                                 <option value="{{$rol}}">{{$rol}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-
-                <!-- ****************************** Demostracion ****************************** -->
-                <p class="my-5">Pana ROBERTO xd</p>
-                <div class="row">
-                    <!--Columnas :v-->
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstado">Estados</label>
-                        <select class="form-select" id="inputEstado" name="estados" value="">
-                                <option selected value="0" >-- Selecciona un estado --</option>
-                            @foreach ($estadosArreglo as $estado)
-                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <!--Selector que va a cambiar conforme a los aestados-->
-                <div class="row">
-                    <!--Columnas :v-->
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipio">Estados</label>
-                        <select class="form-select" id="idMunicipio" name="municipios" value="">
-                                <option selected value="0" >-- Selecciona un municipio --</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- ****************************** FIN Demostracion ****************************** -->
             </div>
         @endslot
         @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
                 <span class="me-2">&#10060;</span>
                 Cancelar
             </button>
@@ -199,11 +181,13 @@
         @endslot
     @endcomponent
 
+<!-- ####################################### Modal de confirmacion de un Usuario ####################################### -->
+
     @component('components.modalSimple')
         @slot('idModal','confirmacionModal')
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
-
+            <!-- Cuerpo del modal-->
         @endslot
         @slot('footerModal')
             <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -216,85 +200,92 @@
             </button>
         @endslot
     @endcomponent
+    
+<!-- ####################################### Modal de edicion de un Usuario ####################################### -->
+@component('components.modal')
+        @slot('idModal','editarUsuariosModal')
+        @slot('tituloModal','Editar un usuario.')
+        @slot('rutaEnvio','')
+        @slot('metodoFormulario','POST')
+        
+        @slot('cuerpoModal')
+            <p class="px-3">
+                Informacion básica del usuario.
+            </p>
+            <div class="container-fluid">
+                <div class="row">
+                    <!--Directiva, basicmanete -->
+                    @csrf
+                    @method('PUT')
+                    <!--Input oculto para el IDE del usuario-->
+                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuarioEditar" name="idUsuario">
+                    <!--Columnas :v-->
+                    <div class="col-md-12 col-sm-12">
+                        <div class="input-group mb-3 ">
+                            <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
+                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuarioEditar" name="nombreUsuarioEditar">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
+                        <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioEditar" name="contrasenaEditar">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
+                        <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrsenaConfirmadaEditar">
+                    </div>
+                </div> 
+            </div>
+            <p class="px-3">
+                Rol del usuario.
+            </p>
+            <div class="container-fluid">
+                <div class="row">
+                    <!--Columnas :v-->
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputRolUsuarioEditar">Roles</label>
+                        <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="">
+                                <option selected value="0">Selecciones rol de Usuario</option>
+                            @foreach ($listaRoles as $rol)
+                                <option value="{{$rol}}">{{$rol}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        @endslot
+        @slot('footerModal')
+            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+                <span class="me-2">&#10060;</span>
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+                <span class="me-2">&#10004;</span>
+                Registrar
+            </button>
+        @endslot
+    @endcomponent
+
 
 @endsection
+
+
+
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
     <script src="./js/validaciones/usuarios.js"></script>
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
-    
-    
+    <script src="./js/funciones/editarUsuario.js"></script>
+
+
     <!--CDN :v o algo asi la neta ni me acuerdo xd-->
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
-    <script type="text/javascript" src="./js/minAjax.js"></script>
+    <!-- <script type="text/javascript" src="./js/minAjax.js"></script> -->
 
-    <script >
-        /**
-         * ARCHIVOS QUE DEBEN DE REVISAR
-         * 
-         *      usuarios.blade.php
-         *      usuariosController.php  -> la funcion "getCiudades" 
-         *      routes/web.php          -> la ruta de /estado/todo
-         * 
-         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
-         * LAS PETICIONES A LAS BASES DE DATOS  
-         * 
-         *      Models/esatdosModelo.php
-         *      Models/municipioModelo.php
-        */
-
-
-
-        const selectorEstado = document.getElementById('inputEstado');
-        const selectorMunicipio = document.getElementById('idMunicipio');
-
-        selectorEstado.addEventListener("change",(event)=>{
-            let valor = event.target.value;
-            //Este input, es el input oculto de la linea 116
-            //let _token = $('');
-            
-            if(valor != '0'){
-
-               minAjax({
-                url:"{{route('estados.todo')}}", 
-                type:"POST",
-                data:{
-                        _token: document.querySelector('input[name="_token"]').value,
-                        id:valor
-                },
-                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
-                success: function(data){
-                    data = JSON.parse(data);
-
-                    let selectorMunicipio = document.getElementById('idMunicipio');
-                    
-                    let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
-                    textoSelectorOP1.value = 0;
-
-                    let opcionesSeleccion = [textoSelectorOP1];
-
-                    for (let index = 0; index < data.length; index++) {
-                        let opcion =  document.createElement('option');
-                        opcion.innerHTML = data[index].nombre;                       
-                        opcion.value = data[index].idmunicipio;
-
-                        opcionesSeleccion.push(opcion);                      
-                    }
-
-                    selectorMunicipio.innerHTML = '';
-
-                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
-                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
-                    }
-
-                }
-               });
-
-            }
-        });
-
-    </script>
 @endsection
