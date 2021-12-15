@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\clienteModelo;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class clienteController extends Controller
 {
+    /**
+     * Atributos ...
+     */
     public $nombreUsuario; //pendiente revisar
     protected $clientesLista; //para guardar lista de clientes
     private $camposVista;
@@ -38,8 +42,8 @@ class clienteController extends Controller
     {
         $cliente = new clienteModelo();
 
-        $cliente->idcliente = $request->idcliente; #checar nombre input
-        $cliente->nombre = $request->nombre; #checar nomnre input
+        $cliente->idcliente = "cl-".$request->apellidoPaterno[1].$request->apellidoPaterno[3].$request->apellidoMaterno[1].$request->apellidoMaterno[3];
+        $cliente->nombre = $request->nombre; 
         $cliente->apellidoPaterno = $request->apellidoPaterno; #checar input
         $cliente->apellidoMaterno = $request->apellidoMaterno; #checar nombre input
         $cliente->telefono = $request->telefono; #checar nombre input
