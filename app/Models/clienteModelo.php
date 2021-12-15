@@ -11,4 +11,5 @@ class clienteModelo extends Model
     protected $table = 'cliente';
     protected $primaryKey = 'idcliente';
     public $incrementing = false;
+    public $timestamps = false;
 }
