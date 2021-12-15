@@ -105,7 +105,7 @@
 
     @slot('cuerpoModal')
         <p class="px-3">
-            Formulario para registrar a un uevo proveedor.
+            Formulario para registrar a un nuevo proveedor.
         </p>
         <p class="px-3">
             Información del Proveedor
@@ -114,15 +114,6 @@
             <div class="row">
                 <!--Columnas :v-->
                 @csrf
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Id de Proveedor</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputIDProveedor" name="idproveedor">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -148,7 +139,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Número de Telefono</span>
+                        <span class="input-group-text" id="basic-addon1">Número de Teléfono</span>
                         <input type="text" class="form-control" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="numtelefono">
                     </div>
                 </div>
@@ -311,19 +302,7 @@
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
 <script type="text/javascript" src="./js/minAjax.js"></script>
 <script >
-        /**
-         * ARCHIVOS QUE DEBEN DE REVISAR
-         * 
-         *      usuarios.blade.php
-         *      usuariosController.php  -> la funcion "getCiudades" 
-         *      routes/web.php          -> la ruta de /estado/todo
-         * 
-         * ESTOS SON DONS IMPORTANTES YA QUE A ELLOS SE LES HACEN 
-         * LAS PETICIONES A LAS BASES DE DATOS  
-         * 
-         *      Models/esatdosModelo.php
-         *      Models/municipioModelo.php
-        */
+        
         const selectorEstado = document.getElementById('inputEstado');
         const selectorMunicipio = document.getElementById('idMunicipio');
         const selectorColonia = document.getElementById('idColonia');

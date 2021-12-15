@@ -26,7 +26,7 @@ class proveedorController extends Controller
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
-        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','Editar','Borrar'];
+        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','ID Dirección','Editar','Borrar'];
     }
     
     /**
@@ -70,7 +70,7 @@ class proveedorController extends Controller
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $proveedor->idproveedor = $request->idproveedor;
+        $proveedor->idproveedor = "PROV-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1].$request->numext[0].$request->numext[1];
         $proveedor->nombre = $request->nombre;
         $proveedor->apellidopaterno = $request->apellidopaterno;
         $proveedor->apellidomaterno = $request->apellidomaterno;
@@ -82,7 +82,7 @@ class proveedorController extends Controller
         //$proveedor->colonia = $request->colonia;
         
         $direccion = new direccionModelo();
-        $direccion->iddireccion = "DIC-".$request->numext."-".$request->idproveedor;
+        $direccion->iddireccion = "DIC-".$request->numext[0].$request->numext[1].$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
         
         $PRYKEY = $direccion->iddireccion;
         
