@@ -73,7 +73,7 @@ function bloquear(){
     $( "#inCantExistencia" ).prop( "disabled", true );
 }
 
-//Limpia los letreros y las entradas paraq que no quede residuos en los modales
+
 function limpiar(){
     $("#letreroNombre").text(""); 
     $("#letreroPrecio").text(""); 
@@ -86,5 +86,5 @@ function limpiar(){
 
 //verificar si ya se agrego un producto al carrito
 function verificar(){
-    
+
 }

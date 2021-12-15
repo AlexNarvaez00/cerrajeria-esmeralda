@@ -80,8 +80,7 @@ $(document).ready(function() {
         $("#inClasificacion").val(clasificacion); 
         $("#inPrecio").val(precio.replace("$","")); 
         $("#inCantExistencia").val(existencia);             
-        $("#inDescripcion").val(descripcion);    
-        
+        $("#inDescripcion").val(descripcion);       
     });
 });
 //Limpiar las entradas para que no quede reciduo
