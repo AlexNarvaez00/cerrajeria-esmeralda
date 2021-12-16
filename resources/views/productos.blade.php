@@ -69,7 +69,7 @@
                         <td>&#36;{{$producto->precio_producto}}</td>
                         <td>{{$producto->cantidad_existencia}}</td>
                         <td>{{$producto->idproveedor}}</td>
-                        <td>{{$producto->descripcion}}</td>
+                        <td style="font-size:80%;">{{$producto->descripcion}}</td>
                         
                         <!--Botones-->
                         <td class="btnEditar">

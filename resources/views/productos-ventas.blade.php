@@ -64,8 +64,7 @@
                             <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
                             <td class="dato">{{$producto->nombre_producto}}</td>                        
                             <td class="dato">&#36;{{$producto->precio_producto}}</td>
-                            <td class="dato">{{$producto->cantidad_existencia}}</td> 
-                            <td class="dato">{{$producto->descripcion}}</td>                       
+                            <td class="dato">{{$producto->cantidad_existencia}}</td>                                                  
                             <!--Boton de carrito-->
                             <td>
                                 <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
