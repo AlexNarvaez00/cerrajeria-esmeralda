@@ -27,7 +27,7 @@ class ventaProductoController extends Controller
         ->get();
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
-        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Descripcion','Agregar al carrito'];
+        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Agregar al carrito'];
     }
 
     /**
@@ -71,11 +71,10 @@ class ventaProductoController extends Controller
         //return $request;
         return redirect()->route('productos-ventas.index');
     }
-
-    public function show()
-    {
-        # code...
+    public function show($id){
+        
     }
+    
     /**
      * @param $estado - peticion que se realiza por medio de AJAX
      */

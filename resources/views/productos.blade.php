@@ -22,7 +22,7 @@
         ¡Hola, XXXX XXXX XXXX!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
-        <span>&#127991;</span>
+        <span>&#128273;</span>
         Productos
     </h5>
 
@@ -69,11 +69,11 @@
                         <td>&#36;{{$producto->precio_producto}}</td>
                         <td>{{$producto->cantidad_existencia}}</td>
                         <td>{{$producto->idproveedor}}</td>
-                        <td>{{$producto->descripcion}}</td>
+                        <td style="font-size:80%;">{{$producto->descripcion}}</td>
                         
                         <!--Botones-->
                         <td class="btnEditar">
-                            <button class="btn" data-id-db="{{$producto->clave_producto}}"  data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                                 <span>&#128394;</span>
                             </button>
                         </td>
@@ -183,6 +183,4 @@
 @section('scritps')
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/validaciones/productos.js"></script>
-    
-
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\proveedorController;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\ventasController;
+use App\Http\Controllers\serviciosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,7 @@ Route::resource('/productos',productosController::class);
 Route::resource('/clientes',clienteController::class);
 Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
+Route::resource('/servicios-ventas',serviciosController::class);
 
 
 /**
@@ -69,6 +71,8 @@ Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->na
  * 
 */
 Route::get('/{pagina}',[RutasController::class,'showView']);
+
+//Route::get('/cliente/{id}', [serviciosController::class,'show'])->name('cliente');
 //Route::get('/proveedores','proveedorController@index');
 //Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');
 
