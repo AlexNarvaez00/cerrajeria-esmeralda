@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\estadosModelo;
-use App\Models\municipiosModelo;
+
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Validation\Validator;
 
 class usuarioController extends Controller
 {
@@ -21,9 +21,10 @@ class usuarioController extends Controller
     private $camposVista;
 
 
-    //Pagina para referenciar las cosas xd    
-    //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
-
+    /**
+     * Constructor, inicializa la lsiata de roles, campos de la tabla y los registros de la misma 
+     * 
+     */
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
@@ -45,41 +46,40 @@ class usuarioController extends Controller
             $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
                 ->get();
         } else {
-            //Sino tiene nada
-            //Que lo rellene con todos los registros 
             $listaUsuarios = usuariosModel::all();
         }
-
-        //Obtenemos todos los estado.
-        $estadosArreglo = estadosModelo::all();
-
-
 
         return view('usuarios') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
             ->with('listaRoles', $this->listaRoles); //; //Campos de la tablas
-
-        //Pasamos los estado a las vista
-        //->with('estadosArreglo',$estadosArreglo);
     }
 
     /**
      * Funcion para guardar un nuevo registro en la base de datos.
      * 
-     * @param $request Este objeto se ecarga de recibir la informacion
-     * que enviamos por el formulario.
+     * @param request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de nanera oculta
      * 
      */
     public function store(Request $request)
     {
-        
-        $llavePrimaria = '';
-        do{
-            //Significa que la llave primaria ya fue registrada
-            $llavePrimaria = 'USU-'.$this->getNumber();
-        }while(usuariosModel::find($llavePrimaria) != null);
+        $llavePrimaria = 'USU-' .
+            strtoupper($request->nombreUsuario[0]) .
+            strtoupper($request->nombreUsuario[1]) .
+            strtoupper($request->rolUser[0]).
+            strtoupper($request->rolUser[1]).'-'.
+            date('dmy');
+
+        //Validacion de los campos
+        $validaciones = FacadesValidator::make($request->all(),[
+            'nombreUsuario' => 'required'
+        ]);
+
+        if($validaciones->fails()){
+            return "errores";
+        }
         
         //Nombre del campo BD----- Nombre input formulario
         $usuario = new usuariosModel();
@@ -88,21 +88,13 @@ class usuarioController extends Controller
         $usuario->contrasena = $request->contrasena;
         $usuario->rol = $request->rolUser;
         $usuario->save();
-
         return redirect()->route('usuarios.index');
     }
 
     /**
+     * Este metodo sirve para borrar los registros de la base de datos.
      * 
-     * 
-     */
-    public function show(Request $request, $usuario)
-    {
-    }
-    /**
-     * Este metodo sirve para borrar los registros de la base de datos,
-     * deben de tener cuidado :v 
-     * 
+     * @param usuario Registro de la base de datos que sera borrado.
      */
     public function destroy(usuariosModel $usuario)
     {
@@ -110,43 +102,37 @@ class usuarioController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-    public function update(Request $request,usuariosModel $usuario)
+    /**
+     * Actualiza la informacion basica de un usuario.
+     * 
+     * @param request Solicitud por parte del cliente
+     * @param usuario Usuario al que se le eactualizada la informacion.
+     * 
+     * @return Redirecciona a la ruta 'index'
+     * 
+    */
+    public function update(Request $request, usuariosModel $usuario)
     {
         $usuario->nombreUsuario = $request->nombreUsuarioEditar;
         $usuario->save();
-
         return redirect()->route('usuarios.index');
     }
 
 
+
+    /**
+     * Función vacia (No hace nada)
+     * 
+    */
     public function edit(usuariosModel $usuario)
     {
     }
 
     /**
-     * @return Regresa un numero de tres cifas aleatorio del 000-999
+     * 
      */
-    public function getNumber(){
-        return random_int(0,9).''.random_int(0,9).''.random_int(0,9);
-    }
-
-
-
-
-
-
-    /**
-     * @param $estado - peticion que se realiza por medio de AJAX
-     */
-    public function getCiudades(Request $request)
+    public function show(Request $request, $usuario)
     {
-        //Recuperamos la llave primaria de estados
-        $llavePrimaria = $request->id;
-        //Lista de municipios que coicidan con la llaveprimaria 
-        $listaMunicipios = municipiosModelo::where('idestado', '=', $llavePrimaria)->get();
-
-        //El 200 significa que las peticiones son buenas.
-        //json_encode ---- es para que en JS se manipule mas rapido.
-        return response()->json($listaMunicipios);
     }
+
 }
