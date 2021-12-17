@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\servicioModelo;
+use App\Models\clienteModelo;
 
 class serviciosController extends Controller{
     public  $nombreUsuario;//Este atributo despues lo revisamos
@@ -13,6 +14,12 @@ class serviciosController extends Controller{
         $this->serviciosLista = servicioModelo::all(); //Obtiene todos los registros de la tabla servicios
         $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente']; //Almacena todos los campos de la tabla de la vista
     }   
+
+    public function show($id){
+        $cliente = clienteModelo::findOrFail($id);
+        return view('servicios-ventas',compact('cliente'));
+            
+    }
 
     public function index()
     {

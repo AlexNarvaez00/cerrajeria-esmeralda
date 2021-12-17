@@ -71,6 +71,8 @@ Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->na
  * 
 */
 Route::get('/{pagina}',[RutasController::class,'showView']);
+
+//Route::get('/cliente/{id}', [serviciosController::class,'show'])->name('cliente');
 //Route::get('/proveedores','proveedorController@index');
 //Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');
 

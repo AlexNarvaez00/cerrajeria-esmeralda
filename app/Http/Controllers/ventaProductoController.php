@@ -71,11 +71,10 @@ class ventaProductoController extends Controller
         //return $request;
         return redirect()->route('productos-ventas.index');
     }
-
-    public function show()
-    {
-        # code...
+    public function show($id){
+        
     }
+    
     /**
      * @param $estado - peticion que se realiza por medio de AJAX
      */
