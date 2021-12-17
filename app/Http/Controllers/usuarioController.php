@@ -21,6 +21,22 @@ class usuarioController extends Controller
     private $camposVista;
 
 
+    /*------------------------------ CONSTANTES ---------------------------------------------------*/
+    //Esto va a ser una constante
+    private $rules = [
+        'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
+        'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
+    ];
+
+    //Esto va a ser una constante
+    private $rules2 = [
+        'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
+        'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
+    ];
+
+
     /**
      * Constructor, inicializa la lsiata de roles, campos de la tabla y los registros de la misma 
      * 
@@ -30,7 +46,7 @@ class usuarioController extends Controller
         $this->nombreUsuario = 'Narvaez ';
         //$this->usuariosLista = usuariosModel::all();
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
-        $this->listaRoles = ['Administrador', 'Empleado', 'Servicio XD', 'Siiiiiiuuuuuuu'];
+        $this->listaRoles = ['Administrador', 'Empleado', 'Ayudante'];
     }
 
     /**
@@ -65,22 +81,16 @@ class usuarioController extends Controller
      */
     public function store(Request $request)
     {
+        //Validacion de los campos
+        $request->validate($this->rules);
+
         $llavePrimaria = 'USU-' .
             strtoupper($request->nombreUsuario[0]) .
             strtoupper($request->nombreUsuario[1]) .
-            strtoupper($request->rolUser[0]).
-            strtoupper($request->rolUser[1]).'-'.
+            strtoupper($request->rolUser[0]) .
+            strtoupper($request->rolUser[1]) . '-' .
             date('dmy');
 
-        //Validacion de los campos
-        $validaciones = FacadesValidator::make($request->all(),[
-            'nombreUsuario' => 'required'
-        ]);
-
-        if($validaciones->fails()){
-            return "errores";
-        }
-        
         //Nombre del campo BD----- Nombre input formulario
         $usuario = new usuariosModel();
         $usuario->idUsuario =  $llavePrimaria;
@@ -98,8 +108,17 @@ class usuarioController extends Controller
      */
     public function destroy(usuariosModel $usuario)
     {
-        $usuario->delete();
-        return redirect()->route('usuarios.index');
+
+        if($usuario->rol == 'Administrador'){
+            $usuarioAdminError = ['noValido'=>'No puedes borrar a un admistrador'];
+            return redirect()
+                ->route('usuarios.index')
+                ->withErrors($usuarioAdminError);
+        }else{
+            $usuario->delete();
+            return redirect()
+                ->route('usuarios.index');    
+        }
     }
 
     /**
@@ -110,20 +129,28 @@ class usuarioController extends Controller
      * 
      * @return Redirecciona a la ruta 'index'
      * 
-    */
+     */
     public function update(Request $request, usuariosModel $usuario)
     {
+        $request->validate($this->rules2);
+
+        $llavePrimaria = 'USU-' .
+            strtoupper($request->nombreUsuario[0]) .
+            strtoupper($request->nombreUsuario[1]) .
+            strtoupper($request->rolUser[0]) .
+            strtoupper($request->rolUser[1]) . '-' .
+            date('dmy');
+
+        $usuario->idUsuario = $llavePrimaria;
         $usuario->nombreUsuario = $request->nombreUsuarioEditar;
         $usuario->save();
         return redirect()->route('usuarios.index');
     }
 
-
-
     /**
      * Función vacia (No hace nada)
      * 
-    */
+     */
     public function edit(usuariosModel $usuario)
     {
     }
@@ -134,5 +161,4 @@ class usuarioController extends Controller
     public function show(Request $request, $usuario)
     {
     }
-
 }
