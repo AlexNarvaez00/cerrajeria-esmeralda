@@ -55,10 +55,14 @@ Route::resource('/servicios-ventas',serviciosController::class);
 */
 //Route::post('/estado/todo',[usuarioController::class,'getCiudades'])->name('estados.todo');
 
+//proveedores
 Route::post('/estado/todo',[proveedorController::class,'getCiudades'])->name('estados.todo');
 Route::post('/municipio/todo',[proveedorController::class,'getColonias'])->name('municipios.todo');
-Route::post('/cliente/todo',[serviciosController::class,'getCliente'])->name('cliente.todo');
 Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->name('producto.todo');
+//Servicios
+Route::post('/cliente/todo',[serviciosController::class,'getCliente'])->name('cliente.todo');
+Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');
+Route::post('/municipio/servicio',[serviciosController::class,'getColonias'])->name('municipio.servicio');
 
 
 

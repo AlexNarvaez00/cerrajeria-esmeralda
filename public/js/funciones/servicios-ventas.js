@@ -1,6 +1,6 @@
+//establece si el cliente ya esta registrado o se va a registrar
 $("#flexSwitchCheckDefault").on("click", function() {
-    var condicion = $("#flexSwitchCheckDefault").is(":checked");
-    //Si el switch habilita
+    var condicion = $("#flexSwitchCheckDefault").is(":checked");    
     limpiar();
     if(condicion){        
         isClienteRegistrado();
@@ -9,7 +9,7 @@ $("#flexSwitchCheckDefault").on("click", function() {
     }
 
 });
-//Si el cliente ya esta registrado
+//Si el cliente ya esta registrado realiza esta opción
 function isClienteRegistrado(){      
     $( "#btnBuscarCliente " ).prop( "disabled", false); 
     $( "#inputIdCliente" ).prop( "disabled", false);
@@ -35,14 +35,9 @@ function limpiar(){
     $( "#inputApellidoMCliente" ).val("");
     $( "#inputNumTelefono" ).val("");
 }
-
-//Función del boton click
-$("#btnBuscarCliente").on("click", function() { 
-     
-    //Este input, es el input oculto de la linea 116
-    //let _token = $('');
-    idetificadorCliente = $("#inputIdCliente").val();
-   
+//Busca a un cliente ya registrado
+$("#btnBuscarCliente").on("click", function() {    
+    idetificadorCliente = $("#inputIdCliente").val();   
     if(idetificadorCliente != ""){
        minAjax({
         url:"/cliente/todo", 
@@ -50,19 +45,94 @@ $("#btnBuscarCliente").on("click", function() {
         data:{
             _token: document.querySelector('input[name="_token"]').value,
             id:idetificadorCliente
-        },
-        //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
-            success: function(data){
-                data = JSON.parse(data);
-                console.log(data)
+        },        
+        success: function(data){
+            data = JSON.parse(data);                            
+            if(data.nombre != null){
                 $('#inputNombreCliente').val(data.nombre);
-                
-
-            //alert(data);
-
+                $('#inputApellidoPCliente').val(data.apellidoPaterno);
+                $('#inputApellidoMCliente').val(data.apellidoMaterno);
+                $('#inputNumTelefono').val(data.telefono);  
+            }else{
+                alert("El cliente no se encontró");
+                $("#inputIdCliente").val("");
+            }  
         }
-       });  
-           
+       });           
+    }else{
+        alert("Se requiere como entrada un idCliente");
     }
-
 });
+//Agrega los muncicipios del estado seleccionado
+$("#inputEstado").on("change", function() { 
+    let valor = $("#inputEstado").val();    
+    if(valor != '0'){
+       minAjax({
+        url:"/estado/servicio", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            id:valor
+        },        
+        success: function(data){
+            data = JSON.parse(data);            
+            let selectorMunicipio = document.getElementById('idMunicipio');            
+            let textoSelectorOP1 = document.createElement('option');
+            textoSelectorOP1.innerHTML = "Selecciona un municipio";
+            textoSelectorOP1.value = 0;
+            let opcionesSeleccion = [textoSelectorOP1];
+            for (let index = 0; index < data.length; index++) {
+                let opcion =  document.createElement('option');
+                opcion.innerHTML = data[index].nombre;                       
+                opcion.value = data[index].idmunicipio;
+                opcionesSeleccion.push(opcion);                            
+            }
+            $("#idMunicipio").empty();
+            for (let idx = 0; idx < opcionesSeleccion.length; idx++) {                    
+                selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
+            }
+        }
+       });
+    }
+});
+//Agrega los asentamientos del municipio seleccionado
+$("#idMunicipio").on("change", function() {    
+    let valor = $("#idMunicipio").val();            
+    if(valor != '0'){
+        minAjax({
+            url:"/municipio/servicio", 
+            type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            idmunicipio:valor
+        },                    
+        success: function(data){
+            data = JSON.parse(data);            
+            let selectorColonia = document.getElementById('idColonia');                    
+            let textoSelectorOP1 = document.createElement('option');
+            textoSelectorOP1.innerHTML = "-- Selecciona una colonia --";
+            textoSelectorOP1.value = 0;
+            let opcionesSeleccion = [textoSelectorOP1];
+            for (let index = 0; index < data.length; index++) {
+                let opcion =  document.createElement('option');
+                opcion.innerHTML = data[index].nombre;                       
+                opcion.value = data[index].idcolonia;
+                opcionesSeleccion.push(opcion);                      
+            }
+            selectorColonia.innerHTML = '';
+            for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
+                selectorColonia.appendChild(opcionesSeleccion[idx]);                    
+            }
+        }
+        });              
+    }
+});
+
+        
+       
+        
+
+
+       
+
+        
