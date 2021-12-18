@@ -60,16 +60,16 @@ class usuarioController extends Controller
         $listaUsuarios = null;
         if (count($request->all()) >= 0) {
             $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
-                ->get();
+                ->paginate(10);
         } else {
-            $listaUsuarios = usuariosModel::all();
+            $listaUsuarios = usuariosModel::paginate(10);
         }
 
         return view('usuarios') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles); //; //Campos de la tablas
+            ->with('listaRoles', $this->listaRoles); // //Campos de la tablas
     }
 
     /**
@@ -135,15 +135,18 @@ class usuarioController extends Controller
         $request->validate($this->rules2);
 
         $llavePrimaria = 'USU-' .
-            strtoupper($request->nombreUsuario[0]) .
-            strtoupper($request->nombreUsuario[1]) .
-            strtoupper($request->rolUser[0]) .
-            strtoupper($request->rolUser[1]) . '-' .
+            strtoupper($request->nombreUsuarioEditar[0]) .
+            strtoupper($request->nombreUsuarioEditar[1]) .
+            strtoupper($request->rolUserEditar[0]) .
+            strtoupper($request->rolUserEditar[1]) . '-' .
             date('dmy');
 
         $usuario->idUsuario = $llavePrimaria;
         $usuario->nombreUsuario = $request->nombreUsuarioEditar;
+        $usuario->contrasena = $request->contrasenaEditar;
+        $usuario->rol = $request->rolUserEditar;
         $usuario->save();
+
         return redirect()->route('usuarios.index');
     }
 

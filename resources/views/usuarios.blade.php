@@ -114,6 +114,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$registrosVista->links()}}
     </div>
 </div>
 
@@ -234,6 +235,8 @@
                     <!--Directiva, basicmanete -->
                     @csrf
                     @method('PUT')
+                    <!--Input oculto para el IDE del usuario-->
+                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuarioEditar" name="idUsuario">
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
@@ -257,7 +260,7 @@
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
-                        <input type="password" class="form-control" value="{{old('contrsenaConfirmadaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrsenaConfirmadaEditar">
+                        <input type="password" class="form-control" value="{{old('contrsenaConfirmadaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrasenaEditar_confirmation">
                         @error('contrsenaConfirmadaEditar')
                                 <p class="col-12">{{$message}}</p>
                         @enderror
