@@ -16,11 +16,10 @@ for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
         if(cantidadProductos == 0){           
             bloquear();          
         }else{            
-            $("#letreroNombre").text(registros[0].innerHTML +" "+registros[1].innerHTML +" " +registros[4].innerHTML); 
+            $("#letreroNombre").text(registros[0].innerHTML +" "+registros[1].innerHTML); 
             $("#letreroPrecio").text("Precio individual: " + registros[2].innerHTML);           
             let botonModal = document.getElementById("botonModalConfirmacion");
-            botonModal.addEventListener("click", (event) => {
-               
+            botonModal.addEventListener("click", (event) => {               
                 agregarCarro(registros);             
                 registros = "";
             });                    
