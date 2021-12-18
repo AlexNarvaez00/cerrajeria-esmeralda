@@ -20,7 +20,7 @@ class serviciosController extends Controller{
     }
     //Obtiene un cliente especificado
     public function getCliente(Request $request){            
-        $cliente = clienteModelo::where('idcliente','=',$request->$id)->get();        
+        $cliente = clienteModelo::where('idcliente','=',$request->$idcliente)->get();        
         return response()->json($cliente);
     }
 

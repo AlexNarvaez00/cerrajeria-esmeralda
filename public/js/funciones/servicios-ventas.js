@@ -29,7 +29,7 @@ function isNotClienteRegistrado(){
 }
 //limpia las entradas para que no quede residuo
 function limpiar(){
-    $( "#inputIdCliente" ).val("");
+    $( "#inputIdCliente").val("");
     $( "#inputNombreCliente" ).val("");
     $( "#inputApellidoPCliente" ).val("");
     $( "#inputApellidoMCliente" ).val("");
@@ -45,16 +45,15 @@ $("#btnBuscarCliente").on("click", function() {
    
     if(idetificadorCliente != ""){
        minAjax({
-        url:"{{route('cliente.todo')}}", 
+        url:"/cliente/todo", 
         type:"POST",
         data:{
-                _token: document.querySelector('input[name="_token"]').value,
-                id:idetificadorCliente
+            _token: document.querySelector('input[name="_token"]').value,
+            id:idetificadorCliente
         },
         //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
             success: function(data){
             data = JSON.parse(data);
-
             alert("Obtuvo lo que pedi");
 
         }
