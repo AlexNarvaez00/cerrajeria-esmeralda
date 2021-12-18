@@ -15,10 +15,13 @@ class serviciosController extends Controller{
         $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente']; //Almacena todos los campos de la tabla de la vista
     }   
 
-    public function show($id){
-        $cliente = clienteModelo::findOrFail($id);
-        return view('servicios-ventas',compact('cliente'));
+    public function show(){     
             
+    }
+    //Obtiene un cliente especificado
+    public function getCliente(Request $request){            
+        $cliente = clienteModelo::where('idcliente','=',$request->$id)->get();        
+        return response()->json($cliente);
     }
 
     public function index()

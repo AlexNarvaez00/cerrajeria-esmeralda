@@ -51,7 +51,33 @@
     <!--Tabla-->
 <div class="conteiner-fluid">
   <div class="col-12 text-center">
-  
+  <table class="table">
+      <thead>
+        <tr>
+          @foreach ($camposTabla as $campo)
+          <th scope="col">{{$campo}}</th>
+          @endforeach
+        </tr>
+      </thead>
+
+      <tbody>
+      @foreach($serviciosLista as $servicio)
+      <!--Inicio de la Fila-->
+      <tr>
+        <!--ID de la tabla Proveedor-->    
+        <th scope="col">{{$servicio->idservicio}}</th>
+        <!--Los otros atributos de la tabla proveedor-->
+        <td class="data">{{$servicio->fechayhora}}</td>
+        <td class="data">{{$servicio->iddireccion}}</td>
+        <td class="data">{{$servicio->monto}}</td>
+        <td class="data">{{$servicio->descripcion}}</td>
+        <td class="data">{{$servicio->idcliente}}</td> 
+        <!--Botones-->                                            
+      </tr>
+      @endforeach        
+      </tbody>
+    </table>
+
   
   </div>
 </div>
@@ -67,7 +93,7 @@
     <div class="container-fluid">
       <h4 class="d-flex justify-content-center">Datos del cliente</h4>
       <div class="row">
-        <form method="GET" action="{{route('servicio-ventas.show',$cliente->id)}}">
+       <!-- <form method="GET">-->
         @csrf
           <div class="col-md-5 col-sm-12">
             <div class="form-check form-switch">
@@ -84,11 +110,11 @@
           </div>
 
             <div class="col-md-2 col-sm-12">
-              <button type="submit" class="btn btn-light d-flex ps-3 pe-3" disabled="true" id="btnBuscarCliente">
+              <button type="button" class="btn btn-light d-flex ps-3 pe-3" disabled="true" id="btnBuscarCliente">
                     <span class="me-3">&#128269</span>                  
               </button>
             </div>
-        </form>
+        <!--</form>-->
       </div>  
 
       <div class="row">
@@ -220,5 +246,6 @@
 @endsection
 @section('scritps')
 <script src="./js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./js/minAjax.js"></script>
 <script src="./js/funciones/servicios-ventas.js"></script>    
 @endsection

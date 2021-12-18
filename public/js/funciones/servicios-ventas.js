@@ -35,3 +35,30 @@ function limpiar(){
     $( "#inputApellidoMCliente" ).val("");
     $( "#inputNumTelefono" ).val("");
 }
+
+//Función del boton click
+$("#btnBuscarCliente").on("click", function() { 
+     
+    //Este input, es el input oculto de la linea 116
+    //let _token = $('');
+    idetificadorCliente = $("#inputIdCliente").val();
+   
+    if(idetificadorCliente != ""){
+       minAjax({
+        url:"{{route('cliente.todo')}}", 
+        type:"POST",
+        data:{
+                _token: document.querySelector('input[name="_token"]').value,
+                id:idetificadorCliente
+        },
+        //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
+            success: function(data){
+            data = JSON.parse(data);
+
+            alert("Obtuvo lo que pedi");
+
+        }
+       });      
+    }
+
+});
