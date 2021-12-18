@@ -16,7 +16,7 @@ class serviciosController extends Controller{
 
     public function __construct(){        
         $this->serviciosLista = servicioModelo::all(); //Obtiene todos los registros de la tabla servicios
-        $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente']; //Almacena todos los campos de la tabla de la vista
+        $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente','Info cliente','Detalle servicio']; //Almacena todos los campos de la tabla de la vista
     }   
 
     public function show(){     

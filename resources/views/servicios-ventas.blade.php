@@ -72,7 +72,17 @@
         <td class="data">{{$servicio->monto}}</td>
         <td class="data">{{$servicio->descripcion}}</td>
         <td class="data">{{$servicio->idcliente}}</td> 
-        <!--Botones-->                                            
+        <!--Botones--> 
+        <td class="btnEditar">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+            <span>&#128065;</span>
+          </button>
+        </td> 
+        <td class="btnEditar">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+            <span>&#128736;</span>
+          </button>
+        </td>                                          
       </tr>
       @endforeach        
       </tbody>
