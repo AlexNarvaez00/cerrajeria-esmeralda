@@ -45,7 +45,7 @@ $("#btnBuscarCliente").on("click", function() {
    
     if(idetificadorCliente != ""){
        minAjax({
-        url:"{{route('cliente.todo')}}", 
+        url:"/cliente/todo", 
         type:"POST",
         data:{
                 _token: document.querySelector('input[name="_token"]').value,
@@ -53,9 +53,12 @@ $("#btnBuscarCliente").on("click", function() {
         },
         //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
             success: function(data){
-            data = JSON.parse(data);
+                data = JSON.parse(data);
+                console.log(data)
+                $('#inputNombreCliente').val(data.nombre);
+                //$('#inputNombreCliente').prop('disabled',false);
 
-            alert("Obtuvo lo que pedi");
+            //alert(data);
 
         }
        });      
