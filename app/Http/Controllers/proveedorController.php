@@ -114,6 +114,14 @@ class proveedorController extends Controller
         return redirect()->route('proveedores.index');
     }
 
+    public function update(Request $request,proveedorModelo $proveedore)
+    {
+        $proveedore->nombre = $request->nombreEditar;
+        $proveedore->save();
+
+        return redirect()->route('proveedores.index');
+    }
+
 /**
      * @param $estado - peticion que se realiza por medio de AJAX
      */

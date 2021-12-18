@@ -55,7 +55,6 @@ Route::resource('/productos-ventas',ventaProductoController::class);
 
 Route::post('/estado/todo',[proveedorController::class,'getCiudades'])->name('estados.todo');
 Route::post('/municipio/todo',[proveedorController::class,'getColonias'])->name('municipios.todo');
-
 Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->name('producto.todo');
 
 

@@ -75,8 +75,19 @@
                             <td class="data">{{$proveedor->correo}}</td>
                             <td class="data">{{$proveedor->iddirecproveedor}}</td> 
                             <!--Botones-->
-                        <td>
-                            <button class="btn" data-id-db="{{$proveedor->idproveedor}}">
+                            <td>
+                            <button class="btn boton-editar" 
+                                data-id="{{$proveedor->idproveedor}}"
+                                data-nombre="{{$proveedor->nombre}}"
+                                data-apellidoP="{{$proveedor->apellidopaterno}}"
+                                data-apellidoM="{{$proveedor->apellidomaterno}}"
+                                data-correo="{{$proveedor->correo}}"
+                                data-direccion="{{$proveedor->iddirecproveedor}}"
+                                data-route-url="{{route('proveedores.update',$proveedor)}}"
+
+
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editarProveedorModal">
                                 <span>&#128394;</span>
                             </button>
                         </td>
@@ -96,6 +107,7 @@
         </div>
     </div>
 
+            <!--########################### Modal Formulario para agregar a un nuevo proveedor  ############################## -->
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
@@ -114,6 +126,7 @@
             <div class="row">
                 <!--Columnas :v-->
                 @csrf
+                <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedor" name="idProveedor">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -210,6 +223,8 @@
     @endslot
     @endcomponent
 
+    <!--########################### Modal de confirmación para eliminar al proveedor ################################# -->
+
     @component('components.modalSimple')
         @slot('idModal','confirmacionModal')
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
@@ -227,10 +242,125 @@
             </button>
         @endslot
     @endcomponent
-
-
-
 @endsection
+
+<!--########################### Modal para editar la información del proveedor ###################################### -->
+
+@component('components.modal')
+    @slot('idModal','editarProveedorModal')
+    @slot('tituloModal','Editar un proveedor.')
+    @slot('rutaEnvio','')
+    @slot('metodoFormulario','POST')
+
+    @slot('cuerpoModal')
+        <p class="px-3">
+            Formulario para registrar a un nuevo proveedor.
+        </p>
+        <p class="px-3">
+            Información del Proveedor
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                @csrf
+                @method('PUT')
+                <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreProveedorEditar" name="nombreEditar">
+                    </div>
+                </div>    
+            </div>
+            <div class="row">
+            <!--Columnas :v-->
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPProveedorEditar" name="apellidopaterno">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMProveedorEditar" name="apellidomaterno">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Número de Teléfono</span>
+                        <input type="text" class="form-control" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefonoEditar" name="numtelefono">
+                    </div>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
+                        <input type="email" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correo">
+                    </div>
+                </div>
+            </div> 
+            <p class="px-3">
+            Dirección
+            </p>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text" id="basic-addon1">Calle</span>
+                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCalleEditar" name="calle">
+                    </div>
+                </div>
+            </div> 
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Número ext</span>
+                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExtEditar" name="numext">
+                </div>
+            </div> 
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="inputEstado">Estado</label>
+                            <select id="inputEstado" class="form-select" name="estados" value="">
+                                <option selected value="0">Selecciona un estado</option>
+                                @foreach($registroEstados as $proveedor)
+                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}} </option>                    
+                                @endforeach
+                            </select>
+                </div>
+            </div> 
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="idMunicipio">Municipio</label>
+                    <select id="idMunicipio" class="form-select" name="municipios">
+                        <option selected value="0">Selecciona un municipio</option>               
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="idColonia">Colonia</label>
+                    <select id="idColonia" class="form-select" name="colonias">
+                        <option selected value="0">Selecciona una colonia</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    @endslot
+    @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+            <span class="me-2">&#10004;</span>
+            Registrar
+        </button>
+    @endslot
+    @endcomponent
+
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
@@ -397,4 +527,7 @@
             }
         });
 </script>
+<script src="./js/funciones/editarProveedor.js"></script>
+
+
 @endsection
