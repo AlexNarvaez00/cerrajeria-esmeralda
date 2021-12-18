@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\estadosModelo;
-use App\Models\municipiosModelo;
+
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Validation\Validator;
 
 class usuarioController extends Controller
 {
@@ -21,15 +21,32 @@ class usuarioController extends Controller
     private $camposVista;
 
 
-    //Pagina para referenciar las cosas xd    
-    //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
+    /*------------------------------ CONSTANTES ---------------------------------------------------*/
+    //Esto va a ser una constante
+    private $rules = [
+        'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
+        'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
+    ];
 
+    //Esto va a ser una constante
+    private $rules2 = [
+        'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
+        'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
+    ];
+
+
+    /**
+     * Constructor, inicializa la lsiata de roles, campos de la tabla y los registros de la misma 
+     * 
+     */
     public function __construct()
     {
         $this->nombreUsuario = 'Narvaez ';
         //$this->usuariosLista = usuariosModel::all();
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
-        $this->listaRoles = ['Administrador', 'Empleado', 'Servicio XD', 'Siiiiiiuuuuuuu'];
+        $this->listaRoles = ['Administrador', 'Empleado', 'Ayudante'];
     }
 
     /**
@@ -43,44 +60,37 @@ class usuarioController extends Controller
         $listaUsuarios = null;
         if (count($request->all()) >= 0) {
             $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
-                ->get();
+                ->paginate(10);
         } else {
-            //Sino tiene nada
-            //Que lo rellene con todos los registros 
-            $listaUsuarios = usuariosModel::all();
+            $listaUsuarios = usuariosModel::paginate(10);
         }
-
-        //Obtenemos todos los estado.
-        $estadosArreglo = estadosModelo::all();
-
-
 
         return view('usuarios') //Nombre de la vista
             ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles); //; //Campos de la tablas
-
-        //Pasamos los estado a las vista
-        //->with('estadosArreglo',$estadosArreglo);
+            ->with('listaRoles', $this->listaRoles); // //Campos de la tablas
     }
 
     /**
      * Funcion para guardar un nuevo registro en la base de datos.
      * 
-     * @param $request Este objeto se ecarga de recibir la informacion
-     * que enviamos por el formulario.
+     * @param request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de nanera oculta
      * 
      */
     public function store(Request $request)
     {
-        
-        $llavePrimaria = '';
-        do{
-            //Significa que la llave primaria ya fue registrada
-            $llavePrimaria = 'USU-'.$this->getNumber();
-        }while(usuariosModel::find($llavePrimaria) != null);
-        
+        //Validacion de los campos
+        $request->validate($this->rules);
+
+        $llavePrimaria = 'USU-' .
+            strtoupper($request->nombreUsuario[0]) .
+            strtoupper($request->nombreUsuario[1]) .
+            strtoupper($request->rolUser[0]) .
+            strtoupper($request->rolUser[1]) . '-' .
+            date('dmy');
+
         //Nombre del campo BD----- Nombre input formulario
         $usuario = new usuariosModel();
         $usuario->idUsuario =  $llavePrimaria;
@@ -88,65 +98,70 @@ class usuarioController extends Controller
         $usuario->contrasena = $request->contrasena;
         $usuario->rol = $request->rolUser;
         $usuario->save();
-
         return redirect()->route('usuarios.index');
     }
 
     /**
+     * Este metodo sirve para borrar los registros de la base de datos.
      * 
-     * 
-     */
-    public function show(Request $request, $usuario)
-    {
-    }
-    /**
-     * Este metodo sirve para borrar los registros de la base de datos,
-     * deben de tener cuidado :v 
-     * 
+     * @param usuario Registro de la base de datos que sera borrado.
      */
     public function destroy(usuariosModel $usuario)
     {
-        $usuario->delete();
-        return redirect()->route('usuarios.index');
+
+        if($usuario->rol == 'Administrador'){
+            $usuarioAdminError = ['noValido'=>'No puedes borrar a un admistrador'];
+            return redirect()
+                ->route('usuarios.index')
+                ->withErrors($usuarioAdminError);
+        }else{
+            $usuario->delete();
+            return redirect()
+                ->route('usuarios.index');    
+        }
     }
 
-    public function update(Request $request,usuariosModel $usuario)
+    /**
+     * Actualiza la informacion basica de un usuario.
+     * 
+     * @param request Solicitud por parte del cliente
+     * @param usuario Usuario al que se le eactualizada la informacion.
+     * 
+     * @return Redirecciona a la ruta 'index'
+     * 
+     */
+    public function update(Request $request, usuariosModel $usuario)
     {
+        $request->validate($this->rules2);
+
+        $llavePrimaria = 'USU-' .
+            strtoupper($request->nombreUsuarioEditar[0]) .
+            strtoupper($request->nombreUsuarioEditar[1]) .
+            strtoupper($request->rolUserEditar[0]) .
+            strtoupper($request->rolUserEditar[1]) . '-' .
+            date('dmy');
+
+        $usuario->idUsuario = $llavePrimaria;
         $usuario->nombreUsuario = $request->nombreUsuarioEditar;
+        $usuario->contrasena = $request->contrasenaEditar;
+        $usuario->rol = $request->rolUserEditar;
         $usuario->save();
 
         return redirect()->route('usuarios.index');
     }
 
-
+    /**
+     * Función vacia (No hace nada)
+     * 
+     */
     public function edit(usuariosModel $usuario)
     {
     }
 
     /**
-     * @return Regresa un numero de tres cifas aleatorio del 000-999
+     * 
      */
-    public function getNumber(){
-        return random_int(0,9).''.random_int(0,9).''.random_int(0,9);
-    }
-
-
-
-
-
-
-    /**
-     * @param $estado - peticion que se realiza por medio de AJAX
-     */
-    public function getCiudades(Request $request)
+    public function show(Request $request, $usuario)
     {
-        //Recuperamos la llave primaria de estados
-        $llavePrimaria = $request->id;
-        //Lista de municipios que coicidan con la llaveprimaria 
-        $listaMunicipios = municipiosModelo::where('idestado', '=', $llavePrimaria)->get();
-
-        //El 200 significa que las peticiones son buenas.
-        //json_encode ---- es para que en JS se manipule mas rapido.
-        return response()->json($listaMunicipios);
     }
 }
