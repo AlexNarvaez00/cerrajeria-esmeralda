@@ -53,8 +53,12 @@ $("#btnBuscarCliente").on("click", function() {
         },
         //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
             success: function(data){
-            data = JSON.parse(data);
-            alert("Obtuvo lo que pedi");
+                data = JSON.parse(data);
+                console.log(data)
+                $('#inputNombreCliente').val(data.nombre);
+                //$('#inputNombreCliente').prop('disabled',false);
+
+            //alert(data);
 
         }
        });      
