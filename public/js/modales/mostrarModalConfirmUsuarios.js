@@ -15,8 +15,16 @@ for (let index = 0; index < formulariosBorrar.length; index++) {
     //en los registros de la tabla
     formulario.addEventListener("submit", (event) => {
         event.preventDefault(); //Evitamos que el formulario envie cosas.
-        const filaHTML = event.target.parentNode.parentNode;
-        const registros = filaHTML.getElementsByClassName("data");
+        cuerpoModalInformacion.innerHTML = "";
+        const data = event.target[2];
+        let informacion = data.dataset;
+        let registros = [
+            ["ID: ", informacion.id],
+            ["Nombre: ", informacion.nombre],
+            ["Rol: ", informacion.rol],
+            ["Creado: ", informacion.creado],
+            ["Modificado: ", informacion.modificado]
+        ];
 
         //Colocar la informacion en el modal.
         for (let index = 0; index < registros.length; index++) {
@@ -25,12 +33,13 @@ for (let index = 0; index < formulariosBorrar.length; index++) {
             filaBooststrap.classList.add("row"); //Agregamos la clase de booststrap
 
             const columnaCampo = document.createElement("div");
-            columnaCampo.classList.add("col-6");
-            columnaCampo.innerText = "CampoNombre:";
+            columnaCampo.classList.add("col-2");
+            columnaCampo.classList.add("fw-bolder");
+            columnaCampo.innerText = registros[index][0];
 
             const columnaInformacion = document.createElement("div");
-            columnaInformacion.classList.add("col-6");
-            columnaInformacion.innerText = registros[index].innerHTML;
+            columnaInformacion.classList.add("col-8");
+            columnaInformacion.innerText = registros[index][1];
 
             filaBooststrap.appendChild(columnaCampo);
             filaBooststrap.appendChild(columnaInformacion);

@@ -28,7 +28,6 @@
     Usuarios
 </h5>
 
-
 <!-- #################################### Cuerpo de la pagina #################################### -->
 <div class="container-fluid mb-4">
     <!--Botones principales de busqueda y agregar-->
@@ -72,12 +71,12 @@
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
-                        <th class="data" scope="col">{{$usuario->idusuario}}</th>
+                        <th scope="col">{{$usuario->idusuario}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td class="data">{{$usuario->nombreUsuario}}</td>
-                        <td class="data">{{$usuario->rol}}</td>
-                        <td class="data">{{$usuario->created_at}}</td>
-                        <td class="data">{{$usuario->updated_at}}</td>
+                        <td >{{$usuario->nombreUsuario}}</td>
+                        <td >{{$usuario->rol}}</td>
+                        <td >{{$usuario->created_at}}</td>
+                        <td >{{$usuario->updated_at}}</td>
 
                         <!--Botones-->
                         <td>
@@ -99,6 +98,12 @@
                                 @method('DELETE')
                                 <button type="submit" 
                                     class="btn delete" 
+                                    data-id="{{$usuario->idusuario}}"
+                                    data-nombre="{{$usuario->nombreUsuario}}"
+                                    data-rol="{{$usuario->rol}}"
+                                    data-creado="{{$usuario->created_at}}"
+                                    data-modificado="{{$usuario->updated_at}}"
+
                                     data-bs-toggle="modal" 
                                     data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
@@ -109,6 +114,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$registrosVista->links()}}
     </div>
 </div>
 
@@ -134,7 +140,10 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
                             <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
-                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
+                            <input type="text" class="form-control {{ ( old('nombreUsuario')!='' )? 'is-valid':'' }}" value="{{old('nombreUsuario')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
+                            @error('nombreUsuario')
+                                <p class="col-12">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -142,12 +151,18 @@
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
+                        @error('contrasena')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
-                        <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrsenaConfirmada">
+                        <input type="password" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrasena_confirmation">
+                        @error('contrsenaConfirmada')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div> 
             </div>
@@ -159,12 +174,15 @@
                     <!--Columnas :v-->
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputRolUsuario">Roles</label>
-                        <select class="form-select" id="inputRolUsuario" name="rolUser" value="">
+                        <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value = "{{old('rolUser')}}">
                                 <option selected value="0">Selecciones rol de Usuario</option>
                             @foreach ($listaRoles as $rol)
                                 <option value="{{$rol}}">{{$rol}}</option>
                             @endforeach
                         </select>
+                        @error('rolUser')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -223,20 +241,29 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
                             <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
-                            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuarioEditar" name="nombreUsuarioEditar">
+                            <input type="text" class="form-control" value="{{old('nombreUsuarioEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuarioEditar" name="nombreUsuarioEditar">
+                            @error('nombreUsuarioEditar')
+                                <p class="col-12">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
-                        <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioEditar" name="contrasenaEditar">
+                        <input type="password" class="form-control" value="{{old('contrasenaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioEditar" name="contrasenaEditar">
+                        @error('contrasenaEditar')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-group mb-3 col-md-12 col-sm-12">
                         <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
-                        <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrsenaConfirmadaEditar">
+                        <input type="password" class="form-control" value="{{old('contrsenaConfirmadaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrasenaEditar_confirmation">
+                        @error('contrsenaConfirmadaEditar')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div> 
             </div>
@@ -248,12 +275,15 @@
                     <!--Columnas :v-->
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputRolUsuarioEditar">Roles</label>
-                        <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="">
+                        <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="{{old('rolUserEditar')}}">
                                 <option selected value="0">Selecciones rol de Usuario</option>
                             @foreach ($listaRoles as $rol)
                                 <option value="{{$rol}}">{{$rol}}</option>
                             @endforeach
                         </select>
+                        @error('rolUserEditar')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -271,8 +301,30 @@
     @endcomponent
 
 
-@endsection
+<!-- ####################################### Modal ADVERTENCIA ####################################### -->
 
+@if('noValido')
+        <div class="modal" tabindex="-1" id="negacionModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registro no admitido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger" role="alert">
+                    ¡No se puede borrar a un usuario Administrador!.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">¡OK!</button>
+            </div>
+            </div>
+        </div>
+        </div>
+@endif
+
+@endsection
 
 
 
@@ -282,10 +334,30 @@
     <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
     <script src="./js/funciones/editarUsuario.js"></script>
 
-
     <!--CDN :v o algo asi la neta ni me acuerdo xd-->
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
     <!-- <script type="text/javascript" src="./js/minAjax.js"></script> -->
+    <!--Este script se ejecuta si existe algun error en los datos-->
+    @if($errors->hasAny('nombreUsuario', 'contrasena', 'rolUser'))
+        <script>
+            let modalRegistro = new bootstrap.Modal(document.getElementById('registroUsuariosModal'),null);
+            modalRegistro.show();
+        </script>
+    @endif
+
+    @if($errors->hasAny('nombreUsuarioEditar', 'contrasenaEditar', 'rolUserEditar'))
+        <script>
+            let modalEdicion = new bootstrap.Modal(document.getElementById('editarUsuariosModal'),null);
+            modalEdicion.show();
+        </script>
+    @endif
+
+    @if($errors->has('noValido'))
+        <script>
+            let modalEdicion = new bootstrap.Modal(document.getElementById('negacionModal'),null);
+            modalEdicion.show();
+        </script>    
+    @endif
 
 @endsection
