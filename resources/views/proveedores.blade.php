@@ -322,8 +322,8 @@
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="inputEstado">Estado</label>
-                            <select id="inputEstado" class="form-select" name="estados" value="">
+                <label class="input-group-text" for="inputEstadoEditar">Estado</label>
+                            <select id="inputEstadoEditar" class="form-select" name="estados" value="">
                                 <option selected value="0">Selecciona un estado</option>
                                 @foreach($registroEstados as $proveedor)
                                 <option value="{{$proveedor->id}}">{{$proveedor->nombre}} </option>                    
@@ -333,16 +333,16 @@
             </div> 
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idMunicipio">Municipio</label>
-                    <select id="idMunicipio" class="form-select" name="municipios">
+                <label class="input-group-text" for="idMunicipioEditar">Municipio</label>
+                    <select id="idMunicipioEditar" class="form-select" name="municipios">
                         <option selected value="0">Selecciona un municipio</option>               
                     </select>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idColonia">Colonia</label>
-                    <select id="idColonia" class="form-select" name="colonias">
+                <label class="input-group-text" for="idColoniaEditar">Colonia</label>
+                    <select id="idColoniaEditar" class="form-select" name="colonias">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
                 </div>
@@ -436,9 +436,13 @@
         const selectorEstado = document.getElementById('inputEstado');
         const selectorMunicipio = document.getElementById('idMunicipio');
         const selectorColonia = document.getElementById('idColonia');
+        const selectorEstadoEditar = document.getElementById('inputEstadoEditar');
+        const selectorMunicipioEditar = document.getElementById('idMunicipioEditar');
+        const selectorColoniaEditar = document.getElementById('idColoniaEditar');
 
-        selectorEstado.addEventListener("change",(event)=>{
-            let valor = event.target.value;
+function recuperarMunicipios(idSelector)
+{
+    let valor = event.target.value;
             //Este input, es el input oculto de la linea 116
             //let _token = $('');
             
@@ -454,8 +458,8 @@
                 //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
                 success: function(data){
                     data = JSON.parse(data);
-
-                    let selectorMunicipio = document.getElementById('idMunicipio');
+                    
+                    let selectorMunicipio = document.getElementById(idSelector);
                     
                     let textoSelectorOP1 = document.createElement('option');
                     textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
@@ -480,10 +484,11 @@
                 }
                });
             }
-        });
+}
 
-        selectorMunicipio.addEventListener("change",(event)=>{
-            let valor = event.target.value;
+function recuperarColonias(idSelector)
+{
+    let valor = event.target.value;
             //Este input, es el input oculto de la linea 116
             //let _token = $('');
             
@@ -499,7 +504,7 @@
                     success: function(data){
                     data = JSON.parse(data);
 
-                    let selectorColonia = document.getElementById('idColonia');
+                    let selectorColonia = document.getElementById(idSelector);
                     
                     let textoSelectorOP1 = document.createElement('option');
                     textoSelectorOP1.innerHTML = "-- Selecciona una colonia --";
@@ -525,7 +530,24 @@
                });
               
             }
+}
+        selectorEstado.addEventListener("change",(event)=>{
+            recuperarMunicipios('idMunicipio');
         });
+
+        selectorMunicipio.addEventListener("change",(event)=>{
+           recuperarColonias('idColonia');
+        });
+
+        selectorEstadoEditar.addEventListener("change",(event)=>{
+            recuperarMunicipios('idMunicipioEditar');
+        });
+
+        selectorMunicipioEditar.addEventListener("change",(event)=>{
+           recuperarColonias('idColoniaEditar');
+        });
+
+
 </script>
 <script src="./js/funciones/editarProveedor.js"></script>
 
