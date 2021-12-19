@@ -4,6 +4,8 @@ use App\Http\Controllers\clienteController;
 use App\Http\Controllers\ventaProductoController;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\proveedorController;
+use App\Http\Controllers\reporteProductosController;
+use App\Http\Controllers\reporteVentasController;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\ventasController;
@@ -46,7 +48,8 @@ Route::resource('/productos',productosController::class);
 Route::resource('/clientes',clienteController::class);
 Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
-
+Route::resource('/reporteVentas',reporteVentasController::class);
+Route::resource('/reporteProductos',reporteProductosController::class);
 Route::get('/{pagina}',[RutasController::class,'showView']);
 
 
