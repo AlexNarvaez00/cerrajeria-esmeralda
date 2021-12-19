@@ -1,73 +1,76 @@
-@extends('layouts.app')
+@extends('rootview')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+@section('header-seccion')
+  @component('components.header')
+    <!--Items de la barra de menu-->
+    @slot('items')
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/menu">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
+      </li>
+    @endslot
+    <!--Esta parte es para mostrar el boton de log out-->
+    @slot('visible',false)
+  @endcomponent
+@endsection
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<!--
+  En esta parte, son los items de la barra de navegacion
+  aun que los escribi fuera del componente, forman parte de el.
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+  **No se si hacer esto este bien pero fue lo unico que se ocurrio,
+  la otra forma estaba muy perra :,,,,,v .
+-->
+@section('itemsmenu')
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+@endsection
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+<!--Seccion del contenido de la pagina donde te encuentres, este sigue siendo, lo mismo-->
+@section('contenido')
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+<!-- <center><h1 class="text-aling-center"><svg xmlns="http://www.w3.org/2000/svg" width="57.84" height="50" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+</svg>Log in</h1></center> -->
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<!--Formulario del login-->
+<div class="row container-fluid d-flex justify-content-center">
+  <!--Codigo del formulario-->
+  <form method="POST" action="{{ route('login') }}" class="col-lg-5 col-md-12">
+    @csrf
+    <div class="componentes-formulario">
+      <div class="d-flex justify-content-center">
+          <img src="./img/usuario.png" class="medida-1">
+      </div>
+      <!--Inputs del propio formulario-->
+      <div class="m-4">
+        <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
+        <input type="email" name="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
+        <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
+      </div>
+      <!--Inputs del propio formulario-->
+      <div class="m-4">
+        <label for="passwordUser" class="form-label">Contraseña</label>
+        <input type="password" name="password" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
+        <!-- <div id="emailHelp" class="form-text">Ingrese la constraseña</div> -->
+      </div>
+      <!--Botones del formulario-->
+      <div class="m-4 d-flex justify-content-end">
+        <button type="submit" class="btn pl-3 pr-3 border-dark me-3">
+          <span>&#10004;</span>
+          Iniciar
+        </button>
+        <button type="reset" class="btn pl-3 pr-3 border-dark">
+          <span>&#10060;</span>
+          Cancelar
+        </button>
+      </div>
     </div>
+  </form>
 </div>
+
 @endsection
