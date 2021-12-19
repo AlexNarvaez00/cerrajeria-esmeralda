@@ -71,9 +71,9 @@
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
-                        <th scope="col">{{$usuario->idusuario}}</th>
+                        <th scope="col">{{$usuario->id}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td >{{$usuario->nombreUsuario}}</td>
+                        <td >{{$usuario->name}}</td>
                         <td >{{$usuario->rol}}</td>
                         <td >{{$usuario->created_at}}</td>
                         <td >{{$usuario->updated_at}}</td>
@@ -145,6 +145,15 @@
                                 <p class="col-12">{{$message}}</p>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Correo</span>
+                        <input type="email" class="form-control" value="{{old('correo')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
+                        @error('correo')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -246,6 +255,15 @@
                                 <p class="col-12">{{$message}}</p>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Correo</span>
+                        <input type="email" class="form-control" value="{{old('correoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correoEditar">
+                        @error('correoEditar')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">

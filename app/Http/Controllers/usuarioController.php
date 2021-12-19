@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
-use Illuminate\Validation\Validator;
 
 class usuarioController extends Controller
 {
@@ -26,6 +24,7 @@ class usuarioController extends Controller
     private $rules = [
         'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'correo' => 'required|email',
         'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -33,6 +32,7 @@ class usuarioController extends Controller
     private $rules2 = [
         'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'correoEditar' => 'required|email',
         'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -59,10 +59,10 @@ class usuarioController extends Controller
     {
         $listaUsuarios = null;
         if (count($request->all()) >= 0) {
-            $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
+            $listaUsuarios = User::where('id', 'like', $request->inputBusqueda . '%')
                 ->paginate(10);
         } else {
-            $listaUsuarios = usuariosModel::paginate(10);
+            $listaUsuarios = User::paginate(10);
         }
 
         return view('usuarios') //Nombre de la vista
@@ -92,10 +92,11 @@ class usuarioController extends Controller
             date('dmy');
 
         //Nombre del campo BD----- Nombre input formulario
-        $usuario = new usuariosModel();
-        $usuario->idUsuario =  $llavePrimaria;
-        $usuario->nombreUsuario = $request->nombreUsuario;
-        $usuario->contrasena = $request->contrasena;
+        $usuario = new User();
+        $usuario->id =  $llavePrimaria;
+        $usuario->name = $request->nombreUsuario;
+        $usuario->password = $request->contrasena;
+        $usuario->email = $request->correo;
         $usuario->rol = $request->rolUser;
         $usuario->save();
         return redirect()->route('usuarios.index');
@@ -141,9 +142,10 @@ class usuarioController extends Controller
             strtoupper($request->rolUserEditar[1]) . '-' .
             date('dmy');
 
-        $usuario->idUsuario = $llavePrimaria;
-        $usuario->nombreUsuario = $request->nombreUsuarioEditar;
-        $usuario->contrasena = $request->contrasenaEditar;
+        $usuario->id = $llavePrimaria;
+        $usuario->name = $request->nombreUsuarioEditar;
+        $usuario->password = $request->contrasenaEditar;
+        $usuario->email = $request->correoEditar;
         $usuario->rol = $request->rolUserEditar;
         $usuario->save();
 
