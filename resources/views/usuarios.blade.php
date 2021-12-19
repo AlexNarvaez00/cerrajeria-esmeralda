@@ -21,7 +21,7 @@
 <!--################################ Ttiulos d ela ventana ##############################################-->
 <h5 class="h5 text-star mt-5 ps-3">
     <span>&#128075;</span>
-    ¡Hola, {{ $nombreUsuarioVista }}!
+    ¡Hola, {{ auth()->user()->name }}!
 </h5>
 <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
     <span>&#128101;</span>
@@ -71,21 +71,22 @@
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
-                        <th scope="col">{{$usuario->idusuario}}</th>
+                        <th scope="col">{{$usuario->id}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td >{{$usuario->nombreUsuario}}</td>
+                        <td >{{$usuario->name}}</td>
                         <td >{{$usuario->rol}}</td>
                         <td >{{$usuario->created_at}}</td>
                         <td >{{$usuario->updated_at}}</td>
 
                         <!--Botones-->
                         <td>
+                            
                             <button class="btn boton-editar" 
-                                data-id="{{$usuario->idusuario}}"
-                                data-nombre="{{$usuario->nombreUsuario}}"
+                                data-id="{{$usuario->id}}"
+                                data-nombre="{{$usuario->name}}"
+                                data-correo="{{$usuario->email}}"
                                 data-rol="{{$usuario->rol}}"
                                 data-route-url="{{route('usuarios.update',$usuario)}}"
-
 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#editarUsuariosModal">
@@ -93,22 +94,28 @@
                             </button>
                         </td>
                         <td>
-                            <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" 
-                                    class="btn delete" 
-                                    data-id="{{$usuario->idusuario}}"
-                                    data-nombre="{{$usuario->nombreUsuario}}"
-                                    data-rol="{{$usuario->rol}}"
-                                    data-creado="{{$usuario->created_at}}"
-                                    data-modificado="{{$usuario->updated_at}}"
+                            @if ($usuario->rol != 'Administrador' )
+                                <form class="form-detele" action="{{route('usuarios.destroy',$usuario)}}" method="POST"> <!-- route productos-venta "store"-->
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                        class="btn delete" 
+                                        data-id="{{$usuario->id}}"
+                                        data-nombre="{{$usuario->name}}"
+                                        data-rol="{{$usuario->rol}}"
+                                        data-creado="{{$usuario->created_at}}"
+                                        data-modificado="{{$usuario->updated_at}}"
 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#confirmacionModal">
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#confirmacionModal">
+                                        <span>&#10060;</span>
+                                    </button>
+                                </form>
+                            @else
+                                <a href="#" class="btn">
                                     <span>&#10060;</span>
-                                </button>
-                            </form>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -145,6 +152,15 @@
                                 <p class="col-12">{{$message}}</p>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Correo</span>
+                        <input type="email" class="form-control" value="{{old('correo')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
+                        @error('correo')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -236,7 +252,6 @@
                     @csrf
                     @method('PUT')
                     <!--Input oculto para el IDE del usuario-->
-                    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuarioEditar" name="idUsuario">
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group mb-3 ">
@@ -246,6 +261,15 @@
                                 <p class="col-12">{{$message}}</p>
                             @enderror
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-md-12 col-sm-12">
+                        <span class="input-group-text col-3" id="basic-addon1">Correo</span>
+                        <input type="email" class="form-control" value="{{old('correoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correoEditar">
+                        @error('correoEditar')
+                                <p class="col-12">{{$message}}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -313,7 +337,9 @@
             </div>
             <div class="modal-body">
                 <p class="alert alert-danger" role="alert">
-                    ¡No se puede borrar a un usuario Administrador!.
+                    @error('noValido')
+                        {{$message}}.
+                    @enderror
                 </p>
             </div>
             <div class="modal-footer">
