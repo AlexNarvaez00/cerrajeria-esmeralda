@@ -29,14 +29,15 @@ class productosController extends Controller
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        
-
+        $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
+        ->select("*")
+        ->get();
             /**
              * Del modelo de caprta App/Http/Models
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Descripcion','Editar','Borrar'];
     }
 
     /**
@@ -62,6 +63,7 @@ class productosController extends Controller
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
             ->with('registrosProductos',$listaProductos)//Registros de la tabla productos
+            ->with('registrosProductosjoin',$this->productosjoin)
             ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
@@ -98,7 +100,12 @@ class productosController extends Controller
         //return $request;
         return redirect()->route('productos.index');
     }
+    public function edit($clave_producto){
+        $producto=productosModelo::findOrFail($clave_producto);
+        return $producto;
 
+    }
+    
     public function show()
     {
         # code...

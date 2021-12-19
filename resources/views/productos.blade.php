@@ -22,7 +22,7 @@
         ¡Hola, XXXX XXXX XXXX!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
-        <span>&#127991;</span>
+        <span>&#128273;</span>
         Productos
     </h5>
 
@@ -38,7 +38,7 @@
                 </button>
             </div>
                 <div class="col-auto">
-                <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+                <button type="button" onclick = "limpiar()" class="btn btn-light d-flex ps-3 pe-3" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                     <span class="me-3">&#10133;</span>
                     Agregar
                 </button>
@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($registrosProductos as $producto)
+                @foreach($registrosProductosjoin as $producto)
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
@@ -69,9 +69,11 @@
                         <td>&#36;{{$producto->precio_producto}}</td>
                         <td>{{$producto->cantidad_existencia}}</td>
                         <td>{{$producto->idproveedor}}</td>
+                        <td style="font-size:80%;">{{$producto->descripcion}}</td>
+                        
                         <!--Botones-->
-                        <td>
-                            <button class="btn" data-id-db="{{$producto->clave_producto}}">
+                        <td class="btnEditar">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                                 <span>&#128394;</span>
                             </button>
                         </td>
@@ -151,7 +153,7 @@
             </div>
             <div class="input-group">
                 <span class="input-group-text">Descripcion</span>
-                <textarea class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+                <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
             </div> 
         </div>
     @endslot
@@ -160,13 +162,25 @@
             <span class="me-2">&#10060;</span>
             Cancelar
         </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+        <div id="btnRegistrarProducto" style="display:none">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
+        </div>
+        <div id="btnGuardarCambios" style="display:none">
+        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
+            <span class="me-2">&#128190;</span>
+            Guardar Cambios
+        </button>
+        </div>
     @endslot
     @endcomponent
 @endsection
+
+
+
 @section('scritps')
+    <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/validaciones/productos.js"></script>
 @endsection

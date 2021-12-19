@@ -9,6 +9,7 @@ use App\Http\Controllers\reporteVentasController;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\ventasController;
+use App\Http\Controllers\serviciosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +49,24 @@ Route::resource('/productos',productosController::class);
 Route::resource('/clientes',clienteController::class);
 Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
+<<<<<<< HEAD
 Route::resource('/reporteVentas',reporteVentasController::class);
 Route::resource('/reporteProductos',reporteProductosController::class);
 Route::get('/{pagina}',[RutasController::class,'showView']);
+=======
+Route::resource('/servicios-ventas',serviciosController::class);
+
+>>>>>>> 9227d8bbd71cb04c7e3d30a0e245901e1f3f16ad
+
+/**
+ * Rutas solo para AJAX :v 
+*/
+//Route::post('/estado/todo',[usuarioController::class,'getCiudades'])->name('estados.todo');
+
+Route::post('/estado/todo',[proveedorController::class,'getCiudades'])->name('estados.todo');
+Route::post('/municipio/todo',[proveedorController::class,'getColonias'])->name('municipios.todo');
+Route::post('/cliente/todo',[serviciosController::class,'getCliente'])->name('cliente.todo');
+Route::post('/producto/todo',[ventaProductoController::class,'getProducto'])->name('producto.todo');
 
 
 
@@ -58,9 +74,15 @@ Route::get('/{pagina}',[RutasController::class,'showView']);
 
 
 
+/** 
+ * Rutas de comodin
+ * 
+*/
+Route::get('/{pagina}',[RutasController::class,'showView']);
 
-
-
+//Route::get('/cliente/{id}', [serviciosController::class,'show'])->name('cliente');
+//Route::get('/proveedores','proveedorController@index');
+//Route::get('proveedores/fetch','proveedorController@fetch')->name('proveedorController.fetch');
 
 
 /**
