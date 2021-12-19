@@ -5,12 +5,14 @@
   @component('components.header')
     <!--Items de la barra de menu-->
     @slot('items')
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/menu">Menu</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
-      </li>
+      <!--
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/menu">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
+        </li>
+      -->
     @endslot
     <!--Esta parte es para mostrar el boton de log out-->
     @slot('visible',false)

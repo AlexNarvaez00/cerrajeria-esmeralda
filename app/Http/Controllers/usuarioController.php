@@ -12,7 +12,6 @@ class usuarioController extends Controller
     /**
      * Atributos ...
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $usuariosLista; //Esta variables para guardar la lista de usuarios
 
     //Arreglos constantes.
@@ -67,7 +66,6 @@ class usuarioController extends Controller
         }
 
         return view('usuarios') //Nombre de la vista
-            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
             ->with('listaRoles', $this->listaRoles); // //Campos de la tablas
@@ -108,18 +106,23 @@ class usuarioController extends Controller
      * 
      * @param usuario Registro de la base de datos que sera borrado.
      */
-    public function destroy(usuariosModel $usuario)
+    public function destroy(User $usuario)
     {
-
-        if($usuario->rol == 'Administrador'){
-            $usuarioAdminError = ['noValido'=>'No puedes borrar a un admistrador'];
+        if ($usuario->id == auth()->user()->id) {
+            $usuarioAdminError = ['noValido' => 'No te puedes borrar a ti mismo'];
             return redirect()
                 ->route('usuarios.index')
                 ->withErrors($usuarioAdminError);
-        }else{
+        }
+        if ($usuario->rol == 'Administrador') {
+            $usuarioAdminError = ['noValido' => 'No puedes borrar a un admistrador'];
+            return redirect()
+                ->route('usuarios.index')
+                ->withErrors($usuarioAdminError);
+        } else {
             $usuario->delete();
             return redirect()
-                ->route('usuarios.index');    
+                ->route('usuarios.index');
         }
     }
 
@@ -132,7 +135,7 @@ class usuarioController extends Controller
      * @return Redirecciona a la ruta 'index'
      * 
      */
-    public function update(Request $request, usuariosModel $usuario)
+    public function update(Request $request, User $usuario)
     {
         $request->validate($this->rules2);
 
