@@ -49,14 +49,11 @@ Route::resource('/productos',productosController::class);
 Route::resource('/clientes',clienteController::class);
 Route::resource('/ventas',ventasController::class);
 Route::resource('/productos-ventas',ventaProductoController::class);
-<<<<<<< HEAD
 Route::resource('/reporteVentas',reporteVentasController::class);
 Route::resource('/reporteProductos',reporteProductosController::class);
 Route::get('/{pagina}',[RutasController::class,'showView']);
-=======
 Route::resource('/servicios-ventas',serviciosController::class);
 
->>>>>>> 9227d8bbd71cb04c7e3d30a0e245901e1f3f16ad
 
 /**
  * Rutas solo para AJAX :v 
