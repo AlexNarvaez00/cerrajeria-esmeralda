@@ -17,6 +17,7 @@ const mostarInformacion = (e) =>{
 
     document.getElementById('inputNombreUsuarioEditar').value = data.nombre;
     document.getElementById('inputRolUsuarioEditar').value = data.rol;
+    document.getElementById('inputCorreoEditar').value = data.correo;
     //console.log(document.getElementById('inputRolUsuarioEditar'))
 };
 

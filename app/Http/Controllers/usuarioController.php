@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class usuarioController extends Controller
 {
     /**
      * Atributos ...
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $usuariosLista; //Esta variables para guardar la lista de usuarios
 
     //Arreglos constantes.
@@ -26,6 +24,7 @@ class usuarioController extends Controller
     private $rules = [
         'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'correo' => 'required|email',
         'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -33,6 +32,7 @@ class usuarioController extends Controller
     private $rules2 = [
         'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
+        'correoEditar' => 'required|email',
         'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -59,14 +59,13 @@ class usuarioController extends Controller
     {
         $listaUsuarios = null;
         if (count($request->all()) >= 0) {
-            $listaUsuarios = usuariosModel::where('idusuario', 'like', $request->inputBusqueda . '%')
-                ->paginate(10);
+            $listaUsuarios = User::where('id', 'like', $request->inputBusqueda . '%')
+                ->paginate(6);
         } else {
-            $listaUsuarios = usuariosModel::paginate(10);
+            $listaUsuarios = User::paginate(6);
         }
 
         return view('usuarios') //Nombre de la vista
-            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposVista', $this->camposVista) //Campos de la tablas
             ->with('registrosVista', $listaUsuarios) //Registros de la tabla
             ->with('listaRoles', $this->listaRoles); // //Campos de la tablas
@@ -92,10 +91,11 @@ class usuarioController extends Controller
             date('dmy');
 
         //Nombre del campo BD----- Nombre input formulario
-        $usuario = new usuariosModel();
-        $usuario->idUsuario =  $llavePrimaria;
-        $usuario->nombreUsuario = $request->nombreUsuario;
-        $usuario->contrasena = $request->contrasena;
+        $usuario = new User();
+        $usuario->id =  $llavePrimaria;
+        $usuario->name = $request->nombreUsuario;
+        $usuario->password = Hash::make($request->contrasena);
+        $usuario->email = $request->correo;
         $usuario->rol = $request->rolUser;
         $usuario->save();
         return redirect()->route('usuarios.index');
@@ -106,18 +106,23 @@ class usuarioController extends Controller
      * 
      * @param usuario Registro de la base de datos que sera borrado.
      */
-    public function destroy(usuariosModel $usuario)
+    public function destroy(User $usuario)
     {
-
-        if($usuario->rol == 'Administrador'){
-            $usuarioAdminError = ['noValido'=>'No puedes borrar a un admistrador'];
+        if ($usuario->id == auth()->user()->id) {
+            $usuarioAdminError = ['noValido' => 'No te puedes borrar a ti mismo'];
             return redirect()
                 ->route('usuarios.index')
                 ->withErrors($usuarioAdminError);
-        }else{
+        }
+        if ($usuario->rol == 'Administrador') {
+            $usuarioAdminError = ['noValido' => 'No puedes borrar a un admistrador'];
+            return redirect()
+                ->route('usuarios.index')
+                ->withErrors($usuarioAdminError);
+        } else {
             $usuario->delete();
             return redirect()
-                ->route('usuarios.index');    
+                ->route('usuarios.index');
         }
     }
 
@@ -130,7 +135,7 @@ class usuarioController extends Controller
      * @return Redirecciona a la ruta 'index'
      * 
      */
-    public function update(Request $request, usuariosModel $usuario)
+    public function update(Request $request, User $usuario)
     {
         $request->validate($this->rules2);
 
@@ -141,9 +146,10 @@ class usuarioController extends Controller
             strtoupper($request->rolUserEditar[1]) . '-' .
             date('dmy');
 
-        $usuario->idUsuario = $llavePrimaria;
-        $usuario->nombreUsuario = $request->nombreUsuarioEditar;
-        $usuario->contrasena = $request->contrasenaEditar;
+        $usuario->id = $llavePrimaria;
+        $usuario->name = $request->nombreUsuarioEditar;
+        $usuario->password = Hash::make($request->contrasenaEditar);
+        $usuario->email = $request->correoEditar;
         $usuario->rol = $request->rolUserEditar;
         $usuario->save();
 

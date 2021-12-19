@@ -16,8 +16,8 @@ class CreateUsuarioEmpleadorTable extends Migration
         Schema::create('usuario_empleador', function (Blueprint $table) {
             $table->string('idEmpleador',7);//El jefe
             $table->string('idEmpleado',7);//El empleado 
-            $table->foreign('idEmpleador')->references('idusuario')->on('usuarios');
-            $table->foreign('idEmpleado')->references('idusuario')->on('usuarios');
+            $table->foreign('idEmpleador')->references('id')->on('users');
+            $table->foreign('idEmpleado')->references('id')->on('users');
             $table->unique('idEmpleador');
         });
     }

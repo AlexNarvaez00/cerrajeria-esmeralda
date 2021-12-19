@@ -5,12 +5,14 @@
   @component('components.header')
     <!--Items de la barra de menu-->
     @slot('items')
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/menu">Menu</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
-      </li>
+      <!--
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/menu">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
+        </li>
+      -->
     @endslot
     <!--Esta parte es para mostrar el boton de log out-->
     @slot('visible',false)
@@ -40,7 +42,8 @@
 <!--Formulario del login-->
 <div class="row container-fluid d-flex justify-content-center">
   <!--Codigo del formulario-->
-  <form action="" class="col-lg-5 col-md-12">
+  <form method="POST" action="{{ route('login') }}" class="col-lg-5 col-md-12">
+    @csrf
     <div class="componentes-formulario">
       <div class="d-flex justify-content-center">
           <img src="./img/usuario.png" class="medida-1">
@@ -48,13 +51,13 @@
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
-        <input type="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
+        <input type="email" name="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
       </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="passwordUser" class="form-label">Contraseña</label>
-        <input type="email" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
+        <input type="password" name="password" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese la constraseña</div> -->
       </div>
       <!--Botones del formulario-->
@@ -63,7 +66,7 @@
           <span>&#10004;</span>
           Iniciar
         </button>
-        <button type="submit" class="btn pl-3 pr-3 border-dark">
+        <button type="reset" class="btn pl-3 pr-3 border-dark">
           <span>&#10060;</span>
           Cancelar
         </button>
