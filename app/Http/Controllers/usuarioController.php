@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\usuariosModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class usuarioController extends Controller
 {
@@ -60,9 +61,9 @@ class usuarioController extends Controller
         $listaUsuarios = null;
         if (count($request->all()) >= 0) {
             $listaUsuarios = User::where('id', 'like', $request->inputBusqueda . '%')
-                ->paginate(10);
+                ->paginate(6);
         } else {
-            $listaUsuarios = User::paginate(10);
+            $listaUsuarios = User::paginate(6);
         }
 
         return view('usuarios') //Nombre de la vista
@@ -95,7 +96,7 @@ class usuarioController extends Controller
         $usuario = new User();
         $usuario->id =  $llavePrimaria;
         $usuario->name = $request->nombreUsuario;
-        $usuario->password = $request->contrasena;
+        $usuario->password = Hash::make($request->contrasena);
         $usuario->email = $request->correo;
         $usuario->rol = $request->rolUser;
         $usuario->save();
@@ -144,7 +145,7 @@ class usuarioController extends Controller
 
         $usuario->id = $llavePrimaria;
         $usuario->name = $request->nombreUsuarioEditar;
-        $usuario->password = $request->contrasenaEditar;
+        $usuario->password = Hash::make($request->contrasenaEditar);
         $usuario->email = $request->correoEditar;
         $usuario->rol = $request->rolUserEditar;
         $usuario->save();

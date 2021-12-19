@@ -40,7 +40,8 @@
 <!--Formulario del login-->
 <div class="row container-fluid d-flex justify-content-center">
   <!--Codigo del formulario-->
-  <form action="" class="col-lg-5 col-md-12">
+  <form method="POST" action="{{ route('login') }}" class="col-lg-5 col-md-12">
+    @csrf
     <div class="componentes-formulario">
       <div class="d-flex justify-content-center">
           <img src="./img/usuario.png" class="medida-1">

@@ -20,7 +20,7 @@ class CreateVentaTable extends Migration
 
             $table->string('idclienteventa',7);
             $table->primary('folio_v');
-            $table->foreign('idusuario')->references('idusuario')->on('usuarios');
+            $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idclienteventa')->references('idcliente')->on('cliente');           
         });
     }
