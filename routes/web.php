@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
     Route::post('/producto/todo', [ventaProductoController::class, 'getProducto'])->name('producto.todo');
    
+    Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');
+    Route::post('/municipio/servicio',[serviciosController::class,'getColonias'])->name('municipio.servicio');
     
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
