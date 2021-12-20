@@ -10,9 +10,8 @@ class reporteProductosModelo extends Model
     use HasFactory;
 
     use HasFactory;
-    protected $table = 'detalleventa';
+    protected $table = 'venta';
     protected $primaryKey = 'folio_v';
     public $incrementing = false;
     public $timestamps = false;
-
 }
