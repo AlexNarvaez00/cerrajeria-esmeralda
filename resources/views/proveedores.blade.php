@@ -15,17 +15,18 @@
   @endcomponent
 @endsection
 
-
+<!--########################### Titulos de la tabla. -- Info del Usuario en sesión ################################# -->
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
-        ¡Hola, {{ $nombreUsuarioVista }}!
+        ¡Hola, {{ auth()->user()->name }}!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#128666;</span>
         Proveedores
     </h5>
 
+<!--########################### Cuerpo de la página ################################# -->
     <div class="container-fluid mb-4">
     <form method="GET" action="{{route('proveedores.index')}}" class="row d-flex justify-content-end">
         <div class="col-5">
@@ -46,7 +47,7 @@
         </form>
     </div>
 
-    <!--Seccion de la tabla-->
+    <!--########################### Sección de la tabla ################################# -->
     <div class="conteiner-fluid">
         <div class="col-12">
             <table class="table">
@@ -372,7 +373,7 @@
     -->
     
     <script src="./js/validaciones/proveedores.js"></script>
-        
+    <script src="./js/funciones/editarProveedor.js"></script>    
         
         <script >
             //Ayudame san pedro
@@ -549,7 +550,7 @@ function recuperarColonias(idSelector)
 
 
 </script>
-<script src="./js/funciones/editarProveedor.js"></script>
+
 
 
 @endsection
