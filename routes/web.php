@@ -4,6 +4,8 @@ use App\Http\Controllers\clienteController;
 use App\Http\Controllers\ventaProductoController;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\proveedorController;
+use App\Http\Controllers\reporteProductosController;
+use App\Http\Controllers\reporteVentasController;
 use App\Http\Controllers\RutasController;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\ventasController;
@@ -27,8 +29,8 @@ Route::get('/', function () {
 });
 
 
-
 Route::middleware(['auth'])->group(function () {
+
 
 
     /** 
@@ -48,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/productos-ventas', ventaProductoController::class);
     Route::resource('/servicios-ventas', serviciosController::class);
 
+    Route::resource('/reporteVentas',reporteVentasController::class);
+    Route::resource('/reporteProductos',reporteProductosController::class);
 
     /**
      * Rutas solo para AJAX :v 
@@ -58,7 +62,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/municipio/todo', [proveedorController::class, 'getColonias'])->name('municipios.todo');
     Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
     Route::post('/producto/todo', [ventaProductoController::class, 'getProducto'])->name('producto.todo');
-
+   
+    
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

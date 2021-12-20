@@ -18,7 +18,7 @@ class CreateClienteTable extends Migration
             $table->string('nombre',30);
             $table->string('apellidoPaterno',30);
             $table->string('apellidoMaterno',30);
-            $table->integer('telefono');
+            $table->string('telefono',15);
             $table->primary('idcliente');
         });
     }
