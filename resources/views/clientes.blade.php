@@ -163,6 +163,7 @@
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
             <!-- Cuerpo del modal-->
+            <p>¿Esta segunro que quiere borrar este registro?</p>
         @endslot
         @slot('footerModal')
             <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -244,4 +245,5 @@
 @section('scritps')
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
+    <script src="./js/modales/clientesConfirmacion.js"></script>
 @endsection
