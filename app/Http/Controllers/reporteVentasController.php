@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\reporteVentasModelo;
 use Illuminate\Http\Request;
 
+/**
+ * Clase controladora para "Reporte de venta de servicios"
+ * 
+ * 
+*/
 class reporteVentasController extends Controller
 {
     /**
@@ -39,7 +44,7 @@ class reporteVentasController extends Controller
      */
     public function index(Request $request)
     {
-        return view('reporteProductos') //Nombre de la vista
+        return view('reporteVentasServicios') //Nombre de la vista
             ->with('camposTabla',$this->camposTabla)//Campos de la tablas
             ->with('registrosVista',$this->reporteLista);//Registros de la tabla
     }
@@ -63,11 +68,5 @@ class reporteVentasController extends Controller
     {
         
     }
-    /**
-     * Este metodo sirve para borrar los registros de la base de datos,
-     * deben de tener cuidado :v 
-     * 
-    */
-
 
 }

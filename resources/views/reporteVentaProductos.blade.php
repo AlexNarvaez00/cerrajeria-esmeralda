@@ -110,20 +110,6 @@
                                       <span>&#128065;</span>  
                                 </button>
                             </td>
-                            <!--Botones-->
-                            <td>
-                                <button class="btn" data-id-db="">
-                                    <span>&#128394;</span>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn" data-id-db="">
-                                    <span>&#10060;</span>
-                                </button>
-                            </td>
-                        <td>
-                            
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

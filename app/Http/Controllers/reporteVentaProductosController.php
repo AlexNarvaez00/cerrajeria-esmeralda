@@ -24,7 +24,7 @@ class reporteVentaProductosController extends Controller
      */
     public function __construct()
     {
-        $this->camposVista = ['Folio venta', 'ID Usuario', 'Fecha', 'Consultar', 'Editar', 'Borrar'];
+        $this->camposVista = ['Folio venta', 'ID Usuario', 'Fecha', 'Consultar'];
     }
 
     /**

@@ -29,7 +29,7 @@ class productosController extends Controller
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
+        $this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
             /**

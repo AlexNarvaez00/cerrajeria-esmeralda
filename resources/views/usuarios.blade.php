@@ -251,6 +251,7 @@
                     <!--Directiva, basicmanete -->
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                     <!--Input oculto para el IDE del usuario-->
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
@@ -369,6 +370,10 @@
         <script>
             let modalRegistro = new bootstrap.Modal(document.getElementById('registroUsuariosModal'),null);
             modalRegistro.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
+
         </script>
     @endif
 
@@ -376,6 +381,9 @@
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('editarUsuariosModal'),null);
             modalEdicion.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>
     @endif
 
@@ -383,6 +391,9 @@
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('negacionModal'),null);
             modalEdicion.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>    
     @endif
 
