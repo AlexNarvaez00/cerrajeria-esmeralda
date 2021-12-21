@@ -14,6 +14,7 @@ const mostarInformacion = (e) =>{
 
     let formulario = modal.getElementsByTagName('form')[0];
     formulario.action = data.routeUrl;
+    document.getElementById('urlTemp').value = data.routeUrl;
 
     //Inputs
     //7let inputIDUsuarioEditar = document.getElementById('inputIDUsuarioEditar');

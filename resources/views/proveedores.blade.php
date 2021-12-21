@@ -298,7 +298,7 @@
             <div class="row">
                 <!--Columnas :v-->
                 @csrf
-                <input type="hidden" name="urltemp" id="">
+                <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
                 <div class="col-md-6 col-sm-12">
@@ -590,6 +590,8 @@ function recuperarColonias(idSelector)
         <script>
             let modalRegistro = new bootstrap.Modal(document.getElementById('registroProveedorModal'),null);
             modalRegistro.show();
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>
     @endif
 
@@ -598,6 +600,8 @@ function recuperarColonias(idSelector)
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('editarProveedorModal'),null);
             modalEdicion.show();
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>
     @endif
 
@@ -605,6 +609,8 @@ function recuperarColonias(idSelector)
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('negacionModal'),null);
             modalEdicion.show();
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>    
     @endif
 
