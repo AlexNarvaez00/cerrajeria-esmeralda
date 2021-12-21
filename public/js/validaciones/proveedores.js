@@ -10,7 +10,7 @@ const expresionesRegulares = {
     //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
 };
 
-//Optenemos los input del formulario
+//Optenemos los input del formulario para agregar un nuevo proveedor
 const inputNombreProveedor = document.getElementById('inputNombreProveedor');
 const inputApellidoPProveedor = document.getElementById('inputApellidoPProveedor');
 const inputApellidoMProveedor = document.getElementById('inputApellidoMProveedor');
@@ -40,3 +40,21 @@ inputNumTelefono.addEventListener('keyup',e => evaluar(e,expresionesRegulares.Nu
 inputCorreo.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Correo));
 inputCalle.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
 inputNumExt.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
+
+
+//validaciones para el formulario de editar proveedor
+const inputNombreProveedorEditar = document.getElementById('inputNombreProveedorEditar');
+const inputApellidoPProveedorEditar = document.getElementById('inputApellidoPProveedorEditar');
+const inputApellidoMProveedorEditar = document.getElementById('inputApellidoMProveedorEditar');
+const inputNumTelefonoEditar = document.getElementById('inputNumTelefonoEditar');
+const inputCorreoEditar = document.getElementById('inputCorreoEditar');
+const inputCalleEditar = document.getElementById('inputCalleEditar');
+const inputNumExtEditar = document.getElementById('inputNumExtEditar');
+//Evento para evaluar los imputs
+inputNombreProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreProveedor));
+inputApellidoPProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoPProveedor));
+inputApellidoMProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoMProveedor));
+inputNumTelefonoEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.NumTelefono));
+inputCorreoEditar.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Correo));
+inputCalleEditar.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
+inputNumExtEditar.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
