@@ -1,5 +1,5 @@
 let botonesEditar = document.getElementsByClassName('boton-editar');
-const modal = document.getElementById('editarUsuariosModal');
+const modal = document.getElementById('editarProveedorModal');
 
 //Funcion flecha
 const mostarInformacion = (e) =>{
@@ -16,10 +16,10 @@ const mostarInformacion = (e) =>{
     formulario.action = data.routeUrl;
     document.getElementById('urlTemp').value = data.routeUrl;
 
-    document.getElementById('inputNombreUsuarioEditar').value = data.nombre;
-    document.getElementById('inputRolUsuarioEditar').value = data.rol;
-    document.getElementById('inputCorreoEditar').value = data.correo;
-    //console.log(document.getElementById('inputRolUsuarioEditar'))
+    //Inputs
+    //7let inputIDUsuarioEditar = document.getElementById('inputIDUsuarioEditar');
+    //inputIDUsuarioEditar.value = data.id;
+
 };
 
 //Agregamos la funciona  los eventos.

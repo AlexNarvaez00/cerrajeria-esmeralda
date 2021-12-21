@@ -15,9 +15,27 @@ class proveedorController extends Controller
      /**
      * Atributos ...
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $proveedoresLista;//Esta variables para guardar la lista de proveeores
     private $camposTabla;
+
+    private $reglaV = [
+        'nombre' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]/',
+        'apellidopaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'apellidomaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'numtelefono' => 'required|regex:/^[0-9]{10}$/',
+        'correo' => 'required|email',
+        'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
+        'numext' => 'required|regex:/^[0-2]+[0-9][0-9]$/' 
+    ];
+
+    //Esto va a ser una constante
+    private $reglaV2 = [
+        'nombreEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]/',
+        'apellidopaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'apellidomaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'numtelefonoEditar' => 'required|regex:/^[0-9]{10}$/',
+        'correoEditar' => 'required|email'
+    ];
 
 
     //Pagina para referenciar las cosas xd    
@@ -25,7 +43,6 @@ class proveedorController extends Controller
 
     public function __construct()
     {
-        $this->nombreUsuario = 'Narvaez ';
         $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','ID Dirección','Editar','Borrar'];
     }
     
@@ -40,22 +57,16 @@ class proveedorController extends Controller
         $listaProveedores = null;
         if(count($request->all()) >= 0){
             $listaProveedores = proveedorModelo::where('idproveedor','like',$request->inputBusqueda.'%')
-                                    ->get();
+            ->paginate(6);
         }else{
             //Sino tiene nada
             //Que lo rellene con todos los registros 
-            $listaProveedores = proveedorModelo::all();
+            $listaProveedores = proveedorModelo::paginate(6);
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
-
-        
         $estadosLista = estadosModelo::all();
-        
-        
-        
         return view('proveedores') //Nombre de la vista
-            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('registrosVista', $listaProveedores) //Registros de la tabla
             ->with('registroEstados',$estadosLista);
@@ -65,12 +76,20 @@ class proveedorController extends Controller
     public function store(Request $request){
         //Creamos un nuevo objeto.
         $proveedor = new proveedorModelo();
-
+        $request->validate($this->reglaV);
         //Nombre del input del formulario es una tributo "name"
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $proveedor->idproveedor = "PROV-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1].$request->numext[0].$request->numext[1];
+        $llavePrimaria = "PROV-".
+        strtoupper($request->apellidopaterno[0]).
+        strtoupper($request->apellidopaterno[1]).
+        strtoupper("-".$request->apellidomaterno[0]).
+        strtoupper($request->apellidomaterno[1]).
+        strtoupper($request->numext[0]).
+        strtoupper($request->numext[1]);
+
+        $proveedor->idproveedor =  $llavePrimaria;
         $proveedor->nombre = $request->nombre;
         $proveedor->apellidopaterno = $request->apellidopaterno;
         $proveedor->apellidomaterno = $request->apellidomaterno;
@@ -111,6 +130,40 @@ class proveedorController extends Controller
     */
     public function destroy(proveedorModelo $proveedore){
         $proveedore->delete();
+        return redirect()->route('proveedores.index');
+    }
+
+    public function update(Request $request,proveedorModelo $proveedore)
+    {
+        //return $request;
+        $request->validate($this->reglaV2);
+
+        // $llavePrimariaPROV = "PROV-".
+        // strtoupper($request->apellidopaternoEditar[0]).
+        // strtoupper($request->apellidopaternoEditar[1]).
+        // strtoupper("-".$request->apellidomaternoEditar[0]).
+        // strtoupper($request->apellidomaternoEditar[1]).
+        // strtoupper($request->numextEditar[0]).
+        // strtoupper($request->numextEditar[1]);
+
+        // $proveedore->idproveedor =  $llavePrimariaPROV;
+        $proveedore->nombre = $request->nombreEditar;
+        $proveedore->apellidopaterno = $request->apellidopaternoEditar;
+        $proveedore->apellidomaterno = $request->apellidomaternoEditar;
+        $proveedore->correo = $request->correoEditar;
+
+        $direccion = direccionModelo::find($proveedore->iddirecproveedor);
+        //$direccion->iddireccion = "DIC-".$request->numextEditar[0].$request->numextEditar[1].$request->apellidopaternoEditar[0].$request->apellidopaternoEditar[1]."-".$request->apellidomaternoEditar[0].$request->apellidomaternoEditar[1];
+
+        //$PRYKEY = $direccion->iddireccion;
+        $direccion->calle=$request->calleEditar;
+        $direccion->numero= $request->numextEditar;
+        $direccion->idcoldirec = $request->coloniasEditar;
+        $direccion->save();
+
+        //$proveedore->iddirecproveedor = $PRYKEY;
+        $proveedore->save();
+
         return redirect()->route('proveedores.index');
     }
 

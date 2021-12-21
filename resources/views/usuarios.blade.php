@@ -149,7 +149,7 @@
                             <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
                             <input type="text" class="form-control {{ ( old('nombreUsuario')!='' )? 'is-valid':'' }}" value="{{old('nombreUsuario')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
                             @error('nombreUsuario')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                             @enderror
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Correo</span>
                         <input type="email" class="form-control" value="{{old('correo')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
                         @error('correo')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
                         <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
                         @error('contrasena')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
                         <input type="password" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrasena_confirmation">
                         @error('contrsenaConfirmada')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div> 
@@ -197,7 +197,7 @@
                             @endforeach
                         </select>
                         @error('rolUser')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -251,6 +251,7 @@
                     <!--Directiva, basicmanete -->
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                     <!--Input oculto para el IDE del usuario-->
                     <!--Columnas :v-->
                     <div class="col-md-12 col-sm-12">
@@ -258,7 +259,7 @@
                             <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
                             <input type="text" class="form-control" value="{{old('nombreUsuarioEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuarioEditar" name="nombreUsuarioEditar">
                             @error('nombreUsuarioEditar')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                             @enderror
                         </div>
                     </div>
@@ -268,7 +269,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Correo</span>
                         <input type="email" class="form-control" value="{{old('correoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correoEditar">
                         @error('correoEditar')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -277,7 +278,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
                         <input type="password" class="form-control" value="{{old('contrasenaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioEditar" name="contrasenaEditar">
                         @error('contrasenaEditar')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -286,7 +287,7 @@
                         <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
                         <input type="password" class="form-control" value="{{old('contrsenaConfirmadaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrasenaEditar_confirmation">
                         @error('contrsenaConfirmadaEditar')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div> 
@@ -306,7 +307,7 @@
                             @endforeach
                         </select>
                         @error('rolUserEditar')
-                                <p class="col-12">{{$message}}</p>
+                                <p class="col-12 text-danger ps-2"> {{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -369,6 +370,10 @@
         <script>
             let modalRegistro = new bootstrap.Modal(document.getElementById('registroUsuariosModal'),null);
             modalRegistro.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
+
         </script>
     @endif
 
@@ -376,6 +381,9 @@
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('editarUsuariosModal'),null);
             modalEdicion.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>
     @endif
 
@@ -383,6 +391,9 @@
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('negacionModal'),null);
             modalEdicion.show();
+
+            let formulario = modal.getElementsByTagName('form')[0];
+            formulario.action = document.getElementById('urlTemp').value;
         </script>    
     @endif
 

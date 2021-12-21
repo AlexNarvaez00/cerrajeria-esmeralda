@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class detalleVentaModelo extends Model
 {
     use HasFactory;
+    protected $table = 'detalleventa';
+    public $incrementing = false;
 }

@@ -191,6 +191,7 @@
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
             <!-- Cuerpo del modal-->
+            <p>¿Esta segunro que quiere borrar este registro?</p>
         @endslot
         @slot('footerModal')
             <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -308,6 +309,7 @@
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/modales/ModalConfirmClien.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
+<<<<<<< HEAD
 
     @if($errors->hasAny('nombre', 'apellidoPaterno','apellidoMaterno', 'telefono'))
         <script>
@@ -331,4 +333,7 @@
     @endif
     
 
+=======
+    <script src="./js/modales/clientesConfirmacion.js"></script>
+>>>>>>> 214b29eab543d06f0babe92901fe737d7b20ff4f
 @endsection

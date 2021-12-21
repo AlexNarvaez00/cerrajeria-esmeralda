@@ -30,8 +30,8 @@
         Reportes
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="/reporteProductos">Reportes ventas productos</a></li>
-        <li><a class="dropdown-item" href="#">Reportes ventas servicios</a></li>            
+        <li><a class="dropdown-item" href="/reporte-venta-productos">Reportes de ventas de productos</a></li>
+        <li><a class="dropdown-item" href="/reporte-ventas-servicios">Reportes ventas servicios</a></li>            
     </ul>
 </li>
 <li class="nav-item">
