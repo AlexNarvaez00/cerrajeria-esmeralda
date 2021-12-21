@@ -134,7 +134,7 @@ class proveedorController extends Controller
 
     public function update(Request $request,proveedorModelo $proveedore)
     {
-        $request->validate($this->reglaV2);
+        //$request->validate($this->reglaV2);
         $llavePrimariaPROV = "PROV-".
         strtoupper($request->apellidopaternoEditar[0]).
         strtoupper($request->apellidopaternoEditar[1]).
