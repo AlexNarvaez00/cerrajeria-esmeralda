@@ -1,33 +1,57 @@
-const formulariosAgregarCarrito = document.getElementsByClassName("form-carrito");
-const eliminarCarro  = document.getElementById("btnEliminarCarrito");
 var total = 0; //Obtiene el total a pagar
-var cont = 0;
+var cont = 0; //Obtiene la cantidad de productos que estan en el carrito
+let carrito = [];//Obtiene los productos que estan en el carrito
 
-for (let index = 0; index < formulariosAgregarCarrito.length; index++) {
-    const productoCarrito = formulariosAgregarCarrito[index];    
-    //Agregamos el vento de submit a cada "formulario" de las filas
-    //en los registros de la tabla
-    productoCarrito.addEventListener("submit", (event) => {        
-        event.preventDefault(); //Evitamos que el formulario envie cosas.                 
-        let filaHTML = event.target.parentNode.parentNode;
-        let registros = filaHTML.getElementsByClassName("dato");
-        let cantidadProductos = registros[3].innerHTML; //Obtiene la cantidad del inventario
+//Abre un modal con la información de un producto antes de agregar al carrito
+$(".btnAgregarAlCarro").on("click", function() {    
+    let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
+    var cantidadExistencia = fila[3].innerHTML;
+    if(cantidadExistencia == 0){
+        bloquear();
+    }else{
         limpiar();
-        if(cantidadProductos == 0){           
-            bloquear();          
-        }else{            
-            $("#letreroNombre").text(registros[0].innerHTML +" "+registros[1].innerHTML); 
-            $("#letreroPrecio").text("Precio individual: " + registros[2].innerHTML);           
-            let botonModal = document.getElementById("botonModalConfirmacion");
-            botonModal.addEventListener("click", (event) => {               
-                agregarCarro(registros);             
-                registros = "";
-            });                    
-        }             
-    });
-}
+    }
+    $("#letreroID").text(fila[0].innerHTML);
+    $("#letreroNombre").text(fila[1].innerHTML);
+    $("#letreroPrecio").text("Precio individual: " + fila[2].innerHTML);    
+});
+//Agrega al carrito
+$("#btnConfirmacionCarro").on("click", function() {    
+    identificadorProducto= $("#letreroID").text();       
+    minAjax({
+        url:"/producto/venta", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            clave_producto:identificadorProducto,
+            cant:4
+        },        
+        success: function(data){
+            data = JSON.parse(data);                            
+            if(data.nombre_producto != null){
+                let observacion = $("#areaObservaciones").val(); 
+                if(observacion == ""){
+                    observacion = "Sin observaciones";
+                }  
+                let cantidadProducto = $("#inCantExistencia").val();
+                if(cantidadProducto <= data.cantidad_existencia && data.cantidad_existencia != 0){
+                    fila = '<tr><td> ' + data.clave_producto+ '</td><td>'
+                        +data.nombre_producto+'</td><td>'+cantidadProducto+'</td><td>'
+                        +observacion+ '</td> <td>'+'$'+data.precio_producto+'</td></tr>';                
+                    $('#tabla tr:last').after(fila);
+                    cont ++;
+                    $("#conProductos").text(cont);
+                    obtenerTotal(cantidadProducto * data.precio_producto);
+                }else{
+                    alert("Agrega mas productos para poder venderlos");
+                }                
+            }
+        }
+    });   
+});
+
 //elimina todo el carrito
-eliminarCarro.addEventListener("click",(event)=>{
+$("#btnEliminarCarrito").on("click", function() {
     event.preventDefault();
     $('#tabla tr:not(:first)').remove();
     total = 0;
@@ -43,25 +67,6 @@ function obtenerTotal(totalProducto){
     $("#letreroTotal").text("Total a pagar: $" + total);
 }
 
-//Agrega una nueva fila al corrito de compras
-function agregarCarro(registros){
-    try {
-        var fila = "";    
-        let observacion = $("#areaObservaciones").val(); 
-        let totalProducto = parseInt($("#inCantExistencia").val()) * parseFloat(registros[2].innerHTML.replace('$',"")); 
-        obtenerTotal(totalProducto);     
-        if(observacion == ""){
-            observacion = "Sin observaciones";
-        }    
-        fila='<tr><td> ' +registros[0].innerHTML+'</td><td>'+registros[1].innerHTML+'</td><td>'+$("#inCantExistencia").val()+'</td><td>'+observacion + '</td> <td>'+'$'+totalProducto+ '</td></tr>';
-        $('#tabla tr:last').after(fila);
-        cont ++;
-        $("#conProductos").text(cont);       
-        registros = "";
-    }catch(error){
-
-    }
-}
 
 //bloquea las entradas si la cantidad en el inventario es 0
 function bloquear(){
@@ -72,7 +77,7 @@ function bloquear(){
     $( "#inCantExistencia" ).prop( "disabled", true );
 }
 
-
+//Limpia las entradas para que no quede residuo
 function limpiar(){
     $("#letreroNombre").text(""); 
     $("#letreroPrecio").text(""); 
@@ -84,6 +89,17 @@ function limpiar(){
 }
 
 //verificar si ya se agrego un producto al carrito
-function verificar(){
+function verificar(claveAgregada){   
+    str1 = new String(claveAgregada);      
+    $('#tabla tr').each(function() {
+        var productoId = $(this).find("td:first").html();  
+        str2 = new String(productoId);  
+        alert(productoId);           
+        if(!str1.toLowerCase() === str2.toLowerCase()){
+           alert(claveAgregada + " " + productoId);
+            return new Boolean(true);
+        }  
+     });
+     //return new Boolean (false);
 
 }
