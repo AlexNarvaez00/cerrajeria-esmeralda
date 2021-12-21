@@ -27,6 +27,8 @@
         Proveedores
     </h5>
 
+    {{$errors}}
+
 <!--########################### Cuerpo de la página ################################# -->
 
     <div class="container-fluid mb-4">
