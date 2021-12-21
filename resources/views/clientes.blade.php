@@ -309,8 +309,8 @@
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/modales/ModalConfirmClien.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
-<<<<<<< HEAD
-
+    <script src="./js/modales/clientesConfirmacion.js"></script>
+    
     @if($errors->hasAny('nombre', 'apellidoPaterno','apellidoMaterno', 'telefono'))
         <script>
             let modalRegistro = new bootstrap.Modal(document.getElementById('registroClienteModal'),null);
@@ -331,9 +331,7 @@
             modalEdicion.show();
         </script>    
     @endif
+
     
 
-=======
-    <script src="./js/modales/clientesConfirmacion.js"></script>
->>>>>>> 214b29eab543d06f0babe92901fe737d7b20ff4f
 @endsection
