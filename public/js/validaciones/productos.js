@@ -95,9 +95,14 @@ $(".btnDetalles").on('click',function() {
         },        
         success: function(data){
             data = JSON.parse(data);                            
-            $("#detalleDescripcion").val(data.data.descripcion.descripcion);
+            $("#detalleDescripcion").val(data.data.descripcion.descripcion);            
+            $("#detalleIdProveedor").val(data.data.proveedor.idproveedor);
+            $("#detalleNombreProveedor").val(data.data.proveedor.nombre);
+            $("#detalleApellidoP").val(data.data.proveedor.apellidopaterno);
+            $("#detalleapellidoM").val(data.data.proveedor.apellidomaterno);
+            $("#detalleCorreo").val(data.data.proveedor.correo);
+            $("#detalledireccion").val(data.data.proveedor.iddirecproveedor);
             
-            $("#detalleIdProveedor").val(claveProveedor);
         }
     });            
 });
