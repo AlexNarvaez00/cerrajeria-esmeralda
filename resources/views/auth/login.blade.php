@@ -53,6 +53,9 @@
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
         <input type="email" name="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
+        @if($errors->has('email'))
+          <p class="invalid-feedback">{{$errors->email}}</p>
+        @endif
       </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
