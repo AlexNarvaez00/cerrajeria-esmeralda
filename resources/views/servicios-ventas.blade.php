@@ -132,14 +132,14 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
-            <input type="text" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre" required>
+            <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre" required>
           </div>
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-            <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoP">
+            <input type="text" maxlength="30"  class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoP">
           </div>
         </div>
 
@@ -150,14 +150,14 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-              <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoM">
+              <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoM">
           </div>
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
-            <input type="text" class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
+            <input type="number" maxlength="10"  class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
           </div>
         </div>
 
@@ -174,13 +174,13 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Calle</span>
-            <input type="text" class="form-control" placeholder="ejem. Constitución" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle">
+            <input type="text" class="form-control" placeholder="ejem. Constitución" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle" required>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Número ext</span>
-            <input type="text" class="form-control" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numero">
+            <input type="text" class="form-control" min="1" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numero" required>
           </div>
         </div>
       </div>
@@ -230,13 +230,13 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Monto del servicio</span>
-            <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="monto" required>
+            <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" name="monto" required>
           </div>
         </div>
 
         <div class="input-group">
           <span class="input-group-text">Descripción</span>
-          <textarea id="areaDescripcion" class="form-control" aria-label="With textarea" name="descripcion"></textarea>
+          <textarea id="areaDescripcion" class="form-control" placeholder="Puedes agregar referencias del lugar o alguna observación" aria-label="With textarea" name="descripcion" required></textarea>
         </div>    
       </div>
     </div>

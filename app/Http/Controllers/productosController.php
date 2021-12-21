@@ -29,9 +29,7 @@ class productosController extends Controller
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        $this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
-        ->select("*")
-        ->get();
+        //$this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")->select("*")->get();
             /**
              * Del modelo de caprta App/Http/Models
              *  
@@ -60,10 +58,10 @@ class productosController extends Controller
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
+        //->with('registrosProductosjoin',$this->productosjoin)
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos
-            ->with('registrosProductosjoin',$this->productosjoin)
+            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos            
             ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }

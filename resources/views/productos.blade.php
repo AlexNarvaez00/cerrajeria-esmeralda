@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($registrosProductosjoin as $producto)
+                @foreach($registrosProductos as $producto)
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    

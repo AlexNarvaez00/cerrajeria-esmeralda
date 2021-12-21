@@ -25,6 +25,7 @@ class ventaProductoController extends Controller
         $this->productosjoin = productosModelo::leftJoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
+        $this->productos = productosModelo::all();
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Agregar al carrito'];
@@ -32,7 +33,8 @@ class ventaProductoController extends Controller
     
     public function index(){
             return view('productos-ventas') //Nombre de la vista            
-            ->with('camposProductos',$this->camposProductos)//Campos de la tablas           
+            ->with('camposProductos',$this->camposProductos)//Campos de la tablas 
+            ->with('productos',$this->productos)      
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
             ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
     }
