@@ -19,7 +19,7 @@
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
-        ¡Hola, XXXX XXXX XXXX!
+        ¡Hola, {{ auth()->user()->name}}!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#127991;</span>
@@ -57,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($registrosProductosDescripcionjoin as $producto)
+                    @foreach($productos as $producto)
                         <!--Inicio de la Fila-->
                         <tr>
                             <!--registros de las tablas-->    
@@ -67,12 +67,11 @@
                             <td class="dato">{{$producto->cantidad_existencia}}</td>                                                  
                             <!--Boton de carrito-->
                             <td>
-                            <a class = "btnAgregarAlCarro">                                                     
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
-                                <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
-                            </button>  
-                            </a>   
-                                                     
+                                <a class = "btnAgregarAlCarro">                                                     
+                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
+                                    </button>  
+                                </a>                                                     
                             </td>                
                         </tr>
                     @endforeach

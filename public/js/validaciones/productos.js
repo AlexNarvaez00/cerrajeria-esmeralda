@@ -1,7 +1,7 @@
 //Esto es un objeto, bueno, una manera de hacerlos
 const expresionesRegulares = {
     claveProducto: /^[a-zA-Z|\-|\d]*$/,
-    caracteres: /^[a-zA-Z|-]*$/,
+    caracteres: /^[a-zA-Z|-|\s]*$/,
     cantidades: /\d/,
 };
 
@@ -62,27 +62,46 @@ if (inputClasificacion) {
         evaluar(e, expresionesRegulares.caracteres)
     );
 }
-//Obtiene los valores de las filas
-$(document).ready(function() {
-    $(".btnEditar").click(function() {
-        $("#btnRegistrarProducto").hide();
-        $("#btnGuardarCambios").show();
-        var claveProducto = $(this).parents("tr").find("th")[0].innerHTML;            
-        var nombreProducto = $(this).parents("tr").find("td")[0].innerHTML;
-        var clasificacion = $(this).parents("tr").find("td")[1].innerHTML;
-        var precio = $(this).parents("tr").find("td")[2].innerHTML;
-        var existencia = $(this).parents("tr").find("td")[3].innerHTML;
-        var proveedor = $(this).parents("tr").find("td")[4].innerHTML; 
-        var descripcion = $(this).parents("tr").find("td")[5].innerHTML;                      
-        $("#inClaveProducto").val(claveProducto); 
-        $("#inClaveProducto").prop("disabled", true); 
-        $("#inNomProducto").val(nombreProducto);
-        $("#inClasificacion").val(clasificacion); 
-        $("#inPrecio").val(precio.replace("$","")); 
-        $("#inCantExistencia").val(existencia);             
-        $("#inDescripcion").val(descripcion);       
-    });
+//Opcion para el boton editar
+
+$(".btnEditar").on('click',function() {
+    let fila = $(this).closest("tr").find(".dato");
+    $("#btnRegistrarProducto").hide();
+    $("#btnGuardarCambios").show();
+    $("#inClaveProducto").prop("disabled", true); 
+    $("#inClaveProducto").val(fila[0].innerHTML); 
+    $("#inNomProducto").val(fila[1].innerHTML);
+    $("#inClasificacion").val(fila[2].innerHTML);
+    $("#inPrecio").val(fila[3].innerHTML.replace("$","")); 
+    $("#inCantExistencia").val(fila[4].innerHTML);           
 });
+//Opción para el boton ver detalles
+$(".btnDetalles").on('click',function() {
+    let fila = $(this).closest("tr").find(".dato"); 
+    var claveproducto =  fila[0].innerHTML;
+    var claveProveedor = fila[5].innerHTML.substring(" ");
+    $("#detalleClave").val(claveproducto);
+    $("#detalleNombreProducto").val(fila[1].innerHTML);
+    $("#detalleClasificacion").val(fila[2].innerHTML);
+    $("#detallePrecio").val(fila[3].innerHTML);
+    $("#detalleExistencia").val(fila[4].innerHTML);
+    minAjax({
+        url:"/producto/detalles", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            clave_producto:claveproducto,
+            idproveedor:claveProveedor
+        },        
+        success: function(data){
+            data = JSON.parse(data);                            
+            $("#detalleDescripcion").val(data.data.descripcion.descripcion);
+            
+            $("#detalleIdProveedor").val(claveProveedor);
+        }
+    });            
+});
+
 //Limpiar las entradas para que no quede reciduo
 function limpiar(){
     $("#btnRegistrarProducto").show();

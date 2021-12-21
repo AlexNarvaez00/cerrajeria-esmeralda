@@ -6,7 +6,7 @@ let carrito = [];//Obtiene los productos que estan en el carrito
 $(".btnAgregarAlCarro").on("click", function() {    
     let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
     var cantidadExistencia = fila[3].innerHTML;
-    if(cantidadExistencia == 0){
+    if(cantidadExistencia <= 0){
         bloquear();
     }else{
         limpiar();
@@ -24,15 +24,16 @@ $("#btnConfirmacionCarro").on("click", function() {
         data:{
             _token: document.querySelector('input[name="_token"]').value,
             clave_producto:identificadorProducto,
-            cant:4
+            cantidadExistente:$("#inCantExistencia").val()
         },        
         success: function(data){
             data = JSON.parse(data);                            
             if(data.nombre_producto != null){
+
                 let observacion = $("#areaObservaciones").val(); 
                 if(observacion == ""){
                     observacion = "Sin observaciones";
-                }  
+                }
                 let cantidadProducto = $("#inCantExistencia").val();
                 if(cantidadProducto <= data.cantidad_existencia && data.cantidad_existencia != 0){
                     fila = '<tr><td> ' + data.clave_producto+ '</td><td>'
@@ -42,6 +43,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                     cont ++;
                     $("#conProductos").text(cont);
                     obtenerTotal(cantidadProducto * data.precio_producto);
+                    
                 }else{
                     alert("Agrega mas productos para poder venderlos");
                 }                
@@ -51,8 +53,7 @@ $("#btnConfirmacionCarro").on("click", function() {
 });
 
 //elimina todo el carrito
-$("#btnEliminarCarrito").on("click", function() {
-    event.preventDefault();
+$("#btnEliminarCarrito").on("click", function() {    
     $('#tabla tr:not(:first)').remove();
     total = 0;
     $("#letreroTotal").text("Total a pagar: $" + total);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\productosModelo;
-use App\Models\proveedorModelo; //proveddores para rellenarlo en la seleccion para agregar
+use App\Models\proveedorModelo;
 use App\Models\productosDescripcionModelo;
 
 use Illuminate\Http\Request;
@@ -29,15 +29,13 @@ class productosController extends Controller
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        $this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
-        ->select("*")
-        ->get();
+        //$this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")->select("*")->get();
             /**
              * Del modelo de caprta App/Http/Models
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Descripcion','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Ver detalles','Editar','Borrar'];
     }
 
     /**
@@ -46,6 +44,7 @@ class productosController extends Controller
      * al mostrar las vistas.
      * 
     */
+    
     public function index(Request $request)
     {
         $listaProductos = null;
@@ -60,10 +59,10 @@ class productosController extends Controller
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
+        //->with('registrosProductosjoin',$this->productosjoin)
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos
-            ->with('registrosProductosjoin',$this->productosjoin)
+            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos            
             ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
@@ -100,14 +99,10 @@ class productosController extends Controller
         //return $request;
         return redirect()->route('productos.index');
     }
-    public function edit($clave_producto){
-        $producto=productosModelo::findOrFail($clave_producto);
-        return $producto;
 
-    }
-    
-    public function show()
-    {
-        # code...
+    public function getDetalles(Request $request){        
+        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
+        $proveedor = proveedorModelo::find($request->idproveedor);
+        return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
     }
 }

@@ -19,7 +19,7 @@
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
-        ¡Hola, XXXX XXXX XXXX!
+        ¡Hola, {{ auth()->user()->name}}!
     </h5>
     <h5 class="h5 text-star mt-3 mb-5 ps-3 ">
         <span>&#128273;</span>
@@ -58,24 +58,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($registrosProductosjoin as $producto)
+                @foreach($registrosProductos as $producto)
                     <!--Inicio de la Fila-->
                     <tr>
                         <!--ID de la tabla usuarios-->    
-                        <th scope="col">{{$producto->clave_producto}}</th>
+                        <th class="dato" scope="col">{{$producto->clave_producto}}</th>
                         <!--Los otros atributos de la tabla usuarios-->
-                        <td>{{$producto->nombre_producto}}</td>
-                        <td>{{$producto->clasificacion}}</td>
-                        <td>&#36;{{$producto->precio_producto}}</td>
-                        <td>{{$producto->cantidad_existencia}}</td>
-                        <td>{{$producto->idproveedor}}</td>
-                        <td style="font-size:80%;">{{$producto->descripcion}}</td>
+                        <td class="dato">{{$producto->nombre_producto}}</td>
+                        <td class="dato">{{$producto->clasificacion}}</td>
+                        <td class="dato">&#36;{{$producto->precio_producto}}</td>
+                        <td class="dato">{{$producto->cantidad_existencia}}</td>
+                        <td class="dato">{{$producto->idproveedor}}</td>                     
                         
                         <!--Botones-->
-                        <td class="btnEditar">
-                            <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
-                                <span>&#128394;</span>
-                            </button>
+                        <td>
+                            <a class="btnDetalles">
+                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles">
+                                    <span>&#128065;</span>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btnEditar">                                
+                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+                                    <span>&#128394;</span>
+                                </button>
+                            </a>
                         </td>
                         <td>
                             <button class="btn">
@@ -122,39 +130,46 @@
             <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input id ="inClasificacion" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
+                        <input id ="inClasificacion" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
+                        <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
                 </div>
             </div> 
 
             <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                <div class="col-md-6 col-sm-12">
+                        <div class="input-group mb-3 ">
+                            <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
+                            <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                        </div>
+                    </div>          
+                
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+                        <select class="form-select" id="inputGroupSelect01" name="idproveedor">
+                            <option selected>Seleccione un proveedor</option>
+                            @foreach($registrosProveedores as $proveedor)
+                            <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
+                            @endforeach
+                        </select>
                     </div>
-                </div>               
-            </div> 
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-                <select class="form-select" id="inputGroupSelect01" name="idproveedor">
-                    <option selected>Seleccione un proveedor</option>
-                    @foreach($registrosProveedores as $proveedor)
-                    <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
-                    @endforeach
-                </select>
+                </div>
             </div>
-            <div class="input-group">
-                <span class="input-group-text">Descripcion</span>
-                <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
-            </div> 
+            <div class = "row">
+                <div class="col-md-12 col-sm-12"> 
+                    <div class="input-group">
+                        <span class="input-group-text">Descripcion</span>
+                        <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+                    </div> 
+                </div>
+            </div>
         </div>
     @endslot
     @slot('footerModal')
@@ -176,11 +191,92 @@
         </div>
     @endslot
     @endcomponent
-@endsection
 
+
+@component('components.modalSimple')
+    @slot('idModal','verdetalles')
+    @slot('tituloModal','Detalles del producto')
+    @slot('cuerpoModal')
+    
+    <div class="container-fluid">  
+        <h6> Información del producto </h6>             
+        <div class="row">            
+            <div class="col-md-6 col-sm-12">
+                        <div class="input-group mb-3 ">
+                            <span class="input-group-text" id="basic-addon1">Clave producto</span>
+                            <input id="detalleClave" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+            </div>                    
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
+                    <input id="detalleNombreProducto" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Clasificación</span>
+                    <input id = "detalleClasificacion" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Precio</span>
+                    <input id="detallePrecio" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
+                    <input id="detalleExistencia" disabled="true" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div> 
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-text">Descripcion del producto</span>
+                    <textarea id="detalleDescripcion" disabled="true" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+                </div>                
+            </div>
+        </div>
+
+        <br>     
+        <hr>   
+        <h6>Información del proveedor<h6>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Id Proveedor</span>
+                    <input id="detalleIdProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        </div>            
+    <div>
+        
+    @endslot
+    @slot('footerModal')
+    @csrf
+        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+            <span class="me-2">&#10060;</span>
+            Cerrar
+        </button>       
+        
+    @endslot
+    @endcomponent
+@endsection
 
 
 @section('scritps')
     <script src="./js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/minAjax.js"></script>
     <script src="./js/validaciones/productos.js"></script>
 @endsection

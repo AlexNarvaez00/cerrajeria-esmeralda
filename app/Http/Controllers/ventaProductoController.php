@@ -25,6 +25,7 @@ class ventaProductoController extends Controller
         $this->productosjoin = productosModelo::leftJoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
+        $this->productos = productosModelo::all();
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Agregar al carrito'];
@@ -32,7 +33,8 @@ class ventaProductoController extends Controller
     
     public function index(){
             return view('productos-ventas') //Nombre de la vista            
-            ->with('camposProductos',$this->camposProductos)//Campos de la tablas           
+            ->with('camposProductos',$this->camposProductos)//Campos de la tablas 
+            ->with('productos',$this->productos)      
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
             ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
     }
@@ -52,12 +54,15 @@ class ventaProductoController extends Controller
     }
 
     public function getProducto(Request $request){
-        $productoCarrito = productosModelo::find($request->clave_producto);
-        DB::table('productos')
-        ->where('clave_producto', $request->clave_producto)
-        ->update(['cantidad_existencia' => $request->cantidadExistente]);          
+        $productoCarrito = productosModelo::find($request->clave_producto);        
+                 
         return response()->json($productoCarrito);
     }
+    /**
+     * DB::table('productos')
+        ->where('clave_producto', $request->clave_producto)
+        ->update(['cantidad_existencia' => $productoCarrito->cantidad]); 
+     */
     
     
    
