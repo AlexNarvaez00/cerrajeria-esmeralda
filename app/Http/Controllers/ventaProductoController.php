@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\productosModelo;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\productosDescripcionModelo;
 
@@ -21,7 +22,7 @@ class ventaProductoController extends Controller
     public function __construct()
     {
         //realiza un join para unir dos tablas
-        $this->productosjoin = productosModelo::join("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
+        $this->productosjoin = productosModelo::leftJoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
         //Son los campos de las tablas
@@ -51,7 +52,10 @@ class ventaProductoController extends Controller
     }
 
     public function getProducto(Request $request){
-        $productoCarrito = productosModelo::find($request->clave_producto);        
+        $productoCarrito = productosModelo::find($request->clave_producto);
+        DB::table('productos')
+        ->where('clave_producto', $request->clave_producto)
+        ->update(['cantidad_existencia' => $request->cantidadExistente]);          
         return response()->json($productoCarrito);
     }
     

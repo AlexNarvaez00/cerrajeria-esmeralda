@@ -34,7 +34,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                     observacion = "Sin observaciones";
                 }  
                 let cantidadProducto = $("#inCantExistencia").val();
-                if(cantidadProducto <= data.cantidad_existencia){
+                if(cantidadProducto <= data.cantidad_existencia && data.cantidad_existencia != 0){
                     fila = '<tr><td> ' + data.clave_producto+ '</td><td>'
                         +data.nombre_producto+'</td><td>'+cantidadProducto+'</td><td>'
                         +observacion+ '</td> <td>'+'$'+data.precio_producto+'</td></tr>';                
