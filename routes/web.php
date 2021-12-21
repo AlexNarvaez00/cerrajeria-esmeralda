@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/productos-ventas', ventaProductoController::class);
     Route::resource('/servicios-ventas', serviciosController::class);
 
-    Route::resource('/reporteVentas',reporteVentasController::class);
+    Route::resource('/reporte-ventas-servicios',reporteVentasController::class);
     Route::resource('/reporte-venta-productos',reporteVentaProductosController::class);
 
     /**

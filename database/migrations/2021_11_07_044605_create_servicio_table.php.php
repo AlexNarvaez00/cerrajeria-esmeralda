@@ -19,7 +19,7 @@ class CreateServicioTable extends Migration
             $table->string('iddireccion',30);
             $table->double('monto',6,2);
             $table->tinyText('descripcion');
-            $table->string('idcliente',7);            
+            $table->string('idcliente',20);            
             $table->primary('idservicio');            
             $table->foreign('iddireccion')->references('iddireccion')->on('direccion');
             $table->foreign('idcliente')->references('idcliente')->on('cliente');

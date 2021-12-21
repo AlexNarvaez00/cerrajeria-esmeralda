@@ -6,7 +6,7 @@ const expresionesRegulares = {
     NumTelefono:/^[0-9]{10}$/, //Los números de telefono tiene 10 números
     Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,   // Correo electrónico
     Calle: /^[A-Z][a-zÀ-ÿ\s]{1,40}/, //Letras y espacios, pueden llevar acentos
-    NumExt:/^[0-2]+[0-9][0-9]$/, // Números exteriores del 0 al 255 pedo del omar >:V
+    NumExt:/^[0-2]+[0-9][0-9]$/, // Números exteriores 
     //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
 };
 

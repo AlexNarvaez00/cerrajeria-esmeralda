@@ -75,8 +75,9 @@ class usuarioController extends Controller
      * Funcion para guardar un nuevo registro en la base de datos.
      * 
      * @param request Este objeto se ecarga de recibir la informacion
-     * que enviamos por el formulario, de nanera oculta
+     * que enviamos por el formulario, de nanera oculta.
      * 
+     * @return redirect Redirecciona a la vista principal. 
      */
     public function store(Request $request)
     {
@@ -170,4 +171,7 @@ class usuarioController extends Controller
     public function show(Request $request, $usuario)
     {
     }
+
+
+
 }
