@@ -28,7 +28,7 @@
     </h5>
 
     <div class="container-fluid mb-4">
-        <form method="GET" action="{{route('reporteProductos.index')}}" class="row d-flex justify-content-end">
+        <form method="GET" action="{{route('reporte-venta-productos.index')}}" class="row d-flex justify-content-end">
             <!--Input de busqueda-->
             <div class="col-5">
                 <input type="text" class="form-control" placeholder="ID del reporte" name="inputBusqueda" value="{{ old('inputBusqueda') }}">
@@ -94,24 +94,32 @@
                 </thead>
                 <tbody>
                     <!--Aqui van los registros-->
-                    @foreach($registrosVista as $reporteProductos)
+                    @foreach($registrosVista as $venta)
                         <!--Inicio de la Fila-->
                         <tr>
                             <!--ID de la tabla clientes-->    
-                            <th scope="col">{{$reporteProductos->folio_v}}</th>
+                            <th scope="col">{{$venta->folio_v}}</th>
                             <!--Los otros atributos de la tabla usuarios-->
-                            <td >{{$reporteProductos->idusuario}}</td>
-                            <td >{{$reporteProductos->fechayhora}}</td>
+                            <td >{{$venta->idusuario}}</td>
+                            <td >{{$venta->fechayhora}}</td>
                             <td>
-                                <button class="btn" data-url-query="">
+                                <button class="btn btn-information-sales" 
+                                    data-url-query="{{ route('ventas.folio',$venta) }}"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#InformacionModalProductos" >
                                       <span>&#128065;</span>  
                                 </button>
                             </td>
                             <!--Botones-->
                             <td>
-                            <button class="btn" data-id-db="{{$reporteProductos->folio_v}}">
-                                <span>&#128394;</span>
-                            </button>
+                                <button class="btn" data-id-db="">
+                                    <span>&#128394;</span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn" data-id-db="">
+                                    <span>&#10060;</span>
+                                </button>
                             </td>
                         <td>
                             
@@ -120,7 +128,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$registrosVista->links()}}
+            {{$registrosVista->withQueryString()->links()}}
         </div>
     </div>
    
@@ -141,10 +149,39 @@
             </button>
         @endslot
     @endcomponent
+
+<!-- ########################## MODLA DE INFORMACION DE LA VENTA ################################################-->
+@component('components.modalSimple')
+        @slot('idModal','InformacionModalProductos')
+        @slot('tituloModal','Informaicon basica de la venta')
+        @slot('cuerpoModal')
+            <!-- Cuerpo del modal-->
+            <div class="container-information overflow-auto">
+
+            </div>
+        @endslot
+        @slot('footerModal')
+            <!--Pies del modal-->
+            <!-- <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+                <span class="me-2">&#10060;</span>
+                Cancelar
+            </button> -->
+            <button type="button" class="btn btn-light d-flex ps-3 pe-3" id="" data-bs-dismiss="modal">
+                <span class="me-2">&#10004;</span>
+                Aceptar
+            </button>
+        @endslot
+@endcomponent        
+
 @endsection
+
+
+
+
 
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
-   
+    <script type="text/javascript" src="./js/minAjax.js"></script>
+    <script src="./js/funciones/informacionProductos.js"></script>
 @endsection
