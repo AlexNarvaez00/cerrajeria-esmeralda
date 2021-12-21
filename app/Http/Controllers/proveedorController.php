@@ -80,7 +80,15 @@ class proveedorController extends Controller
         //Chequen esa parte.
 
         //Nombre del campo BD----- Nombre input formulario
-        $proveedor->idproveedor = "PROV-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1].$request->numext[0].$request->numext[1];
+        $llavePrimaria = "PROV-".
+        strtoupper($request->apellidopaterno[0]).
+        strtoupper($request->apellidopaterno[1]).
+        strtoupper("-".$request->apellidomaterno[0]).
+        strtoupper($request->apellidomaterno[1]).
+        strtoupper($request->numext[0]).
+        strtoupper($request->numext[1]);
+
+        $proveedor->idproveedor =  $llavePrimaria;
         $proveedor->nombre = $request->nombre;
         $proveedor->apellidopaterno = $request->apellidopaterno;
         $proveedor->apellidomaterno = $request->apellidomaterno;
@@ -127,11 +135,30 @@ class proveedorController extends Controller
     public function update(Request $request,proveedorModelo $proveedore)
     {
         $request->validate($this->reglaV2);
-        $proveedore->nombre = $request->nombreEditar;
-        //$proveedore->apellidopaterno = $request->apellidopaternoEditar;
-        //$proveedore->apellidomaterno = $request->apellidomaternoEditar;
-        //$proveedore->correo = $request->correoEditar;
+        $llavePrimariaPROV = "PROV-".
+        strtoupper($request->apellidopaternoEditar[0]).
+        strtoupper($request->apellidopaternoEditar[1]).
+        strtoupper("-".$request->apellidomaternoEditar[0]).
+        strtoupper($request->apellidomaternoEditar[1]).
+        strtoupper($request->numextEditar[0]).
+        strtoupper($request->numextEditar[1]);
 
+        $proveedore->idproveedor =  $llavePrimariaPROV;
+        $proveedore->nombre = $request->nombreEditar;
+        $proveedore->apellidopaterno = $request->apellidopaternoEditar;
+        $proveedore->apellidomaterno = $request->apellidomaternoEditar;
+        $proveedore->correo = $request->correoEditar;
+
+        $direccion = new direccionModelo();
+        $direccion->iddireccion = "DIC-".$request->numextEditar[0].$request->numextEditar[1].$request->apellidopaternoEditar[0].$request->apellidopaternoEditar[1]."-".$request->apellidomaternoEditar[0].$request->apellidomaternoEditar[1];
+
+        $PRYKEY = $direccion->iddireccion;
+        $direccion->calle=$request->calleEditar;
+        $direccion->numero= $request->numextEditar;
+        $direccion->idcoldirec = $request->coloniasEditar;
+        $direccion->save();
+
+        $proveedore->iddirecproveedor = $PRYKEY;
         $proveedore->save();
 
         return redirect()->route('proveedores.index');

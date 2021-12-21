@@ -298,6 +298,7 @@
             <div class="row">
                 <!--Columnas :v-->
                 @csrf
+                <input type="hidden" name="urltemp" id="">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
                 <div class="col-md-6 col-sm-12">
