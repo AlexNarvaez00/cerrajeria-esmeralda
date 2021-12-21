@@ -15,9 +15,26 @@ class proveedorController extends Controller
      /**
      * Atributos ...
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
     protected  $proveedoresLista;//Esta variables para guardar la lista de proveeores
     private $camposTabla;
+
+    private $reglaV = [
+        'nombre' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]/',
+        'apellidopaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'apellidomaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'numtelefono' => 'required|regex:/^[0-9]{10}$/',
+        'correo' => 'required|email',
+        'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
+        'numext' => 'required|regex:/^[0-2]+[0-9][0-9]$/' 
+    ];
+
+    //Esto va a ser una constante
+    private $reglaV2 = [
+        'nombreEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]/',
+        'apellidopaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'apellidomaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
+        'correoEditar ' => 'required|email'
+    ];
 
 
     //Pagina para referenciar las cosas xd    
@@ -25,7 +42,6 @@ class proveedorController extends Controller
 
     public function __construct()
     {
-        $this->nombreUsuario = 'Narvaez ';
         $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','ID Dirección','Editar','Borrar'];
     }
     
@@ -40,22 +56,16 @@ class proveedorController extends Controller
         $listaProveedores = null;
         if(count($request->all()) >= 0){
             $listaProveedores = proveedorModelo::where('idproveedor','like',$request->inputBusqueda.'%')
-                                    ->get();
+            ->paginate(6);
         }else{
             //Sino tiene nada
             //Que lo rellene con todos los registros 
-            $listaProveedores = proveedorModelo::all();
+            $listaProveedores = proveedorModelo::paginate(6);
         }
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
-
-        
         $estadosLista = estadosModelo::all();
-        
-        
-        
         return view('proveedores') //Nombre de la vista
-            ->with('nombreUsuarioVista', $this->nombreUsuario) //Titulo de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('registrosVista', $listaProveedores) //Registros de la tabla
             ->with('registroEstados',$estadosLista);
@@ -65,7 +75,7 @@ class proveedorController extends Controller
     public function store(Request $request){
         //Creamos un nuevo objeto.
         $proveedor = new proveedorModelo();
-
+        $request->validate($this->reglaV);
         //Nombre del input del formulario es una tributo "name"
         //Chequen esa parte.
 
@@ -116,7 +126,12 @@ class proveedorController extends Controller
 
     public function update(Request $request,proveedorModelo $proveedore)
     {
+        $request->validate($this->reglaV2);
         $proveedore->nombre = $request->nombreEditar;
+        //$proveedore->apellidopaterno = $request->apellidopaternoEditar;
+        //$proveedore->apellidomaterno = $request->apellidomaternoEditar;
+        //$proveedore->correo = $request->correoEditar;
+
         $proveedore->save();
 
         return redirect()->route('proveedores.index');
