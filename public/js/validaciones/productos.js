@@ -79,6 +79,7 @@ $(".btnEditar").on('click',function() {
 $(".btnDetalles").on('click',function() {
     let fila = $(this).closest("tr").find(".dato"); 
     var claveproducto =  fila[0].innerHTML;
+    var claveProveedor = fila[5].innerHTML.substring(" ");
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
     $("#detalleClasificacion").val(fila[2].innerHTML);
@@ -89,15 +90,16 @@ $(".btnDetalles").on('click',function() {
         type:"POST",
         data:{
             _token: document.querySelector('input[name="_token"]').value,
-            clave_producto:claveproducto
+            clave_producto:claveproducto,
+            idproveedor:claveProveedor
         },        
         success: function(data){
             data = JSON.parse(data);                            
-            $("#detalleDescripcion").val(data.descripcion);
-            var claveProveedor = fila[5].innerHTML.substring(" ");
+            $("#detalleDescripcion").val(data.data.descripcion.descripcion);
+            
             $("#detalleIdProveedor").val(claveProveedor);
         }
-       });            
+    });            
 });
 
 //Limpiar las entradas para que no quede reciduo

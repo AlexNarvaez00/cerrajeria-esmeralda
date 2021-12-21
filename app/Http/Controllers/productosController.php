@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\productosModelo;
-use App\Models\proveedorModelo; //proveddores para rellenarlo en la seleccion para agregar
+use App\Models\proveedorModelo;
 use App\Models\productosDescripcionModelo;
 
 use Illuminate\Http\Request;
@@ -102,6 +102,7 @@ class productosController extends Controller
 
     public function getDetalles(Request $request){        
         $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
-        return response()->json($descripcionProducto);
+        $proveedor = proveedorModelo::find($request->idproveedor);
+        return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
     }
 }
