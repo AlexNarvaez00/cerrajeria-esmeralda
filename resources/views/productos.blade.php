@@ -71,10 +71,12 @@
                         <td class="dato">{{$producto->idproveedor}}</td>                     
                         
                         <!--Botones-->
-                        <td class="btnDetalles">
-                            <button class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles">
-                                <span>&#128065;</span>
-                            </button>
+                        <td>
+                            <a class="btnDetalles">
+                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles">
+                                    <span>&#128065;</span>
+                                </button>
+                            </a>
                         </td>
                         <td>
                             <a class="btnEditar">                                
@@ -196,62 +198,68 @@
     @slot('tituloModal','Detalles del producto')
     @slot('cuerpoModal')
     
-    <div class="container-fluid">        
-        <div class="row">
-         <!--Columnas :v-->
-         <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clave producto</span>
-                        <input maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
-                    </div>
+    <div class="container-fluid">  
+        <h6> Información del producto </h6>             
+        <div class="row">            
+            <div class="col-md-6 col-sm-12">
+                        <div class="input-group mb-3 ">
+                            <span class="input-group-text" id="basic-addon1">Clave producto</span>
+                            <input id="detalleClave" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+            </div>                    
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
+                    <input id="detalleNombreProducto" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
         </div>
-                <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>
-                    </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Clasificación</span>
+                    <input id = "detalleClasificacion" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div>
 
-            <div class="row">
             <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
-                    </div>
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Precio</span>
+                    <input id="detallePrecio" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
+            </div>
+        </div> 
 
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input type="number" step="0.01" class="form-control" value="0.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
-                    </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
+                    <input id="detalleExistencia" disabled="true" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div> 
-
-            <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                        <input type="number" class="form-control" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
-                    </div>
-                </div>   
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Id Proveedor</span>
-                        <input maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>
-                    </div>
-                </div>
-            </div>            
-            </div> 
-            <div class="row">
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
                 <div class="input-group">
                     <span class="input-group-text">Descripcion del producto</span>
-                    <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
-                </div> 
+                    <textarea id="detalleDescripcion" disabled="true" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
+                </div>                
             </div>
-            
+        </div>
+
+        <br>     
+        <hr>   
+        <h6>Información del proveedor<h6>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Id Proveedor</span>
+                    <input id="detalleIdProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        </div>            
     <div>
         
     @endslot
@@ -269,5 +277,6 @@
 
 @section('scritps')
     <script src="./js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/minAjax.js"></script>
     <script src="./js/validaciones/productos.js"></script>
 @endsection

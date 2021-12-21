@@ -44,6 +44,7 @@ class productosController extends Controller
      * al mostrar las vistas.
      * 
     */
+    
     public function index(Request $request)
     {
         $listaProductos = null;
@@ -98,14 +99,9 @@ class productosController extends Controller
         //return $request;
         return redirect()->route('productos.index');
     }
-    public function edit($clave_producto){
-        $producto=productosModelo::findOrFail($clave_producto);
-        return $producto;
 
-    }
-    
-    public function show()
-    {
-        # code...
+    public function getDetalles(Request $request){        
+        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
+        return response()->json($descripcionProducto);
     }
 }

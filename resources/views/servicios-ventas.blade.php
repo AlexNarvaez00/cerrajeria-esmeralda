@@ -20,7 +20,7 @@
 <!--Encabezado bienvenida-->
 <h5 class="h5 text-star mt-5 ps-3">
   <span>&#128075;</span>   
-    ¡Hola, XXXX XXXX XXXX!
+  ¡Hola, {{ auth()->user()->name}}!
 </h5>
 <!--Titulo modulo-->
 <h5 class="h5 text-star mt-3 mb-5 ps-3 ">

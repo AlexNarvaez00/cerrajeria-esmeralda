@@ -62,37 +62,43 @@ if (inputClasificacion) {
         evaluar(e, expresionesRegulares.caracteres)
     );
 }
-//Obtiene los valores de las filas
+//Opcion para el boton editar
 
-    $(".btnEditar").on('click',function() {
-        let fila = $(this).closest("tr").find(".dato");
-        $("#btnRegistrarProducto").hide();
-        $("#btnGuardarCambios").show();
-        $("#inClaveProducto").prop("disabled", true); 
-        $("#inClaveProducto").val(fila[0].innerHTML); 
-        $("#inNomProducto").val(fila[1].innerHTML);
-        $("#inClasificacion").val(fila[2].innerHTML);
-        $("#inPrecio").val(fila[3].innerHTML.replace("$","")); 
-        $("#inCantExistencia").val(fila[4].innerHTML);   
-        
-        //alert(fila[0].innerHTML);
-        //$("#inClaveProducto").val(fila[0].innerHTML); 
-        /*
-        var claveProducto = fila[0].innerHTML;            
-        var nombreProducto = fila[0].innerHTML;
-        var clasificacion = fila[1].innerHTML;
-        var precio = fila.innerHTML;
-        var existencia = fila[3].innerHTML;
-        var proveedor = fila[4].innerHTML; 
-        var descripcion = fila[5].innerHTML;                      
-        $("#inClaveProducto").val(claveProducto); 
-        $("#inClaveProducto").prop("disabled", true); 
-        $("#inNomProducto").val(nombreProducto);
-        $("#inClasificacion").val(clasificacion); 
-        $("#inPrecio").val(precio.replace("$","")); 
-        $("#inCantExistencia").val(existencia);             
-        $("#inDescripcion").val(descripcion); */      
-    });
+$(".btnEditar").on('click',function() {
+    let fila = $(this).closest("tr").find(".dato");
+    $("#btnRegistrarProducto").hide();
+    $("#btnGuardarCambios").show();
+    $("#inClaveProducto").prop("disabled", true); 
+    $("#inClaveProducto").val(fila[0].innerHTML); 
+    $("#inNomProducto").val(fila[1].innerHTML);
+    $("#inClasificacion").val(fila[2].innerHTML);
+    $("#inPrecio").val(fila[3].innerHTML.replace("$","")); 
+    $("#inCantExistencia").val(fila[4].innerHTML);           
+});
+//Opción para el boton ver detalles
+$(".btnDetalles").on('click',function() {
+    let fila = $(this).closest("tr").find(".dato"); 
+    var claveproducto =  fila[0].innerHTML;
+    $("#detalleClave").val(claveproducto);
+    $("#detalleNombreProducto").val(fila[1].innerHTML);
+    $("#detalleClasificacion").val(fila[2].innerHTML);
+    $("#detallePrecio").val(fila[3].innerHTML);
+    $("#detalleExistencia").val(fila[4].innerHTML);
+    minAjax({
+        url:"/producto/detalles", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            clave_producto:claveproducto
+        },        
+        success: function(data){
+            data = JSON.parse(data);                            
+            $("#detalleDescripcion").val(data.descripcion);
+            var claveProveedor = fila[5].innerHTML.substring(" ");
+            $("#detalleIdProveedor").val(claveProveedor);
+        }
+       });            
+});
 
 //Limpiar las entradas para que no quede reciduo
 function limpiar(){
