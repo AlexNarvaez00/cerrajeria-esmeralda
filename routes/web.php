@@ -60,11 +60,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/estado/todo', [proveedorController::class, 'getCiudades'])->name('estados.todo');
     Route::post('/municipio/todo', [proveedorController::class, 'getColonias'])->name('municipios.todo');
-    Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
-    Route::post('/producto/todo', [ventaProductoController::class, 'getProducto'])->name('producto.todo');
-   
+    
+    
+   //Rutas para el modulo de ventas servicios
     Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');
     Route::post('/municipio/servicio',[serviciosController::class,'getColonias'])->name('municipio.servicio');
+    Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
+    //Rutas para el modulo de ventas de productos
+    Route::post('/producto/venta', [ventaProductoController::class, 'getProducto'])->name('producto.venta');
+    
     
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -85,3 +89,6 @@ Auth::routes();
  * 
  */
 //Route::get('/{pagina}',[RutasController::class,'showView']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

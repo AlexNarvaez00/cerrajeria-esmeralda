@@ -33,7 +33,7 @@
             </div> 
             <form action="" class="col-9 d-flex justify-content-end">                   
                 <div class="col-5">
-                    <input type="text" class="form-control" placeholder="PlaceHolder">
+                    <input type="text" class="form-control" placeholder="Buscar producto">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
@@ -67,11 +67,12 @@
                             <td class="dato">{{$producto->cantidad_existencia}}</td>                                                  
                             <!--Boton de carrito-->
                             <td>
-                                <form class="form-carrito" method="POST" action="{{route('productos.index')}}">                      
-                                    <button id="btnCarrito" type="submit" class="btn" data-id-db="{{$producto->clave_producto}}" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
-                                        <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
-                                    </button>     
-                                </form>                       
+                            <a class = "btnAgregarAlCarro">                                                     
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
+                                <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
+                            </button>  
+                            </a>   
+                                                     
                             </td>                
                         </tr>
                     @endforeach
@@ -117,12 +118,14 @@
     @slot('idModal','agregarcarritoModal')
     @slot('tituloModal','Agregar al carrito')
     @slot('cuerpoModal')
-    @csrf
+    
     <div class="container-fluid">
     
         <div class="row">        
             <p class="px-3">
-                <h5 id="letreroNombre"></h5>
+                
+                <h5 id="letreroID"></h5>
+                <h6 id="letreroNombre"></h6>
                 <h6 id="letreroPrecio"></h6>
             </p>
             
@@ -142,11 +145,12 @@
         
     @endslot
     @slot('footerModal')
+    @csrf
         <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
-        </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion" data-bs-dismiss="modal">
+        </button>        
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" id="btnConfirmacionCarro" data-bs-dismiss="modal">
             <i class="bi bi-plus-lg " style="font-size:20px;"></i>
             Agregar
         </button>
@@ -157,7 +161,6 @@
 @section('scritps')   
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="./js/minAjax.js"></script>
-    <script src="./js/validaciones/productos.js"></script>
-    <script src="./js/funciones/funcionesProductos-ventas.js"></script>
+    <script src="./js/validaciones/productos.js"></script>    
     <script src="./js/modales/mostrarModalProdVentas.js" ></script>
 @endsection
