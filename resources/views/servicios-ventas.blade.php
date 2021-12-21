@@ -72,7 +72,17 @@
         <td class="data">{{$servicio->monto}}</td>
         <td class="data">{{$servicio->descripcion}}</td>
         <td class="data">{{$servicio->idcliente}}</td> 
-        <!--Botones-->                                            
+        <!--Botones--> 
+        <td class="btnEditar">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+            <span>&#128065;</span>
+          </button>
+        </td> 
+        <td class="btnEditar">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+            <span>&#128736;</span>
+          </button>
+        </td>                                          
       </tr>
       @endforeach        
       </tbody>
@@ -93,7 +103,7 @@
     <div class="container-fluid">
       <h4 class="d-flex justify-content-center">Datos del cliente</h4>
       <div class="row">
-       <!-- <form method="GET">-->
+       
         @csrf
           <div class="col-md-5 col-sm-12">
             <div class="form-check form-switch">
@@ -105,7 +115,7 @@
           <div class="col-md-5 col-sm-12">
             <div class="input-group mb-3 ">
               <span class="input-group-text" id="basic-addon1">idCliente</span>
-              <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" id="inputIdCliente" name="nombre" required>
+              <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" id="inputIdCliente" name="idCliente" required>
             </div>
           </div>
 
@@ -114,7 +124,7 @@
                     <span class="me-3">&#128269</span>                  
               </button>
             </div>
-        <!--</form>-->
+        
       </div>  
 
       <div class="row">
@@ -129,7 +139,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-            <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="nombre">
+            <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoP">
           </div>
         </div>
 
@@ -140,7 +150,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-              <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoMaterno">
+              <input type="text" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoM">
           </div>
         </div>
 
@@ -170,7 +180,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Número ext</span>
-            <input type="text" class="form-control" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numext">
+            <input type="text" class="form-control" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numero">
           </div>
         </div>
       </div>
@@ -180,9 +190,12 @@
       <div class="col-md-6 col-sm-12">
         <div class="input-group mb-3">
           <label class="input-group-text" for="inputEstado">Estado</label>
-          <select id="inputEstado" class="form-select" name="estados" value="">
-            <option selected value="0">Selecciona un estado</option>                                
-          </select>
+            <select id="inputEstado" class="form-select" name="estados" value="">
+              <option selected value="0">Selecciona un estado</option>
+              @foreach($registroEstados as $lugarCliente)
+              <option value="{{$lugarCliente->id}}">{{$lugarCliente->nombre}} </option>                    
+              @endforeach
+            </select>
         </div>
       </div> 
 
@@ -201,7 +214,7 @@
       <div class="col-md-6 col-sm-12">
         <div class="input-group mb-3">
           <label class="input-group-text" for="idColonia">Colonia</label>
-          <select id="idColonia" class="form-select" name="colonias">
+          <select id="idColonia" class="form-select" name="colonia">
             <option selected value="0">Selecciona una colonia</option>
           </select>
         </div>
@@ -223,7 +236,7 @@
 
         <div class="input-group">
           <span class="input-group-text">Descripción</span>
-          <textarea id="areaDescripcion" class="form-control" aria-label="With textarea"></textarea>
+          <textarea id="areaDescripcion" class="form-control" aria-label="With textarea" name="descripcion"></textarea>
         </div>    
       </div>
     </div>
