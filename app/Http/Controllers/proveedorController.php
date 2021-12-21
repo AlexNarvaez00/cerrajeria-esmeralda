@@ -137,32 +137,17 @@ class proveedorController extends Controller
     {
         //return $request;
         $request->validate($this->reglaV2);
-
-        // $llavePrimariaPROV = "PROV-".
-        // strtoupper($request->apellidopaternoEditar[0]).
-        // strtoupper($request->apellidopaternoEditar[1]).
-        // strtoupper("-".$request->apellidomaternoEditar[0]).
-        // strtoupper($request->apellidomaternoEditar[1]).
-        // strtoupper($request->numextEditar[0]).
-        // strtoupper($request->numextEditar[1]);
-
-        // $proveedore->idproveedor =  $llavePrimariaPROV;
-
         $proveedore->nombre = $request->nombreEditar;
         $proveedore->apellidopaterno = $request->apellidopaternoEditar;
         $proveedore->apellidomaterno = $request->apellidomaternoEditar;
         $proveedore->correo = $request->correoEditar;
 
         $direccion = direccionModelo::find($proveedore->iddirecproveedor);
-        //$direccion->iddireccion = "DIC-".$request->numextEditar[0].$request->numextEditar[1].$request->apellidopaternoEditar[0].$request->apellidopaternoEditar[1]."-".$request->apellidomaternoEditar[0].$request->apellidomaternoEditar[1];
-
-        //$PRYKEY = $direccion->iddireccion;
         $direccion->calle=$request->calleEditar;
         $direccion->numero= $request->numextEditar;
         $direccion->idcoldirec = $request->coloniasEditar;
         $direccion->save();
-
-        //$proveedore->iddirecproveedor = $PRYKEY;
+        
         $proveedore->save();
 
         return redirect()->route('proveedores.index');
