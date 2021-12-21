@@ -52,12 +52,15 @@ class ventaProductoController extends Controller
     }
 
     public function getProducto(Request $request){
-        $productoCarrito = productosModelo::find($request->clave_producto);
-        DB::table('productos')
-        ->where('clave_producto', $request->clave_producto)
-        ->update(['cantidad_existencia' => $request->cantidadExistente]);          
+        $productoCarrito = productosModelo::find($request->clave_producto);        
+                 
         return response()->json($productoCarrito);
     }
+    /**
+     * DB::table('productos')
+        ->where('clave_producto', $request->clave_producto)
+        ->update(['cantidad_existencia' => $productoCarrito->cantidad]); 
+     */
     
     
    

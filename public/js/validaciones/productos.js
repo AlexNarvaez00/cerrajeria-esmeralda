@@ -1,7 +1,7 @@
 //Esto es un objeto, bueno, una manera de hacerlos
 const expresionesRegulares = {
     claveProducto: /^[a-zA-Z|\-|\d]*$/,
-    caracteres: /^[a-zA-Z|-]*$/,
+    caracteres: /^[a-zA-Z|-|\s]*$/,
     cantidades: /\d/,
 };
 
@@ -63,26 +63,37 @@ if (inputClasificacion) {
     );
 }
 //Obtiene los valores de las filas
-$(document).ready(function() {
-    $(".btnEditar").click(function() {
+
+    $(".btnEditar").on('click',function() {
+        let fila = $(this).closest("tr").find(".dato");
         $("#btnRegistrarProducto").hide();
         $("#btnGuardarCambios").show();
-        var claveProducto = $(this).parents("tr").find("th")[0].innerHTML;            
-        var nombreProducto = $(this).parents("tr").find("td")[0].innerHTML;
-        var clasificacion = $(this).parents("tr").find("td")[1].innerHTML;
-        var precio = $(this).parents("tr").find("td")[2].innerHTML;
-        var existencia = $(this).parents("tr").find("td")[3].innerHTML;
-        var proveedor = $(this).parents("tr").find("td")[4].innerHTML; 
-        var descripcion = $(this).parents("tr").find("td")[5].innerHTML;                      
+        $("#inClaveProducto").prop("disabled", true); 
+        $("#inClaveProducto").val(fila[0].innerHTML); 
+        $("#inNomProducto").val(fila[1].innerHTML);
+        $("#inClasificacion").val(fila[2].innerHTML);
+        $("#inPrecio").val(fila[3].innerHTML.replace("$","")); 
+        $("#inCantExistencia").val(fila[4].innerHTML);   
+        
+        //alert(fila[0].innerHTML);
+        //$("#inClaveProducto").val(fila[0].innerHTML); 
+        /*
+        var claveProducto = fila[0].innerHTML;            
+        var nombreProducto = fila[0].innerHTML;
+        var clasificacion = fila[1].innerHTML;
+        var precio = fila.innerHTML;
+        var existencia = fila[3].innerHTML;
+        var proveedor = fila[4].innerHTML; 
+        var descripcion = fila[5].innerHTML;                      
         $("#inClaveProducto").val(claveProducto); 
         $("#inClaveProducto").prop("disabled", true); 
         $("#inNomProducto").val(nombreProducto);
         $("#inClasificacion").val(clasificacion); 
         $("#inPrecio").val(precio.replace("$","")); 
         $("#inCantExistencia").val(existencia);             
-        $("#inDescripcion").val(descripcion);       
+        $("#inDescripcion").val(descripcion); */      
     });
-});
+
 //Limpiar las entradas para que no quede reciduo
 function limpiar(){
     $("#btnRegistrarProducto").show();
