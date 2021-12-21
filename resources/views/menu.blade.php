@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Reporte de Ventas</h5>
                         <p class="card-text">En esta sección puedes consultar la sección de reportes. Visualiza los reportes de ventas.</p>
-                        <a href="../ventas" class="btn btn-primary">Ir a las opciones</a>
+                        <a href="../ventas" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#irreportes">Ir a las opciones</a>
                     </div>
                 </div>
             </article>
@@ -163,9 +163,59 @@
     @endcomponent
 
 
+
+
+
+@component('components.modalSimple')
+        @slot('idModal','irreportes')
+        @slot('tituloModal','¿Vas a realizar una venta?')
+        /**Agregar estas dos cosas a sus modales*/
+            @slot('rutaEnvio','')
+            @slot('metodoFormulario','')
+        /**Fin de los nuevo */
+        @slot('cuerpoModal')
+        <div class="container">
+        <div class="row">
+        <div class="row cards" style="width: auto; margin: auto auto;">
+
+            <div class="col-1">           
+                <div class="card" style="width: 18rem;">
+                    <img src="./img/productoscerrajeria.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Reporte de productos</h5>
+                        <p class="card-text">¿Quieres realizar consultas sobre la venta de productos?</p>
+                        <a href="../reporte-venta-productos" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+                </div>
+            </div>           
+
+            <div class="col-6">
+                <div class="container mt-2">
+                    <div class="card" style="width: 18rem;">
+                        <img src="./img/serviciocerrajeria.jpeg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Reporte de servicio</h5>
+                            <p class="card-text">¿Quieres realizar consultas sobre la ventas de un servicio?</p>
+                            <a href="../reporte-ventas-servicios" class="btn btn-primary">Ir</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        
+        @endslot
+        @slot('footerModal')
+        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal2">
+            <span class="me-2">&#10060;</span>
+            Cerrar
+        </button>        
+    @endslot
+    @endcomponent
+
+
 @endsection
-
-
 
 
 <!--
