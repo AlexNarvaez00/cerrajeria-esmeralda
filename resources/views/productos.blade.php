@@ -259,7 +259,50 @@
                     <input id="detalleIdProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </div>                
-        </div>            
+        
+        <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Nombre proveedor</span>
+                    <input id="detalleNombreProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        </div> 
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">apellido paterno</span>
+                    <input id="detalleApellidoP" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        
+        <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">apellido materno</span>
+                    <input id="detalleapellidoM" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        </div> 
+        </div>       
+         
+    <div>
+    <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">correo</span>
+                    <input id="detalleCorreo" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        
+        <div class="col-md-6 col-sm-12">
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">iddireccion</span>
+                    <input id="detalledireccion" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>                
+        </div> 
+        </div>       
+         
     <div>
         
     @endslot
