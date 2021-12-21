@@ -18,7 +18,7 @@ class CreateVentaTable extends Migration
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('idusuario',15);
 
-            $table->string('idclienteventa');
+            $table->string('idclienteventa',20);
             $table->primary('folio_v');
             $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idclienteventa')->references('idcliente')->on('cliente');           
