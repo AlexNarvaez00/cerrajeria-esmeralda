@@ -117,48 +117,24 @@
     Informacion básica del usuario.
 </p>
 <div class="container-fluid">
+    <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
+    @csrf
+    <!--Input oculto para el IDE del usuario-->
+    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
+    <!--Columnas :v-->
     <div class="row">
-        <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
-        @csrf
-        <!--Input oculto para el IDE del usuario-->
-        <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
-        <!--Columnas :v-->
         <div class="col-md-12 col-sm-12">
-            <div class="input-group mb-3 ">
-                <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
-                <input type="text" class="form-control {{ ( old('nombreUsuario')!='' )? 'is-valid':'' }}" value="{{old('nombreUsuario')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuario" name="nombreUsuario">
-                @error('nombreUsuario')
-                <p class="col-12 text-danger ps-2"> {{$message}}</p>
-                @enderror
-            </div>
+            <x-input-normal classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
         </div>
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Correo</span>
-            <input type="email" class="form-control" value="{{old('correo')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
-            @error('correo')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
-            <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuario" name="contrasena">
-            @error('contrasena')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
-            <input type="password" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioCon" name="contrasena_confirmation">
-            @error('contrsenaConfirmada')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
     </div>
 </div>
 <p class="px-3">
