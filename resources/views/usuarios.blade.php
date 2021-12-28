@@ -123,18 +123,16 @@
     <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
     <!--Columnas :v-->
     <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <x-input-normal classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
-        </div>
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
     </div>
     <div class="row">
-        <x-input-normal classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
     </div>
     <div class="row">
-        <x-input-normal classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
     </div>
     <div class="row">
-        <x-input-normal classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
     </div>
 </div>
 <p class="px-3">
@@ -159,14 +157,19 @@
 </div>
 @endslot
 @slot('footerModal')
-<button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+
+<x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar"/>
+<x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar"/>
+
+<!-- <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
     <span class="me-2">&#10060;</span>
     Cancelar
-</button>
-<button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+</button> -->
+
+<!-- <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
     <span class="me-2">&#10004;</span>
     Registrar
-</button>
+</button> -->
 @endslot
 @endcomponent
 
@@ -202,49 +205,23 @@
     Informacion básica del usuario.
 </p>
 <div class="container-fluid">
+    <!--Directiva, basicmanete -->
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
+
     <div class="row">
-        <!--Directiva, basicmanete -->
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
-        <!--Input oculto para el IDE del usuario-->
         <!--Columnas :v-->
-        <div class="col-md-12 col-sm-12">
-            <div class="input-group mb-3 ">
-                <span class="input-group-text col-3" id="basic-addon1">Nombre de Usuario</span>
-                <input type="text" class="form-control" value="{{old('nombreUsuarioEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreUsuarioEditar" name="nombreUsuarioEditar">
-                @error('nombreUsuarioEditar')
-                <p class="col-12 text-danger ps-2"> {{$message}}</p>
-                @enderror
-            </div>
-        </div>
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuarioEditar" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuarioEditar')}}" nombreInput="nombreUsuarioEditar" nombreError="nombreUsuarioEditar" />
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Correo</span>
-            <input type="email" class="form-control" value="{{old('correoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correoEditar">
-            @error('correoEditar')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar" />
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Contraseña</span>
-            <input type="password" class="form-control" value="{{old('contrasenaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioEditar" name="contrasenaEditar">
-            @error('contrasenaEditar')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioEditar" type="password" texto="Contraseña" nombreInput="contrasenaEditar" nombreError="contrasenaEditar" />
     </div>
     <div class="row">
-        <div class="input-group mb-3 col-md-12 col-sm-12">
-            <span class="input-group-text col-3" id="basic-addon1">Confirmar Contraseña</span>
-            <input type="password" class="form-control" value="{{old('contrsenaConfirmadaEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputPasswordUsuarioConEditar" name="contrasenaEditar_confirmation">
-            @error('contrsenaConfirmadaEditar')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
-        </div>
+        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioConEditar" type="password" texto="Confirmar Contraseña" valor="{{old('contrsenaConfirmadaEditar')}}" nombreInput="contrasenaEditar_confirmation" nombreError="contrsenaConfirmadaEditar" />
     </div>
 </div>
 <p class="px-3">

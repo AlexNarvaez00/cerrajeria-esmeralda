@@ -17,15 +17,19 @@ class ButtonNormalForm extends Component
      * Atributes
      * 
      */
-
+    public $type;
+    public $estiloBoton;
+    public $texto;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($type = 'button', $estiloBoton, $texto)
     {
-
+        $this->type = $type;
+        $this->estiloBoton = $estiloBoton;
+        $this->texto = $texto;
     }
 
     /**
@@ -35,6 +39,6 @@ class ButtonNormalForm extends Component
      */
     public function render()
     {
-        return view('components.header');
+        return view('components.button-normal-form');
     }
 }
