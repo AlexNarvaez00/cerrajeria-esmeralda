@@ -309,7 +309,7 @@
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/modales/ModalConfirmClien.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
-
+    <script src="./js/modales/clientesConfirmacion.js"></script>
 
     @if($errors->hasAny('nombre', 'apellidoPaterno','apellidoMaterno', 'telefono'))
         <script>
@@ -331,9 +331,9 @@
             modalEdicion.show();
         </script>    
     @endif
-    
 
 
     <script src="./js/modales/clientesConfirmacion.js"></script>
 
+ Narvaez
 @endsection
