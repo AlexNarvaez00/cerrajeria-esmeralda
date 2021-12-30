@@ -174,29 +174,13 @@
 @endcomponent
 
 <!-- ####################################### Modal de confirmacion de un Usuario ####################################### -->
-
-@component('components.modalSimple')
-@slot('idModal','confirmacionModal')
-@slot('tituloModal','¿Seguro que quieres borrar este registro?')
-@slot('cuerpoModal')
-<!-- Cuerpo del modal-->
-@endslot
-@slot('footerModal')
-<x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-<x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
-
-
-<!-- <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-    <span class="me-2">&#10060;</span>
-    Cancelar
-</button>
-<button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
-    <span class="me-2">&#10004;</span>
-    Confirmar
-</button> -->
-@endslot
-@endcomponent
-
+<x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
+    <x-slot name="cuerpoModal"></x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+    </x-slot>
+</x-modalSimple>
 <!-- ####################################### Modal de edicion de un Usuario ####################################### -->
 @component('components.modal')
 @slot('idModal','editarUsuariosModal')
