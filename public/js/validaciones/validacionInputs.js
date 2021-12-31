@@ -14,12 +14,15 @@ const evaluarExpre = (element, expresion) => {
     }
 };
 
-const evaluarValor = (event,valorDefecto) =>{
-    if(event.target.value != valorDefecto){
-        
+const evaluarValor = (event, valorDefecto) => {
+    if (event.target.value != valorDefecto) {
+        event.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
+    } else {
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid");
     }
-}
-
+};
 
 /**
  * Funcion a para agregar las validaciones en cada uno de los inputs
@@ -38,28 +41,31 @@ const validator = (matrizElementoExpresion) => {
         if (fila[0]) {
             //Si el elemento existe
 
+            let elemento = fila[0];
             //Preguntamos que tipo de elemento es.
             switch (fila[0].tagName) {
                 case "INPUT":
-                    let input = fila[0];
                     let expresion = fila[1];
-                    input.addEventListener("keyup", (event) =>
+                    elemento.addEventListener("keyup", (event) =>
                         evaluarExpre(event, expresion)
                     );
-                    input.addEventListener("focus", (event) =>
-                        evaluarExpre(event, expresion)
-                    );
-                    input.addEventListener("blur", (event) =>
+                    // input.addEventListener("focus", (event) =>
+                    //     evaluarExpre(event, expresion)
+                    // );
+                    elemento.addEventListener("blur", (event) =>
                         evaluarExpre(event, expresion)
                     );
                     break;
                 case "SELECT":
-                    let select = fila[0];
-                    select.addEventListener("focus", (event) =>
-                        evaluarExpre(event, expresion)
+                    let valorDefecto = fila[1];
+                    // elemento.addEventListener("focus", (event) =>
+                    //     evaluarExpre(event, valorDefecto)
+                    // );
+                    elemento.addEventListener("blur", (event) =>
+                        evaluarValor(event, valorDefecto)
                     );
-                    select.addEventListener("blur", (event) =>
-                        evaluarExpre(event, expresion)
+                    elemento.addEventListener("change", (event) =>
+                        evaluarValor(event, valorDefecto)
                     );
                     break;
             }

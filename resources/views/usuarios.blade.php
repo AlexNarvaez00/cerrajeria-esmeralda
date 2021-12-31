@@ -281,7 +281,22 @@
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
-<script src="./js/validaciones/usuarios.js"></script>
+<!-- <script src="./js/validaciones/usuarios.js"></script> -->
+<script >
+    validator([
+        [document.getElementById('inputIDUsuario'),/^USU-[0-9]{3}$/],
+        [document.getElementById('inputNombreUsuario'),/^[A-Z][a-z]{2,14}$/],
+        [document.getElementById('inputPasswordUsuario'),/^[A-Za-z0-9\_]{8,14}$/],
+        [document.getElementById('inputPasswordUsuarioCon'),/^[A-Za-z0-9\_]{8,14}$/],
+        [document.getElementById('inputRolUsuario'),'0'], //Esto es un selector
+        //Inpust de edicion
+        [document.getElementById('inputIDUsuarioEditar'),/^USU-[0-9]{3}$/],
+        [document.getElementById('inputNombreUsuarioEditar'),/^[A-Z][a-z]{2,14}$/],
+        [document.getElementById('inputPasswordUsuarioEditar'),/^[A-Za-z0-9\_]{8,14}$/],
+        [document.getElementById('inputPasswordUsuarioConEditar'),/^[A-Za-z0-9\_]{8,14}$/],
+        [document.getElementById('inputRolUsuarioEditar'),'0'], //El otro selector xd
+    ]);
+</script>
 <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
 <script src="./js/funciones/editarUsuario.js"></script>
 
