@@ -15,7 +15,7 @@
 <!-- Elementos que muestran la información de la persona previamente al Log In -->
 <h5 class="h5 text-star mt-5 ps-3">
     <span>&#128075;</span>
-    ¡Hola, XXXX XXXX XXXX!
+    ¡Hola, {{ auth()->user()->name}}!
 </h5>
 
 <div class="container mt-2">

@@ -331,7 +331,4 @@
             modalEdicion.show();
         </script>    
     @endif
-
-    
-
 @endsection
