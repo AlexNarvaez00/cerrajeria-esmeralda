@@ -331,9 +331,4 @@
             modalEdicion.show();
         </script>    
     @endif
-
-
-    <script src="./js/modales/clientesConfirmacion.js"></script>
-
- Narvaez
 @endsection
