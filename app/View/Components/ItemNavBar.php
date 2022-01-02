@@ -1,9 +1,8 @@
 <?php
 
-namespace App\View\Components\components;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
-
 /**
  * @author Narvaez Ruiz Alexis 
  * 

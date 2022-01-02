@@ -4,7 +4,7 @@
 @section('header-seccion')
 <x-header visible=true>
     <x-slot name="items">
-        <x-itemsNavBar active='usuarios' />
+        <x-itemsNavBar active="usuarios" />
     </x-slot>
 </x-header>
 <!--Esta es la prte del boton de log out -->
@@ -105,73 +105,66 @@
 </div>
 
 <!-- ####################################### Modal de registro de un Usuario ####################################### -->
-
-@component('components.modal')
-@slot('idModal','registroUsuariosModal')
-@slot('tituloModal','Registrar un nuevo usuario.')
-@slot('rutaEnvio',route('usuarios.store'))
-@slot('metodoFormulario','POST')
-
-@slot('cuerpoModal')
-<p class="px-3">
-    Informacion básica del usuario.
-</p>
-<div class="container-fluid">
-    <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
-    @csrf
-    <!--Input oculto para el IDE del usuario-->
-    <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
-    <!--Columnas :v-->
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
-    </div>
-</div>
-<p class="px-3">
-    Rol del usuario.
-</p>
-<div class="container-fluid">
-    <div class="row">
-        <!--Columnas :v-->
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputRolUsuario">Roles</label>
-            <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value="{{old('rolUser')}}">
-                <option selected value="0">Selecciones rol de Usuario</option>
-                @foreach ($listaRoles as $rol)
-                <option value="{{$rol}}">{{$rol}}</option>
-                @endforeach
-            </select>
-            @error('rolUser')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
+<x-modal idModal="registroUsuariosModal" tituloModal="Registrar un nuevo usuario." rutaEnvio="{{route('usuarios.store')}}" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
+        <p class="px-3">
+            Informacion básica del usuario.
+        </p>
+        <div class="container-fluid">
+            <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
+            @csrf
+            <!--Input oculto para el IDE del usuario-->
+            <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
+            <!--Columnas :v-->
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
+            </div>
         </div>
-    </div>
-</div>
-@endslot
-@slot('footerModal')
+        <p class="px-3">
+            Rol del usuario.
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputRolUsuario">Roles</label>
+                    <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value="{{old('rolUser')}}">
+                        <option selected value="0">Selecciones rol de Usuario</option>
+                        @foreach ($listaRoles as $rol)
+                        <option value="{{$rol}}">{{$rol}}</option>
+                        @endforeach
+                    </select>
+                    @error('rolUser')
+                    <p class="col-12 text-danger ps-2"> {{$message}}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
 
-<x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-<x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
-
-<!-- <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
+        <!-- <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
     <span class="me-2">&#10060;</span>
     Cancelar
 </button> -->
 
-<!-- <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
+        <!-- <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
     <span class="me-2">&#10004;</span>
     Registrar
 </button> -->
-@endslot
-@endcomponent
+    </x-slot>
+</x-modal>
 
 <!-- ####################################### Modal de confirmacion de un Usuario ####################################### -->
 <x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
@@ -182,73 +175,57 @@
     </x-slot>
 </x-modalSimple>
 <!-- ####################################### Modal de edicion de un Usuario ####################################### -->
-@component('components.modal')
-@slot('idModal','editarUsuariosModal')
-@slot('tituloModal','Editar un usuario.')
-@slot('rutaEnvio','')
-@slot('metodoFormulario','POST')
+<x-modal idModal="editarUsuariosModal" tituloModal="Editar un usuario." rutaEnvio="" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
+        <p class="px-3">
+            Informacion básica del usuario.
+        </p>
+        <div class="container-fluid">
+            <!--Directiva, basicmanete -->
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
 
-@slot('cuerpoModal')
-<p class="px-3">
-    Informacion básica del usuario.
-</p>
-<div class="container-fluid">
-    <!--Directiva, basicmanete -->
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
-
-    <div class="row">
-        <!--Columnas :v-->
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuarioEditar" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuarioEditar')}}" nombreInput="nombreUsuarioEditar" nombreError="nombreUsuarioEditar" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioEditar" type="password" texto="Contraseña" nombreInput="contrasenaEditar" nombreError="contrasenaEditar" />
-    </div>
-    <div class="row">
-        <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioConEditar" type="password" texto="Confirmar Contraseña" valor="{{old('contrsenaConfirmadaEditar')}}" nombreInput="contrasenaEditar_confirmation" nombreError="contrsenaConfirmadaEditar" />
-    </div>
-</div>
-<p class="px-3">
-    Rol del usuario.
-</p>
-<div class="container-fluid">
-    <div class="row">
-        <!--Columnas :v-->
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputRolUsuarioEditar">Roles</label>
-            <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="{{old('rolUserEditar')}}">
-                <option selected value="0">Selecciones rol de Usuario</option>
-                @foreach ($listaRoles as $rol)
-                <option value="{{$rol}}">{{$rol}}</option>
-                @endforeach
-            </select>
-            @error('rolUserEditar')
-            <p class="col-12 text-danger ps-2"> {{$message}}</p>
-            @enderror
+            <div class="row">
+                <!--Columnas :v-->
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuarioEditar" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuarioEditar')}}" nombreInput="nombreUsuarioEditar" nombreError="nombreUsuarioEditar" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioEditar" type="password" texto="Contraseña" nombreInput="contrasenaEditar" nombreError="contrasenaEditar" />
+            </div>
+            <div class="row">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioConEditar" type="password" texto="Confirmar Contraseña" valor="{{old('contrsenaConfirmadaEditar')}}" nombreInput="contrasenaEditar_confirmation" nombreError="contrsenaConfirmadaEditar" />
+            </div>
         </div>
-    </div>
-</div>
-@endslot
-@slot('footerModal')
-<x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-<x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
-
-
-<!-- <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-    <span class="me-2">&#10060;</span>
-    Cancelar
-</button>
-<button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-    <span class="me-2">&#10004;</span>
-    Registrar
-</button> -->
-@endslot
-@endcomponent
-
+        <p class="px-3">
+            Rol del usuario.
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Columnas :v-->
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputRolUsuarioEditar">Roles</label>
+                    <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="{{old('rolUserEditar')}}">
+                        <option selected value="0">Selecciones rol de Usuario</option>
+                        @foreach ($listaRoles as $rol)
+                        <option value="{{$rol}}">{{$rol}}</option>
+                        @endforeach
+                    </select>
+                    @error('rolUserEditar')
+                    <p class="col-12 text-danger ps-2"> {{$message}}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
+    </x-slot>
+</x-modal>
 
 <!-- ####################################### Modal ADVERTENCIA ####################################### -->
 

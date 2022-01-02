@@ -9,3 +9,18 @@
     height: 150px;
     object-fit: cover;
 }
+.icon_notify{
+    position: relative;
+}
+.icon_notify::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: rgba(var(--bs-danger-rgb), 0.85);
+    position: absolute;
+    top:0;
+    z-index: 100;
+    right: 0;
+    border-radius: 50%;
+    border:1px solid black;
+}
