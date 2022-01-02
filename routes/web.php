@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ventas/get/{folio_v}',[reporteVentaProductosController::class,'getProductsAtFolio'])->name('ventas.folio');
     //rutas para productos
     Route::post('/producto/detalles', [productosController::class, 'getDetalles'])->name('producto.detalles');
+    Route::post('/municipios/proveedor',[productosController::class,'getMunicipios'])->name('municipios.proveedor');
+    Route::post('/colonias/proveedor', [productosController::class, 'getColonias'])->name('colonias.proveedor');
 
     
 

@@ -382,14 +382,17 @@
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Estado</label>
                         <select class="form-select" id="estadoProveedor" name="idproveedor">
-                            <option value = "0" selected>Seleccione un estado</option>                        
+                            <option value = "0" selected>Seleccione un estado</option>
+                            @foreach($listaEstados as $estado)
+                                <option value = "{{$estado->id}}" selected>{{$estado->nombre}}</option>
+                            @endforeach                        
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Municipio</label>
-                        <select class="form-select" id="muncipioProveedor" name="idproveedor">
+                        <select  id="muncipioProveedor" disabled="true" class="form-select"  name="idproveedor">
                             <option value = "0" selected>Seleccione un municipio</option>                        
                         </select>
                     </div>
@@ -399,7 +402,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Colonia</label>
-                        <select class="form-select" id="coloniaProveedor" name="idproveedor">
+                        <select class="form-select" disabled="true" id="coloniaProveedor" name="idproveedor">
                             <option value = "0" selected>Seleccione una colonia</option>                        
                         </select>
                     </div>

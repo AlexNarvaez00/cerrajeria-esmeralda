@@ -124,6 +124,69 @@ $(".btnDetalles").on('click',function() {
     });            
 });
 
+$("#estadoProveedor").on("change", function() { 
+    let valor = $("#estadoProveedor").val();   
+    $("#muncipioProveedor").prop("disabled",false); 
+    $("#muncipioProveedor").find("option").remove();
+    $("#muncipioProveedor").append($("<option>", {
+        value: 0,
+        text: "Seleccione un municipio"
+    }));
+    if(valor != '0'){
+       minAjax({
+        url:'/municipios/proveedor', 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            id:valor
+        },        
+        success: function(data){
+            data = JSON.parse(data);            
+            for(let i = 0; i < data.length; i++){
+                $("#muncipioProveedor").append($("<option>", {
+                    value: data[i].idmunicipio,
+                    text: data[i].nombre
+                }));
+            }
+        }
+       });
+    }else{
+        $("#muncipioProveedor").prop("disabled",true); 
+        $("#muncipioProveedor option[value='0']").attr("selected",true);
+    }
+});
+$("#muncipioProveedor").on("change", function() { 
+    let valor = $("#muncipioProveedor").val();   
+    $("#coloniaProveedor").prop("disabled",false); 
+    $("#coloniaProveedor").find("option").remove();
+    $("#coloniaProveedor").append($("<option>", {
+        value: 0,
+        text: "Seleccione una colonia"
+    }));
+    if(valor != '0'){
+       minAjax({
+        url:'/colonias/proveedor', 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            idmunicipio:valor
+        },        
+        success: function(data){
+            data = JSON.parse(data);            
+            for(let i = 0; i < data.length; i++){
+                $("#coloniaProveedor").append($("<option>", {
+                    value: data[i].idcolonia,
+                    text: data[i].nombre +" CP:"+data[i].codigopostal
+                }));
+            }
+        }
+       });
+    }else{
+        $("#coloniaProveedor").prop("disabled",true); 
+        $("#coloniaProveedor option[value='0']").attr("selected",true);
+    }
+});
+
 //Limpiar las entradas para que no quede reciduo
 function limpiar(){    
     

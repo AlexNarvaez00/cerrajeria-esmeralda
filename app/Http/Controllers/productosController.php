@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
+use App\Models\estadosModelo;
+use App\Models\municipiosModelo;
+use App\Models\coloniaModelo;
 use App\Models\productosDescripcionModelo;
 
 use Illuminate\Http\Request;
@@ -49,6 +52,7 @@ class productosController extends Controller
     {
         $listaProductos = null;
         $listaDescripciones = null;
+        $estadosLista = estadosModelo::all();
         if(count($request->all()) >= 0){
             $listaProductos = productosModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
             $listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
@@ -62,7 +66,8 @@ class productosController extends Controller
         //->with('registrosProductosjoin',$this->productosjoin)
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos            
+            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos  
+            ->with('listaEstados',$estadosLista)          
             ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
@@ -104,5 +109,21 @@ class productosController extends Controller
         $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
         $proveedor = proveedorModelo::find($request->idproveedor);
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
+    }
+    /**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getMunicipios(Request $request)
+    {
+        $llavePrimaria = $request->id;        
+        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();        
+        return response()->json($listaMunicipios);
+    }
+
+    public function getColonias(Request $request)
+    {
+        $llavePrimaria = $request->idmunicipio;
+        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
+        return response()->json($listaColonias);
     }
 }
