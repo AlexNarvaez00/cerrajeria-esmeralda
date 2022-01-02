@@ -173,13 +173,11 @@
         </div>
     @endslot
     @slot('footerModal')
-        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
+        <button type="reset" class="btn btn-outline-danger d-flex ps-3 pe-3" data-bs-dismiss="modal">
             Cancelar
         </button>
         <div id="btnRegistrarProducto" style="display:none">
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
-            <span class="me-2">&#10004;</span>
+        <button type="submit" class="btn  btn-outline-primary d-flex ps-3 pe-3" >
             Registrar
         </button>
         </div>
