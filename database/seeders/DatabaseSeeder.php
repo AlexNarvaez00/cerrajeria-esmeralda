@@ -6,6 +6,7 @@ use App\Models\clienteModelo;
 use App\Models\direccionModelo;
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
+use App\Models\productosDescripcionModelo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -71,6 +72,10 @@ class DatabaseSeeder extends Seeder
         $producto->idproveedor = 'PROV-Jk-In12';
         $producto->save();
 
+        $productoDescripcion = new productosDescripcionModelo();
+        $productoDescripcion->descripcion = "Es una llave color rojo marca phillips";
+        $productoDescripcion->clave_producto= 'YUJJ';
+        $productoDescripcion->save();
         $this->call([
             ventasSeeder::class,
             detalleVentaSeeder::class,

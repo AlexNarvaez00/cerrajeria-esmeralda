@@ -18,7 +18,7 @@ INSERT INTO `estados` (`id`, `nombre`) VALUES
 (17, 'Morelos'),
 (18, 'Nayarit'),
 (19, 'Nuevo León'),
-(20, 'Oaxaca de Juárez'),
+(20, 'Oaxaca'),
 (21, 'Puebla'),
 (22, 'Querétaro'),
 (23, 'Quintana Roo'),

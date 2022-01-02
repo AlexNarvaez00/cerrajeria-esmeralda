@@ -102,22 +102,19 @@
     @slot('tituloModal','Registrar un nuevo producto')
     @slot('rutaEnvio',route('productos.store'))
     @slot('metodoFormulario','POST')
-    @slot('cuerpoModal')    
-   
-        <p class="px-3">
-            Formulario para registrar a un nuevo producto
-        </p>
+    @slot('cuerpoModal')       
         <div class="container-fluid">
+            <p class="px-3">
+                <h6 id="letreroInstruccion">Agregue la información sobre el producto</h6>
+            </p>
             <div class="row">
-            @csrf
-                <!--Columnas :v-->
+            @csrf                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>
                         <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
                     </div>
                 </div>
-                <!--Columnas :v-->
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
@@ -127,40 +124,33 @@
             </div>
 
             <div class="row">
-            <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Cant. existencia</span>
+                        <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                    </div>
+                </div> 
+                <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
                         <input id ="inClasificacion" maxlength="20" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
                     </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Precio</span>
-                        <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
-                    </div>
-                </div>
-            </div> 
+                </div> 
+            </div>
 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                        <div class="input-group mb-3 ">
-                            <span class="input-group-text" id="basic-addon1">Cantidad en existencia</span>
-                            <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
-                        </div>
-                    </div>          
-                
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
-                        <select class="form-select" id="inputGroupSelect01" name="idproveedor">
-                            <option selected>Seleccione un proveedor</option>
-                            @foreach($registrosProveedores as $proveedor)
-                            <option>{{$proveedor->idproveedor}} {{$proveedor->nombre}} {{$proveedor->apellidopaterno}} {{$proveedor->apellidomaterno}} </option>                    
-                            @endforeach
-                        </select>
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Precio venta $</span>
+                        <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
-                </div>
+                </div> 
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Precio compra $</span>
+                        <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
+                    </div>
+                </div>                
             </div>
             <div class = "row">
                 <div class="col-md-12 col-sm-12"> 
@@ -168,18 +158,38 @@
                         <span class="input-group-text">Descripcion</span>
                         <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
                     </div> 
+            </div>           
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <p class="px-3">
+                <h6 id="letreroInstruccion">Agregue la información el proveedor del producto</h6>
+            </p>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
+                        <select class="form-select" id="proveedores" name="idproveedor">
+                            <option value = "0" selected>Seleccione un proveedor</option>
+                            @foreach($registrosProveedores as $proveedor)
+                            <option value="{{$proveedor->idproveedor}}">{{$proveedor->idproveedor}} {{$proveedor->nombre}}</option>                    
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <button type="button" class="btn btn-link" data-bs-target="#agregarProveedor" data-bs-toggle="modal" data-bs-dismiss="modal">agregar proveedor</button>
                 </div>
             </div>
         </div>
+
     @endslot
     @slot('footerModal')
-        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
+        <button type="reset" class="btn btn-outline-danger d-flex ps-3 pe-3" data-bs-dismiss="modal">
             Cancelar
         </button>
         <div id="btnRegistrarProducto" style="display:none">
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
-            <span class="me-2">&#10004;</span>
+        <button type="submit" class="btn  btn-outline-primary d-flex ps-3 pe-3" >
             Registrar
         </button>
         </div>
@@ -197,7 +207,7 @@
     @slot('idModal','verdetalles')
     @slot('tituloModal','Detalles del producto')
     @slot('cuerpoModal')
-    
+    <!--Información del producto-->
     <div class="container-fluid">  
         <h6> Información del producto </h6>             
         <div class="row">            
@@ -248,9 +258,10 @@
                 </div>                
             </div>
         </div>
-
-        <br>     
-        <hr>   
+    </div>        
+    <hr> 
+    <!--Información del proveedor-->
+    <div class="container-fluid"> 
         <h6>Información del proveedor<h6>
         <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -258,65 +269,153 @@
                     <span class="input-group-text" id="basic-addon1">Id Proveedor</span>
                     <input id="detalleIdProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div>
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">Nombre proveedor</span>
                     <input id="detalleNombreProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
+            </div>
         </div> 
-        </div>
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">apellido paterno</span>
                     <input id="detalleApellidoP" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div> 
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">apellido materno</span>
                     <input id="detalleapellidoM" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        </div> 
-        </div>       
-         
-<div>
-    <div class="row">
+            </div>  
+        </div>
+        <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">correo</span>
                     <input id="detalleCorreo" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div>  
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">iddireccion</span>
                     <input id="detalledireccion" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                           
-        </div> 
-    </div>      
-         
-    
-        
+                </div>                           
+            </div>  
+        </div>
+    </div>       
     @endslot
     @slot('footerModal')
     @csrf
-        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cerrar
-        </button>       
-        
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />       
+    @endslot
+    @endcomponent
+    <!--Modal para agregar un nuevo Poovedor-->
+    @component('components.modalSimple')
+    @slot('idModal','agregarProveedor')
+    @slot('tituloModal','Agregar Proveedor')
+    @slot('cuerpoModal')
+        <div class="container-fluid">
+            <p class="px-3">
+                <h6>Información básica del proveedor</h6>
+            </p>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                        <input id="txtNombreProveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
+                        <input id="txtApellidoPProveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
+                        <input id="txtApellidoMProveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div> 
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Numero de tel.</span>
+                        <input id="txtNumeroProveedor" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
+                        <input type="email" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="txtCorreoProveedor" name="correo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <p class="px-3">
+                <h6>Información del domicilio</h6>
+            </p>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Numero</span>
+                        <input id="numeroProveedor" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">calle</span>
+                        <input id="calleProveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+                        <select class="form-select" id="estadoProveedor" name="idproveedor">
+                            <option value = "0" selected>Seleccione un estado</option>
+                            @foreach($listaEstados as $estado)
+                                <option value = "{{$estado->id}}" selected>{{$estado->nombre}}</option>
+                            @endforeach                        
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Municipio</label>
+                        <select  id="muncipioProveedor" disabled="true" class="form-select"  name="idproveedor">
+                            <option value = "0" selected>Seleccione un municipio</option>                        
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Colonia</label>
+                        <select class="form-select" disabled="true" id="coloniaProveedor" name="idproveedor">
+                            <option value = "0" selected>Seleccione una colonia</option>                        
+                        </select>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    @endslot
+    @slot('footerModal')
+    @csrf
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" />       
     @endslot
     @endcomponent
 @endsection
-
 
 @section('scritps')
     <script src="./js/jquery-3.6.0.min.js"></script>

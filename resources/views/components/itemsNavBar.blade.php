@@ -38,7 +38,7 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'notificaciones')?'active':''}}" href="../notificaciones">
+    <a class="nav-link {{($active == 'notificaciones')?'active':''}}" href="../notificaciones" id="btnNoificaciones">
         <span class="icon">&#128276;</span>
         Notificaciones
     </a>
