@@ -66,6 +66,9 @@ if (inputClasificacion) {
 
 $(".btnEditar").on('click',function() {
     let fila = $(this).closest("tr").find(".dato");
+    var claveproducto =  fila[0].innerHTML;
+    var claveProveedor = fila[5].innerHTML;       
+    
     $("#btnRegistrarProducto").hide();
     $("#btnGuardarCambios").show();
     $("#inClaveProducto").prop("disabled", true); 
@@ -73,13 +76,28 @@ $(".btnEditar").on('click',function() {
     $("#inNomProducto").val(fila[1].innerHTML);
     $("#inClasificacion").val(fila[2].innerHTML);
     $("#inPrecio").val(fila[3].innerHTML.replace("$","")); 
-    $("#inCantExistencia").val(fila[4].innerHTML);           
+    $("#inCantExistencia").val(fila[4].innerHTML);
+     
+    minAjax({
+        url:"/producto/detalles", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            clave_producto:claveproducto,
+            idproveedor:claveProveedor
+        },        
+        success: function(data){
+            data = JSON.parse(data);                            
+            $("#inDescripcion").val(data.data.descripcion.descripcion); 
+            $("#proveedores option[value="+ data.data.proveedor.idproveedor +"]").attr("selected",true);                      
+        }
+    });                      
 });
 //Opción para el boton ver detalles
 $(".btnDetalles").on('click',function() {
     let fila = $(this).closest("tr").find(".dato"); 
     var claveproducto =  fila[0].innerHTML;
-    var claveProveedor = fila[5].innerHTML.substring(" ");
+    var claveProveedor = fila[5].innerHTML;
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
     $("#detalleClasificacion").val(fila[2].innerHTML);
@@ -101,14 +119,14 @@ $(".btnDetalles").on('click',function() {
             $("#detalleApellidoP").val(data.data.proveedor.apellidopaterno);
             $("#detalleapellidoM").val(data.data.proveedor.apellidomaterno);
             $("#detalleCorreo").val(data.data.proveedor.correo);
-            $("#detalledireccion").val(data.data.proveedor.iddirecproveedor);
-            
+            $("#detalledireccion").val(data.data.proveedor.iddirecproveedor);            
         }
     });            
 });
 
 //Limpiar las entradas para que no quede reciduo
-function limpiar(){
+function limpiar(){    
+    
     $("#btnRegistrarProducto").show();
     $("#btnGuardarCambios").hide();
     $("#inClaveProducto").val(""); 
