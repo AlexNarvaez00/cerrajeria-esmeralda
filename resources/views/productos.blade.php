@@ -246,9 +246,10 @@
                 </div>                
             </div>
         </div>
-
-        <br>     
-        <hr>   
+    </div>        
+    <hr> 
+    <!--Información del proveedor-->
+    <div class="container-fluid"> 
         <h6>Información del proveedor<h6>
         <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -256,53 +257,43 @@
                     <span class="input-group-text" id="basic-addon1">Id Proveedor</span>
                     <input id="detalleIdProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div>
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">Nombre proveedor</span>
                     <input id="detalleNombreProveedor" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
+            </div>
         </div> 
-        </div>
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">apellido paterno</span>
                     <input id="detalleApellidoP" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div> 
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">apellido materno</span>
                     <input id="detalleapellidoM" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        </div> 
-        </div>       
-         
-<div>
-    <div class="row">
+            </div>  
+        </div>
+        <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">correo</span>
                     <input id="detalleCorreo" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </div>                
-        
-        <div class="col-md-6 col-sm-12">
+            </div>  
+            <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3 ">
                     <span class="input-group-text" id="basic-addon1">iddireccion</span>
                     <input id="detalledireccion" disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                           
-        </div> 
-    </div>      
-         
-    
-        
+                </div>                           
+            </div>  
+        </div>
+    </div>       
     @endslot
     @slot('footerModal')
     @csrf
