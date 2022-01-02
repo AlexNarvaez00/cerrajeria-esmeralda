@@ -95,8 +95,9 @@ $(".btnEditar").on('click',function() {
 });
 //Opción para el boton ver detalles
 $(".btnDetalles").on('click',function() {
-    let fila = $(this).closest("tr").find(".dato"); 
-    var claveproducto =  fila[0].innerHTML;
+    let fila = $(this).closest("tr").find(".dato");  
+       
+    var claveproducto =  fila[0].innerHTML;    
     var claveProveedor = fila[5].innerHTML;
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
