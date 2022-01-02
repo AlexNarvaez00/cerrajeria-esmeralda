@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\clienteController;
+use App\Http\Controllers\Notificaciones;
 use App\Http\Controllers\ventaProductoController;
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\proveedorController;
@@ -52,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/reporte-ventas-servicios',reporteVentasController::class);
     Route::resource('/reporte-venta-productos',reporteVentaProductosController::class);
+    Route::resource('/notificaciones',Notificaciones::class);
 
     /**
      * Rutas solo para AJAX :v 
@@ -73,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ventas/get/{folio_v}',[reporteVentaProductosController::class,'getProductsAtFolio'])->name('ventas.folio');
     //rutas para productos
     Route::post('/producto/detalles', [productosController::class, 'getDetalles'])->name('producto.detalles');
-
+    Route::get('/notificaciones/existencia/total',[Notificaciones::class,'existsNotify'])->name('productos.notificacionesTotal');
     
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

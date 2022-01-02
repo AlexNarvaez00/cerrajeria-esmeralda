@@ -8,7 +8,15 @@
     <small>{{$tiempo}}</small>
     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
-  <div class="toast-body">
-    {{$descripcion}}
+  <div class="toast-body pb-4">
+    <p>El producto <strong>{{$nombreProducto}}</strong> {{$conclusion}}</p> 
+    <a href="{{route('productos.index',$producto)}}" class="btn btn-outline-primary rounded-pill px-3 me-3">Resolver conflicto</a>
+    <button type="button" class="btn btn-outline-danger rounded-pill px-3" 
+            data-bs-dismiss="toast" 
+            aria-label="Close"
+            data-bs-toggle="tooltip" 
+            data-bs-placement="bottom" 
+            title="Esta accion solo quita la notifición, pero no la resulve"
+            >Descartar</button>
   </div>
 </div>

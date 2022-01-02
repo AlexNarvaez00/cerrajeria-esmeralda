@@ -4,7 +4,7 @@
 @section('header-seccion')
 <x-header visible=true>
     <x-slot name="items">
-        <x-itemsNavBar active='usuarios' />
+        <x-itemsNavBar active="usuarios" />
     </x-slot>
 </x-header>
 <!--Esta es la prte del boton de log out -->
