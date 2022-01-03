@@ -128,7 +128,9 @@ class productosController extends Controller
     }
     public function setProveedor(Request $request){
         //$proveedorTemp = json_decode($request->proveedor);
-        $proveedorNuevo = $request->proveedor[0];
+        
+        
+         $proveedorNuevo = json_decode($request->proveedor);
         //$proveedorNuevo->idProveedor = $params['Prov'];
         //$proveedorNuevo->save();
 

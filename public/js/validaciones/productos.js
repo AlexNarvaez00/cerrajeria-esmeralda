@@ -204,7 +204,8 @@ function limpiar(){
 //Agrega a un nuevo proveedor
 $('#formularioProveedor').on('submit', function(e){
     e.preventDefault();    
-    var datosFormulario = $(this).serializeArray();    
+    var datosFormulario = $(this).serialize(); 
+    alert(datosFormulario);   
     minAjax({
         url:'/agregar/proveedor',
         type:"POST",
@@ -213,10 +214,9 @@ $('#formularioProveedor').on('submit', function(e){
             proveedor:datosFormulario
         },        
         success: function(data){
-            data= JSON.parse(data);
-            for(var i = 0; i <= data.length; i ++){
-                alert(data[i]);
-            }
+            //data= JSON.parse(data);            
+                alert(data);
+            
             
         }
        });
