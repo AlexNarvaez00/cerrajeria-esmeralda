@@ -201,3 +201,23 @@ function limpiar(){
     $("#inCantExistencia").val("0");             
     $("#inDescripcion").val("");
 }
+//Agrega a un nuevo proveedor
+$('#formularioProveedor').on('submit', function(e){
+    e.preventDefault();    
+    var datosFormulario = $(this).serializeArray();    
+    minAjax({
+        url:'/agregar/proveedor',
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            proveedor:datosFormulario
+        },        
+        success: function(data){
+            data= JSON.parse(data);
+            for(var i = 0; i <= data.length; i ++){
+                alert(data[i]);
+            }
+            
+        }
+       });
+});
