@@ -11,6 +11,7 @@ validator([
     [
         document.getElementById("inputNombreUsuario"),
         expresionesRegulares.nombreUsuario,
+        20
     ],
     [document.getElementById("inputCorreo"), expresionesRegulares.correo],
     [

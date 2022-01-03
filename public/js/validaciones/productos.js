@@ -204,20 +204,17 @@ function limpiar(){
 //Agrega a un nuevo proveedor
 $('#formularioProveedor').on('submit', function(e){
     e.preventDefault();    
-    var datosFormulario = $(this).serialize(); 
-    alert(datosFormulario);   
+    var datosFormulario = $(this).serializeArray(); 
+    //alert(datosFormulario);   
     minAjax({
         url:'/agregar/proveedor',
         type:"POST",
         data:{
             _token: document.querySelector('input[name="_token"]').value,
-            proveedor:datosFormulario
+            proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
         },        
-        success: function(data){
-            //data= JSON.parse(data);            
-                alert(data);
-            
-            
+        success: function(data){          
+            console.log(data)    
         }
        });
 });

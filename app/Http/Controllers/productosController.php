@@ -128,14 +128,10 @@ class productosController extends Controller
     }
     public function setProveedor(Request $request){
         //$proveedorTemp = json_decode($request->proveedor);
+        $temp = json_decode($request->proveedor[0]); //-> Esto ya lo puede convertir en JSON
         
-        
-         $proveedorNuevo = json_decode($request->proveedor);
-        //$proveedorNuevo->idProveedor = $params['Prov'];
-        //$proveedorNuevo->save();
 
-        //$request->session()->flash('alert-success', 'User was successful added!');
-        //return redirect()->route('productos.index');  
-        return response()->json($proveedorNuevo);      
+        return response($temp->name);    
+        //return response()->json($temp);    
     }
 }

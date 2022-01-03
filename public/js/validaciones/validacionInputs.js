@@ -24,6 +24,12 @@ const evaluarValor = (event, valorDefecto) => {
     }
 };
 
+const limitValidator = (event,limite) =>{
+    console.log(event.key);
+    if(event.target.value.length > limite){
+        event.preventDefault();
+    }
+}
 /**
  * Funcion a para agregar las validaciones en cada uno de los inputs
  * de los formularios
@@ -55,6 +61,11 @@ const validator = (matrizElementoExpresion) => {
                     elemento.addEventListener("blur", (event) =>
                         evaluarExpre(event, expresion)
                     );
+
+                    if (fila[2]) {
+                        //Limite de caracteres en los inpust
+                        elemento.addEventListener('keypress',e=> validator(e,fila[2]) );
+                    }
                     break;
                 case "SELECT":
                     let valorDefecto = fila[1];
