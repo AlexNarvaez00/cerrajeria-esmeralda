@@ -126,4 +126,8 @@ class productosController extends Controller
         $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
         return response()->json($listaColonias);
     }
+    public function agregarProveedor(Request $request){
+        $proveedor = new proveedorModelo();
+        
+    }
 }

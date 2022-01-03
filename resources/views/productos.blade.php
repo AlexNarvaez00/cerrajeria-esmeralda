@@ -86,7 +86,7 @@
                             </a>
                         </td>
                         <td>
-                            <button class="btn">
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                 <span>&#10060;</span>
                             </button>
                         </td>
@@ -309,7 +309,8 @@
     @endslot
     @slot('footerModal')
     @csrf
-        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />       
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />    
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />   
     @endslot
     @endcomponent
     <!--Modal para agregar un nuevo Poovedor-->
@@ -415,6 +416,13 @@
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" />       
     @endslot
     @endcomponent
+    <x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
+        <x-slot name="cuerpoModal"></x-slot>
+        <x-slot name="footerModal">
+            <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+            <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+        </x-slot>
+    </x-modalSimple>
 @endsection
 
 @section('scritps')
