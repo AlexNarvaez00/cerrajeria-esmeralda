@@ -129,8 +129,9 @@ class productosController extends Controller
     public function setProveedor(Request $request){
         //$proveedorTemp = json_decode($request->proveedor);
         
+        //$nombreProveeedor = htmlspecialchars($_POST["txtNombreProveedor"]);
         
-         $proveedorNuevo = json_decode($request->proveedor);
+         $proveedorNuevo = $request->proveedor;
         //$proveedorNuevo->idProveedor = $params['Prov'];
         //$proveedorNuevo->save();
 
