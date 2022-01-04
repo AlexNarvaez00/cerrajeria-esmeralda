@@ -3,16 +3,11 @@
 <!--Contenido del header.-->
 @section('header-seccion')
   <!--Esta es la prte del boton de log out -->
-  @component('components.header')
-    @slot('items')
-        @component('components.itemsNavBar')
-            @slot('active','proveedores')
-        @endcomponent
-    @endslot
-  
-    <!--Esta parte es para mostrar el boton de log out-->
-    @slot('visible',true)
-  @endcomponent
+  <x-header visible=true>
+    <x-slot name="items">
+        <x-itemsNavBar active='proveedores' />
+    </x-slot>
+</x-header>
 @endsection
 
 <!--########################### Titulos de la tabla. -- Info del Usuario en sesión ################################# -->
@@ -27,7 +22,6 @@
         Proveedores
     </h5>
 
-    {{$errors}}
 
 <!--########################### Cuerpo de la página ################################# -->
 
@@ -117,7 +111,6 @@
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
-
     @slot('rutaEnvio',route('proveedores.store'))
     @slot('metodoFormulario','POST')
 
@@ -133,79 +126,23 @@
                 <!--Columnas :v-->
                 @csrf
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedor" name="idProveedor">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control {{ (old('nombre'))? 'is-valid':'' }}" value="{{old('nombre')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreProveedor" name="nombre">
-                        @error('nombre')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>    
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-                        <input type="text" class="form-control" value="{{old('apellidopaterno')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPProveedor" name="apellidopaterno">
-                        @error('apellidopaterno')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
             </div>
             <div class="row">
             <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-                        <input type="text" class="form-control" value="{{old('apellidomaterno')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMProveedor" name="apellidomaterno">
-                        @error('apellidomaterno')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Número de Teléfono</span>
-                        <input type="number" class="form-control" value="{{old('numtelefono')}}" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="numtelefono">
-                        @error('numtelefono')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedor" type="text" texto="Apellido Materno" valor="{{old('apellidomaterno')}}" nombreInput="apellidomaterno" nombreError="apellidomaterno" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('numtelefono')}}" nombreInput="numtelefono" nombreError="numtelefono" />
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
-                        <input type="email" class="form-control" value="{{old('correo')}}" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreo" name="correo">
-                        @error('correo')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo Electrónico" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Calle</span>
-                        <input type="text" class="form-control" value="{{old('calle')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle">
-                        @error('calle')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Número ext</span>
-                        <input type="number" class="form-control" value="{{old('numext')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numext">
-                        @error('numext')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div> 
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -249,6 +186,11 @@
         </div>
     @endslot
     @slot('footerModal')
+
+    <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
+    
+    <!-- Botones anteriores
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
@@ -257,28 +199,19 @@
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
+    -->
     @endslot
     @endcomponent
 
     <!--########################### Modal de confirmación para eliminar al proveedor ################################# -->
 
-    @component('components.modalSimple')
-        @slot('idModal','confirmacionModal')
-        @slot('tituloModal','¿Seguro que quieres borrar este registro?')
-        @slot('cuerpoModal')
-
-        @endslot
-        @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
-                <span class="me-2">&#10004;</span>
-                Confirmar
-            </button>
-        @endslot
-    @endcomponent
+    <x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
+    <x-slot name="cuerpoModal"></x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+    </x-slot>
+</x-modalSimple>
 
 
 <!--########################### Modal para editar la información del proveedor ###################################### -->
@@ -303,79 +236,23 @@
                 <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input type="text" class="form-control" value="{{old('nombreEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreProveedorEditar" name="nombreEditar">
-                        @error('nombreEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>  
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-                        <input type="text" class="form-control" value="{{old('apellidopaternoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPProveedorEditar" name="apellidopaternoEditar">
-                        @error('apellidopaternoEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>  
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
             </div>
             <div class="row">
             <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-                        <input type="text" class="form-control" value="{{old('apellidomaternoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMProveedorEditar" name="apellidomaternoEditar">
-                        @error('apellidomaternoEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Número de Teléfono</span>
-                        <input type="number" class="form-control" value="{{old('numtelefonoEditar')}}" placeholder="Ej. 9513302424" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefonoEditar" name="numtelefonoEditar">
-                        @error('numtelefonoEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedorEditar" type="text" texto="Apellido Materno" valor="{{old('apellidomaternoEditar')}}" nombreInput="apellidomaternoEditar" nombreError="apellidomaternoEditar" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('numtelefonoEditar')}}" nombreInput="numtelefonoEditar" nombreError="numtelefonoEditar" />
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
-                        <input type="email" class="form-control" value="{{old('correoEditar')}}" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="inputCorreoEditar" name="correoEditar">
-                        @error('correoEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo Electrónico" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar"/>
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 col-md-12 col-sm-12">
-                        <span class="input-group-text" id="basic-addon1">Calle</span>
-                        <input type="text" class="form-control" value="{{old('calleEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputCalleEditar" name="calleEditar">
-                        @error('calleEditar')
-                                <p class="col-12">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Número ext</span>
-                        <input type="number" class="form-control" value="{{old('numextEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExtEditar" name="numextEditar">
-                            @error('numextEditar')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
-                </div> 
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -418,6 +295,11 @@
         </div>
     @endslot
     @slot('footerModal')
+    <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
+
+
+    <!--
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
@@ -426,6 +308,7 @@
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
+    -->
     @endslot
     @endcomponent
 
