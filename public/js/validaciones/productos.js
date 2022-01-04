@@ -95,8 +95,9 @@ $(".btnEditar").on('click',function() {
 });
 //Opción para el boton ver detalles
 $(".btnDetalles").on('click',function() {
-    let fila = $(this).closest("tr").find(".dato"); 
-    var claveproducto =  fila[0].innerHTML;
+    let fila = $(this).closest("tr").find(".dato");  
+       
+    var claveproducto =  fila[0].innerHTML;    
     var claveProveedor = fila[5].innerHTML;
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
@@ -200,3 +201,20 @@ function limpiar(){
     $("#inCantExistencia").val("0");             
     $("#inDescripcion").val("");
 }
+//Agrega a un nuevo proveedor
+$('#formularioProveedor').on('submit', function(e){
+    e.preventDefault();    
+    var datosFormulario = $(this).serializeArray(); 
+    //alert(datosFormulario);   
+    minAjax({
+        url:'/agregar/proveedor',
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
+        },        
+        success: function(data){          
+            console.log(data)    
+        }
+       });
+});

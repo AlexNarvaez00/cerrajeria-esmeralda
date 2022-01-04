@@ -1,15 +1,13 @@
 @extends('rootview')
 @section('header-seccion')
-@component('components.header')
-<!--Items de la barra de menu-->
-@slot('items')
-<li class="nav-item">
-  <a class="btn btn-outline-success" href="/login">Iniciar sesión</a>
-</li>
-@endslot
-<!--Esta parte es para mostrar el boton de log out-->
-@slot('visible',false)
-@endcomponent
+<x-header visible=false>
+    <x-slot name="items">
+      <li class="nav-item">
+        <a class="btn btn-link text-dark" href="/login">Iniciar sesión</a>
+      </li>
+    </x-slot>
+</x-header>
+
 @endsection
 @section('contenido')
 <main class="container">

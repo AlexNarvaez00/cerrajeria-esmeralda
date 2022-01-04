@@ -5,10 +5,10 @@
 
  -->
 <li class="nav-item">
-    <a class="nav-link {{($active == 'productos')?'active':''}}" href="../productos">Productos</a>
+    <a class="nav-link fs-5 {{($active == 'productos')?'active':''}}" href="../productos">Productos</a>
 </li>
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle {{($active == 'ventas')?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link fs-5  dropdown-toggle {{($active == 'ventas')?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Ventas
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -17,19 +17,19 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'devoluciones')?'active':''}}" href="../devoluciones">Devoluciones</a>
+    <a class="nav-link fs-5 {{($active == 'devoluciones')?'active':''}}" href="../devoluciones">Devoluciones</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'clientes')?'active':''}}" href="../clientes">Clientes</a>
+    <a class="nav-link fs-5 {{($active == 'clientes')?'active':''}}" href="../clientes">Clientes</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'proveedores')?'active':''}}" href="../proveedores">Proveedores</a>
+    <a class="nav-link fs-5 {{($active == 'proveedores')?'active':''}}" href="../proveedores">Proveedores</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'usuarios')?'active':''}}" href="../usuarios">Usuarios</a>
+    <a class="nav-link fs-5 {{($active == 'usuarios')?'active':''}}" href="../usuarios">Usuarios</a>
 </li>
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle {{($active == 'reportes')?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link fs-5 dropdown-toggle {{($active == 'reportes')?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Reportes
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -38,8 +38,21 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'notificaciones')?'active':''}}" href="../notificaciones" id="btnNoificaciones">
+    <a class="nav-link fs-5 {{($active == 'notificaciones')?'active':''}}" href="../notificaciones" id="btnNoificaciones">
         <span class="icon">&#128276;</span>
         Notificaciones
     </a>
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link fs-5 dropdown-toggle" href="#" id="navbarDropdownSesion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Opciones
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSesion">
+        <li>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item">Cerrar sesión</button>
+            </form>
+        </li>
+    </ul>
 </li>
