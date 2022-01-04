@@ -1,9 +1,9 @@
 <div class="container">
     <header>
-        <nav class="navbar navbar-expand-md navbar-light">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container-fluid">
                 <!--Logo -->
-                <a class="navbar-brand fw-bold text-dark" href="../home">Cerrajeria Esmeralda</a>
+                <a class="navbar-brand fw-bold" href="../home">Cerrajeria Esmeralda</a>
                 <!--Boton de hamburguesa-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

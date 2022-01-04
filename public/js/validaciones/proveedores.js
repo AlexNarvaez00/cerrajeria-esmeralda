@@ -10,51 +10,27 @@ const expresionesRegulares = {
     //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
 };
 
-//Optenemos los input del formulario para agregar un nuevo proveedor
-const inputNombreProveedor = document.getElementById('inputNombreProveedor');
-const inputApellidoPProveedor = document.getElementById('inputApellidoPProveedor');
-const inputApellidoMProveedor = document.getElementById('inputApellidoMProveedor');
-const inputNumTelefono = document.getElementById('inputNumTelefono');
-const inputCorreo = document.getElementById('inputCorreo');
-const inputCalle = document.getElementById('inputCalle');
-const inputNumExt = document.getElementById('inputNumExt');
-
-//Definimos la funcion que evaluara la expresion regular.
-function evaluar(element,expresion){
-    let cadena = element.target.value;//Optenemos el valor del input
-    if(expresion.test(cadena)){
-        //Si la expresion coincide, se pone en verde
-        element.target.classList.add('is-valid') 
-        element.target.classList.remove('is-invalid')  
-    }else{
-        //Agregamos una lista al input para que se ponga en rojo
-        element.target.classList.add('is-invalid')
-        element.target.classList.remove('is-valid')    
-    }      
-}
-//Agregamos el vento escuchador "cuando una tecla se levanta"
-inputNombreProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreProveedor));
-inputApellidoPProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoPProveedor));
-inputApellidoMProveedor.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoMProveedor));
-inputNumTelefono.addEventListener('keyup',e => evaluar(e,expresionesRegulares.NumTelefono));
-inputCorreo.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Correo));
-inputCalle.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
-inputNumExt.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
-
-
-//validaciones para el formulario de editar proveedor
-const inputNombreProveedorEditar = document.getElementById('inputNombreProveedorEditar');
-const inputApellidoPProveedorEditar = document.getElementById('inputApellidoPProveedorEditar');
-const inputApellidoMProveedorEditar = document.getElementById('inputApellidoMProveedorEditar');
-const inputNumTelefonoEditar = document.getElementById('inputNumTelefonoEditar');
-const inputCorreoEditar = document.getElementById('inputCorreoEditar');
-const inputCalleEditar = document.getElementById('inputCalleEditar');
-const inputNumExtEditar = document.getElementById('inputNumExtEditar');
-//Evento para evaluar los imputs
-inputNombreProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.nombreProveedor));
-inputApellidoPProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoPProveedor));
-inputApellidoMProveedorEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.ApellidoMProveedor));
-inputNumTelefonoEditar.addEventListener('keyup',e => evaluar(e,expresionesRegulares.NumTelefono));
-inputCorreoEditar.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Correo));
-inputCalleEditar.addEventListener('keyup' ,e => evaluar(e,expresionesRegulares.Calle));
-inputNumExtEditar.addEventListener('keyup' , e => evaluar(e,expresionesRegulares.NumExt));
+validator([
+    //Empezamos con los imputs del modal ingresar nuevo prov
+    [document.getElementById("inputNombreProveedor"), expresionesRegulares.nombreProveedor],
+    [document.getElementById("inputApellidoPProveedor"), expresionesRegulares.ApellidoPProveedor],
+    [document.getElementById("inputApellidoMProveedor"), expresionesRegulares.ApellidoMProveedor],
+    [document.getElementById("inputNumTelefono"), expresionesRegulares.NumTelefono],
+    [document.getElementById("inputCorreo"), expresionesRegulares.Correo],
+    [document.getElementById("inputCalle"), expresionesRegulares.Calle],
+    [document.getElementById("inputNumExt"), expresionesRegulares.NumExt],
+    [document.getElementById("inputEstado"), "0"],
+    [document.getElementById("idMunicipio"), "0"],
+    [document.getElementById("idColonia"), "0"],
+    //Continuamos con los Imputs del modal para editar al proveedor
+    [document.getElementById("inputNombreProveedorEditar"), expresionesRegulares.nombreProveedor],
+    [document.getElementById("inputApellidoPProveedorEditar"), expresionesRegulares.nombreProveedor],
+    [document.getElementById("inputApellidoMProveedorEditar"), expresionesRegulares.nombreProveedor],
+    [document.getElementById("inputNumTelefonoEditar"), expresionesRegulares.NumTelefono],
+    [document.getElementById("inputCorreoEditar"), expresionesRegulares.Correo],
+    [document.getElementById("inputCalleEditar"), expresionesRegulares.Calle],
+    [document.getElementById("inputNumExtEditar"), expresionesRegulares.NumExt],
+    [document.getElementById("inputEstadoEditar"), "0"],
+    [document.getElementById("idMunicipioEditar"), "0"],
+    [document.getElementById("idColoniaEditar"), "0"],
+]);
