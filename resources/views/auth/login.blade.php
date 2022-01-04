@@ -65,14 +65,8 @@
       </div>
       <!--Botones del formulario-->
       <div class="m-4 d-flex justify-content-end">
-        <button type="submit" class="btn pl-3 pr-3 border-dark me-3">
-          <span>&#10004;</span>
-          Iniciar
-        </button>
-        <button type="reset" class="btn pl-3 pr-3 border-dark">
-          <span>&#10060;</span>
-          Cancelar
-        </button>
+        <x-button-normal-form  type="reset" estiloBoton="btn-outline-danger" texto="Cancelar"/>
+        <x-button-normal-form  type="submit" estiloBoton="btn-outline-success" texto="Iniciar"/>
       </div>
     </div>
   </form>

@@ -126,4 +126,12 @@ class productosController extends Controller
         $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
         return response()->json($listaColonias);
     }
+    public function setProveedor(Request $request){
+        //$proveedorTemp = json_decode($request->proveedor);
+        $temp = json_decode($request->proveedor[0]); //-> Esto ya lo puede convertir en JSON
+        
+
+        return response($temp->name);    
+        //return response()->json($temp);    
+    }
 }
