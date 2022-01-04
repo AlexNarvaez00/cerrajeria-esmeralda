@@ -1,22 +1,25 @@
-<div class="container">
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-warning">
-            <div class="container-fluid">
-                <!--Logo -->
-                <a class="navbar-brand fw-bold" href="../home">Cerrajeria Esmeralda</a>
-                <!--Boton de hamburguesa-->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!--botones de la barra de navegacion-->
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <!--Lista d elos botones de la barra de navegacion-->
-                    <ul class="navbar-nav">
-                        {{$items}}
-                    </ul>
+
+    <div class="container-fluid bg-warning shadow">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light">
+                <div class="container-fluid">
+                    <!--Logo -->
+                    <a class="navbar-brand fw-bold d-flex align-items-center" href="../home">
+                        <span class="fs-1 me-2"> <i class="bi bi-key"></i> </span>
+                         Cerrajeria Esmeralda
+                    </a>
+                    <!--Boton de hamburguesa-->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!--botones de la barra de navegacion-->
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <!--Lista d elos botones de la barra de navegacion-->
+                        <ul class="navbar-nav">
+                            {{$items}}
+                        </ul>
+                    </div>
                 </div>
-                
-            </div>
-        </nav>
-    </header>
-</div>
+            </nav>
+        </header>
+    </div>
