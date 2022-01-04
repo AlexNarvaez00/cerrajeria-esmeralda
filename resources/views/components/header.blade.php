@@ -1,6 +1,6 @@
 <div class="container">
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-md navbar-light bg-warning">
             <div class="container-fluid">
                 <!--Logo -->
                 <a class="navbar-brand fw-bold" href="../home">Cerrajeria Esmeralda</a>
@@ -15,14 +15,7 @@
                         {{$items}}
                     </ul>
                 </div>
-                <div class="container-button-end">
-                    @if($visible)
-                        <form action="{{route('logout')}}" method="post">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-success">Cerrar sesión</button>
-                        </form>
-                    @endif
-                </div>
+                
             </div>
         </nav>
     </header>

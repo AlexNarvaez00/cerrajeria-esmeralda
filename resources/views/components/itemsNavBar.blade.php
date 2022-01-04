@@ -43,3 +43,15 @@
         Notificaciones
     </a>
 </li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSesion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSesion">
+        <li>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item">Cerrar sesión</button>
+            </form>
+        </li>
+    </ul>
+</li>
