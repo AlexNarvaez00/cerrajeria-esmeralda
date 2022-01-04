@@ -130,7 +130,11 @@ class productosController extends Controller
         //$proveedorTemp = json_decode($request->proveedor);
         $temp = json_decode($request->proveedor[0]); //-> Esto ya lo puede convertir en JSON
         
-
+        //$nombreProveeedor = htmlspecialchars($_POST["txtNombreProveedor"]);
+        
+         $proveedorNuevo = $request->proveedor;
+        //$proveedorNuevo->idProveedor = $params['Prov'];
+        //$proveedorNuevo->save();
         return response($temp->name);    
         //return response()->json($temp);    
     }
