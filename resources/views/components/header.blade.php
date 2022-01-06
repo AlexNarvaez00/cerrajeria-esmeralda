@@ -1,5 +1,4 @@
-
-    <div class="container-fluid bg-warning shadow">
+<div class="container-fluid bg-warning shadow">
         <header>
             <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
