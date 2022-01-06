@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class telefonoModelo extends Model
 {
     use HasFactory;
+    protected $table = 'telefono_proveedor';
+    public $timestamps = false;
+    public $incrementing = false;
 }

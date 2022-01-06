@@ -214,7 +214,7 @@ $('#formularioProveedor').on('submit', function(e){
             proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
         },        
         success: function(data){          
-            console.log(data)    
+            console.log(data); 
         }
        });
 });
