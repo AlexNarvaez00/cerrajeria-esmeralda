@@ -145,8 +145,6 @@ class productosController extends Controller
         strtoupper($apM[1]).
         strtoupper($num[0]).
         strtoupper($num[1]);
-        
-
         //Llave primaria direccion       
         $llavePrimariaDireccion = "DIC-".$tel[0].$tel[1].$apP[0].$apP[1]."-".$apM[0].$apM[1];
         //Agregar tabla direccion        
@@ -156,6 +154,7 @@ class productosController extends Controller
         $direccionProveedor->numero= $num;
         $direccionProveedor->idcoldirec = $idcolonia;
         $direccionProveedor->save();
+        
         //Agregar tabla proveedor
         $proveedorTemp = new proveedorModelo();
         $proveedorTemp->idproveedor = $llavePrimaria;
@@ -163,19 +162,19 @@ class productosController extends Controller
         $proveedorTemp->apellidopaterno = $apP;
         $proveedorTemp->apellidomaterno = $apM;
         $proveedorTemp->correo = $correo;
-        $proveedor->iddirecproveedor = $llavePrimariaDireccion;
+        $proveedorTemp->iddirecproveedor = $llavePrimariaDireccion;
         $proveedorTemp->save();
         //Agregar tabla telefono_proveedor
 
         //Almacena las tablas
         
-        
+        $retornarProveedor = proveedorModelo::find($llavePrimaria);
         
         /*
-        $retornarProveedor = proveedorModelo::where('idproveedor','=',$llavePrimaria)->get();
+        
         return response()->json($retornarProveedor); 
         */
-        return response($llavePrimariaDireccion);         
+        return response()->json($retornarProveedor);         
 
     }
 }
