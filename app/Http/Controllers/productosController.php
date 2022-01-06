@@ -168,13 +168,13 @@ class productosController extends Controller
 
         //Almacena las tablas
         
-        
+        $retornarProveedor = proveedorModelo::find($llavePrimaria);
         
         /*
-        $retornarProveedor = proveedorModelo::where('idproveedor','=',$llavePrimaria)->get();
+        
         return response()->json($retornarProveedor); 
         */
-        return response($llavePrimariaDireccion);         
+        return response()->json($retornarProveedor);         
 
     }
 }
