@@ -6,6 +6,7 @@ use App\Models\productosModelo;
 use App\Models\proveedorModelo;
 use App\Models\estadosModelo;
 use App\Models\municipiosModelo;
+use App\Models\direccionModelo;
 use App\Models\coloniaModelo;
 use App\Models\productosDescripcionModelo;
 
@@ -128,14 +129,53 @@ class productosController extends Controller
     }
     public function setProveedor(Request $request){
         //$proveedorTemp = json_decode($request->proveedor);
-        $temp = json_decode($request->proveedor[0]); //-> Esto ya lo puede convertir en JSON
+        $nombre= json_decode($request->proveedor[0])->value; //-> Esto ya lo puede convertir en JSON 
+        $apP= json_decode($request->proveedor[1])->value;
+        $apM = json_decode($request->proveedor[2])->value;        
+        $tel = json_decode($request->proveedor[3])->value;
+        $correo = json_decode($request->proveedor[4])->value;
+        $num = json_decode($request->proveedor[5])->value;
+        $calle = json_decode($request->proveedor[6])->value;
+        $idcolonia = json_decode($request->proveedor[9])->value;
+        //Llave primaria del proveedor
+        $llavePrimaria = "PROV-".
+        strtoupper($apP[0]).
+        strtoupper($apP[1]).
+        strtoupper("-".$apM[0]).
+        strtoupper($apM[1]).
+        strtoupper($num[0]).
+        strtoupper($num[1]);
         
-        //$nombreProveeedor = htmlspecialchars($_POST["txtNombreProveedor"]);
+
+        //Llave primaria direccion       
+        $llavePrimariaDireccion = "DIC-".$tel[0].$tel[1].$apP[0].$apP[1]."-".$apM[0].$apM[1];
+        //Agregar tabla direccion        
+        $direccionProveedor = new direccionModelo();
+        $direccionProveedor->iddireccion = $llavePrimariaDireccion;
+        $direccionProveedor->calle = $calle;
+        $direccionProveedor->numero= $num;
+        $direccionProveedor->idcoldirec = $idcolonia;
+        $direccionProveedor->save();
+        //Agregar tabla proveedor
+        $proveedorTemp = new proveedorModelo();
+        $proveedorTemp->idproveedor = $llavePrimaria;
+        $proveedorTemp->nombre = $nombre;
+        $proveedorTemp->apellidopaterno = $apP;
+        $proveedorTemp->apellidomaterno = $apM;
+        $proveedorTemp->correo = $correo;
+        $proveedor->iddirecproveedor = $llavePrimariaDireccion;
+        $proveedorTemp->save();
+        //Agregar tabla telefono_proveedor
+
+        //Almacena las tablas
         
-         $proveedorNuevo = $request->proveedor;
-        //$proveedorNuevo->idProveedor = $params['Prov'];
-        //$proveedorNuevo->save();
-        return response($temp->name);    
-        //return response()->json($temp);    
+        
+        
+        /*
+        $retornarProveedor = proveedorModelo::where('idproveedor','=',$llavePrimaria)->get();
+        return response()->json($retornarProveedor); 
+        */
+        return response($llavePrimariaDireccion);         
+
     }
 }
