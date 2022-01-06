@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <form action="" class="row d-flex justify-content-end">
             <div class="col-5">
-                <input type="text" class="form-control" placeholder="Buscar producto" name="inputBusqueda">
+                <input id="inputBuscar" type="text" class="form-control" placeholder="Buscar producto" name="inputBusqueda">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
@@ -148,7 +148,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1">Precio compra $</span>
-                        <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
+                        <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
                     </div>
                 </div>                
             </div>
@@ -184,20 +184,13 @@
         </div>
 
     @endslot
-    @slot('footerModal')
-        <button type="reset" class="btn btn-outline-danger d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            Cancelar
-        </button>
-        <div id="btnRegistrarProducto" style="display:none">
-        <button type="submit" class="btn  btn-outline-primary d-flex ps-3 pe-3" >
-            Registrar
-        </button>
+    @slot('footerModal')        
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />  
+        <div id="btnRegistrarProducto" style="display:none">        
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
         </div>
         <div id="btnGuardarCambios" style="display:none">
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
-            <span class="me-2">&#128190;</span>
-            Guardar Cambios
-        </button>
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Guardar" data-bs-toggle="modal" data-bs-target="#confirmacionModificacion" data-bs-dismiss="modal"/>
         </div>
     @endslot
     @endcomponent
@@ -421,11 +414,47 @@
         </form>  
     @endslot
     @endcomponent
-    <x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
-        <x-slot name="cuerpoModal"></x-slot>
+    <x-modalSimple idModal="confirmacionModal" tituloModal="Borrar registro">
+        <x-slot name="cuerpoModal">
+        <div class = "container">
+                <div class = "row">
+                    <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+                        <h6>¿Seguro que quieres eliminar el registro?</h6>
+                    </div>
+                </div>
+                
+                <div class = "row">
+                    <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+                        <h6>Los cambios no se pueden deshacer</h6>
+                    </div>
+                </div>
+            </div>
+        </x-slot>
         <x-slot name="footerModal">
             <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
             <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+        </x-slot>
+    </x-modalSimple>
+    <!--Modal cambios-->
+    <x-modalSimple idModal="confirmacionModificacion" tituloModal="Modificar registro">
+        <x-slot name="cuerpoModal">
+            <div class = "container">
+                <div class = "row">
+                    <div class="col-md-12 col-sm-12  d-flex justify-content-center">
+                        <h6>¿Seguro que quieres modificar el registro?</h6>
+                    </div>
+                </div>
+                
+                <div class = "row">
+                    <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+                        <h6>Los cambios no se pueden deshacer</h6>
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footerModal">
+            <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
+            <x-button-normal-form type="submit" id="btnGuardar" estiloBoton="btn-outline-primary" texto="Confirmar"/>
         </x-slot>
     </x-modalSimple>
 @endsection

@@ -237,4 +237,27 @@ $("#formularioProveedor").on("submit", function (e) {
         }
        });
 });
+$('#inputBuscar').on('keyup', function() {
+   
+});
+
+$('#btnGuardar').on('click',function(e){
+    e.preventDefault();
+    $( "#inClaveProducto" ).prop( "disabled", false);
+    let form = $("#registroProductoModal").find("form");
+    var datosFormulario = form.serializeArray();    
+    minAjax({
+        url: "/producto/cambiar",
+        type: "POST",
+        data: {
+            _token: document.querySelector('input[name="_token"]').value,
+            producto:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
+        },        
+        success: function(data){  
+             
+            window.location.reload();
+            
+        }
+       });
+});
 

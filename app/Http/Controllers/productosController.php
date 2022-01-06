@@ -173,4 +173,28 @@ class productosController extends Controller
                
 
     }
+    public function cambiosProducto(Request $request){
+        $clave_producto = json_decode($request->producto[1])->value;
+        $nombre_producto = json_decode($request->producto[2])->value;
+        $existencia = json_decode($request->producto[3])->value;
+        $clasificacion = json_decode($request->producto[4])->value;
+        $precio_venta = json_decode($request->producto[5])->value;
+        $precio_compra = json_decode($request->producto[6])->value;
+        $descripcion = json_decode($request->producto[7])->value;
+        $idProveedor = json_decode($request->producto[8])->value;
+        
+        
+        productosModelo::where('clave_producto',$clave_producto)->update([
+            'nombre_producto'=>$nombre_producto,
+            'clasificacion'=>$clasificacion,
+            'precio_producto'=>$precio_venta,
+            'cantidad_existencia'=>$existencia,
+            'idproveedor'=>$idProveedor
+        ]);
+        productosDescripcionModelo::where('clave_producto',$clave_producto)->update([
+            'descripcion'=>$descripcion
+        ]);  
+        return response($idProveedor);
+        
+    }
 }
