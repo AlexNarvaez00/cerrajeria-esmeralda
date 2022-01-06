@@ -230,4 +230,3 @@ $("#formularioProveedor").on("submit", function (e) {
         }
        });
 });
-
