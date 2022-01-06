@@ -188,7 +188,7 @@
     @slot('footerModal')
 
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
+    <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
     
     <!-- Botones anteriores
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">

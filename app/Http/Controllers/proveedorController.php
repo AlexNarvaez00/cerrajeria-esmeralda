@@ -103,8 +103,8 @@ class proveedorController extends Controller
         //Guardamos el telefono en la tabla telefono
         $telefono_prov = new telefonoModelo();
         $telefono_prov->idtelefono = "Tel-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
-        $telefono_prov->telefono=$request->numtelefono;
-        $telefono_prov->idproveedor=$llavePrimaria;
+        $telefono_prov->telefono = $request->numtelefono;
+        $telefono_prov->idproveedor = $proveedor->idproveedor;
         $telefono_prov->save();
 
         //Se crea y guarda una dirección con la información del proveedor para posteriormente usarla en el campo de dirección de la tabla
