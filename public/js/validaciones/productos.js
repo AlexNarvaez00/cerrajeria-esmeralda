@@ -223,19 +223,6 @@ $("#formularioProveedor").on("submit", function (e) {
         type: "POST",
         data: {
             _token: document.querySelector('input[name="_token"]').value,
-<<<<<<< HEAD
-            proveedor: datosFormulario.map(
-                (e) => `{"name":"${e.name}","value":"${e.value}"}`
-            ),
-        },
-
-        success: function (data) {
-            data = JSON.parse(data);
-            alert(data);
-        },
-    });
-});
-=======
             proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
         },        
         success: function(data){          
@@ -243,4 +230,3 @@ $("#formularioProveedor").on("submit", function (e) {
         }
        });
 });
->>>>>>> Narvaez
