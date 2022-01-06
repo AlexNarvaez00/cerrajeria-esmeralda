@@ -225,8 +225,15 @@ $("#formularioProveedor").on("submit", function (e) {
             _token: document.querySelector('input[name="_token"]').value,
             proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
         },        
-        success: function(data){          
-            console.log(data.idproveedor); 
+        success: function(data){   
+            data = JSON.parse(data);       
+            $("#proveedores").append(
+                $("<option>", {
+                    value: data.idproveedor,
+                    text: data.idproveedor + " "+data.nombre,
+                })
+            );
+            $("#proveedores option[value='"+data.idproveedor+"']").attr("selected", true);
         }
        });
 });

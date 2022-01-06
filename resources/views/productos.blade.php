@@ -417,7 +417,7 @@
     @slot('footerModal')
     @csrf
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" />    
-        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" /> 
         </form>  
     @endslot
     @endcomponent
