@@ -5,31 +5,60 @@ let carrito = [];//Obtiene los productos que estan en el carrito
 //Abre un modal con la información de un producto antes de agregar al carrito
 $(".btnAgregarAlCarro").on("click", function() {    
     let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
-    var cantidadExistencia = fila[4].innerHTML;  
-    alert(cantidadExistencia);  
+    var cantidadExistencia = fila[4].innerHTML;     
     if(cantidadExistencia > 0){
+        $("#liveToast").toast("hide");
         $("#agregarcarritoModal").modal("show");
-        $("#letreroConfirmacion").text("¿Deseas agregar a " + fila[0].innerHTML+" " + fila[1].innerHTML+" al carrito?");
+        $("#letreroIdProducto").text(fila[0].innerHTML);        
+        $("#letreroConfirmacion").text("¿Deseas agregar a "+ fila[1].innerHTML+" al carrito?");
     }else{
         $("#liveToast").toast("show");
     }        
 });
+
 //Agrega al carrito
-$("#btnConfirmacionCarro").on("click", function() {    
-    identificadorProducto= $("#letreroID").text();       
+$("#btnConfirmacionCarro").on("click", function() { 
+    var idInputs = 0, idBotones = 0;
+    var clave_producto = $("#letreroIdProducto").text();       
     minAjax({
         url:"/producto/venta", 
         type:"POST",
         data:{
             _token: document.querySelector('input[name="_token"]').value,
-            clave_producto:identificadorProducto,
-            cantidadExistente:$("#inCantExistencia").val()
+            clave_producto:clave_producto            
         },        
         success: function(data){
             data = JSON.parse(data);                            
-            if(data.nombre_producto != null){
+            if(data != null){                
+                fila = "<tr>"
+                            +"<th>"+data.clave_producto+ "</th>"
+                            +"<td>"+data.nombre_producto+"</td>"
+                            +'<td class="inCantidad"></td>'
+                            +"<td>"+data.cantidad_existencia+"</td>"
+                            +"<td>"+'$'+data.precio_producto+"</td>"
+                            +"<td>"+data.cantidad_stock+"</td>"                            
+                            +'<td class="btnQuitar"></td>'
+                        +"</tr>";
+                $('#tabla tr:last').after(fila);
 
-                let observacion = $("#areaObservaciones").val(); 
+                $("#tabla tr:last").find(".btnQuitar").append(
+                '<a class = "btnQuitarCarro">'                                                     
+                +'<button type="button" class="btn">'
+                    + '<span><i  class="bi bi-cart4" style="font-size:20px;"></i></span>'
+                +'</button>'  
+                +'</a>');
+                
+               
+               $("#tabla tr:last").find(".inCantidad").append(               
+                '<input type="number" class="inCantidad" value="1" size=20  style="width:50px">'                
+                );  
+                                          
+            }
+        }
+    });   
+});
+/*
+let observacion = $("#areaObservaciones").val(); 
                 if(observacion == ""){
                     observacion = "Sin observaciones";
                 }
@@ -45,11 +74,8 @@ $("#btnConfirmacionCarro").on("click", function() {
                     
                 }else{
                     alert("Agrega mas productos para poder venderlos");
-                }                
-            }
-        }
-    });   
-});
+                }  
+* */
 
 //elimina todo el carrito
 $("#btnEliminarCarrito").on("click", function() {    

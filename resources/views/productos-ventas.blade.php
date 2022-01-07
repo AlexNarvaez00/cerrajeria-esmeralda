@@ -82,21 +82,23 @@
             </table>
         </div>
     </div>
-<!-- modal para listar los productos en el carrito-->
-    @component('components.modal')
+<!-- modal para listar los productos en el carrito -->
+    @component('components.modalSimple')
     @slot('idModal','carritoModal')
     @slot('tituloModal','Carrito de compras')
-    @slot('rutaEnvio',route('productos-ventas.store'))
-    @slot('metodoFormulario','POST')
     @slot('cuerpoModal')           
         <p class="px-3">
             Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
         <div class="col-12 text-center">
-            <table id = "tabla" class="table table-success table-striped">
-                @foreach ($camposproductosCarrito  as $campo)
-                    <th scope="col">{{$campo}}</th>
-                @endforeach  
+            <table id = "tabla" class="table table-warning table-striped">
+                <thead>
+                    <tr>
+                    @foreach ($camposproductosCarrito  as $campo)
+                        <th scope="col">{{$campo}}</th>
+                    @endforeach 
+                    </tr>
+                </thead> 
                 <tbody>
                 </tbody>
             </table>   
@@ -104,37 +106,35 @@
     @endslot
     @slot('footerModal')
         <div class="me-auto p-2 bd-highlight"><h6 id="letreroTotal">Total a pagar: $0.00</h6></div>
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3">
-            <span class="me-2">&#10004;</span>
-            Realizar pago
-        </button>
-        <button id="btnEliminarCarrito"type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Eliminar carrito
-        </button>
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta" id="btnRealizarVenta" data-bs-dismiss="modal" data-bs-toggle="modal"/>         
     @endslot
     @endcomponent
     <!-- modal para agregar un producto al carrito-->
     @component('components.modalSimple')
     @slot('idModal','agregarcarritoModal')
     @slot('tituloModal','Agregar al carrito')
-    @slot('cuerpoModal')
-    
+    @slot('cuerpoModal')    
     <div class="container-fluid">
-        <div class = "row">
+        <div class = "row">            
+            <div class="col-md-6 col-sm-6  d-flex justify-content-end">
+                <h6>Id del producto: </h6>                        
+            </div>
+            <div class="col-md-6 col-sm-6 d-flex justify-content-start">
+                <h6 id="letreroIdProducto" class="font-weight-bold"></h6>                        
+            </div>                                        
+        </div> 
+        <div class = "row">            
             <div class="col-md-12 col-sm-12  d-flex justify-content-center">
                 <h6 id="letreroConfirmacion"></h6>                        
-            </div>  
-                                       
-        </div>
-    
-        
-    <div>
-        
+            </div>                                      
+        </div>       
+    <div>        
     @endslot
     @slot('footerModal')
-        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" />
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Agregar" id="btnConfirmacionCarro" />
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal"/>
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="btnConfirmacionCarro" data-bs-dismiss="modal"/>
+        
     @endslot
     @endcomponent
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

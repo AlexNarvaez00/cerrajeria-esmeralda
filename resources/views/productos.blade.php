@@ -478,7 +478,7 @@
             </div>
         </x-slot>
         <x-slot name="footerModal">
-            <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
+            <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" data-bs-target="#registroProductoModal" data-bs-toggle="modal"/>
             <x-button-normal-form type="submit" id="btnGuardar" estiloBoton="btn-outline-primary" texto="Confirmar"/>
         </x-slot>
     </x-modalSimple>
