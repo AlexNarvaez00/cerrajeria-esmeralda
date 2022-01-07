@@ -223,7 +223,7 @@
     </x-slot>
     <x-slot name="footerModal">
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Guardar" />
     </x-slot>
 </x-modal>
 
@@ -245,7 +245,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">¡OK!</button>
+                <x-button-normal-form type="reset" estiloBoton="btn-outline-primary" texto="!OK¡" data-bs-dismiss="modal" />
             </div>
         </div>
     </div>
