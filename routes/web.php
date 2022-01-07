@@ -79,6 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/colonias/proveedor', [productosController::class, 'getColonias'])->name('colonias.proveedor');
     Route::get('/notificaciones/existencia/total',[Notificaciones::class,'existsNotify'])->name('productos.notificacionesTotal');
     Route::post('/agrega/proveedor', [productosController::class, 'setProveedor'])->name('agrega.proveedor');
+    Route::post('/producto/cambiar', [productosController::class, 'cambiosProducto'])->name('producto.cambiar');
+    Route::post('/producto/buscar', [productosController::class, 'existe'])->name('producto.buscar');
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

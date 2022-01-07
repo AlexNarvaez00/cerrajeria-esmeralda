@@ -39,7 +39,7 @@ class productosController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Ver detalles','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
     }
 
     /**
@@ -55,7 +55,7 @@ class productosController extends Controller
         $listaDescripciones = null;
         $estadosLista = estadosModelo::all();
         if(count($request->all()) >= 0){
-            $listaProductos = productosModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
+            $listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%') ->get();
             $listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
         }else{
             //Sino tiene nada
@@ -91,7 +91,12 @@ class productosController extends Controller
         $producto->nombre_producto = $request->nombre_producto;
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
+        $producto->precio_compra = $request->precio_compra;
         $producto->cantidad_existencia = $request->cantidad_existencia;
+        $producto->cantidad_stock = $request->cantidad_stock;
+        
+        
+        
         //parte la cadena y la combierte en un arreglo
         $arreProveedores = explode(" ",$request->idproveedor);
         $producto->idproveedor = $arreProveedores[0];       
@@ -168,13 +173,50 @@ class productosController extends Controller
 
         //Almacena las tablas
         
-        $retornarProveedor = proveedorModelo::find($llavePrimaria);
-        
-        /*
-        
-        return response()->json($retornarProveedor); 
-        */
-        return response()->json($retornarProveedor);         
+        $retornarProveedor = proveedorModelo::find($llavePrimaria);    
+        return response()->json($retornarProveedor);   
+               
 
+    }
+    public function cambiosProducto(Request $request){
+        $clave_producto = json_decode($request->producto[1])->value;
+        $nombre_producto = json_decode($request->producto[2])->value;
+        $existencia = json_decode($request->producto[3])->value;
+        $stock = json_decode($request->producto[4])->value;
+        $clasificacion = json_decode($request->producto[7])->value;
+        $precio_venta = json_decode($request->producto[5])->value;
+        $precio_compra = json_decode($request->producto[6])->value;
+        $descripcion = json_decode($request->producto[8])->value;
+        $idProveedor = json_decode($request->producto[9])->value;
+        
+        
+        productosModelo::where('clave_producto',$clave_producto)->update([
+            'nombre_producto'=>$nombre_producto,
+            'clasificacion'=>$clasificacion,
+            'precio_producto'=>$precio_venta,
+            'precio_compra'=>$precio_compra,
+            'cantidad_existencia'=>$existencia,
+            'cantidad_stock'=>$stock,
+            'idproveedor'=>$idProveedor
+        ]);
+        productosDescripcionModelo::where('clave_producto',$clave_producto)->update([
+            'descripcion'=>$descripcion
+        ]);  
+        return response($idProveedor);
+        
+    }
+    public function buscar(Request $request){
+        $listaProductos = productosModelo::where('$request->nombre_producto','like',$request->inputBusqueda.'%') ->get();
+        return view('productos') ->with ('registrosProductos',$listaProductos);
+    }
+    //Si existe
+    public function existe(Request $request){
+        $bandera = "NULL";
+        if (productosModelo::where('clave_producto', "=",$request->clave_producto)->exists()) {
+            $bandera = "true";
+         }else{
+             $bandera = "false";
+         }
+         return response($bandera);
     }
 }
