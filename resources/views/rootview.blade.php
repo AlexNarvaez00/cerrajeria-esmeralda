@@ -30,6 +30,8 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
+    <script src="./js/minAjax.js"></script>
+    <script src="./js/funciones/verificarNotificaciones.js"></script>
     @yield('scritps')
 </body>
 

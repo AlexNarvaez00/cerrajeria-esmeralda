@@ -34,26 +34,4 @@
 </div>
 @endsection
 @section('scritps')
-<script src="./js/minAjax.js"></script>
-<script>
-  minAjax({
-    url: "{{route('productos.notificacionesTotal')}}", //request URL
-    type: "GET", //Request type GET/POST
-    //Send Data in form of GET/POST
-    data: {},
-    //CALLBACK FUNCTION with RESPONSE as argument
-    success: function(data) {
-      data = JSON.parse(data);
-      document.getElementById('cantidad').innerHTML = '' + data.cantidad;
-
-      //Esto ira en la vista raiz
-      if(data.cantidad != 0){
-        let btnNotificaciones = document.getElementById('btnNoificaciones');
-        btnNotificaciones.classList.add('text-danger');
-        document.querySelector('#btnNoificaciones .icon').classList.add("icon_notify")
-      }
-    }
-
-  });
-</script>
 @endsection
