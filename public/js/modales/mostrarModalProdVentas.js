@@ -5,15 +5,14 @@ let carrito = [];//Obtiene los productos que estan en el carrito
 //Abre un modal con la información de un producto antes de agregar al carrito
 $(".btnAgregarAlCarro").on("click", function() {    
     let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
-    var cantidadExistencia = fila[3].innerHTML;
-    if(cantidadExistencia <= 0){
-        bloquear();
+    var cantidadExistencia = fila[4].innerHTML;  
+    alert(cantidadExistencia);  
+    if(cantidadExistencia > 0){
+        $("#agregarcarritoModal").modal("show");
+        $("#letreroConfirmacion").text("¿Deseas agregar a " + fila[0].innerHTML+" " + fila[1].innerHTML+" al carrito?");
     }else{
-        limpiar();
-    }
-    $("#letreroID").text(fila[0].innerHTML);
-    $("#letreroNombre").text(fila[1].innerHTML);
-    $("#letreroPrecio").text("Precio individual: " + fila[2].innerHTML);    
+        $("#liveToast").toast("show");
+    }        
 });
 //Agrega al carrito
 $("#btnConfirmacionCarro").on("click", function() {    

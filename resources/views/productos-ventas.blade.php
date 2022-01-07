@@ -67,11 +67,11 @@
                             <td class="dato">&#36;{{$producto->precio_compra}}</td>
                             <td class="dato">{{$producto->cantidad_existencia}}</td>  
                             <td class="dato">{{$producto->cantidad_stock}}</td>                                                  
-                            <!--Boton de carrito-->
+                            <!--Boton de carrito  -->
                             <td>
                                 <a class = "btnAgregarAlCarro">                                                     
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarcarritoModal">
-                                        <span><i  class="bi bi-cart4" style="font-size:20px;" ></i></span>
+                                    <button type="button" class="btn" >
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;"  ></i></span>
                                     </button>  
                                 </a>                                                     
                             </td>                
@@ -121,42 +121,34 @@
     @slot('cuerpoModal')
     
     <div class="container-fluid">
-    
-        <div class="row">        
-            <p class="px-3">
-                
-                <h5 id="letreroID"></h5>
-                <h6 id="letreroNombre"></h6>
-                <h6 id="letreroPrecio"></h6>
-            </p>
-            
-            <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3 ">
-                    <span class="input-group-text" id="basic-addon1">Cantidad</span>
-                    <input id ="inCantExistencia" type="number" class="form-control" value="1" placeholder="" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
-                </div>
-            </div>
-            <div class="input-group">
-                <span class="input-group-text">Observaciones</span>
-                <textarea id="areaObservaciones" class="form-control" aria-label="With textarea"></textarea>
-            </div>         
-        
+        <div class = "row">
+            <div class="col-md-12 col-sm-12  d-flex justify-content-center">
+                <h6 id="letreroConfirmacion"></h6>                        
+            </div>  
+                                       
         </div>
+    
+        
     <div>
         
     @endslot
     @slot('footerModal')
-    @csrf
-        <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>        
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" id="btnConfirmacionCarro" data-bs-dismiss="modal">
-            <i class="bi bi-plus-lg " style="font-size:20px;"></i>
-            Agregar
-        </button>
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" />
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Agregar" id="btnConfirmacionCarro" />
     @endslot
     @endcomponent
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">    
+                <strong class="me-auto">&#10060 Error</strong>      
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Agraga mas productos al inventario
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scritps')   
