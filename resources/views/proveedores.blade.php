@@ -11,7 +11,6 @@
 @endsection
 
 <!--########################### Titulos de la tabla. -- Info del Usuario en sesión ################################# -->
-
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
@@ -21,8 +20,6 @@
         <span>&#128666;</span>
         Proveedores
     </h5>
-
-
 <!--########################### Cuerpo de la página ################################# -->
 
     <div class="container-fluid mb-4">
@@ -71,6 +68,7 @@
                             <td class="data">{{$proveedor->nombre}}</td>
                             <td class="data">{{$proveedor->apellidopaterno}}</td>
                             <td class="data">{{$proveedor->apellidomaterno}}</td>
+                            <td class="data">{{$proveedor->telefono}}</td>
                             <td class="data">{{$proveedor->correo}}</td>
                             <td class="data">{{$proveedor->iddirecproveedor}}</td> 
                             <!--Botones-->
@@ -80,11 +78,10 @@
                                 data-nombre="{{$proveedor->nombre}}"
                                 data-apellidoP="{{$proveedor->apellidopaterno}}"
                                 data-apellidoM="{{$proveedor->apellidomaterno}}"
+                                data-numtelefono="{{$proveedor->numtelefono}}"
                                 data-correo="{{$proveedor->correo}}"
                                 data-direccion="{{$proveedor->iddirecproveedor}}"
                                 data-route-url="{{route('proveedores.update',$proveedor)}}"
-
-
                                 data-bs-toggle="modal" 
                                 data-bs-target="#editarProveedorModal">
                                 <span>&#128394;</span>
@@ -106,7 +103,6 @@
             {{$registrosVista->links()}}
         </div>
     </div>
-
             <!--########################### Modal Formulario para agregar a un nuevo proveedor  ############################## -->
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
@@ -162,7 +158,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="idMunicipio">Municipio</label>
-                            <select id="idMunicipio" class="form-select {{ (old('municipios'))? 'is-valid':'' }}" name="municipios" value="{{old('municipios')}}">
+                            <select id="idMunicipio" class="form-select {{ (old('municipios'))? 'is-valid':'' }}" disabled="true" name="municipios" value="{{old('municipios')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
                             @error('municipios')
@@ -172,10 +168,10 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
                 <label class="input-group-text" for="idColonia">Colonia</label>
-                    <select id="idColonia" class="form-select {{ (old('colonias'))? 'is-valid':'' }}" name="colonias" value="{{old('colonias')}}">
+                    <select id="idColonia" class="form-select {{ (old('colonias'))? 'is-valid':'' }}" disabled="true" name="colonias" value="{{old('colonias')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
                     @error('colonias')
@@ -188,7 +184,7 @@
     @slot('footerModal')
 
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
+    <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
     
     <!-- Botones anteriores
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
@@ -209,10 +205,9 @@
     <x-slot name="cuerpoModal"></x-slot>
     <x-slot name="footerModal">
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
     </x-slot>
 </x-modalSimple>
-
 
 <!--########################### Modal para editar la información del proveedor ###################################### -->
 
@@ -272,7 +267,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="idMunicipioEditar">Municipio</label>
-                            <select id="idMunicipioEditar" class="form-select" name="municipiosEditar" value="{{old('municipiosEditar')}}">
+                            <select id="idMunicipioEditar" class="form-select" disabled="true" name="municipiosEditar" value="{{old('municipiosEditar')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
                             @error('municipiosEditar')
@@ -281,10 +276,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
                 <label class="input-group-text" for="idColoniaEditar">Colonia</label>
-                    <select id="idColoniaEditar" class="form-select" name="coloniasEditar" value="{{old('coloniasEditar')}}">
+                    <select id="idColoniaEditar" class="form-select" disabled="true" name="coloniasEditar" value="{{old('coloniasEditar')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
                     @error('coloniasEditar')
@@ -296,9 +291,7 @@
     @endslot
     @slot('footerModal')
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
-    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Registrar" />
-
-
+    <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
     <!--
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
@@ -311,7 +304,6 @@
     -->
     @endslot
     @endcomponent
-
 
 @if('noValido')
         <div class="modal" tabindex="-1" id="negacionModal">
@@ -353,6 +345,7 @@
     <!-- https://flouthoc.github.io/minAjax.js/ -->
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
 <script type="text/javascript" src="./js/minAjax.js"></script>
+    <!-- script para los selectores de los municipios y colonias -->
 <script >
         
         const selectorEstado = document.getElementById('inputEstado');
@@ -380,29 +373,23 @@ function recuperarMunicipios(idSelector)
                 //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
                 success: function(data){
                     data = JSON.parse(data);
-                    
+                    let selectordesabilitadoM = document.getElementById(idSelector).disabled=false;
                     let selectorMunicipio = document.getElementById(idSelector);
-                    
                     let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "-- Selecciona un municipio --";
+                    textoSelectorOP1.innerHTML = "Selecciona un municipio";
                     textoSelectorOP1.value = 0;
-
                     let opcionesSeleccion = [textoSelectorOP1];
 
                     for (let index = 0; index < data.length; index++) {
                         let opcion =  document.createElement('option');
                         opcion.innerHTML = data[index].nombre;                       
                         opcion.value = data[index].idmunicipio;
-
                         opcionesSeleccion.push(opcion);                      
                     }
-
                     selectorMunicipio.innerHTML = '';
-
                     for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
                             selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
                     }
-
                 }
                });
             }
@@ -425,29 +412,23 @@ function recuperarColonias(idSelector)
                 //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
                     success: function(data){
                     data = JSON.parse(data);
-
+                    let selectordesabilitadoC = document.getElementById(idSelector).disabled=false;
                     let selectorColonia = document.getElementById(idSelector);
-                    
                     let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "-- Selecciona una colonia --";
+                    textoSelectorOP1.innerHTML = "Selecciona una colonia";
                     textoSelectorOP1.value = 0;
-
                     let opcionesSeleccion = [textoSelectorOP1];
 
                     for (let index = 0; index < data.length; index++) {
                         let opcion =  document.createElement('option');
-                        opcion.innerHTML = data[index].nombre;                       
+                        opcion.innerHTML = data[index].nombre+ " CP:" + data[index].codigopostal;                       
                         opcion.value = data[index].idcolonia;
-
                         opcionesSeleccion.push(opcion);                      
                     }
-
                     selectorColonia.innerHTML = '';
-
                     for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
                             selectorColonia.appendChild(opcionesSeleccion[idx]);                    
                     }
-
                 }
                });
               

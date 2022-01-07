@@ -7,6 +7,7 @@ use App\Models\estadosModelo;
 use App\Models\municipiosModelo;
 use App\Models\coloniaModelo;
 use App\Models\direccionModelo;
+use App\Models\telefonoModelo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -43,7 +44,7 @@ class proveedorController extends Controller
 
     public function __construct()
     {
-        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Correo','ID Dirección','Editar','Borrar'];
+        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar'];
     }
     
     /**
@@ -66,10 +67,17 @@ class proveedorController extends Controller
         # = DB::select('select idusuario from laravelcerrajeria.usuarios');
         # code...
         $estadosLista = estadosModelo::all();
+        $numtelefonoLista = telefonoModelo::all();
+        foreach ($listaProveedores as $proveedor) { 
+            $telefonos=telefonoModelo::where('idproveedor','=',$proveedor->idproveedor)->get();
+            if(count($telefonos)>0){
+            $proveedor->telefono=$telefonos[0]->telefono;
+            }
+        }
         return view('proveedores') //Nombre de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('registrosVista', $listaProveedores) //Registros de la tabla
-            ->with('registroEstados',$estadosLista);
+            ->with('registroEstados',$estadosLista);    // Listado de los Estados
     }
 
 
@@ -99,7 +107,8 @@ class proveedorController extends Controller
         //$proveedor->estado = $request->estado;
         //$proveedor->municipio = $request->municipio;
         //$proveedor->colonia = $request->colonia;
-        
+
+        //Se crea y guarda una dirección con la información del proveedor para posteriormente usarla en el campo de dirección de la tabla
         $direccion = new direccionModelo();
         $direccion->iddireccion = "DIC-".$request->numext[0].$request->numext[1].$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
         
@@ -110,11 +119,18 @@ class proveedorController extends Controller
         $direccion->idcoldirec = $request->colonias;
         $direccion->save();
 
+        //Campo de dirección del proveedor en su tabla.
         $proveedor->iddirecproveedor = $PRYKEY;
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
         $proveedor->save();
+        //Guardamos el telefono en la tabla telefono, al utilizar una llave foranea (idproveedor) tiene que ir en esta parte, cuando ya se ha creado la llave.
+        $telefono_prov = new telefonoModelo();
+        $telefono_prov->idtelefono = "Tel-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
+        $telefono_prov->telefono = $request->numtelefono;
+        $telefono_prov->idproveedor = $proveedor->idproveedor;
+        $telefono_prov->save();
 
         return redirect()->route('proveedores.index');
     }
@@ -147,9 +163,10 @@ class proveedorController extends Controller
         $direccion->numero= $request->numextEditar;
         $direccion->idcoldirec = $request->coloniasEditar;
         $direccion->save();
-        
         $proveedore->save();
-
+        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];
+        $telefono_prov->telefono = $request->numtelefonoEditar;
+        $telefono_prov->save();
         return redirect()->route('proveedores.index');
     }
 
