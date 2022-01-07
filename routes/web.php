@@ -102,4 +102,4 @@ Auth::routes();
 //Route::get('/{pagina}',[RutasController::class,'showView']);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
