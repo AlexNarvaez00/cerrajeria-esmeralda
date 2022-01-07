@@ -1,7 +1,7 @@
 <div class="container-fluid bg-warning shadow">
-        <header>
+        <header class="px-3">
             <nav class="navbar navbar-expand-md navbar-light">
-                <div class="container-fluid">
+                <div class="container-fluid px-5">
                     <!--Logo -->
                     <a class="navbar-brand fw-bold d-flex align-items-center" href="../home">
                         <span class="fs-1 me-2"> <i class="bi bi-key"></i> </span>

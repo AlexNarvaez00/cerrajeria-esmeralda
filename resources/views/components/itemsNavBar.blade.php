@@ -25,9 +25,9 @@
 <li class="nav-item">
     <a class="nav-link fs-5 {{($active == 'proveedores')?'active':''}}" href="../proveedores">Proveedores</a>
 </li>
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link fs-5 {{($active == 'usuarios')?'active':''}}" href="../usuarios">Usuarios</a>
-</li>
+</li> -->
 <li class="nav-item dropdown">
     <a class="nav-link fs-5 dropdown-toggle {{($active == 'reportes')?'active':''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Reportes
@@ -43,11 +43,12 @@
         Notificaciones
     </a>
 </li>
-<li class="nav-item dropdown">
+<li class="nav-item dropdown {{($active == 'usuarios')?'active':''}}">
     <a class="nav-link fs-5 dropdown-toggle" href="#" id="navbarDropdownSesion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Opciones
+    Menú
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdownSesion">
+        <li><a class="dropdown-item" href="../usuarios">Usuarios</a></li>
         <li>
             <form action="{{route('logout')}}" method="post">
                 @csrf
