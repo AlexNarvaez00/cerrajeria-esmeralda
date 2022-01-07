@@ -1,6 +1,6 @@
 var total = 0; //Obtiene el total a pagar
 var cont = 0; //Obtiene la cantidad de productos que estan en el carrito
-let carrito = [];//Obtiene los productos que estan en el carrito
+let carrito = new Array();//Obtiene los productos que estan en el carrito
 
 //Abre un modal con la información de un producto antes de agregar al carrito
 $(".btnAgregarAlCarro").on("click", function() {    
@@ -17,46 +17,64 @@ $(".btnAgregarAlCarro").on("click", function() {
 });
 
 //Agrega al carrito
-$("#btnConfirmacionCarro").on("click", function() { 
-    var idInputs = 0, idBotones = 0;
-    var clave_producto = $("#letreroIdProducto").text();       
-    minAjax({
-        url:"/producto/venta", 
-        type:"POST",
-        data:{
-            _token: document.querySelector('input[name="_token"]').value,
-            clave_producto:clave_producto            
-        },        
-        success: function(data){
-            data = JSON.parse(data);                            
-            if(data != null){                
-                fila = "<tr>"
-                            +"<th>"+data.clave_producto+ "</th>"
-                            +"<td>"+data.nombre_producto+"</td>"
-                            +'<td class="inCantidad"></td>'
-                            +"<td>"+data.cantidad_existencia+"</td>"
-                            +"<td>"+'$'+data.precio_producto+"</td>"
-                            +"<td>"+data.cantidad_stock+"</td>"                            
-                            +'<td class="btnQuitar"></td>'
-                        +"</tr>";
-                $('#tabla tr:last').after(fila);
+$("#btnConfirmacionCarro").on("click", function() {     
+    var clave_producto = $("#letreroIdProducto").text();
+    if(!verificar(clave_producto)){       
+        minAjax({
+            url:"/producto/venta", 
+            type:"POST",
+            data:{
+                _token: document.querySelector('input[name="_token"]').value,
+                clave_producto:clave_producto            
+            },        
+            success: function(data){
+                data = JSON.parse(data);                            
+                if(data != null){                
+                    fila = "<tr>"
+                                +"<th>"+data.clave_producto+ "</th>"
+                                +"<td>"+data.nombre_producto+"</td>"
+                                +'<td class="inCantidad"></td>'
+                                +"<td>"+data.cantidad_existencia+"</td>"
+                                +"<td>"+'$'+data.precio_producto+"</td>"
+                                +"<td>"+data.cantidad_stock+"</td>"                            
+                                +'<td class="btnQuitar"></td>'
+                            +"</tr>";
+                    $('#tabla tr:last').after(fila);
 
-                $("#tabla tr:last").find(".btnQuitar").append(
-                '<a class = "btnQuitarCarro">'                                                     
-                +'<button type="button" class="btn">'
-                    + '<span><i  class="bi bi-cart4" style="font-size:20px;"></i></span>'
-                +'</button>'  
-                +'</a>');
+                    $("#tabla tr:last").find(".btnQuitar").append(
+                    '<a class = "btnQuitarCarro">'                                                     
+                    +'<button type="button" class="btn">'
+                        + '<span>&#10060;</span>'
+                    +'</button>'  
+                    +'</a>');     
                 
-               
-               $("#tabla tr:last").find(".inCantidad").append(               
-                '<input type="number" class="inCantidad" value="1" size=20  style="width:50px">'                
-                );  
-                                          
-            }
-        }
-    });   
+                $("#tabla tr:last").find(".inCantidad").append(               
+                    '<input type="number" class="inCantidad" value="1" size=20 style="width:50px" min=1 max='+data.cantidad_existencia+'>'                
+                    );  
+                    carrito.push(clave_producto); 
+                    $("#conProductos").text(carrito.length);                
+                }
+                $("#tabla tr:last").find(".inCantidad").on("keydown", function(){
+                    var cantTemp = $("#tabla tr:last").find(".inCantidad").text(); 
+                    alert(data.cantidad_existencia);                   
+                    if(cantTemp > data.cantidad_existencia){
+                        
+                        $("#tabla tr:last").find(".inCantidad").focus();
+                        $("#tabla tr:last").find(".inCantidad").unbind("keydown");
+                    }
+                });
+                }
+            
+        });   
+    }else{
+        alert("Este producto ya esta en la cesta");
+    }
 });
+
+function validarCantidad(cantidad_existencia){
+
+}
+
 /*
 let observacion = $("#areaObservaciones").val(); 
                 if(observacion == ""){
@@ -116,16 +134,10 @@ function limpiar(){
 
 //verificar si ya se agrego un producto al carrito
 function verificar(claveAgregada){   
-    str1 = new String(claveAgregada);      
-    $('#tabla tr').each(function() {
-        var productoId = $(this).find("td:first").html();  
-        str2 = new String(productoId);  
-        alert(productoId);           
-        if(!str1.toLowerCase() === str2.toLowerCase()){
-           alert(claveAgregada + " " + productoId);
-            return new Boolean(true);
-        }  
-     });
-     //return new Boolean (false);
-
+    for(var i = 0; i < carrito.length; i++){        
+        if(carrito[i]==claveAgregada){
+            return true;
+        }        
+    }    
+    return false;
 }
