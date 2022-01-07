@@ -8,7 +8,7 @@ const expresionesRegulares = {
     Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 };
 validator([
-    [document.getElementById("inClaveProducto"),expresionesRegulares.claveProducto],
+    //[document.getElementById("inClaveProducto"),expresionesRegulares.claveProducto],
     [document.getElementById("inClasificacion"),expresionesRegulares.caracteres],
     [document.getElementById("inPrecio"), expresionesRegulares.cantidades],
     [document.getElementById("inNomProducto"), expresionesRegulares.caracteres],
@@ -217,8 +217,9 @@ $('#inClaveProducto').on('keyup', function() {
         success: function(data){  
             if(data == "true"){                
                 alert("El producto ya se encuentra registrado");
+                $('#inClaveProducto').addClass("is-invalid");
             }else{
-
+                $('#inClaveProducto').addClass("is-valid");
             }                      
         }
        });
