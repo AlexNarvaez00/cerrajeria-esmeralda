@@ -68,7 +68,9 @@ class DatabaseSeeder extends Seeder
         $producto->nombre_producto = 'LLave';
         $producto->clasificacion = 'Llave';
         $producto->precio_producto = 50.0;
+        $producto->precio_compra = 25.0;
         $producto->cantidad_existencia = 51;
+        $producto->cantidad_stock = 5;
         $producto->idproveedor = 'PROV-Jk-In12';
         $producto->save();
 

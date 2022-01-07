@@ -27,8 +27,8 @@ class ventaProductoController extends Controller
         ->get();
         $this->productos = productosModelo::all();
         //Son los campos de las tablas
-        $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Total por producto'];
-        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio','Existencia','Agregar al carrito'];
+        $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Observaciones','Stock','Total por producto'];
+        $this->camposProductos = ['Clave Producto','Nombre Producto','Precio venta','Precio compra','Existencia','Stock','Agregar al carrito'];
     }  
     
     public function index(){
