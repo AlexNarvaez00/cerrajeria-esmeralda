@@ -2,13 +2,16 @@
 
 
 @section('header-seccion')
-@component('components.header')
-<!--Items de la barra de menu-->
-@slot('items')
-@endslot
-<!--Esta parte es para mostrar el boton de log out-->
-@slot('visible',true)
-@endcomponent
+<x-header visible=false>
+    <x-slot name="items">
+      <li class="nav-item">
+        <form action="{{route('logout')}}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-link text-dark fs-5">Cerrar sesión</button>
+        </form>
+      </li>
+    </x-slot>
+</x-header>
 @endsection
 
 @section('contenido')

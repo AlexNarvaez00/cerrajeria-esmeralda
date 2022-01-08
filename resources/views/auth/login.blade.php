@@ -2,21 +2,11 @@
 
 
 @section('header-seccion')
-  @component('components.header')
-    <!--Items de la barra de menu-->
-    @slot('items')
-      <!--
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="/menu">Menu</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="/acercade">Acerca de...</a>
-        </li>
-      -->
-    @endslot
-    <!--Esta parte es para mostrar el boton de log out-->
-    @slot('visible',false)
-  @endcomponent
+
+<x-header visible=faLse>
+    <x-slot name="items">
+    </x-slot>
+</x-header>
 @endsection
 
 <!--
@@ -42,7 +32,7 @@
 <!--Formulario del login-->
 <div class="row container-fluid d-flex justify-content-center">
   <!--Codigo del formulario-->
-  <form method="POST" action="{{ route('login') }}" class="col-lg-5 col-md-12">
+  <form method="POST" action="{{ route('login') }}" class="col-lg-5 col-md-12 mt-5">
     @csrf
     <div class="componentes-formulario">
       <div class="d-flex justify-content-center">
