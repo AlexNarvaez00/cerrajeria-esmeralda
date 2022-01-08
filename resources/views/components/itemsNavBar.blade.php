@@ -17,9 +17,6 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{($active == 'devoluciones')?'active':''}}" href="../devoluciones">Devoluciones</a>
-</li>
-<li class="nav-item">
     <a class="nav-link {{($active == 'clientes')?'active':''}}" href="../clientes">Clientes</a>
 </li>
 <li class="nav-item">

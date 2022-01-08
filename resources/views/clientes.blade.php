@@ -173,6 +173,11 @@
         </div>
         @endslot
     @slot('footerModal')
+    
+    <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto= "Cancelar" data-bs-dismiss="modal" />
+    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto= "Registrar" />
+    
+    <!--
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
@@ -181,9 +186,10 @@
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
-    @endslot
+    -->
+       @endslot
     @endcomponent
-
+    
 <!-- ####################################### Modal de confirmacion de un Cliente ####################################### -->
 
 @component('components.modalSimple')
@@ -194,14 +200,10 @@
             <p>¿Esta segunro que quiere borrar este registro?</p>
         @endslot
         @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
-                <span class="me-2">&#10004;</span>
-                Confirmar
-            </button>
+        
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto= "Confirmar" />     
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto= "Cancelar" data-bs-dismiss="modal" />
+        
         @endslot
     @endcomponent
    <!-- ####################################### Modal de edicion de un cliente ####################################### -->
@@ -265,14 +267,10 @@
         </div>
         @endslot
         @slot('footerModal')
-            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-                <span class="me-2">&#10004;</span>
-                Registrar
-            </button>
+             
+    <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto= "Cancelar" data-bs-dismiss="modal" />
+    <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto= "Registrar" />
+    
         @endslot
     @endcomponent
 
