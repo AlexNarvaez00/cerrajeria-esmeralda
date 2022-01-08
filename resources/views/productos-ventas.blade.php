@@ -82,7 +82,7 @@
             </table>
         </div>
     </div>
-<!-- modal para listar los productos en el carrito -->
+    <!-- modal para listar los productos en el carrito -->
     @component('components.modalSimple')
     @slot('idModal','carritoModal')
     @slot('tituloModal','Carrito de compras')
@@ -107,7 +107,97 @@
     @slot('footerModal')
         <div class="me-auto p-2 bd-highlight"><h6 id="letreroTotal">Total a pagar: $0.00</h6></div>
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta" id="btnRealizarVenta" data-bs-dismiss="modal" data-bs-toggle="modal"/>         
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+    @endslot    
+    @endcomponent
+    @component('components.modalSimple')
+    @slot('idModal','detalleCompras')
+    @slot('tituloModal','Detalle Compra')
+    @slot('cuerpoModal') 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-center">
+                    <h4> <span class="fs-1 me-2"> <i class="bi bi-key"></i> </span>Cerrajeria Profesional Esmeralda</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-center">
+                    <p>calle obsidiana, S/N, hacienda blanca, fraccionamiento Esmeralda, Oaxaca de Juárez, Oax</p>
+                </div>
+            </div>
+        </div>  
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-sm-6  justify-content-start">
+                <h6>IdCompra:</h6> 
+                </div>  
+                <div class="col-md-6 col-sm-6  justify-content-start">
+                <h6 id="idDetallecompra"><?php
+                    $DateAndTime = date('m-d-Y h:i:s a', time());  
+                    echo str_replace(" ","","COMP-".substr(auth()->user()->name,0,3).$DateAndTime);
+                ?></h6>
+                </div>              
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6  justify-content-start">
+                idempleado: {{ auth()->user()->id}} 
+                </div>
+                <div class="col-md-6 col-sm-6  d-flex justify-content-end">
+                <?php
+                    $DateAndTime = date('m-d-Y h:i:s a', time());  
+                    echo "Fecha y hora: ".$DateAndTime;
+                ?>
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1 col-sm-1  justify-content-start">
+                        Cant.
+                    </div>
+                    <div class="col-md-5 col-sm-5  justify-content-start">
+                        Descripcion
+                    </div>
+                    <div class="col-md-3 col-sm-3  justify-content-start">
+                        Precio unitario
+                    </div>
+                    <div class="col-md-3 col-sm-3  justify-content-start">
+                        Importe
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-end">
+                    <p>recibido: $200.00</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-end">
+                    <p>cambio: $100.00</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-end">
+                    <p>total a pagar: $100.00</p>
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12  d-flex justify-content-center">
+                        <p>¡Gracias por su compra!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endslot
+    @slot('footerModal')
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal"/>
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo"/>        
     @endslot
     @endcomponent
     <!-- modal para agregar un producto al carrito-->
@@ -137,6 +227,10 @@
         
     @endslot
     @endcomponent
+    <!-- modal para mostrar el detalle compra-->
+    
+
+    <!--toast-->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">    
@@ -148,8 +242,11 @@
             </div>
         </div>
     </div>
+    
+
 
 @endsection
+
 
 @section('scritps')   
     <script src="./js/jquery-3.6.0.min.js"></script>

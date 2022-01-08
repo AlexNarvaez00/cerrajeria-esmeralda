@@ -14,7 +14,7 @@ class CreateVentaTable extends Migration
     public function up()
     {
         Schema::create('venta', function (Blueprint $table) {
-            $table->string('folio_v',7);
+            $table->string('folio_v',30);
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('idusuario',15);
 
