@@ -90,29 +90,48 @@
         <p class="px-3">
             Fecha de compra:  <?php echo date("j-n-Y");?>
         </p>
-        <div class="col-12 text-center">
-            <table id = "tabla" class="table table-warning table-striped">
-                <thead>
-                    <tr>
-                    @foreach ($camposproductosCarrito  as $campo)
-                        <th scope="col">{{$campo}}</th>
-                    @endforeach 
-                    </tr>
-                </thead> 
-                <tbody>
-                </tbody>
-            </table>   
-        </div>     
+        <div class="container-fluid">
+            <div class="col-12 text-center">
+                <table id = "tabla" class="table table-warning table-striped">
+                    <thead>
+                        <tr>
+                        @foreach ($camposproductosCarrito  as $campo)
+                            <th scope="col">{{$campo}}</th>
+                        @endforeach 
+                        </tr>
+                    </thead> 
+                    <tbody>
+                    </tbody>
+                </table>   
+            </div> 
+        </div> 
+        <hr>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                <h4 id="letreroTotal">Total a pagar: $0.00</h4>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1">Cantidad recibida $</span>
+                        <input id ="inRecibido" type="number" min="1" step="0.01" class="form-control" value="0.00" placeholder="Cantidad recibida" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>   
     @endslot
-    @slot('footerModal')
-        <div class="me-auto p-2 bd-highlight"><h6 id="letreroTotal">Total a pagar: $0.00</h6></div>
+    @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
         <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
     @component('components.modalSimple')
     @slot('idModal','detalleCompras')
-    @slot('tituloModal','Detalle Compra')
+    @slot('tituloModal','Detalle compra')
     @slot('cuerpoModal') 
         <div class="container-fluid">
             <div class="row">
