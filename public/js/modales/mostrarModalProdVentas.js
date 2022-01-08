@@ -16,7 +16,7 @@ $(".btnAgregarAlCarro").on("click", function() {
     }        
 });
 
-//Agrega al carrito
+//Agrega al carrito un producto
 $("#btnConfirmacionCarro").on("click", function() {     
     var clave_producto = $("#letreroIdProducto").text();
     if(!verificar(clave_producto)){       
@@ -35,66 +35,65 @@ $("#btnConfirmacionCarro").on("click", function() {
                                 +"<td>"+data.nombre_producto+"</td>"
                                 +'<td class="inCantidad"></td>'
                                 +"<td>"+data.cantidad_existencia+"</td>"
-                                +"<td>"+'$'+data.precio_producto+"</td>"
-                                +"<td>"+data.cantidad_stock+"</td>"                            
+                                +"<td>"+data.cantidad_stock+"</td>"
+                                +"<td>"+'$'+data.precio_producto+"</td>"                            
                                 +'<td class="btnQuitar"></td>'
                             +"</tr>";
                     $('#tabla tr:last').after(fila);
 
                     $("#tabla tr:last").find(".btnQuitar").append(
                     '<a class = "btnQuitarCarro">'                                                     
-                    +'<button type="button" class="btn">'
+                    +'<button type="button" class="btn" id="btn'+data.clave_producto+'">'
                         + '<span>&#10060;</span>'
                     +'</button>'  
-                    +'</a>');     
+                    +'</a>');
                 
                 $("#tabla tr:last").find(".inCantidad").append(               
-                    '<input type="number" class="inCantidad" value="1" size=20 style="width:50px" min=1 max='+data.cantidad_existencia+'>'                
+                    '<input type="number" class="inCantidad" value="1" size=20 style="width:50px" min=1 max='+data.cantidad_existencia+' id="'+data.clave_producto+'">'                
                     );  
                     carrito.push(clave_producto); 
-                    $("#conProductos").text(carrito.length);                
-                }
-                $("#tabla tr:last").find(".inCantidad").on("keydown", function(){
-                    var cantTemp = $("#tabla tr:last").find(".inCantidad").text(); 
-                    alert(data.cantidad_existencia);                   
-                    if(cantTemp > data.cantidad_existencia){
-                        
-                        $("#tabla tr:last").find(".inCantidad").focus();
-                        $("#tabla tr:last").find(".inCantidad").unbind("keydown");
-                    }
-                });
-                }
-            
+                    $("#conProductos").text(carrito.length);   
+                    validarCantidad(data);
+                    eliminarFila(data);
+                }                
+            }           
         });   
     }else{
         alert("Este producto ya esta en la cesta");
     }
 });
+//Elimna una fila del carrito
+function eliminarFila(data){
+    $("#btn"+data.clave_producto).on('click', function (event) {
+        $(this).closest('tr').remove();
+        const index = carrito.indexOf(data.clave_producto);
+        if (index > -1) {
+            carrito.splice(index, 1);
+          }
+          $("#conProductos").text(carrito.length); 
 
-function validarCantidad(cantidad_existencia){
+    });
+
 
 }
-
-/*
-let observacion = $("#areaObservaciones").val(); 
-                if(observacion == ""){
-                    observacion = "Sin observaciones";
-                }
-                let cantidadProducto = $("#inCantExistencia").val();
-                if(cantidadProducto <= data.cantidad_existencia && data.cantidad_existencia != 0){
-                    fila = '<tr><td> ' + data.clave_producto+ '</td><td>'
-                        +data.nombre_producto+'</td><td>'+cantidadProducto+'</td><td>'
-                        +observacion+ '</td> <td>'+'$'+data.precio_producto+'</td></tr>';                
-                    $('#tabla tr:last').after(fila);
-                    cont ++;
-                    $("#conProductos").text(cont);
-                    obtenerTotal(cantidadProducto * data.precio_producto);
-                    
-                }else{
-                    alert("Agrega mas productos para poder venderlos");
-                }  
-* */
-
+//valida que las entradas de la cantidad no sean negativas ni se queden vacias al perder el foco
+function validarCantidad(data){
+    $("#"+data.clave_producto).on("keyup", function(event){
+        var cantTemp = $("#"+data.clave_producto).val();                      
+        if(cantTemp > data.cantidad_existencia){   
+            $("#"+data.clave_producto).val(data.cantidad_existencia); 
+        }else{
+            if(cantTemp < data.cantidad_existencia){
+                $("#"+data.clave_producto).val(cantTemp.replace("-",""));
+            }
+        }
+        $("#"+data.clave_producto).on("blur",function(){
+            if($("#"+data.clave_producto).val() == ""){
+                $("#"+data.clave_producto).val("1");
+            }
+        });
+    });
+}
 //elimina todo el carrito
 $("#btnEliminarCarrito").on("click", function() {    
     $('#tabla tr:not(:first)').remove();
