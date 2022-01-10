@@ -16,6 +16,11 @@ const mostarInformacion = (e) =>{
     formulario.action = data.routeUrl;
     document.getElementById('urlTemp').value = data.routeUrl;
 
+    document.getElementById('inputNombreProveedorEditar').value = data.nombre;
+    document.getElementById('inputApellidoPProveedorEditar').value = data.apellidop;
+    document.getElementById('inputApellidoMProveedorEditar').value = data.apellidom;
+    document.getElementById('inputNumTelefonoEditar').value = data.numtelefono;
+    document.getElementById('inputCorreoEditar').value = data.correo;
     //Inputs
     //7let inputIDUsuarioEditar = document.getElementById('inputIDUsuarioEditar');
     //inputIDUsuarioEditar.value = data.id;

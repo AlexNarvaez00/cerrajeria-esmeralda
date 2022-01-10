@@ -78,7 +78,7 @@
                                 data-nombre="{{$proveedor->nombre}}"
                                 data-apellidoP="{{$proveedor->apellidopaterno}}"
                                 data-apellidoM="{{$proveedor->apellidomaterno}}"
-                                data-numtelefono="{{$proveedor->numtelefono}}"
+                                data-numtelefono="{{$proveedor->telefono}}"
                                 data-correo="{{$proveedor->correo}}"
                                 data-direccion="{{$proveedor->iddirecproveedor}}"
                                 data-route-url="{{route('proveedores.update',$proveedor)}}"
@@ -91,7 +91,15 @@
                             <form class="form-detele" action="{{route('proveedores.destroy',$proveedor)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn delete" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
+                                <button type="submit" class="btn delete" 
+                                data-id="{{$proveedor->idproveedor}}"
+                                data-nombre="{{$proveedor->nombre}}"
+                                data-apellidoP="{{$proveedor->apellidopaterno}}"
+                                data-apellidoM="{{$proveedor->apellidomaterno}}"
+                                data-numtelefono="{{$proveedor->telefono}}"
+                                data-correo="{{$proveedor->correo}}"
+                                data-direccion="{{$proveedor->iddirecproveedor}}"
+                                data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                     <span>&#10060;</span>
                                 </button>
                             </form>

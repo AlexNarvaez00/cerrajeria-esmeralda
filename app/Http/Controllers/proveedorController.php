@@ -145,11 +145,14 @@ class proveedorController extends Controller
      * 
     */
     public function destroy(proveedorModelo $proveedore){
-        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get();
-        if(count($telefono_prov)>0){
+        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];
+        if($telefono_prov!=null){
             $telefono_prov->delete();
             }
-        $proveedore->delete();
+            $direcciontemp = $proveedore->iddirecproveedor;
+            $direccion= direccionModelo::find($direcciontemp);
+            $proveedore->delete();
+            $direccion->delete();
         return redirect()->route('proveedores.index');
     }
 
