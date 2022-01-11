@@ -7,20 +7,57 @@ use App\Models\usuariosModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @author Narvaez Ruiz Alexis  
+ */
+
 class usuarioController extends Controller
 {
-    /**
-     * Atributos ...
-     */
-    protected  $usuariosLista; //Esta variables para guardar la lista de usuarios
+    /* 
+    | -----------------------------------
+    |   usuarioController
+    | -----------------------------------
+    |   El controlador es utilizado para recuperar
+    |   la lista de los usuarios en el sistema, mostrarndo
+    |   la  informacion basica de los mismo en una tabla
+    |
+    */
 
-    //Arreglos constantes.
+    /**
+     * La lista de usuarios recuperada de 
+     * la base de datos.
+     * 
+     * @var array 
+     */
+    protected  $usuariosLista;
+
+    /**
+     * La lista de roles que se pueden 
+     * asignar a los usuarios, cuando estos
+     * son registrados
+     * 
+     * @var array 
+     */
     private $listaRoles;
+
+    /**
+     * La lista de campos que se 
+     * mostraran en la tabla principal 
+     * de los usuarios.  
+     * 
+     * @var array 
+     */
     private $camposVista;
 
 
     /*------------------------------ CONSTANTES ---------------------------------------------------*/
-    //Esto va a ser una constante
+    /**
+     * Arreglo de reglas para validar los campos enviados 
+     * por el formulario, esta validacion sirve cuando el 
+     * usuario es registrado por primera vez  
+     * 
+     * @var array 
+     */
     private $rules = [
         'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
@@ -28,7 +65,13 @@ class usuarioController extends Controller
         'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
-    //Esto va a ser una constante
+    /**
+     * Arreglo de reglas para validar los campos enviados 
+     * por el formulario, esta validacion sirve cuando los 
+     * datos del usuario son actualizados.   
+     * 
+     * @var array 
+     */
     private $rules2 = [
         'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
@@ -38,22 +81,26 @@ class usuarioController extends Controller
 
 
     /**
-     * Constructor, inicializa la lsiata de roles, campos de la tabla y los registros de la misma 
+     * -------------------------------------
+     *  Constructor
+     * -------------------------------------
+     * 
+     * Inicializa la lsiata de roles, campos de la tabla.
      * 
      */
     public function __construct()
     {
-        $this->nombreUsuario = 'Narvaez ';
-        //$this->usuariosLista = usuariosModel::all();
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
         $this->listaRoles = ['Administrador', 'Empleado', 'Ayudante'];
     }
 
     /**
-     * Este metodo se usa para indicar que ruta debemos mostrar.
-     * el nombre ya lo detecta laravel :v es como el primer metodo que se ejecuta,
-     * al mostrar las vistas.
+     * Funcion que ejecutada cuando la ruta de "usuarios" es 
+     * solicitada por el navegador.
      * 
+     * @param Request $request Solicitud por parte del navgador.
+     * 
+     * @return View Vista de usuarios.
      */
     public function index(Request $request)
     {
@@ -74,10 +121,10 @@ class usuarioController extends Controller
     /**
      * Funcion para guardar un nuevo registro en la base de datos.
      * 
-     * @param request Este objeto se ecarga de recibir la informacion
-     * que enviamos por el formulario, de nanera oculta.
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
      * 
-     * @return redirect Redirecciona a la vista principal. 
+     * @return Redirect Redirecciona a la vista principal. 
      */
     public function store(Request $request)
     {
@@ -103,9 +150,11 @@ class usuarioController extends Controller
     }
 
     /**
-     * Este metodo sirve para borrar los registros de la base de datos.
+     * Funncion para borrar un registro de la tabla de "usuarios". 
      * 
-     * @param usuario Registro de la base de datos que sera borrado.
+     * @param User $usuario Registro de la base de datos que sera borrado, laraval lo detecta solo.
+     * 
+     * @return Redirector Redirecciona a la vista principal.
      */
     public function destroy(User $usuario)
     {
@@ -130,10 +179,10 @@ class usuarioController extends Controller
     /**
      * Actualiza la informacion basica de un usuario.
      * 
-     * @param request Solicitud por parte del cliente
-     * @param usuario Usuario al que se le eactualizada la informacion.
+     * @param Request $request Solicitud por parte del cliente
+     * @param User $usuario Usuario al que se le eactualizada la informacion.
      * 
-     * @return Redirecciona a la ruta 'index'
+     * @return Redirector Redirecciona a la vista principal.
      * 
      */
     public function update(Request $request, User $usuario)
@@ -160,18 +209,20 @@ class usuarioController extends Controller
     /**
      * Función vacia (No hace nada)
      * 
+     * @param User $usuario Usuario a editar, laravel lo detecta solo.
+     * 
      */
-    public function edit(usuariosModel $usuario)
+    public function edit(User $usuario)
     {
     }
 
     /**
+     * Función vacia (No hace nada).
+     * @param Request $request Solicitud por parte del navegador.
+     * @param User $usuario Registro de la tabla "Usuario"
      * 
      */
-    public function show(Request $request, $usuario)
+    public function show(Request $request, User $usuario)
     {
     }
-
-
-
 }

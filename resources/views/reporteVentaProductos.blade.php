@@ -2,20 +2,12 @@
 
 <!--Contenido del header.-->
 @section('header-seccion')
-<!--Esta es la prte del boton de log out -->
-@component('components.header')
-@slot('items')
-    @component('components.itemsNavBar')
-        @slot('active','Reportes')
-    @endcomponent
-@endslot
-
-<!--Esta parte es para mostrar el boton de log out-->
-@slot('visible',true)
-@endcomponent
+<x-header visible=true>
+    <x-slot name="items">
+        <x-itemsNavBar active="Reportes" />
+    </x-slot>
+</x-header>
 @endsection
-
-
 
 @section('contenido')
     <h5 class="h5 text-star mt-5 ps-3">
@@ -117,8 +109,10 @@
             {{$registrosVista->withQueryString()->links()}}
         </div>
     </div>
-   
-@component('components.modalSimple')
+
+ <!------Era el modal de Borrar. xd-------->   
+{{--
+    @component('components.modalSimple')
         @slot('idModal','confirmacionModal')
         @slot('tituloModal','¿Seguro que quieres borrar este registro?')
         @slot('cuerpoModal')
@@ -135,39 +129,23 @@
             </button>
         @endslot
     @endcomponent
+ --}}   
 
 <!-- ########################## MODLA DE INFORMACION DE LA VENTA ################################################-->
-@component('components.modalSimple')
-        @slot('idModal','InformacionModalProductos')
-        @slot('tituloModal','Informaicon basica de la venta')
-        @slot('cuerpoModal')
-            <!-- Cuerpo del modal-->
-            <div class="container-information overflow-auto">
+<x-modalSimple idModal="InformacionModalProductos" tituloModal="Informaicon basica de la venta" >
+    <x-slot name="cuerpoModal">
+        <div class="container-information overflow-auto">
 
-            </div>
-        @endslot
-        @slot('footerModal')
-            <!--Pies del modal-->
-            <!-- <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button> -->
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" id="" data-bs-dismiss="modal">
-                <span class="me-2">&#10004;</span>
-                Aceptar
-            </button>
-        @endslot
-@endcomponent        
+        </div>
+    </x-slot >
+    <x-slot name="footerModal">
+            <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Aceptar" data-bs-dismiss="modal" />
+    </x-slot>
+</x-modalSimple>       
 
 @endsection
 
-
-
-
-
-
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
-    <script type="text/javascript" src="./js/minAjax.js"></script>
     <script src="./js/funciones/informacionProductos.js"></script>
 @endsection

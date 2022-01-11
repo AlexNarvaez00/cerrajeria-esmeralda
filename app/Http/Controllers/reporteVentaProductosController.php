@@ -2,25 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detalleVentaModelo;
 use App\Models\productosModelo;
-use App\Models\reporteProductosModelo;
-use App\Models\reporteVentasModelo;
 use App\Models\ventaModelo;
 use Illuminate\Http\Request;
 
 /**
- * Reporte de venta de productos.
+ * @author Narvaez Ruiz Alexis
+ * @author Martinez Jimenez Jennifer
+ * 
  */
 class reporteVentaProductosController extends Controller
 {
     /**
-     * Atributos ...
+    | ------------------------------------------------------
+    |   reporteVentaProductosController -> Reporte de las ventas de los prodcutos
+    | ------------------------------------------------------
+    |   
+    |   Constrolador untilizado para hacer las consultas a las  
+    |   tablas principales para generar los reportes
+    |   "Productos","detalleventa","venta", estas consultas son
+    |   visualizadas en la tabla principal de la vista.
+    | 
+     */
+
+    /**
+     * Array que contiene los campos que se visualizaran 
+     * en la tabla principal.
+     * 
+     * @var array
      */
     private $camposVista;
 
     /**
-     *Contructor de la clase 
+     *Contructor 
      */
     public function __construct()
     {
@@ -28,10 +42,12 @@ class reporteVentaProductosController extends Controller
     }
 
     /**
-     * Funcion index, es la primera funcion en ejecutarse al memoento de renderizar 
+     * Funcion index, es la primera funcion en ejecutarse al memento de renderizar 
      * la vista.
      * 
-     * @return vista reporteProductos
+     * @param Request $request Solicitud por parte del navegador.
+     * 
+     * @return View Vista de "reporte-venta-productos"
      * 
      */
     public function index(Request $request)
@@ -52,7 +68,11 @@ class reporteVentaProductosController extends Controller
     }
     /**
      * Obtiene los registros, dependiendo de la consulta.
-     * @return $rows Registros filtrados. 
+     * 
+     * @param Request $request Solicitud por parte del navegador.
+     * 
+     * @return array $rows Registros filtrados. 
+     * 
      */
     private function getVentasPorConsulta(Request $request)
     {
@@ -84,15 +104,16 @@ class reporteVentaProductosController extends Controller
 
     /**
      * Regresa el JOIN entre las tablas detalleventa, venta y productos
-     * @param $folio_v Registro de la venta en la base de datos. 
+     * 
+     * @param ventaModelo $folio_v Registro de la venta en la base de datos. 
+     * @return array JSON JSON con la informacion de la consulta.
      */
     public function getProductsAtFolio(ventaModelo $folio_v)
     {
-        $query1 = productosModelo::
-                    join('detalleventa as dv', 'dv.clave_producto', '=', 'productos.clave_producto')
-                        ->where('dv.folio_v', '=', $folio_v->folio_v)
-                        ->get();
-       return response()->json($query1);
+        $query1 = productosModelo::join('detalleventa as dv', 'dv.clave_producto', '=', 'productos.clave_producto')
+            ->where('dv.folio_v', '=', $folio_v->folio_v)
+            ->get();
+        return response()->json($query1);
     }
 
 
@@ -111,7 +132,7 @@ class reporteVentaProductosController extends Controller
      */
     public function destroy(ventaModelo $reporte)
     {
-        $reporte->delete();
-        return redirect()->route('reporteProductos.index');
+        //$reporte->delete();
+        //return redirect()->route('reporteProductos.index');
     }
 }

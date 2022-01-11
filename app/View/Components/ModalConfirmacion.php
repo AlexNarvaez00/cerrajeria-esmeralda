@@ -8,16 +8,31 @@ use Illuminate\View\Component;
  * @author Narvaez Ruiz Alexis 
  * 
  * 
- * Clase para crear el componente del boton de los formularios de registro,
- *  eviat escribir el "@" en el HTML
  */
 class ModalConfirmacion extends Component
 {
+    /*
+    | --------------------------------------------------------
+    |   ModalConfirmacion
+    | --------------------------------------------------------
+    |   Clase para crear el componente del boton de los formularios de registro,
+    |   eviat escribir el "@" en el HTML
+    |
+    | 
+    */
+
     /**
-     * Atributes
+     * ID modal (atributo del HTML)
      * 
+     * @var string
      */
     public $idModal;
+
+    /**
+     * Titulo del modal
+     * 
+     * @var string
+     */
     public $tituloModal;
 
     /**
@@ -27,8 +42,8 @@ class ModalConfirmacion extends Component
      */
     public function __construct($idModal, $tituloModal)
     {
-        $this->idModal=$idModal;
-        $this->tituloModal=$tituloModal;
+        $this->idModal = $idModal;
+        $this->tituloModal = $tituloModal;
     }
 
     /**

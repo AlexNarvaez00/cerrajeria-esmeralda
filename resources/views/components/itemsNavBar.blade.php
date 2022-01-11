@@ -39,7 +39,7 @@
 </li>
 <li class="nav-item">
     <a class="nav-link fs-5 {{($active == 'notificaciones')?'active':''}}" href="../notificaciones" id="btnNoificaciones"
-    data-bs-toggle="tooltip" data-bs-placement="bottom" title="cualquier cosa">
+    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tienes: 0 notificaciones">
         Notificaciones
     </a>
 </li>

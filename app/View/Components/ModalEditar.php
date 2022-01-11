@@ -8,18 +8,46 @@ use Illuminate\View\Component;
  * @author Narvaez Ruiz Alexis 
  * 
  * 
- * Clase para crear el componente del modal de "Ediatr",
- *  eviat escribir el "@" en el HTML
  */
 class ModalEditar extends Component
 {
+    /*
+    | ----------------------------------------------------------------
+    |   ModalEditar
+    | ----------------------------------------------------------------
+    |   Clase para crear el componente del modal de "Ediatr",
+    |   eviat escribir el "@" en el HTML
+    |
+    */
+
     /**
-     * Atributes
+     * ID del modal (atributo del HTML)
      * 
+     * @var string
      */
     public $idModal;
+    
+    /**
+     * Titulo del modal
+     * 
+     * @var string
+     */
     public $tituloModal;
+
+    /**
+     * Ruta del formulario del Modal (atributo "action" del fomurlario)
+     * 
+     * @var string
+     */
     public $rutaEnvio;
+
+    
+    /**
+     * Método de envio del formualario 
+     * GET | POST
+     * 
+     * @var string
+     */
     public $metodoFormulario;
 
     /**

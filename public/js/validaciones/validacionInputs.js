@@ -1,5 +1,8 @@
 /**
- *  Definimos la funcion que evaluara la expresion regular.
+ * Definimos la funcion que evaluara la expresion regular.
+ * 
+ * @param {Object} element Elemento del html (input) al que le aplicaremos la expresion regular.
+ * @param {String} expresion Expresion regular a evaluar 
  */
 const evaluarExpre = (element, expresion) => {
     let cadena = element.target.value; //Optenemos el valor del input
@@ -13,7 +16,12 @@ const evaluarExpre = (element, expresion) => {
         element.target.classList.remove("is-valid");
     }
 };
-
+/**
+ * Funcion que evala si la opcion seleccionada no es la opcion por defecto 
+ * 
+ * @param {Object} event Evento disparado por escuchador de eventos.
+ * @param {String} valorDefecto Valor por defecto del elemento "select"
+ */
 const evaluarValor = (event, valorDefecto) => {
     if (event.target.value != valorDefecto) {
         event.target.classList.add("is-valid");
@@ -34,7 +42,7 @@ const limitValidator = (event,limite) =>{
  * Funcion a para agregar las validaciones en cada uno de los inputs
  * de los formularios
  *
- * @param var matrizElementoExpresion
+ * @param {Obhject[][]} matrizElementoExpresion
  *  El formato debe ser
  *      [document.getElementById('ID'),/[A-Z]/ ] -> Es solo el ejemplo
  *
