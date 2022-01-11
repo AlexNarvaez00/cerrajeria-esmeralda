@@ -44,7 +44,7 @@ class proveedorController extends Controller
 
     public function __construct()
     {
-        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar'];
+        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar']; //Titulos de la tabla en la vista de proveedores
     }
     
     /**
@@ -56,16 +56,14 @@ class proveedorController extends Controller
     public function index(Request $request)
     {
         $listaProveedores = null;
-        if(count($request->all()) >= 0){
-            $listaProveedores = proveedorModelo::where('idproveedor','like',$request->inputBusqueda.'%')
-            ->paginate(6);
+        if(count($request->all()) >= 0){                                    //Condición para el imput de búsques que se encuentra en la vista de proveedores
+            $listaProveedores = proveedorModelo::where('idproveedor','like',$request->inputBusqueda.'%')                //Consulta con where para buscar todos los registros que coincidan con el id a buscar
+            ->paginate(6);                                                  //Paginado a 6 registros por página
         }else{
             //Sino tiene nada
             //Que lo rellene con todos los registros 
             $listaProveedores = proveedorModelo::paginate(6);
         }
-        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
-        # code...
         $estadosLista = estadosModelo::all();
         $numtelefonoLista = telefonoModelo::all();
         foreach ($listaProveedores as $proveedor) { 
@@ -86,9 +84,7 @@ class proveedorController extends Controller
         $proveedor = new proveedorModelo();
         $request->validate($this->reglaV);
         //Nombre del input del formulario es una tributo "name"
-        //Chequen esa parte.
-
-        //Nombre del campo BD----- Nombre input formulario
+        //Se crea una llave primaria a partir de los datos del formulario
         $llavePrimaria = "PROV-".
         strtoupper($request->apellidopaterno[0]).
         strtoupper($request->apellidopaterno[1]).
@@ -97,6 +93,7 @@ class proveedorController extends Controller
         strtoupper($request->numext[0]).
         strtoupper($request->numext[1]);
 
+        //Nombre del campo BD----- Nombre input formulario
         $proveedor->idproveedor =  $llavePrimaria;
         $proveedor->nombre = $request->nombre;
         $proveedor->apellidopaterno = $request->apellidopaterno;
@@ -111,26 +108,23 @@ class proveedorController extends Controller
         //Se crea y guarda una dirección con la información del proveedor para posteriormente usarla en el campo de dirección de la tabla
         $direccion = new direccionModelo();
         $direccion->iddireccion = "DIC-".$request->numext[0].$request->numext[1].$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
-        
-        $PRYKEY = $direccion->iddireccion;
-        
         $direccion->calle=$request->calle;
         $direccion->numero= $request->numext;
         $direccion->idcoldirec = $request->colonias;
+        $PRYKEY = $direccion->iddireccion;
         $direccion->save();
 
         //Campo de dirección del proveedor en su tabla.
         $proveedor->iddirecproveedor = $PRYKEY;
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
-        //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
         $proveedor->save();
         //Guardamos el telefono en la tabla telefono, al utilizar una llave foranea (idproveedor) tiene que ir en esta parte, cuando ya se ha creado la llave.
         $telefono_prov = new telefonoModelo();
-        $telefono_prov->idtelefono = "Tel-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];
-        $telefono_prov->telefono = $request->numtelefono;
-        $telefono_prov->idproveedor = $proveedor->idproveedor;
-        $telefono_prov->save();
+        $telefono_prov->idtelefono = "Tel-".$request->apellidopaterno[0].$request->apellidopaterno[1]."-".$request->apellidomaterno[0].$request->apellidomaterno[1];    //Se crea un ID (llave primaria)para el registro en la tabla
+        $telefono_prov->telefono = $request->numtelefono;                                       //Número de telefono del proveedor que se almacena en la tabla telefono_proveedor
+        $telefono_prov->idproveedor = $proveedor->idproveedor;                                  //Llave foranea (ID proveedor)
+        $telefono_prov->save();                                                                 //Se guarda el registro
 
         return redirect()->route('proveedores.index');
     }
@@ -145,35 +139,35 @@ class proveedorController extends Controller
      * 
     */
     public function destroy(proveedorModelo $proveedore){
-        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];
-        if($telefono_prov!=null){
-            $telefono_prov->delete();
+        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];   //Se realiza la consulta a la tabla telefono cuando el id del proveedor coincida
+        if($telefono_prov!=null){                                                        //Se evalua la consulta si esta es diferente de null (si hay un registro de telefono)
+            $telefono_prov->delete();                                                    //Si la condición se cumple procede a borrar el registro de la tabla
             }
-            $direcciontemp = $proveedore->iddirecproveedor;
-            $direccion= direccionModelo::find($direcciontemp);
-            $proveedore->delete();
-            $direccion->delete();
+            $direcciontemp = $proveedore->iddirecproveedor;                              //Se hace un guardado de la dirección del proveedor antes de su borrado (esto por las llaves foraneas)
+            $direccion= direccionModelo::find($direcciontemp);                           //Se busca la dirección antes guardada en la tabla dirección
+            $proveedore->delete();                                                       //Se procede a borrar el registro del proveedor en la tabla proveedor
+            $direccion->delete();                                                        //Se procede a borrar el registro de la dirección en la tabla dirección
         return redirect()->route('proveedores.index');
     }
 
-    public function update(Request $request,proveedorModelo $proveedore)
+    public function update(Request $request,proveedorModelo $proveedore)                //Método que nos permite actualizar el registro seleccionado
     {
         //return $request;
-        $request->validate($this->reglaV2);
-        $proveedore->nombre = $request->nombreEditar;
+        $request->validate($this->reglaV2);                                             //A las entradas (imputs) se les valida con reglaV2
+        $proveedore->nombre = $request->nombreEditar;                                   //Estos datos serán los que se podrán actualziar de un proveedor
         $proveedore->apellidopaterno = $request->apellidopaternoEditar;
         $proveedore->apellidomaterno = $request->apellidomaternoEditar;
         $proveedore->correo = $request->correoEditar;
 
-        $direccion = direccionModelo::find($proveedore->iddirecproveedor);
-        $direccion->calle=$request->calleEditar;
+        $direccion = direccionModelo::find($proveedore->iddirecproveedor);              //Se busca (find)el registro que se está editando en la tabla de dirección para posteriormente actualizar sus datos
+        $direccion->calle=$request->calleEditar;                                        //Los datos a actualizar incluyen de igual manera los siguientes
         $direccion->numero= $request->numextEditar;
         $direccion->idcoldirec = $request->coloniasEditar;
-        $direccion->save();
-        $proveedore->save();
-        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];
-        $telefono_prov->telefono = $request->numtelefonoEditar;
-        $telefono_prov->save();
+        $direccion->save();                                                             //Se realiza el guardado de estos datos en la tabla dirección
+        $proveedore->save();                                                            //Se realiza el guardado de estos datos en la tabla proveedor
+        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];   //Se realiza un consulta (esto devuelve una lista) en el modelo telefonoModelo o tabla (telefono_proveedor) para coincidir en el registro a editar
+        $telefono_prov->telefono = $request->numtelefonoEditar;                         //Se actualizan sus registros
+        $telefono_prov->save();                                                         //Se realiza el guardado de estos datos en la tabla telefono_proveedor
         return redirect()->route('proveedores.index');
     }
 
@@ -192,9 +186,9 @@ class proveedorController extends Controller
 
     }
     public function getColonias(Request $request)
-    {
-        $llavePrimaria = $request->idmunicipio;
-        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
+    {   
+        $llavePrimaria = $request->idmunicipio;                                         //Recuperamos la llave primaria de los Municipios
+        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();   //Lista de municipios que coincidan con la llave primaria
         return response()->json($listaColonias);
     }
 
