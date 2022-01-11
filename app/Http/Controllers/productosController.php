@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
+use App\Models\estadosModelo;
+use App\Models\municipiosModelo;
+use App\Models\direccionModelo;
+use App\Models\coloniaModelo;
 use App\Models\productosDescripcionModelo;
 
 use Illuminate\Http\Request;
@@ -35,7 +39,7 @@ class productosController extends Controller
              *  
             */
 
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio producto','Existencia','idProveedor','Ver detalles','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
     }
 
     /**
@@ -49,8 +53,9 @@ class productosController extends Controller
     {
         $listaProductos = null;
         $listaDescripciones = null;
+        $estadosLista = estadosModelo::all();
         if(count($request->all()) >= 0){
-            $listaProductos = productosModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
+            $listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%') ->get();
             $listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
         }else{
             //Sino tiene nada
@@ -62,7 +67,8 @@ class productosController extends Controller
         //->with('registrosProductosjoin',$this->productosjoin)
         return view('productos') //Nombre de la vista            
             ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos            
+            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos  
+            ->with('listaEstados',$estadosLista)          
             ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
             ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
     }
@@ -85,7 +91,12 @@ class productosController extends Controller
         $producto->nombre_producto = $request->nombre_producto;
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
+        $producto->precio_compra = $request->precio_compra;
         $producto->cantidad_existencia = $request->cantidad_existencia;
+        $producto->cantidad_stock = $request->cantidad_stock;
+        
+        
+        
         //parte la cadena y la combierte en un arreglo
         $arreProveedores = explode(" ",$request->idproveedor);
         $producto->idproveedor = $arreProveedores[0];       
@@ -104,5 +115,108 @@ class productosController extends Controller
         $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
         $proveedor = proveedorModelo::find($request->idproveedor);
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
+    }
+    /**
+     * @param $estado - peticion que se realiza por medio de AJAX
+     */
+    public function getMunicipios(Request $request)
+    {
+        $llavePrimaria = $request->id;        
+        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();        
+        return response()->json($listaMunicipios);
+    }
+
+    public function getColonias(Request $request)
+    {
+        $llavePrimaria = $request->idmunicipio;
+        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
+        return response()->json($listaColonias);
+    }
+    public function setProveedor(Request $request){
+        //$proveedorTemp = json_decode($request->proveedor);
+        $nombre= json_decode($request->proveedor[0])->value; //-> Esto ya lo puede convertir en JSON 
+        $apP= json_decode($request->proveedor[1])->value;
+        $apM = json_decode($request->proveedor[2])->value;        
+        $tel = json_decode($request->proveedor[3])->value;
+        $correo = json_decode($request->proveedor[4])->value;
+        $num = json_decode($request->proveedor[5])->value;
+        $calle = json_decode($request->proveedor[6])->value;
+        $idcolonia = json_decode($request->proveedor[9])->value;
+        //Llave primaria del proveedor
+        $llavePrimaria = "PROV-".
+        strtoupper($apP[0]).
+        strtoupper($apP[1]).
+        strtoupper("-".$apM[0]).
+        strtoupper($apM[1]).
+        strtoupper($num[0]).
+        strtoupper($num[1]);
+        //Llave primaria direccion       
+        $llavePrimariaDireccion = "DIC-".$tel[0].$tel[1].$apP[0].$apP[1]."-".$apM[0].$apM[1];
+        //Agregar tabla direccion        
+        $direccionProveedor = new direccionModelo();
+        $direccionProveedor->iddireccion = $llavePrimariaDireccion;
+        $direccionProveedor->calle = $calle;
+        $direccionProveedor->numero= $num;
+        $direccionProveedor->idcoldirec = $idcolonia;
+        $direccionProveedor->save();
+        
+        //Agregar tabla proveedor
+        $proveedorTemp = new proveedorModelo();
+        $proveedorTemp->idproveedor = $llavePrimaria;
+        $proveedorTemp->nombre = $nombre;
+        $proveedorTemp->apellidopaterno = $apP;
+        $proveedorTemp->apellidomaterno = $apM;
+        $proveedorTemp->correo = $correo;
+        $proveedorTemp->iddirecproveedor = $llavePrimariaDireccion;
+        $proveedorTemp->save();
+        //Agregar tabla telefono_proveedor
+
+        //Almacena las tablas
+        
+        $retornarProveedor = proveedorModelo::find($llavePrimaria);    
+        return response()->json($retornarProveedor);   
+               
+
+    }
+    public function cambiosProducto(Request $request){
+        $clave_producto = json_decode($request->producto[1])->value;
+        $nombre_producto = json_decode($request->producto[2])->value;
+        $existencia = json_decode($request->producto[3])->value;
+        $stock = json_decode($request->producto[4])->value;
+        $clasificacion = json_decode($request->producto[7])->value;
+        $precio_venta = json_decode($request->producto[5])->value;
+        $precio_compra = json_decode($request->producto[6])->value;
+        $descripcion = json_decode($request->producto[8])->value;
+        $idProveedor = json_decode($request->producto[9])->value;
+        
+        
+        productosModelo::where('clave_producto',$clave_producto)->update([
+            'nombre_producto'=>$nombre_producto,
+            'clasificacion'=>$clasificacion,
+            'precio_producto'=>$precio_venta,
+            'precio_compra'=>$precio_compra,
+            'cantidad_existencia'=>$existencia,
+            'cantidad_stock'=>$stock,
+            'idproveedor'=>$idProveedor
+        ]);
+        productosDescripcionModelo::where('clave_producto',$clave_producto)->update([
+            'descripcion'=>$descripcion
+        ]);  
+        return response($idProveedor);
+        
+    }
+    public function buscar(Request $request){
+        $listaProductos = productosModelo::where('$request->nombre_producto','like',$request->inputBusqueda.'%') ->get();
+        return view('productos') ->with ('registrosProductos',$listaProductos);
+    }
+    //Si existe
+    public function existe(Request $request){
+        $bandera = "NULL";
+        if (productosModelo::where('clave_producto', "=",$request->clave_producto)->exists()) {
+            $bandera = "true";
+         }else{
+             $bandera = "false";
+         }
+         return response($bandera);
     }
 }

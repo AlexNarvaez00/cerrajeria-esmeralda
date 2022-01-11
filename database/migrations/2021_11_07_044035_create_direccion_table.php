@@ -19,7 +19,7 @@ class CreateDireccionTable extends Migration
         Schema::create('direccion', function (Blueprint $table) {
             $table->string('iddireccion', 30);
             $table->string('calle', 80);
-            $table->tinyInteger('numero');
+            $table->integer('numero');
             $table->integer('idcoldirec')->unsigned();    
             
             $table->primary('iddireccion'); 

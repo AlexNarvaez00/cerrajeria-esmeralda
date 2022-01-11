@@ -18,7 +18,9 @@ class CreateProductosTable extends Migration
             $table->string('nombre_producto',20);
             $table->string('clasificacion',20);
             $table->double('precio_producto',6,2);
+            $table->double('precio_compra',6,2);
             $table->integer('cantidad_existencia');
+            $table->integer('cantidad_stock');
             $table->primary('clave_producto');
             $table->string('idproveedor',15);
             $table->foreign('idproveedor')->references('idproveedor')->on('proveedor');
