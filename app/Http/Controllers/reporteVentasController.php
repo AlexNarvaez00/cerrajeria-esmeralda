@@ -2,71 +2,130 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\reporteVentasModelo;
+use App\Models\servicioModelo;
+use App\Models\productosModelo;
 use Illuminate\Http\Request;
 
 /**
- * Clase controladora para "Reporte de venta de servicios"
+ * @author Narvaez Ruiz Alexis
+ * @author Martinez Jimenez Jennifer
  * 
- * 
-*/
+ */
 class reporteVentasController extends Controller
 {
+    /*
+    |  ------------------------------------------------
+    |   reporteVentasController -> venta de servicios
+    |  ------------------------------------------------
+    |   Controlador apatra visualizar las consultas a las tablas 
+    |   "Productos","Servicios","DetalleServicio", estas consultas son
+    |   visualizadas la tabla principal de la vista.  
+    |   
+    */
+
+
     /**
-     * Atributos ...
+     * Lista de registros a partir de las consultas, de las 
+     * tablas principales sobre este controlador. 
+     * 
+     * @var array 
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
-    protected  $reporteLista; //Esta variables para guardar la lista de usuarios
-
-    private $camposVista;
-
-
-    //Pagina para referenciar las cosas xd    
-    //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
+    protected  $reporteLista;
 
     public function __construct()
     {
-        $this->reporteLista=reporteVentasModelo::all();
-        //$this->usuariosLista = usuariosModel::all();
-        /**
-         * Del modelo de caprta App/Http/Models
-         *  
-         */
-
-        $this->camposTabla = ['Clave Venta', 'Descripcion', 'Fecha', 'Editar', 'Borrar'];
+        $this->camposTabla = ["#", "Fecha/Hora", "ID Direccion", "Monto", "Descripcion", "ID Cliente", "Ver"];
     }
 
     /**
-     * Este metodo se usa para indicar que ruta debemos mostrar.
-     * el nombre ya lo detecta laravel :v es como el primer metodo que se ejecuta,
-     * al mostrar las vistas.
+     * Funcion que ejecutada cuando la ruta de "reporte-ventas-servicios" es 
+     * solicitada por el navegador.
      * 
+     * @param Request $request Solicitud por parte del navgador.
+     * 
+     * @return View Vista de "reporteVentasServicios".
      */
     public function index(Request $request)
     {
+        $listaReporte = null;
+        if (count($request->all()) >= 0) {
+            $listaReporte = $this->getServiciosPorConsulta($request);
+        } else {
+            //se rellena con todos los registros
+            $listaReporte = servicioModelo::paginate(10);
+        }
+        $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')->groupBy('anio')->get();
         return view('reporteVentasServicios') //Nombre de la vista
-            ->with('camposTabla',$this->camposTabla)//Campos de la tablas
-            ->with('registrosVista',$this->reporteLista);//Registros de la tabla
+            ->with('camposTabla', $this->camposTabla) //Campos de la tablas
+            ->with('aniosDisponibles', $aniosDisponible)
+            ->with('registrosVista', $listaReporte); //Registros de la tabla
     }
 
     /**
-     * @param $request Este objeto se ecarga de recibir la informacion
+     * Obtiene los registros, dependiendo de la consulta.
+     * 
+     * @param Request $request Solicitud por parte del navegador.
+     * 
+     * @return $rows Registros filtrados. 
+     */
+    private function getServiciosPorConsulta(Request $request)
+    {
+        $rows = null;
+
+        if ($request->has('inputBusqueda') && $request->inputBusqueda != null) {
+            $rows = servicioModelo::where('idservicio', 'like', $request->inputBusqueda . '%');
+        }
+        if ($request->has('inputSelectorMes') && $request->inputSelectorMes != null && $request->inputSelectorMes != "0") {
+            if ($rows == null) {
+                $rows = servicioModelo::where('idservicio', 'like', '%');
+            }
+            $rows = $rows->whereMonth('fechayhora', '=', $request->inputSelectorMes);
+        }
+        if ($request->has('inputSelectorAnio') && $request->inputSelectorAnio != null && $request->inputSelectorAnio != "0") {
+            if ($rows == null) {
+                $rows = servicioModelo::where('idservicio', 'like', '%');
+            }
+            $rows = $rows->whereYear('fechayhora', '=', $request->inputSelectorAnio);
+        }
+
+        if ($rows == null) {
+            $rows = servicioModelo::paginate(10);
+        } else {
+            $rows = $rows->paginate(10);
+        }
+        return $rows;
+    }
+
+    /**
+     * Regresa el JOIN entre las tablas detalleventa, venta y servicios.
+     * 
+     * @param servicioModelo $servicio Registro del servicio en la base de datos.
+     * @return array Resultado de la consulta en formato JSON.
+     */
+    public function getServicesAtFolio(servicioModelo $servicio)
+    {
+        $query1 = productosModelo::join('detalleservicio as ds', 'ds.clave_producto', '=', 'productos.clave_producto')
+            ->where('ds.idservicio', '=', $servicio->idservicio)
+            ->get();
+        return response()->json($query1);
+    }
+
+    /**
+     * @param Request $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.
      * 
      */
     public function store(Request $request)
     {
-        
     }
 
 
     /**
-     * 
+     * @param Request $request Solicitud por parte del navegador.
+     * @param mixed $servicio Registro de la tabla de "servicio".
      * 
      */
-    public function show(Request $request, $usuario)
+    public function show(Request $request, $servicio)
     {
-        
     }
-
 }

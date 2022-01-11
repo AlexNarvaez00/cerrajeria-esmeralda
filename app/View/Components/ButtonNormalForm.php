@@ -14,12 +14,47 @@ use Illuminate\View\Component;
 class ButtonNormalForm extends Component
 {
     /**
+<<<<<<< HEAD
      * Atributes
      * 
      */
     public $type;
     public $estiloBoton;
     public $texto;
+=======
+   | -----------------------------------------------------------
+   |    ButtonNormalForm
+   | -----------------------------------------------------------
+   |
+   |    Boton comun que se utiliza en los formularios de envio,
+   |    el proposito de este componente es evitar que el HTML cresca mucho
+   |
+   |
+     */
+
+
+    /**
+     * Tipo de boton
+     * 
+     * @var string
+     */
+    public $type;
+
+    /**
+     * Estilo visual del boton, son las clases CSS
+     * 
+     * @var string
+     */
+    public $estiloBoton;
+
+    /**
+     * Texto que se mostrar en el boton
+     * 
+     * @var string
+     */
+    public $texto;
+
+>>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
     /**
      * Create a new component instance.
      *

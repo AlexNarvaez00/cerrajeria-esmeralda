@@ -1,8 +1,7 @@
 /**
- * Todo este codigo debe de ir en archivo aparte :v
- * pero lo puse aqui no mas para probar
- *
+ * @author Narvaez Ruiz Alexis
  */
+
 const formulariosBorrar = document.getElementsByClassName("form-detele");
 let cuerpoModalInformacion = document.querySelector(
     "#confirmacionModal .modal-body"
@@ -23,7 +22,7 @@ for (let index = 0; index < formulariosBorrar.length; index++) {
             ["Nombre: ", informacion.nombre],
             ["Rol: ", informacion.rol],
             ["Creado: ", informacion.creado],
-            ["Modificado: ", informacion.modificado]
+            ["Modificado: ", informacion.modificado],
         ];
 
         //Colocar la informacion en el modal.
@@ -51,6 +50,9 @@ for (let index = 0; index < formulariosBorrar.length; index++) {
     });
 }
 
+/**
+ * El formulario se enviara cuando le demos click o boton de confirmacion
+ */
 let botonModalConfirmacion = document.getElementById("botonModalConfirmacion");
 botonModalConfirmacion.addEventListener("click", (event) => {
     FORMULARIO_GLOBAL.submit();

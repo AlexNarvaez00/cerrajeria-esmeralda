@@ -14,17 +14,62 @@ use Illuminate\View\Component;
 class InputNormal extends Component
 {
     /**
-     * Atributes
+     * Clases de la etiqueta del componente.
      * 
+     * @var string
      */
     public $classesLabel;
+    /**
+     * ID del input del componente.
+     * 
+     * @var string
+     */
     public $idInput;
+    
+    /**
+     * Tipo de input del componente, text, file, password, etc.
+     * 
+     * @var string
+     */
     public $type;
+    
+    /**
+     * Texto de la etiquet del componente.
+     * 
+     * @var string
+     */
     public $texto;
+     
+    /**
+     * Clase que determina si el input esta activo (es valido)
+     * 
+     * @var string
+     */
     public $activeInput;
+
+    /**
+     * Texto o valor del "input"
+     * 
+     * @var string
+     */
     public $valor;
+    
+    /**
+     * Nombre del input en el HTML
+     * 
+     * @var string
+     */
     public $nombreInput;
+    
+    /**
+     * Nombre del error que mostrara, cuando el error ocurra
+     * 
+     * @var string
+     */
     public $nombreError;
+    
+    
+
     /**
      * Create a new component instance.
      *

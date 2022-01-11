@@ -1,4 +1,4 @@
-<div class="container-fluid bg-warning shadow">
+<div class="container-fluid bg-warning shadow-sm">
         <header class="px-3">
             <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid px-5">

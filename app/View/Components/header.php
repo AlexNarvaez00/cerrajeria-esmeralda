@@ -14,7 +14,19 @@ use Illuminate\View\Component;
 class header extends Component
 {
     /**
-     * Atributes
+        | -------------------------------------------------
+        |   header
+        | -------------------------------------------------
+        |
+        |   Componente del header, el cual muestra los items     
+        |   para nevegar entre las vistas, esto evita que el HTML
+        |   cresca mucho evitando escribir la sentencia @
+        |
+        |
+     */
+
+    /**
+     * 
      * 
      */
     public $visible;
