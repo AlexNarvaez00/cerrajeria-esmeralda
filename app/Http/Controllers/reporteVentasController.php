@@ -3,47 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\servicioModelo;
-use App\Models\reporteVentasModelo;
 use App\Models\productosModelo;
 use Illuminate\Http\Request;
 
 /**
- * Clase controladora para "Reporte de venta de servicios"
+ * @author Narvaez Ruiz Alexis
+ * @author Martinez Jimenez Jennifer
  * 
- * 
-*/
+ */
 class reporteVentasController extends Controller
 {
+    /*
+    |  ------------------------------------------------
+    |   reporteVentasController -> venta de servicios
+    |  ------------------------------------------------
+    |   Controlador apatra visualizar las consultas a las tablas 
+    |   "Productos","Servicios","DetalleServicio", estas consultas son
+    |   visualizadas la tabla principal de la vista.  
+    |   
+    */
+
+
     /**
-     * Atributos ...
+     * Lista de registros a partir de las consultas, de las 
+     * tablas principales sobre este controlador. 
+     * 
+     * @var array 
      */
-    public  $nombreUsuario; //Este atributo despues lo revisamos
-    protected  $reporteLista; //Esta variables para guardar la lista de usuarios
-
-    private $camposVista;
-
-
-    //Pagina para referenciar las cosas xd    
-    //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
+    protected  $reporteLista;
 
     public function __construct()
     {
-        
-        //$this->reporteLista=servicioModelo::all();
-        //$this->usuariosLista = usuariosModel::all();
-        /**
-         * Del modelo de caprta App/Http/Models
-         *  
-         */
-
-        $this->camposTabla = ["#","Fecha/Hora","ID Direccion","Monto","Descripcion","ID Cliente","Ver"];
+        $this->camposTabla = ["#", "Fecha/Hora", "ID Direccion", "Monto", "Descripcion", "ID Cliente", "Ver"];
     }
 
     /**
-     * Este metodo se usa para indicar que ruta debemos mostrar.
-     * el nombre ya lo detecta laravel :v es como el primer metodo que se ejecuta,
-     * al mostrar las vistas.
+     * Funcion que ejecutada cuando la ruta de "reporte-ventas-servicios" es 
+     * solicitada por el navegador.
      * 
+     * @param Request $request Solicitud por parte del navgador.
+     * 
+     * @return View Vista de "reporteVentasServicios".
      */
     public function index(Request $request)
     {
@@ -56,12 +56,16 @@ class reporteVentasController extends Controller
         }
         $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')->groupBy('anio')->get();
         return view('reporteVentasServicios') //Nombre de la vista
-            ->with('camposTabla',$this->camposTabla)//Campos de la tablas
+            ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('aniosDisponibles', $aniosDisponible)
-            ->with('registrosVista',$listaReporte);//Registros de la tabla
+            ->with('registrosVista', $listaReporte); //Registros de la tabla
     }
+
     /**
      * Obtiene los registros, dependiendo de la consulta.
+     * 
+     * @param Request $request Solicitud por parte del navegador.
+     * 
      * @return $rows Registros filtrados. 
      */
     private function getServiciosPorConsulta(Request $request)
@@ -93,36 +97,35 @@ class reporteVentasController extends Controller
     }
 
     /**
-     * Regresa el JOIN entre las tablas detalleventa, venta y productos
-     * @param $folio_v Registro de la venta en la base de datos. 
+     * Regresa el JOIN entre las tablas detalleventa, venta y servicios.
+     * 
+     * @param servicioModelo $servicio Registro del servicio en la base de datos.
+     * @return array Resultado de la consulta en formato JSON.
      */
     public function getServicesAtFolio(servicioModelo $servicio)
     {
-        $query1 = productosModelo::
-                    join('detalleservicio as ds', 'ds.clave_producto', '=', 'productos.clave_producto')
-                    ->where('ds.idservicio', '=', $servicio->idservicio)
-                    ->get();
-       return response()->json($query1);
+        $query1 = productosModelo::join('detalleservicio as ds', 'ds.clave_producto', '=', 'productos.clave_producto')
+            ->where('ds.idservicio', '=', $servicio->idservicio)
+            ->get();
+        return response()->json($query1);
     }
 
     /**
-     * @param $request Este objeto se ecarga de recibir la informacion
+     * @param Request $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.
      * 
      */
     public function store(Request $request)
     {
-        
     }
 
 
     /**
-     * 
+     * @param Request $request Solicitud por parte del navegador.
+     * @param mixed $servicio Registro de la tabla de "servicio".
      * 
      */
-    public function show(Request $request, $usuario)
+    public function show(Request $request, $servicio)
     {
-        
     }
-
 }

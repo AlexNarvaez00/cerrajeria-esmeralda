@@ -3,20 +3,34 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+
 /**
  * @author Narvaez Ruiz Alexis 
  * 
  * 
- * Clase para crear el componente de los items del barra de navegacion,
- *  eviat escribir el "@" en el HTML
  */
 class ItemNavBar extends Component
 {
+    /*
+        | --------------------------------------------------------------
+        |  ItemNavBar
+        | ---------------------------------------------------------------
+        | Clase para crear el componente de los items del barra de navegacion,
+        |  eviat escribir el "@" en el HTML
+        |
+        |
+     */
+
+
+
     /**
-     * Atributes
+     * Nombre del elmento que se iluminara cuando este este activo
      * 
+     * @var string
      */
     public $active;
+
+
     /**
      * Create a new component instance.
      *
@@ -24,7 +38,7 @@ class ItemNavBar extends Component
      */
     public function __construct($active)
     {
-        $this->active=$active;
+        $this->active = $active;
     }
 
     /**
