@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <div class ="row">
             <div class="col-3 d-flex justify-content-start">        
-                <button type="button" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span id ="conProductos" class="badge">0</span></button>           
+                <button type="button" id ="btnCarrito" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span id ="conProductos" class="badge">0</span></button>           
             </div> 
             <form action="" class="col-9 d-flex justify-content-end">                   
                 <div class="col-5">
@@ -71,7 +71,7 @@
                             <td>
                                 <a class = "btnAgregarAlCarro">                                                     
                                     <button type="button" class="btn" >
-                                        <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-target="#agregarcarritoModal" ></i></span>
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;"></i></span>
                                     </button>  
                                 </a>                                                     
                             </td>                
@@ -86,18 +86,24 @@
     @slot('idModal','verificarCompra')
     @slot('tituloModal','Verifica que la venta sea correcta')
     @slot('cuerpoModal')          
-        
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">* Campo obligatorio</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
+                        <input type="number" class="form-control" id="cantidadRecibida" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">* Campo obligatorio</div>
+                    </div>
+                </div>                
+            </div>
         </div>
+        
         <div class="container-fluid">
             <div class="col-12 text-center">
                 <table id = "tabla2" class="table table-warning table-striped">
                     <thead>
                         <tr>
-                        @foreach ($camposProductos  as $campo)
+                        @foreach ($camposValidar as $campo)
                             <th scope="col">{{$campo}}</th>
                         @endforeach 
                         </tr>
@@ -111,16 +117,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-12 d-flex justify-content-start">
-                    <h4 id="letreroTotal2">Total a pagar: $0.00</h4>
+                    <h4 id="letreroTotalConfirmacion">Total a pagar: $0.00</h4>
                 </div>                
             </div>  
             <div class="row">
                 <div class="col-md-6 col-sm-12 d-flex justify-content-start">
-                    <h4 id="letreroTotal2">Cambio: $0.00</h4>
+                    <h4 id="letreroCambio">Cambio: $0.00</h4>
                 </div>                
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                <div class="col-md-12 col-sm-12 d-flex justify-content-center">
                     <h5>No se aceptan devoluciones</h5>
                 </div>                
             </div>                          
@@ -128,7 +134,7 @@
         @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+        <x-button-normal-form type="button" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
     <!-- modal para listar los productos en el carrito -->
@@ -165,7 +171,7 @@
     @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#verificarCompra" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+        <x-button-normal-form type="button" id="btnRealizarVenta" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#verificarCompra" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
     @component('components.modalSimple')

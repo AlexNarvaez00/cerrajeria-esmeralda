@@ -1,11 +1,19 @@
 var total = 0; //Obtiene el total a pagar
 var cont = 0; //Obtiene la cantidad de productos que estan en el carrito
 let carrito = new Array();//Obtiene los productos que estan en el carrito
+$("#btnCarrito").on("click", function() {
+    if(carrito.length == 0){
+        $("#btnRealizarVenta").prop('disabled', true); 
+    }else{
+        $("#btnRealizarVenta").prop('disabled', false); 
+    }
+});
 
 //Abre un modal con la información de un producto antes de agregar al carrito
 $(".btnAgregarAlCarro").on("click", function() {    
+    
     let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
-    var cantidadExistencia = fila[4].innerHTML;     
+    var cantidadExistencia = fila[4].innerHTML;          
     if(cantidadExistencia > 0){
         $("#liveToast").toast("hide");
         $("#agregarcarritoModal").modal("show");
@@ -18,8 +26,9 @@ $(".btnAgregarAlCarro").on("click", function() {
 
 //Agrega al carrito un producto
 $("#btnConfirmacionCarro").on("click", function() {     
-    var clave_producto = $("#letreroIdProducto").text();    
-    if(!verificar(clave_producto)){       
+    var clave_producto = $("#letreroIdProducto").text();       
+    if(!verificar(clave_producto)){  
+        $("#btnRealizarVenta").prop('disabled', true);      
         minAjax({
             url:"/producto/venta", 
             type:"POST",
@@ -32,7 +41,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                 if(data != null){                
                     fila = "<tr>"
                                 +"<th>"+data.clave_producto+ "</th>"
-                                +"<td>"+data.nombre_producto+"</td>"
+                                +'<td class="nombreProductosColumnas">'+data.nombre_producto+"</td>"
                                 +'<td class="inCantidadProductosCompras"></td>'
                                 +"<td>"+data.cantidad_existencia+"</td>"
                                 +"<td>"+data.cantidad_stock+"</td>"
@@ -55,6 +64,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                     $("#conProductos").text(carrito.length);   
                     validarCantidad(data);
                     eliminarFila(data);
+                    $("#btnRealizarVenta").prop('disabled', false); 
                     obtenerTotal();
                 }                
             }           
@@ -105,6 +115,7 @@ $("#btnEliminarCarrito").on("click", function() {
     $('#tabla tr:not(:first)').remove();   
     cont = 0;
     $("#conProductos").text(cont);  
+    $("#btnRealizarVenta").prop('disabled', true);
     obtenerTotal();
 
 });
@@ -115,6 +126,7 @@ function obtenerTotal(){
     let valores = $(".inCantidad"); 
     let preciosIndividuales = $(".preciosProductosColumnas");    
     if(carrito.length > 0){
+        $("#btnRealizarVenta").prop('disabled', false);
         for(var i = 0; i < carrito.length; i++){
             var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','');
             total +=  subtotal;
@@ -122,8 +134,8 @@ function obtenerTotal(){
         $("#letreroTotal").text("Total a pagar: $" + total);
     }else{
         $("#letreroTotal").text("Total a pagar: $0.00");
-    }
-    
+        $("#btnRealizarVenta").prop('disabled', true);
+    }  
     
       
     
@@ -160,3 +172,29 @@ function verificar(claveAgregada){
     }    
     return false;
 }
+
+$('#btnRealizarVenta').on("click", function() {
+    $('#tabla2 tr:not(:first)').remove();  
+    let valores = $(".inCantidad"); 
+    let preciosIndividuales = $(".preciosProductosColumnas");
+    let nombreProductos = $(".nombreProductosColumnas");
+    for(var i = 0; i < carrito.length; i ++){
+        var nombreTemp =  nombreProductos[i].innerHTML;
+        var precioIndividualTemp = preciosIndividuales[0].innerHTML.replace('$','');
+        var cantidadTemp = valores[i].value;
+
+        fila = "<tr>"
+            +"<th>"+carrito[i]+ "</th>"
+            +"<td>"+nombreTemp+"</td>"            
+            +"<td>"+cantidadTemp+"</td>"
+            +"<td>"+"$"+precioIndividualTemp+"</td>"                                     
+            +"<td>"+"$"+cantidadTemp*precioIndividualTemp+"</td>"
+            +"</tr>";
+            $('#tabla2 tr:last').after(fila);
+
+    }
+    $("#letreroTotalConfirmacion").text("Total a pagar $" + total);
+    
+                    
+
+ });

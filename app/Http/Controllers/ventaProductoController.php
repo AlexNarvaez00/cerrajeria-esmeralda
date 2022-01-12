@@ -37,8 +37,8 @@ class ventaProductoController extends Controller
             ->with('camposProductos',$this->camposProductos)//Campos de la tablas 
             ->with('productos',$this->productos)      
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
-            ->with('camposproductosCarrito',$this->camposproductosCarrito);
-            //->with('camposValidar',$this->camposProductosConfirmar);//campos para la tabla en carritos
+            ->with('camposproductosCarrito',$this->camposproductosCarrito)
+            ->with('camposValidar',$this->camposProductosConfirmar);//campos para la tabla en carritos
     }
 
    
