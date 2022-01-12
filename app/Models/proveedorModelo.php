@@ -5,13 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @author Roberto Alejandro Vásquez Alcántara
+ */
 class proveedorModelo extends Model
 {
     use HasFactory;
-    //Nombre de la tabla , asi se tienen que cambiar a cada uno de sus modelos  
+    /*
+     |------------------------
+     | proveedorModelo
+     |------------------------
+     |
+     |  Modelo para recuperrar los registros de la
+     |  base de datos, estos registros son usados para
+     |  verificar que los proveedores existen en el sistema
+     |
+     */
+
+    /**
+     * Nombre de la tabla a la cual hace referencia
+     * @var string
+     */
     protected $table = 'proveedor';
-    //Para que nos busque directamente, el "ID" de nuestra tabla, necesitamos 
-    //indicarle la llave primaria y decirle que "NO es autoincrementable"
+
+    /**
+     * LLave primaria de la tabla "Proveedores"
+     * 
+     * @var string
+     */
     protected $primaryKey = 'idproveedor';
+
+    /**
+     * Atributo para indicar si la llave primaria es autoincrementable
+     * @var boolean
+     */
     public $incrementing = false;
 }

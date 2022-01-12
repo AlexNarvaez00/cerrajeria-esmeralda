@@ -112,6 +112,12 @@
         </div>
     </div>
             <!--########################### Modal Formulario para agregar a un nuevo proveedor  ############################## -->
+    <!-- 
+        | Modal utilizado como formulario para agregar a un nuevo proveedor, la información 
+        | es mandada oculta por el método POST.
+        | Las entradas (imputs) del modal son evaluados para su correcta introducción de la información
+        | así mismo, sus entradas son obligatorias, lanza un texto mencionando las entradas obligatorias.
+    -->
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
@@ -190,20 +196,8 @@
         </div>
     @endslot
     @slot('footerModal')
-
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
     <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
-    
-    <!-- Botones anteriores
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-            <span class="me-2">&#10004;</span>
-            Registrar
-        </button>
-    -->
     @endslot
     @endcomponent
 
@@ -218,7 +212,12 @@
 </x-modalSimple>
 
 <!--########################### Modal para editar la información del proveedor ###################################### -->
-
+    <!-- 
+        | Modal utilizado como formulario para editar (actualizar) la información del proveedor seleccionado, la información 
+        | es mandada oculta por el método POST.
+        | Las entradas (imputs) del modal son evaluados para su correcta introducción de la información
+        | así mismo, sus entradas son obligatorias, lanza un texto mencionando las entradas obligatorias.
+    -->
 @component('components.modal')
     @slot('idModal','editarProveedorModal')
     @slot('tituloModal','Editar un proveedor.')
@@ -300,16 +299,6 @@
     @slot('footerModal')
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
     <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
-    <!--
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-            <span class="me-2">&#10004;</span>
-            Registrar
-        </button>
-    -->
     @endslot
     @endcomponent
 
