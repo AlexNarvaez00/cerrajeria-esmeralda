@@ -82,6 +82,55 @@
             </table>
         </div>
     </div>
+    @component('components.modalSimple')
+    @slot('idModal','verificarCompra')
+    @slot('tituloModal','Verifica que la venta sea correcta')
+    @slot('cuerpoModal')          
+        
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">* Campo obligatorio</div>
+        </div>
+        <div class="container-fluid">
+            <div class="col-12 text-center">
+                <table id = "tabla2" class="table table-warning table-striped">
+                    <thead>
+                        <tr>
+                        @foreach ($camposProductos  as $campo)
+                            <th scope="col">{{$campo}}</th>
+                        @endforeach 
+                        </tr>
+                    </thead> 
+                    <tbody>
+                    </tbody>
+                </table>   
+            </div> 
+        </div> 
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroTotal2">Total a pagar: $0.00</h4>
+                </div>                
+            </div>  
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroTotal2">Cambio: $0.00</h4>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                    <h5>No se aceptan devoluciones</h5>
+                </div>                
+            </div>                          
+        </div>   
+        @endslot
+    @slot('footerModal')        
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+    @endslot    
+    @endcomponent
     <!-- modal para listar los productos en el carrito -->
     @component('components.modalSimple')
     @slot('idModal','carritoModal')
@@ -107,26 +156,16 @@
         </div> 
         <hr>
         <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
-                <h4 id="letreroTotal">Total a pagar: $0.00</h4>
-            </div>
-        </div>
             <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad recibida $</span>
-                        <input id ="inRecibido" type="number" min="1" step="0.01" class="form-control" value="0.00" placeholder="Cantidad recibida" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
-                    </div>
-                </div>
-
-
-            </div>
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroTotal">Total a pagar: $0.00</h4>
+                </div>                
+            </div>                          
         </div>   
     @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#verificarCompra" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
     @component('components.modalSimple')
@@ -219,6 +258,7 @@
         <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo"/>        
     @endslot
     @endcomponent
+    
     <!-- modal para agregar un producto al carrito-->
     @component('components.modalSimple')
     @slot('idModal','agregarcarritoModal')
@@ -246,21 +286,10 @@
         
     @endslot
     @endcomponent
-    <!-- modal para mostrar el detalle compra-->
+    <!-- modal para confirmar la compra-->
     
 
-    <!--toast-->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">    
-                <strong class="me-auto">&#10060 Error</strong>      
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Agraga mas productos al inventario
-            </div>
-        </div>
-    </div>
+   
     
 
 

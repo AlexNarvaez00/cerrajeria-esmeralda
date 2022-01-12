@@ -18,7 +18,7 @@ $(".btnAgregarAlCarro").on("click", function() {
 
 //Agrega al carrito un producto
 $("#btnConfirmacionCarro").on("click", function() {     
-    var clave_producto = $("#letreroIdProducto").text();
+    var clave_producto = $("#letreroIdProducto").text();    
     if(!verificar(clave_producto)){       
         minAjax({
             url:"/producto/venta", 
@@ -33,10 +33,10 @@ $("#btnConfirmacionCarro").on("click", function() {
                     fila = "<tr>"
                                 +"<th>"+data.clave_producto+ "</th>"
                                 +"<td>"+data.nombre_producto+"</td>"
-                                +'<td class="inCantidad"></td>'
+                                +'<td class="inCantidadProductosCompras"></td>'
                                 +"<td>"+data.cantidad_existencia+"</td>"
                                 +"<td>"+data.cantidad_stock+"</td>"
-                                +"<td>"+'$'+data.precio_producto+"</td>"                            
+                                +'<td class="preciosProductosColumnas">'+'$'+data.precio_producto+"</td>"                            
                                 +'<td class="btnQuitar"></td>'
                             +"</tr>";
                     $('#tabla tr:last').after(fila);
@@ -48,13 +48,14 @@ $("#btnConfirmacionCarro").on("click", function() {
                     +'</button>'  
                     +'</a>');
                 
-                $("#tabla tr:last").find(".inCantidad").append(               
+                $("#tabla tr:last").find(".inCantidadProductosCompras").append(               
                     '<input type="number" class="inCantidad" value="1" size=20 style="width:50px" min=1 max='+data.cantidad_existencia+' id="'+data.clave_producto+'">'                
                     );  
-                    carrito.push(clave_producto); 
+                    carrito.push(clave_producto);
                     $("#conProductos").text(carrito.length);   
                     validarCantidad(data);
                     eliminarFila(data);
+                    obtenerTotal();
                 }                
             }           
         });   
@@ -62,6 +63,9 @@ $("#btnConfirmacionCarro").on("click", function() {
         alert("Este producto ya esta en la cesta");
     }
 });
+
+
+
 //Elimna una fila del carrito
 function eliminarFila(data){
     $("#btn"+data.clave_producto).on('click', function (event) {
@@ -71,6 +75,7 @@ function eliminarFila(data){
             carrito.splice(index, 1);
           }
           $("#conProductos").text(carrito.length); 
+          obtenerTotal();
 
     });
 
@@ -92,22 +97,37 @@ function validarCantidad(data){
                 $("#"+data.clave_producto).val("1");
             }
         });
+        obtenerTotal();
     });
 }
 //elimina todo el carrito
 $("#btnEliminarCarrito").on("click", function() {    
-    $('#tabla tr:not(:first)').remove();
-    total = 0;
-    $("#letreroTotal").text("Total a pagar: $" + total);
+    $('#tabla tr:not(:first)').remove();   
     cont = 0;
     $("#conProductos").text(cont);  
+    obtenerTotal();
 
 });
 
 //Obteiene el total a pagar
-function obtenerTotal(totalProducto){    
-    total +=  totalProducto;
-    $("#letreroTotal").text("Total a pagar: $" + total);
+function obtenerTotal(){ 
+    total = 0;
+    let valores = $(".inCantidad"); 
+    let preciosIndividuales = $(".preciosProductosColumnas");    
+    if(carrito.length > 0){
+        for(var i = 0; i < carrito.length; i++){
+            var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','');
+            total +=  subtotal;
+        }
+        $("#letreroTotal").text("Total a pagar: $" + total);
+    }else{
+        $("#letreroTotal").text("Total a pagar: $0.00");
+    }
+    
+    
+      
+    
+    
 }
 
 
