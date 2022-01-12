@@ -208,9 +208,9 @@ class proveedorController extends Controller
     */
     public function destroy(proveedorModelo $proveedore){
 
-        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get()[0];   //Se realiza la consulta a la tabla telefono cuando el id del proveedor coincida
-        if($telefono_prov!=null){                                                        //Se evalua la consulta si esta es diferente de null (si hay un registro de telefono)
-            $telefono_prov->delete();                                                    //Si la condición se cumple procede a borrar el registro de la tabla
+        $telefono_prov = telefonoModelo::where('idproveedor','=',$proveedore->idproveedor)->get();   //Se realiza la consulta a la tabla telefono cuando el id del proveedor coincida
+        if(count($telefono_prov)!=null){                                                        //Se evalua la consulta si esta es diferente de null (si hay un registro de telefono)
+            $telefono_prov[0]->delete();                                                    //Si la condición se cumple procede a borrar el registro de la tabla
             }
 
 
