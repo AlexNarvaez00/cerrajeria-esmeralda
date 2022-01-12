@@ -71,7 +71,7 @@
                             <td>
                                 <a class = "btnAgregarAlCarro">                                                     
                                     <button type="button" class="btn" >
-                                        <span><i  class="bi bi-cart4" style="font-size:20px;"  ></i></span>
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;" data-bs-target="#agregarcarritoModal" ></i></span>
                                     </button>  
                                 </a>                                                     
                             </td>                
