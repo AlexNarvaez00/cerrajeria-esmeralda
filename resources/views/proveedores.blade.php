@@ -131,6 +131,7 @@
         <p class="px-3">
             Información del Proveedor
         </p>
+        <x-tag-obligatorios />
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
@@ -157,7 +158,10 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstado">Estado</label>
+                        <label class="input-group-text" for="inputEstado">
+                            Estado
+                        <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="inputEstado" class="form-select {{ (old('estados'))? 'is-valid':'' }}" name="estados" value="{{old('estados')}}">
                                 <option selected value="0">Selecciona un estado</option>
                                 @foreach($registroEstados as $proveedor)
@@ -171,7 +175,10 @@
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipio">Municipio</label>
+                        <label class="input-group-text" for="idMunicipio">
+                            Municipio
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="idMunicipio" class="form-select {{ (old('municipios'))? 'is-valid':'' }}" disabled="true" name="municipios" value="{{old('municipios')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
@@ -184,7 +191,10 @@
 
             <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idColonia">Colonia</label>
+                <label class="input-group-text" for="idColonia">
+                    Colonia
+                    <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                </label>
                     <select id="idColonia" class="form-select {{ (old('colonias'))? 'is-valid':'' }}" disabled="true" name="colonias" value="{{old('colonias')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
@@ -231,6 +241,7 @@
         <p class="px-3">
             Información del Proveedor
         </p>
+        <x-tag-obligatorios />
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
@@ -259,7 +270,10 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstadoEditar">Estado</label>
+                        <label class="input-group-text" for="inputEstadoEditar">
+                            Estado
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="inputEstadoEditar" class="form-select" name="estadosEditar" value="{{old('estadosEditar')}}">
                                 <option selected value="0">Selecciona un estado</option>
                                 @foreach($registroEstados as $proveedor)
@@ -273,7 +287,10 @@
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipioEditar">Municipio</label>
+                        <label class="input-group-text" for="idMunicipioEditar">
+                            Municipio
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="idMunicipioEditar" class="form-select" disabled="true" name="municipiosEditar" value="{{old('municipiosEditar')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
@@ -285,7 +302,10 @@
             </div>
             <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idColoniaEditar">Colonia</label>
+                <label class="input-group-text" for="idColoniaEditar">
+                    Colonia
+                <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                </label>
                     <select id="idColoniaEditar" class="form-select" disabled="true" name="coloniasEditar" value="{{old('coloniasEditar')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
