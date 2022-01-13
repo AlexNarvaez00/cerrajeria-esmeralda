@@ -110,8 +110,11 @@
         <p class="px-3">
             Informacion básica del usuario.
         </p>
+
+        <x-tag-obligatorios />
+
         <div class="container-fluid">
-            <!--Directiva, basicmanete sirve como seguridad .v jajajajaj-->
+            <!--Directiva,  sirve como seguridad .v jajajajaj-->
             @csrf
             <!--Input oculto para el IDE del usuario-->
             <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
@@ -136,7 +139,10 @@
             <div class="row">
                 <!--Columnas :v-->
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputRolUsuario">Roles</label>
+                    <label class="input-group-text" for="inputRolUsuario">
+                        Roles
+                        <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                    </label>
                     <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value="{{old('rolUser')}}">
                         <option selected value="0">Selecciones rol de Usuario</option>
                         @foreach ($listaRoles as $rol)
@@ -180,6 +186,9 @@
         <p class="px-3">
             Informacion básica del usuario.
         </p>
+
+        <x-tag-obligatorios />
+
         <div class="container-fluid">
             <!--Directiva, basicmanete -->
             @csrf
@@ -206,8 +215,11 @@
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputRolUsuarioEditar">Roles</label>
+                <div class="input-group mb-3 selector-obligatorio">
+                    <label class="input-group-text" for="inputRolUsuarioEditar">
+                        Roles
+                        <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                    </label>
                     <select class="form-select" id="inputRolUsuarioEditar" name="rolUserEditar" value="{{old('rolUserEditar')}}">
                         <option selected value="0">Selecciones rol de Usuario</option>
                         @foreach ($listaRoles as $rol)

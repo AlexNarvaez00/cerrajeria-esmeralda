@@ -1,6 +1,6 @@
 <div class="">
     <!--
-    Este es el contenedor del modal, lo hice asi, :v por quie 
+    Este es el contenedor del modal, lo hice asi,  por que
     necesita propiedades extras, fue lo unico que se me corrio.
 -->
     <div class="modal fade" id="{{$idModal}}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">

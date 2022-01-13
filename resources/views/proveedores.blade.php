@@ -112,6 +112,12 @@
         </div>
     </div>
             <!--########################### Modal Formulario para agregar a un nuevo proveedor  ############################## -->
+    <!-- 
+        | Modal utilizado como formulario para agregar a un nuevo proveedor, la información 
+        | es mandada oculta por el método POST.
+        | Las entradas (imputs) del modal son evaluados para su correcta introducción de la información
+        | así mismo, sus entradas son obligatorias, lanza un texto mencionando las entradas obligatorias.
+    -->
     @component('components.modal')
     @slot('idModal','registroProveedorModal')
     @slot('tituloModal','Módulo de Proveedor.')
@@ -190,20 +196,8 @@
         </div>
     @endslot
     @slot('footerModal')
-
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
     <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
-    
-    <!-- Botones anteriores
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-            <span class="me-2">&#10004;</span>
-            Registrar
-        </button>
-    -->
     @endslot
     @endcomponent
 
@@ -218,7 +212,12 @@
 </x-modalSimple>
 
 <!--########################### Modal para editar la información del proveedor ###################################### -->
-
+    <!-- 
+        | Modal utilizado como formulario para editar (actualizar) la información del proveedor seleccionado, la información 
+        | es mandada oculta por el método POST.
+        | Las entradas (imputs) del modal son evaluados para su correcta introducción de la información
+        | así mismo, sus entradas son obligatorias, lanza un texto mencionando las entradas obligatorias.
+    -->
 @component('components.modal')
     @slot('idModal','editarProveedorModal')
     @slot('tituloModal','Editar un proveedor.')
@@ -300,16 +299,6 @@
     @slot('footerModal')
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
     <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
-    <!--
-        <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-            <span class="me-2">&#10060;</span>
-            Cancelar
-        </button>
-        <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-            <span class="me-2">&#10004;</span>
-            Registrar
-        </button>
-    -->
     @endslot
     @endcomponent
 
@@ -354,110 +343,7 @@
     <!--Pero esta madre se necesita para hacer AJAX mas simple -->
 <script type="text/javascript" src="./js/minAjax.js"></script>
     <!-- script para los selectores de los municipios y colonias -->
-<script >
-        
-        const selectorEstado = document.getElementById('inputEstado');
-        const selectorMunicipio = document.getElementById('idMunicipio');
-        const selectorColonia = document.getElementById('idColonia');
-        const selectorEstadoEditar = document.getElementById('inputEstadoEditar');
-        const selectorMunicipioEditar = document.getElementById('idMunicipioEditar');
-        const selectorColoniaEditar = document.getElementById('idColoniaEditar');
-
-function recuperarMunicipios(idSelector)
-{
-    let valor = event.target.value;
-            //Este input, es el input oculto de la linea 116
-            //let _token = $('');
-            
-            if(valor != '0'){
-
-               minAjax({
-                url:"{{route('estados.todo')}}", 
-                type:"POST",
-                data:{
-                        _token: document.querySelector('input[name="_token"]').value,
-                        id:valor
-                },
-                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
-                success: function(data){
-                    data = JSON.parse(data);
-                    let selectordesabilitadoM = document.getElementById(idSelector).disabled=false;
-                    let selectorMunicipio = document.getElementById(idSelector);
-                    let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "Selecciona un municipio";
-                    textoSelectorOP1.value = 0;
-                    let opcionesSeleccion = [textoSelectorOP1];
-
-                    for (let index = 0; index < data.length; index++) {
-                        let opcion =  document.createElement('option');
-                        opcion.innerHTML = data[index].nombre;                       
-                        opcion.value = data[index].idmunicipio;
-                        opcionesSeleccion.push(opcion);                      
-                    }
-                    selectorMunicipio.innerHTML = '';
-                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
-                            selectorMunicipio.appendChild(opcionesSeleccion[idx]);                    
-                    }
-                }
-               });
-            }
-}
-
-function recuperarColonias(idSelector)
-{
-    let valor = event.target.value;
-            //Este input, es el input oculto de la linea 116
-            //let _token = $('');
-            
-            if(valor != '0'){
-               minAjax({
-                url:"{{route('municipios.todo')}}", 
-                type:"POST",
-                data:{
-                        _token: document.querySelector('input[name="_token"]').value,
-                        idmunicipio:valor
-                },
-                //Esta funcion se ejecuta cuando el servisor nos responde con los datos que enviamos
-                    success: function(data){
-                    data = JSON.parse(data);
-                    let selectordesabilitadoC = document.getElementById(idSelector).disabled=false;
-                    let selectorColonia = document.getElementById(idSelector);
-                    let textoSelectorOP1 = document.createElement('option');
-                    textoSelectorOP1.innerHTML = "Selecciona una colonia";
-                    textoSelectorOP1.value = 0;
-                    let opcionesSeleccion = [textoSelectorOP1];
-
-                    for (let index = 0; index < data.length; index++) {
-                        let opcion =  document.createElement('option');
-                        opcion.innerHTML = data[index].nombre+ " CP:" + data[index].codigopostal;                       
-                        opcion.value = data[index].idcolonia;
-                        opcionesSeleccion.push(opcion);                      
-                    }
-                    selectorColonia.innerHTML = '';
-                    for (let idx = 0; idx < opcionesSeleccion.length; idx++) {
-                            selectorColonia.appendChild(opcionesSeleccion[idx]);                    
-                    }
-                }
-               });
-              
-            }
-}
-        selectorEstado.addEventListener("change",(event)=>{
-            recuperarMunicipios('idMunicipio');
-        });
-
-        selectorMunicipio.addEventListener("change",(event)=>{
-           recuperarColonias('idColonia');
-        });
-
-        selectorEstadoEditar.addEventListener("change",(event)=>{
-            recuperarMunicipios('idMunicipioEditar');
-        });
-
-        selectorMunicipioEditar.addEventListener("change",(event)=>{
-           recuperarColonias('idColoniaEditar');
-        });
-</script>
+<script src="./js/funciones/cargarselectoresProv.js"></script>
 
 @if($errors->hasAny('nombre', 'apellidopaterno', 'apellidomaterno',
 'numtelefono', 'correo', 'calle', 'numext', 'estados', 'municipios', 'colonias'))
