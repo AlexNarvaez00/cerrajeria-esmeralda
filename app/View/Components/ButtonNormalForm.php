@@ -14,14 +14,6 @@ use Illuminate\View\Component;
 class ButtonNormalForm extends Component
 {
     /**
-<<<<<<< HEAD
-     * Atributes
-     * 
-     */
-    public $type;
-    public $estiloBoton;
-    public $texto;
-=======
    | -----------------------------------------------------------
    |    ButtonNormalForm
    | -----------------------------------------------------------
@@ -54,7 +46,6 @@ class ButtonNormalForm extends Component
      */
     public $texto;
 
->>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
     /**
      * Create a new component instance.
      *

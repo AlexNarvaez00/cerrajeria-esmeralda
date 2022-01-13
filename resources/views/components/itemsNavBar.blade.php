@@ -16,9 +16,7 @@
         <li><a class="dropdown-item" href="./servicios-ventas">Realizar venta de servicios</a></li>            
     </ul>
 </li>
-<li class="nav-item">
-    <a class="nav-link fs-5 {{($active == 'devoluciones')?'active':''}}" href="../devoluciones">Devoluciones</a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link fs-5 {{($active == 'clientes')?'active':''}}" href="../clientes">Clientes</a>
 </li>
