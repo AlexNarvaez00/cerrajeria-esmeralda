@@ -1,6 +1,9 @@
 var total = 0; //Obtiene el total a pagar
 var cont = 0; //Obtiene la cantidad de productos que estan en el carrito
+var cantidadRecibida = 0;
+var cambio = 0;
 let carrito = new Array();//Obtiene los productos que estan en el carrito
+
 $("#btnCarrito").on("click", function() {
     if(carrito.length == 0){
         $("#btnRealizarVenta").prop('disabled', true); 
@@ -59,13 +62,14 @@ $("#btnConfirmacionCarro").on("click", function() {
                 
                 $("#tabla tr:last").find(".inCantidadProductosCompras").append(               
                     '<input type="number" class="inCantidad" value="1" size=20 style="width:50px" min=1 max='+data.cantidad_existencia+' id="'+data.clave_producto+'">'                
-                    );  
+                    );                   
                     carrito.push(clave_producto);
                     $("#conProductos").text(carrito.length);   
                     validarCantidad(data);
                     eliminarFila(data);
                     $("#btnRealizarVenta").prop('disabled', false); 
                     obtenerTotal();
+
                 }                
             }           
         });   
@@ -92,7 +96,7 @@ function eliminarFila(data){
 
 }
 //valida que las entradas de la cantidad no sean negativas ni se queden vacias al perder el foco
-function validarCantidad(data){
+function validarCantidad(data){    
     $("#"+data.clave_producto).on("keyup", function(event){
         var cantTemp = $("#"+data.clave_producto).val();                      
         if(cantTemp > data.cantidad_existencia){   
@@ -110,6 +114,7 @@ function validarCantidad(data){
         obtenerTotal();
     });
 }
+
 //elimina todo el carrito
 $("#btnEliminarCarrito").on("click", function() {    
     $('#tabla tr:not(:first)').remove();   
@@ -180,21 +185,70 @@ $('#btnRealizarVenta').on("click", function() {
     let nombreProductos = $(".nombreProductosColumnas");
     for(var i = 0; i < carrito.length; i ++){
         var nombreTemp =  nombreProductos[i].innerHTML;
-        var precioIndividualTemp = preciosIndividuales[0].innerHTML.replace('$','');
+        var precioIndividualTemp = preciosIndividuales[i].innerHTML.replace('$','');
         var cantidadTemp = valores[i].value;
 
         fila = "<tr>"
             +"<th>"+carrito[i]+ "</th>"
-            +"<td>"+nombreTemp+"</td>"            
-            +"<td>"+cantidadTemp+"</td>"
-            +"<td>"+"$"+precioIndividualTemp+"</td>"                                     
+            +'<td class="nombreRealizarVenta">'+nombreTemp+"</td>"            
+            +'<td class="cantidadRealizarVenta">'+cantidadTemp+"</td>"
+            +'<td class="precioIndividualRealizaVenta">'+"$"+precioIndividualTemp+"</td>"                                     
             +"<td>"+"$"+cantidadTemp*precioIndividualTemp+"</td>"
             +"</tr>";
             $('#tabla2 tr:last').after(fila);
 
     }
-    $("#letreroTotalConfirmacion").text("Total a pagar $" + total);
-    
-                    
+    $("#letreroTotalConfirmacion").text("Total a pagar $" + total);            
 
  });
+
+
+$("#cantidadRecibida").on("keyup", function(event){
+    var temp = $("#cantidadRecibida").val();
+    if(temp < 0.00 || temp.includes("-")){
+        $("#cantidadRecibida").val("0.00");
+        $("#btnFinalizarCompra").prop("disabled",true);
+        cambio = 0;
+    }else{        
+        cantidadRecibida = temp;
+        cambio = cantidadRecibida -total; 
+        if(cambio < 0){
+            $("#btnFinalizarCompra").prop("disabled",true);
+        }else{
+            $("#btnFinalizarCompra").prop("disabled",false);    
+        }           
+    }    
+    $("#letreroCambio").text("Cambio: $" + cambio);
+});
+
+$("#btnFinalizarCompra").on("click",function(event){  
+    $("#letreroCantidadRecibida").text("Cantidad Recibida: $" + cantidadRecibida);
+    $("#letreroCantidadCambio").text("Cambio: $" + cambio );
+    $("#letreroTotalPagar").text("Total a pagar: $" + total);
+
+    let nombres = $(".nombreRealizarVenta");
+    let cantidadProducto = $(".cantidadRealizarVenta");
+    let precioUnitario = $(".precioIndividualRealizaVenta");
+    
+    for(var i = 0; i < carrito.length; i++){
+        alert(nombres[i].innerHTML +" "+cantidadProducto[i].innerHTML );
+        componente = '<div class="row">'
+                        +'<div class="col-md-1 col-sm-1  justify-content-center">'
+                            +cantidadProducto[i].innerHTML
+                        +'</div>'
+                        +'<div class="col-md-5 col-sm-5 justify-content-center">'
+                            +carrito[i]+' '+nombres[i].innerHTML
+                        +'</div>'
+                        +'<div class="col-md-3 col-sm-3  justify-content-center">'
+                            +precioUnitario[i].innerHTML
+                        +'</div>'
+                        +'<div class="col-md-3 col-sm-3  justify-content-start">'
+                            +"$"+(cantidadProducto[i].innerHTML * precioUnitario[i].innerHTML.replace("$",""))
+                        +'</div>'
+                    +'</div>'
+        $("#descripcionProductosDetalleCompra").append(componente);
+    }
+
+});
+
+

@@ -91,8 +91,8 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
-                        <input type="number" class="form-control" id="cantidadRecibida" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">* Campo obligatorio</div>
+                        <input type="number" value="0.00" class="form-control" id="cantidadRecibida" min="0" step="0.01" required>
+                        <div class="form-text">* Campo obligatorio</div>
                     </div>
                 </div>                
             </div>
@@ -134,7 +134,7 @@
         @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+        <x-button-normal-form type="button" disabled="true" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
     <!-- modal para listar los productos en el carrito -->
@@ -174,6 +174,8 @@
         <x-button-normal-form type="button" id="btnRealizarVenta" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#verificarCompra" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
+
+    <!--Modal detalle compra-->
     @component('components.modalSimple')
     @slot('idModal','detalleCompras')
     @slot('tituloModal','Detalle compra')
@@ -215,7 +217,7 @@
                 </div>
             </div>
             <hr>
-            <div class="container-fluid">
+            <div class="container-fluid" id="descripcionProductosDetalleCompra">
                 <div class="row">
                     <div class="col-md-1 col-sm-1  justify-content-start">
                         Cant.
@@ -236,17 +238,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>recibido: $200.00</p>
+                    <p id="letreroCantidadRecibida">recibido: $200.00</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>cambio: $100.00</p>
+                    <p id="letreroCantidadCambio">cambio: $100.00</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>total a pagar: $100.00</p>
+                    <p id="letreroTotalPagar">total a pagar: $100.00</p>
                 </div>
             </div>
             <hr>
