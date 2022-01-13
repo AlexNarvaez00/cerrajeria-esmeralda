@@ -29,6 +29,7 @@ class ventaProductoController extends Controller
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Productos disponibles','Stock','Precio individual','Quitar'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio venta','Precio compra','Existencia','Stock','Agregar al carrito'];
+        $this->camposProductosConfirmar = ['Clave Producto','Nombre Producto','Cantidad','Precio individual','subtotal'];
     }  
     
     public function index(){
@@ -36,7 +37,8 @@ class ventaProductoController extends Controller
             ->with('camposProductos',$this->camposProductos)//Campos de la tablas 
             ->with('productos',$this->productos)      
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
-            ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
+            ->with('camposproductosCarrito',$this->camposproductosCarrito)
+            ->with('camposValidar',$this->camposProductosConfirmar);//campos para la tabla en carritos
     }
 
    
