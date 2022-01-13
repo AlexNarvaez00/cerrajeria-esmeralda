@@ -291,13 +291,24 @@ function guardarDetalleVenta(idVenta){
                 folio_v:idVenta,
                 importe:(cantidadProducto[i].innerHTML * (precioUnitario[i].innerHTML.replace("$","")))           
             },        
-            success: function(data){  
+            success: function(data){ 
                 
-                       alert(data);       
+                           
             }           
         });
     }
 
+}
+
+$("#btnImprimirTicket").on("click",function(event){  
+    refrescar();
+});
+$("#btnCerrarTicket").on("click",function(event){  
+    refrescar();
+});
+
+function refrescar(){
+    window.location.reload();
 }
 
 

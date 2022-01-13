@@ -259,8 +259,8 @@
         </div>
     @endslot
     @slot('footerModal')
-        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo"/>        
+        <x-button-normal-form  type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" id="btnCerrarTicket"/>
+        <x-button-normal-form  type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo" id="btnImprimirTicket"/>        
     @endslot
     @endcomponent
     
