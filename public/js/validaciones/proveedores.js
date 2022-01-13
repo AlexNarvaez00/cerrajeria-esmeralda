@@ -1,17 +1,34 @@
+/**
+ * @author Roberto Alejandro Vásquez Alcántara
+ */
+
+    /*
+     | ------------------------------
+     | proveedores
+     | ------------------------------
+     | Este Script es utilizado para validar las entradas (imputs, haciendo uso de expresiones
+     | regulares en JavaScript) en la vista
+     | tanto del formulario para registrar un nuevo proveedor como el formulario
+     | para actualizar el registro del proveedor.
+     */
+
+     /**
+     * Objeto de expresiones regulares para validar los campos en el formulario
+     * 
+     * @var Object
+     */
 const expresionesRegulares = {
-    //idProveedor: /^PROV+-[0-9]{3}[A-Z]{3}$/, //Esto puede cambiar Por ahora está para que empieze como PROV-(esto a la de ahuevo) despues 3 números 3 letras
-    nombreProveedor:/^[A-Z][a-zÀ-ÿ\s]/, //Letras y espacios, pueden llevar acentos  ----Los nombres solo pueden iniciar con mayusculas. /^[A-Z][a-z]{2,25}$/,
+    nombreProveedor:/^[A-Z][a-zÀ-ÿ\s]/, //Letras y espacios, pueden llevar acentos
     ApellidoPProveedor:/^[A-Z][a-zÀ-ÿ]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
     ApellidoMProveedor:/^[A-Z][a-zÀ-ÿ]{2,25}$/, //Los nombres solo pueden iniciar con mayusculas.
     NumTelefono:/^[0-9]{10}$/, //Los números de telefono tiene 10 números
     Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,   // Correo electrónico
     Calle: /^[A-Z][a-zÀ-ÿ\s]{1,40}/, //Letras y espacios, pueden llevar acentos
-    NumExt:/^[0-2]+[0-9][0-9]$/, // Números exteriores 
-    //(([A-Z]+[a-z]+[0-9]+)|([A-Z]*[a-z]*[0-9]*))+
+    NumExt:/^[0-9]{3,4}$/, // Números exteriores 
 };
 
 validator([
-    //Empezamos con los imputs del modal ingresar nuevo prov
+    //Empezamos con los imputs del modal ingresar nuevo proveedor
     [document.getElementById("inputNombreProveedor"), expresionesRegulares.nombreProveedor],
     [document.getElementById("inputApellidoPProveedor"), expresionesRegulares.ApellidoPProveedor],
     [document.getElementById("inputApellidoMProveedor"), expresionesRegulares.ApellidoMProveedor],

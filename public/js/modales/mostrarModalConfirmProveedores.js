@@ -1,12 +1,19 @@
 /**
- * Todo este codigo debe de ir en archivo aparte :v
- * pero lo puse aqui no mas para probar
- *
+ * @author Roberto Alejandro Vásquez Alcántara
  */
+
+/*
+     | ------------------------------
+     | mostrarModalConfirmProveedores
+     | ------------------------------
+     | Este Script es utilizado para recuperar la información de la vista
+     | y poder mostrar la información en un modal del proveedor a borrar.
+     | Este modal o la acción continuará cuando demos click al boton confirmar
+     |
+     */
+
 const formulariosBorrar = document.getElementsByClassName("form-detele");
-let cuerpoModalInformacion = document.querySelector(
-    "#confirmacionModal .modal-body"
-);
+let cuerpoModalInformacion = document.querySelector("#confirmacionModal .modal-body");
 let FORMULARIO_GLOBAL = null;
 
 for (let index = 0; index < formulariosBorrar.length; index++) {
@@ -51,10 +58,11 @@ for (let index = 0; index < formulariosBorrar.length; index++) {
         FORMULARIO_GLOBAL = event.target;
         //console.log(cuerpoModalInformacion);
     });
-
-
 }
 
+/**
+ * El formulario se enviara cuando le demos click o boton de confirmacion
+ */
 let botonModalConfirmacion = document.getElementById("botonModalConfirmacion");
 botonModalConfirmacion.addEventListener("click", (event) => {
     FORMULARIO_GLOBAL.submit();
