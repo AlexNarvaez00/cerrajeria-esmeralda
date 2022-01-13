@@ -10,4 +10,5 @@ class detalleVentaModelo extends Model
     use HasFactory;
     protected $table = 'detalleventa';
     public $incrementing = false;
+    public $timestamps = false;
 }

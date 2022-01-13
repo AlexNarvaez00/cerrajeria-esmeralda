@@ -13,8 +13,7 @@ $("#btnCarrito").on("click", function() {
 });
 
 //Abre un modal con la información de un producto antes de agregar al carrito
-$(".btnAgregarAlCarro").on("click", function() {    
-    
+$(".btnAgregarAlCarro").on("click", function() {     
     let fila = $(this).closest("tr").find(".dato"); //Obtiene la fila en donde se le da clic
     var cantidadExistencia = fila[4].innerHTML;          
     if(cantidadExistencia > 0){
@@ -222,6 +221,7 @@ $("#cantidadRecibida").on("keyup", function(event){
 });
 
 $("#btnFinalizarCompra").on("click",function(event){  
+    guardarVenta();
     $("#letreroCantidadRecibida").text("Cantidad Recibida: $" + cantidadRecibida);
     $("#letreroCantidadCambio").text("Cambio: $" + cambio );
     $("#letreroTotalPagar").text("Total a pagar: $" + total);
@@ -230,8 +230,7 @@ $("#btnFinalizarCompra").on("click",function(event){
     let cantidadProducto = $(".cantidadRealizarVenta");
     let precioUnitario = $(".precioIndividualRealizaVenta");
     
-    for(var i = 0; i < carrito.length; i++){
-        alert(nombres[i].innerHTML +" "+cantidadProducto[i].innerHTML );
+    for(var i = 0; i < carrito.length; i++){        
         componente = '<div class="row">'
                         +'<div class="col-md-1 col-sm-1  justify-content-center">'
                             +cantidadProducto[i].innerHTML
@@ -250,5 +249,55 @@ $("#btnFinalizarCompra").on("click",function(event){
     }
 
 });
+
+function guardarVenta(){
+    var idEmpleado = $("#letreroIdEmpleado").text().replace("idempleado: ",""); 
+    
+    minAjax({
+        url:"/producto/guardarventa", 
+        type:"POST",
+        data:{
+            _token: document.querySelector('input[name="_token"]').value,
+            idEmpleado:idEmpleado,
+            recibido:cantidadRecibida,
+            total:total,
+            cambio:cambio           
+        },        
+        success: function(data){  
+            $("#idDetallecompra").text(data);            
+            guardarDetalleVenta(data); 
+            
+                          
+        }           
+    }); 
+     
+}
+
+function guardarDetalleVenta(idVenta){
+    
+    let nombres = $(".nombreRealizarVenta");
+    let cantidadProducto = $(".cantidadRealizarVenta");
+    let precioUnitario = $(".precioIndividualRealizaVenta");
+    
+    for(var i = 0; i < carrito.length; i++){              
+        minAjax({
+            url:"/producto/guardardetalleventa", 
+            type:"POST",
+            data:{
+                _token: document.querySelector('input[name="_token"]').value,
+                idProducto:carrito[i],
+                observaciones:carrito[i]+' '+nombres[i].innerHTML,
+                cantidad:cantidadProducto[i].innerHTML,
+                folio_v:idVenta,
+                importe:(cantidadProducto[i].innerHTML * (precioUnitario[i].innerHTML.replace("$","")))           
+            },        
+            success: function(data){  
+                
+                       alert(data);       
+            }           
+        });
+    }
+
+}
 
 

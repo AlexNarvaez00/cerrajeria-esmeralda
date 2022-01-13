@@ -196,18 +196,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 col-sm-6  justify-content-start">
-                <h6>IdCompra:</h6> 
+                <h6 id="letreroIdCompra">IdCompra: </h6> 
                 </div>  
                 <div class="col-md-6 col-sm-6  justify-content-start">
-                <h6 id="idDetallecompra"><?php
-                    $DateAndTime = date('m-d-Y h:i:s a', time());  
-                    echo str_replace(" ","","COMP-".substr(auth()->user()->name,0,3).$DateAndTime);
-                ?></h6>
+                <h6 id="idDetallecompra"></h6>
                 </div>              
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6  justify-content-start">
-                idempleado: {{ auth()->user()->id}} 
+                <p id="letreroIdEmpleado">idempleado: {{ auth()->user()->id}}</p>
                 </div>
                 <div class="col-md-6 col-sm-6  d-flex justify-content-end">
                 <?php

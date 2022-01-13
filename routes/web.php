@@ -71,6 +71,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
     //Rutas para el modulo de ventas de productos
     Route::post('/producto/venta', [ventaProductoController::class, 'getProducto'])->name('producto.venta');
+    Route::post('/producto/guardarventa', [ventaProductoController::class, 'realizarVenta'])->name('producto.guardarventa');
+    Route::post('/producto/guardardetalleventa', [ventaProductoController::class, 'guardarDetalleVenta'])->name('producto.guardardetalleventa');
     
     Route::get('/ventas/get/{folio_v}',[reporteVentaProductosController::class,'getProductsAtFolio'])->name('ventas.folio');
     Route::get('/servicios/get/{servicio}',[reporteVentasController::class,'getServicesAtFolio'])->name('servicios.folio');
@@ -82,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/agrega/proveedor', [productosController::class, 'setProveedor'])->name('agrega.proveedor');
     Route::post('/producto/cambiar', [productosController::class, 'cambiosProducto'])->name('producto.cambiar');
     Route::post('/producto/buscar', [productosController::class, 'existe'])->name('producto.buscar');
+    
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
