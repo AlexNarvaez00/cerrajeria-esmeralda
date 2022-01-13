@@ -24,3 +24,9 @@
     border-radius: 50%;
     border:1px solid black;
 }
+
+
+.selector-obligatorio .input-group-text{
+    --var-padding: 0.25rem;
+    position: relative;
+}
