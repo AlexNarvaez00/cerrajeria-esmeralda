@@ -82,66 +82,7 @@
             </table>
         </div>
     </div>
-<<<<<<< HEAD
 <!-- modal para listar los productos en el carrito -->
-=======
-    @component('components.modalSimple')
-    @slot('idModal','verificarCompra')
-    @slot('tituloModal','Verifica que la venta sea correcta')
-    @slot('cuerpoModal')          
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
-                        <input type="number" value="0.00" class="form-control" id="cantidadRecibida" min="0" step="0.01" required>
-                        <div class="form-text">* Campo obligatorio</div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        
-        <div class="container-fluid">
-            <div class="col-12 text-center">
-                <table id = "tabla2" class="table table-warning table-striped">
-                    <thead>
-                        <tr>
-                        @foreach ($camposValidar as $campo)
-                            <th scope="col">{{$campo}}</th>
-                        @endforeach 
-                        </tr>
-                    </thead> 
-                    <tbody>
-                    </tbody>
-                </table>   
-            </div> 
-        </div> 
-        <hr>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
-                    <h4 id="letreroTotalConfirmacion">Total a pagar: $0.00</h4>
-                </div>                
-            </div>  
-            <div class="row">
-                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
-                    <h4 id="letreroCambio">Cambio: $0.00</h4>
-                </div>                
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 d-flex justify-content-center">
-                    <h5>No se aceptan devoluciones</h5>
-                </div>                
-            </div>                          
-        </div>   
-        @endslot
-    @slot('footerModal')        
-        <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" disabled="true" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
-    @endslot    
-    @endcomponent
-    <!-- modal para listar los productos en el carrito -->
->>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
     @component('components.modalSimple')
     @slot('idModal','carritoModal')
     @slot('tituloModal','Carrito de compras')

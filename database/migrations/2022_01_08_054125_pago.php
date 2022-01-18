@@ -13,6 +13,17 @@ class Pago extends Migration
      */
     public function up()
     {
+         /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "pago".
+        | ------------------------------------------------------------
+        |
+        | folio_v               -> Folio de la venta (llave foránea)
+        | recibido              -> Pago en efectivo dado por el cliente 
+        | total_pagar           -> Importe total a pagar
+        | cambio                -> El cambio en efectivo que se extenderá al cliente
+        |
+         */
         Schema::create('pago', function (Blueprint $table) {
             $table->string('folio_v',30);
             $table->double('recibido',8,2);

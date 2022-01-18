@@ -13,6 +13,18 @@ class CreateDetalleServicioTable extends Migration
      */
     public function up()
     {
+         /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "DetalleServicio".
+        | ------------------------------------------------------------
+        |
+        | cantidad              -> Llave primaria de la tabla en la base de datos.
+        | total_productos       -> Cantidad total de los productos que se utilizaron en la realización del servicio
+        | clave_producto        -> Clave del producto que se vendió (llave foránea) con esta relacion 
+        |                          se interpreta que cada producto vendido llevará su respectiva clave
+        | idservicio            -> ID sel servicio que se realizó (llave foránea)
+        |
+         */
         Schema::create('detalleservicio', function (Blueprint $table) {
             $table->integer('cantidad');
             $table->double('total_productos',6,2);            
