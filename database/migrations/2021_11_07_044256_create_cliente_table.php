@@ -13,6 +13,18 @@ class CreateClienteTable extends Migration
      */
     public function up()
     {
+        /*
+        | -------------------------------------------------------
+        |   Diccionario | Tabla de "Cliente".
+        | -------------------------------------------------------
+        | 
+        | idcliente         -> Llave primaria de la tablla en la base de datos. 
+        | nombre            -> Nombre del cliente.
+        | apellidoPaterno   -> Apellido del cliente (Paterno).
+        | apellidoMaterno   -> Apellido del cliente (Materno).
+        | telefono          -> Telefono del cliente.
+        |
+        */
         Schema::create('cliente', function (Blueprint $table) {
             $table->string('idcliente',20);
             $table->string('nombre',30);

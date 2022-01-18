@@ -16,6 +16,19 @@ class CreateProveedorTable extends Migration
      */
     public function up()
     {
+        /*
+        | ---------------------------------------------------------------
+        |   Diccionario | Tabla de "proveedor".
+        | ---------------------------------------------------------------
+        | 
+        | idproveedor       -> Llave primaria de la tabla en la base de datos.
+        | nombre            -> Nombre del proveedor 
+        | apellidopaterno   -> Apellido del proeeedor (Materno)
+        | apellidomaterno   -> Apellido del proeeedor (Peterno)
+        | correo            -> Correo del proveedor.
+        | iddirecproveedor  -> LLave foranea de la tabla direccion (La direccion del proveedor).
+        |
+        */
         Schema::create('proveedor', function (Blueprint $table) {
             $table->string('idproveedor', 15);
             $table->string('nombre', 50);

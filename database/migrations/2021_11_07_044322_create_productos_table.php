@@ -13,6 +13,21 @@ class CreateProductosTable extends Migration
      */
     public function up()
     {
+        /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "productos".
+        | ------------------------------------------------------------
+        |
+        | clave_producto        -> Llave primaria de la tabla en la base de datos.
+        | nombre_producto       -> Nombre del producto.
+        | clasificacion         -> Clasificacion del prodcuto.
+        | precio_producto       -> Precio del producto.
+        | precio_compra         -> Precio de compra del producto.
+        | cantidad_existencia   -> Cantidad en existencia del prodcuto.
+        | cantidad_stock        -> Cantidad de stock del prodcuto
+        | idproveedor           -> ID del proveedor (De que proveedor es el producto.)
+        |
+         */
         Schema::create('productos', function (Blueprint $table) {
             $table->string('clave_producto',10);
             $table->string('nombre_producto',20);
