@@ -1,7 +1,5 @@
 /**
- * Todo este codigo debe de ir en archivo aparte :v
- * pero lo puse aqui no mas para probar
- *
+ * @author Santiago Solano Dafne
  */
  const formulariosBorrar = document.getElementsByClassName("form-detele");
  let cuerpoModalInformacion = document.querySelector(

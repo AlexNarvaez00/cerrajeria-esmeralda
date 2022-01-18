@@ -11,129 +11,185 @@ use App\Models\coloniaModelo;
 use App\Models\productosDescripcionModelo;
 
 use Illuminate\Http\Request;
-
+/**
+ * @author Omar 
+ */
+ /* 
+    | -----------------------------------
+    |   productosController
+    | -----------------------------------
+    |   El controlador es utilizado para recuperar
+    |   la lista de los productos en el sistema, mostrando
+    |   la  informacion basica de los mismo en una tabla.
+    |
+    */
 class productosController extends Controller
 {
     /**
-     * Atributos ...
-     */
-    public  $nombreUsuario;//Este atributo despues lo revisamos
-    protected  $productosLista;//Esta variables para guardar la lista de usuarios
-    protected $proveedorLista;//Lista de proveedores
-    PROTECTED $descripcionLista;//lista de las descripciones de los productos
+     * La lista de productos recuperada de 
+     * la base de datos.
+     * 
+     * @var array 
+     */   
+    protected $listaProductos;
+    /**
+     * La lista de proveedores recuperada de 
+     * la base de datos.
+     * 
+     * @var array 
+     */   
+    protected $proveedorLista;
+    /**
+     * La lista de descripciones de los productos recuperada de 
+     * la base de datos.
+     * 
+     * @var array 
+     */ 
+    Protected $listaDescripciones;
+    /**
+     * Los encabezados para la tabla de la vista
+     * productos.
+     * 
+     * @var array 
+     */ 
     private $camposVista;
-
-
-    //Pagina para referenciar las cosas xd    
-    //https://richos.gitbooks.io/laravel-5/content/capitulos/chapter10.html
-
+  
+    /**
+     * -------------------------------------
+     *  Constructor
+     * -------------------------------------
+     * Carga todos los productos almacenados en la base de datos
+     * Carga todos los proveedores almacenados en la base de datos
+     * Carga todas las descripciones de los productos almacenados en la base de datos
+     * Carga los nombre de los encabezados de la tabla para la vista productos.blade.php
+     * 
+     */ 
     public function __construct()
-    {
-        
+    {        
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        //$this->productosjoin = productosModelo::leftjoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")->select("*")->get();
-            /**
-             * Del modelo de caprta App/Http/Models
-             *  
-            */
-
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación','Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
+        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación',
+        'Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
     }
 
-    /**
-     * Este metodo se usa para indicar que ruta debemos mostrar.
-     * el nombre ya lo detecta laravel :v es como el primer metodo que se ejecuta,
-     * al mostrar las vistas.
+     /**
+     * Funcion que ejecutada cuando la ruta de "productos" es 
+     * solicitada por el navegador.
      * 
-    */
-    
+     * @param Request $request Solicitud por parte del navegador.
+     * 
+     * @return View Vista de productos.
+     */
+  
     public function index(Request $request)
-    {
-        $listaProductos = null;
-        $listaDescripciones = null;
-        $estadosLista = estadosModelo::all();
+    {      
+        $this->listaProductos = null; //Asigna null a la lista de los productos
+        $this->listaDescripciones = null;//Asigna null a la lista de las descripciones de los productos
+        $estadosLista = estadosModelo::all(); //Recupera todos los estados de la tabla estados de la bas de datos
+        //Verifica si no se realizo una busqueda en la vista de productos retorna todos los productos si no cumple la condición      
         if(count($request->all()) >= 0){
-            $listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%') ->get();
-            $listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%') ->get();
-        }else{
-            //Sino tiene nada
-            //Que lo rellene con todos los registros 
-            $listaProductos = productosModelo::all();
-        }
-        # = DB::select('select idusuario from laravelcerrajeria.usuarios');
-        # code...
-        //->with('registrosProductosjoin',$this->productosjoin)
-        return view('productos') //Nombre de la vista            
-            ->with('camposVista',$this->camposVista)//Campos de la tablas
-            ->with('registrosProductos',$listaProductos)//Registros de la tabla productos  
+            $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')
+                                     ->get();
+            $this->listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%')
+                                         ->get();
+        }else{        
+            $this->listaProductos = productosModelo::all();
+        }       
+        return view('productos') //retorna la vista productos          
+            ->with('camposVista',$this->camposVista)//retiorna Campos de la tablas
+            ->with('registrosProductos',$this->listaProductos)//retorna Registros de la tabla productos  
             ->with('listaEstados',$estadosLista)          
-            ->with('registrosProductosDescripciones',$listaDescripciones) //Registro de las descripciones de los productos
-            ->with('registrosProveedores',$this->proveedorLista);//Registros de la tabla proveedores
+            ->with('registrosProductosDescripciones',$this->listaDescripciones) //retorna Registro de las descripciones de los productos
+            ->with('registrosProveedores',$this->proveedorLista);//retorna Registros de la tabla proveedores
     }
 
     /**
-     * @param $request Este objeto se ecarga de recibir la informacion
-     * que enviamos por el formulario.
+     * Funcion para guardar un nuevo registro en la base de datos.
      * 
-    */
-    public function store(Request $request){
-        //Creamos un nuevo objeto.
-        $producto = new productosModelo();
-        $productoDescripcion = new productosDescripcionModelo();
-
-        //Nombre del input del formulario es una tributo "name"
-        //Chequen esa parte.
-
-        //Nombre del campo BD----- Nombre input formulario
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return Redirect Redirecciona a la vista principal. 
+     */
+    public function store(Request $request){        
+        $producto = new productosModelo();//agrega un modelo productos temporal.
+        $productoDescripcion = new productosDescripcionModelo();//agrega un modelo de las descripciones de losproductos temporal.
+        //Nombre del campo BD  ----- Nombre input formulario
         $producto->clave_producto = $request->clave_producto;
         $producto->nombre_producto = $request->nombre_producto;
         $producto->clasificacion = $request->clasificacion;
         $producto->precio_producto = $request->precio_producto;
         $producto->precio_compra = $request->precio_compra;
         $producto->cantidad_existencia = $request->cantidad_existencia;
-        $producto->cantidad_stock = $request->cantidad_stock;
-        
-        
-        
-        //parte la cadena y la combierte en un arreglo
-        $arreProveedores = explode(" ",$request->idproveedor);
-        $producto->idproveedor = $arreProveedores[0];       
-        //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
-        //Pero deben de revisar el modelo que les toco, en mi caso es "usuariosModel"
-        $producto->save();
+        $producto->cantidad_stock = $request->cantidad_stock;      
+        $producto->idproveedor = explode(" ",$request->idproveedor)[0];       
+        $producto->save();//Guarda un nuevo registro en la tabla producto de la base de datos
 
+        //Nombre del campo BD  ----- Nombre input formulario
         $productoDescripcion->clave_producto = $request->clave_producto;
         $productoDescripcion->descripcion = $request->descripcion;
-        $productoDescripcion->save();
-        //return $request;
-        return redirect()->route('productos.index');
+        $productoDescripcion->save();//Guarda un nuevo registro en la tabla productoDescripcion de la base de datos        
+        return redirect()->route('productos.index'); //Regirige a la vista principal
     }
 
+    /**
+     * Funcion para consultar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retorna la información solicitada desde la vista
+     */
     public function getDetalles(Request $request){        
-        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);  
-        $proveedor = proveedorModelo::find($request->idproveedor);
+        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);//recupera la descripcion de un producto
+        $proveedor = proveedorModelo::find($request->idproveedor); //busca a un proveedor
+        //Retorna al proveedor y la descripcion en formato json
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
     }
+
     /**
-     * @param $estado - peticion que se realiza por medio de AJAX
+     * Funcion para consultar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retorna la información solicitada desde la vista
      */
     public function getMunicipios(Request $request)
     {
-        $llavePrimaria = $request->id;        
-        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();        
-        return response()->json($listaMunicipios);
+        $llavePrimaria = $request->id;     //Obtiene un id de la tabla estados   
+        //recupera los municipios del estado seleccionado 
+        $listaMunicipios = municipiosModelo::where('idestado','=',$llavePrimaria)->get();  
+        return response()->json($listaMunicipios); //Retorna la lista de los municipios en formato json
     }
 
+    /**
+     * Funcion para consultar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retorna la información solicitada desde la vista
+     */
     public function getColonias(Request $request)
     {
-        $llavePrimaria = $request->idmunicipio;
-        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
-        return response()->json($listaColonias);
+        $llavePrimaria = $request->idmunicipio; //Obtiene el id de un muncipio
+        // recupera las colonias del municipio requerido
+        $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get(); 
+        return response()->json($listaColonias);//Retorna la lista de las colonias en formato json
     }
-    public function setProveedor(Request $request){
-        //$proveedorTemp = json_decode($request->proveedor);
+
+    /**
+     * Funcion para consultar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retorna la información solicitada desde la vista
+     */
+    public function setProveedor(Request $request){ 
+        //Recupera los parametros que se solicitan para agrega un nuevo proveedor y su dirección       
         $nombre= json_decode($request->proveedor[0])->value; //-> Esto ya lo puede convertir en JSON 
         $apP= json_decode($request->proveedor[1])->value;
         $apM = json_decode($request->proveedor[2])->value;        
@@ -142,7 +198,7 @@ class productosController extends Controller
         $num = json_decode($request->proveedor[5])->value;
         $calle = json_decode($request->proveedor[6])->value;
         $idcolonia = json_decode($request->proveedor[9])->value;
-        //Llave primaria del proveedor
+        //Arma la llave primaria para el proveedor
         $llavePrimaria = "PROV-".
         strtoupper($apP[0]).
         strtoupper($apP[1]).
@@ -150,17 +206,16 @@ class productosController extends Controller
         strtoupper($apM[1]).
         strtoupper($num[0]).
         strtoupper($num[1]);
-        //Llave primaria direccion       
+        //Arma la llave primaria para la direccion del proveedor      
         $llavePrimariaDireccion = "DIC-".$tel[0].$tel[1].$apP[0].$apP[1]."-".$apM[0].$apM[1];
-        //Agregar tabla direccion        
+        //crea un nuevo modelo para la direccion del proveedor       
         $direccionProveedor = new direccionModelo();
         $direccionProveedor->iddireccion = $llavePrimariaDireccion;
         $direccionProveedor->calle = $calle;
         $direccionProveedor->numero= $num;
         $direccionProveedor->idcoldirec = $idcolonia;
-        $direccionProveedor->save();
-        
-        //Agregar tabla proveedor
+        $direccionProveedor->save(); //Almacena la direccion del proveedor a la base de datos        
+        //crea un nuevo modelo para almacenar un nuevo proveedor  
         $proveedorTemp = new proveedorModelo();
         $proveedorTemp->idproveedor = $llavePrimaria;
         $proveedorTemp->nombre = $nombre;
@@ -168,17 +223,28 @@ class productosController extends Controller
         $proveedorTemp->apellidomaterno = $apM;
         $proveedorTemp->correo = $correo;
         $proveedorTemp->iddirecproveedor = $llavePrimariaDireccion;
-        $proveedorTemp->save();
-        //Agregar tabla telefono_proveedor
+        $proveedorTemp->save(); //Almacena al proveedor a la base de datos
+        //crea un nuevo modelo para almacenar un el numero de telefono del proveedor 
+        $telefono_prov = new telefonoModelo();
+        $telefono_prov->idtelefono = "Tel-".$apP[0].$apM[1]."-".$apM[0].$apM[1]; //Construye la llave primaria
+        $telefono_prov->telefono = $tel;
+        $telefono_prov->idproveedor = $llavePrimaria;
+        $telefono_prov->save(); //Almacena el telefono del proveedor a la tabla
 
-        //Almacena las tablas
-        
-        $retornarProveedor = proveedorModelo::find($llavePrimaria);    
-        return response()->json($retornarProveedor);   
-               
-
+        $retornarProveedor = proveedorModelo::find($llavePrimaria); //Busca al proveedor agregado recientemente 
+        return response()->json($retornarProveedor);   //retorna al proveedor agregado recientemente en formato json              
     }
+
+    /**
+     * Funcion para modificar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retorna la información solicitada desde la vista
+     */
     public function cambiosProducto(Request $request){
+        //Recupera la información enviada por el usuario mediante ajax
         $clave_producto = json_decode($request->producto[1])->value;
         $nombre_producto = json_decode($request->producto[2])->value;
         $existencia = json_decode($request->producto[3])->value;
@@ -187,9 +253,8 @@ class productosController extends Controller
         $precio_venta = json_decode($request->producto[5])->value;
         $precio_compra = json_decode($request->producto[6])->value;
         $descripcion = json_decode($request->producto[8])->value;
-        $idProveedor = json_decode($request->producto[9])->value;
-        
-        
+        $idProveedor = json_decode($request->producto[9])->value;        
+        //actualiza un registro de la tabla productos
         productosModelo::where('clave_producto',$clave_producto)->update([
             'nombre_producto'=>$nombre_producto,
             'clasificacion'=>$clasificacion,
@@ -199,19 +264,40 @@ class productosController extends Controller
             'cantidad_stock'=>$stock,
             'idproveedor'=>$idProveedor
         ]);
+        //actualiza un registro de la tabla productosDescripcion
         productosDescripcionModelo::where('clave_producto',$clave_producto)->update([
             'descripcion'=>$descripcion
         ]);  
-        return response($idProveedor);
+        return response($idProveedor); //Retorna el id del proveedor
         
     }
+
+    /**
+     * Funcion para buscar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return view retorna la vista con un registro
+     */
     public function buscar(Request $request){
-        $listaProductos = productosModelo::where('$request->nombre_producto','like',$request->inputBusqueda.'%') ->get();
-        return view('productos') ->with ('registrosProductos',$listaProductos);
+        //Recupera el producto solicitado
+        $listaProductos = productosModelo::where('$request->nombre_producto','like',$request->inputBusqueda.'%') 
+                            ->get();
+        return view('productos') ->with ('registrosProductos',$listaProductos); //Retorna a la vista productos con el producto
     }
-    //Si existe
+    
+    /**
+     * Funcion para buscar en la base de datos mediante ajax.
+     * 
+     * @param Request $request Este objeto se ecarga de recibir la informacion
+     * que enviamos por el formulario, de manera oculta.
+     * 
+     * @return response retonar una cadena con true o false
+     */
     public function existe(Request $request){
         $bandera = "NULL";
+        //Si encuentra una clave primaria registrada el bdd retorna true
         if (productosModelo::where('clave_producto', "=",$request->clave_producto)->exists()) {
             $bandera = "true";
          }else{

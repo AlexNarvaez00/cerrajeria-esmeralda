@@ -16,6 +16,15 @@ class CreateEstadosTable extends Migration
      */
     public function up()
     {
+
+        /*
+        | ----------------------------------------------------
+        |   Diccionario | Tabla de "estados". 
+        | ----------------------------------------------------
+        | id    -> Llave primaria de la tabla.
+        | nombre -> Nombre dle estado 
+        |
+        */
         Schema::create('estados', function (Blueprint $table) {
             $table->integer('id');
             $table->string('nombre', 40);

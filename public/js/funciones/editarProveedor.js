@@ -1,7 +1,17 @@
+
+/**
+ * @author Roberto Alejandro Vásquez Alcántara
+ */
+
 let botonesEditar = document.getElementsByClassName('boton-editar');
 const modal = document.getElementById('editarProveedorModal');
 
-//Funcion flecha
+/**
+ * Coloca los datos que posee el boton en los inputs del formulario.        
+ * 
+ * @param {Object} e Evento que se dispara al momento de dar click en el boton
+ */
+
 const mostarInformacion = (e) =>{
     //let inputIDUsuario = document.getElementById('inputIDUsuarioEditar');
    
@@ -21,18 +31,20 @@ const mostarInformacion = (e) =>{
     document.getElementById('inputApellidoMProveedorEditar').value = data.apellidom;
     document.getElementById('inputNumTelefonoEditar').value = data.numtelefono;
     document.getElementById('inputCorreoEditar').value = data.correo;
-    //Inputs
-    //7let inputIDUsuarioEditar = document.getElementById('inputIDUsuarioEditar');
-    //inputIDUsuarioEditar.value = data.id;
-
 };
 
-//Agregamos la funciona  los eventos.
+/**
+ * Agregamos la funcion a cada uno de los botones
+ */
 for (let index = 0; index < botonesEditar.length; index++) {
     const boton = botonesEditar[index];
     boton.addEventListener('click',mostarInformacion);
 }
 
+/**
+ * Le quitamos todas las clases de "validacion" a los inputs 
+ * del formulario
+ */
 modal.addEventListener('hide.bs.modal',e=>{
     let inputsValidos = modal.getElementsByClassName('is-valid');
     for (let index = 0; index < inputsValidos.length; index++) {

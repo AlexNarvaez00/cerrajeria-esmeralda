@@ -5,6 +5,9 @@ use App\Models\productosModelo;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\productosDescripcionModelo;
+use App\Models\ventaModelo;
+use App\Models\pagoModelo;
+use App\Models\detalleVentaModelo;
 
 class ventaProductoController extends Controller
 {
@@ -29,6 +32,7 @@ class ventaProductoController extends Controller
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Cantidad','Productos disponibles','Stock','Precio individual','Quitar'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio venta','Precio compra','Existencia','Stock','Agregar al carrito'];
+        $this->camposProductosConfirmar = ['Clave Producto','Nombre Producto','Cantidad','Precio individual','subtotal'];
     }  
     
     public function index(){
@@ -36,7 +40,8 @@ class ventaProductoController extends Controller
             ->with('camposProductos',$this->camposProductos)//Campos de la tablas 
             ->with('productos',$this->productos)      
             ->with('registrosProductosDescripcionjoin',$this->productosjoin)
-            ->with('camposproductosCarrito',$this->camposproductosCarrito);//campos para la tabla en carritos
+            ->with('camposproductosCarrito',$this->camposproductosCarrito)
+            ->with('camposValidar',$this->camposProductosConfirmar);//campos para la tabla en carritos
     }
 
    
@@ -58,11 +63,52 @@ class ventaProductoController extends Controller
                  
         return response()->json($productoCarrito);
     }
-    /**
-     * DB::table('productos')
-        ->where('clave_producto', $request->clave_producto)
-        ->update(['cantidad_existencia' => $productoCarrito->cantidad]); 
-     */
+
+    public function realizarVenta(Request $request){        
+        $DateAndTime = date('Y-m-d h:i:s', time());
+        $DateAndTime2 = date('Y-m-d H:i:s');        
+        $idVenta = str_replace(" ","","COMP-".substr($request->idEmpleado,0,3).$DateAndTime);     
+
+        $ventaTemp = new ventaModelo();
+        $ventaTemp->folio_v = $idVenta;
+        $ventaTemp->fechayhora = $DateAndTime2;//$DateAndTime2;
+        $ventaTemp->idusuario = $request->idEmpleado;
+        //$ventaTemp->idclienteventa = 'null';
+        $pagoTemp = new pagoModelo();
+        $pagoTemp->folio_v = $idVenta;
+        $pagoTemp->recibido = $request->recibido;
+        $pagoTemp->total_pagar = $request->total;
+        $pagoTemp->cambio = $request->cambio;
+
+        $ventaTemp->save();
+        $pagoTemp->save();
+        return response($idVenta);
+    }
+
+    public function guardarDetalleVenta(Request $request){
+        
+        $idProducto = $request->idProducto;
+        $observaciones = $request->observaciones;
+        $cantidad = $request->cantidad;
+        $folio_v = $request->folio_v;
+        $importe = $request->importe;
+        
+        $detalleTemp = new detalleVentaModelo();
+        $detalleTemp->clave_producto = $idProducto;
+        $detalleTemp->observaciones = $observaciones;
+        $detalleTemp->cantidad = $cantidad;
+        $detalleTemp->folio_v = $folio_v;
+        $detalleTemp->importe = $importe; 
+        $detalleTemp->save();
+        
+        $productoModificar= productosModelo::find($idProducto);
+        $cantidadExistencia = $productoModificar->cantidad_existencia;
+        $productoModificar->cantidad_existencia = $cantidadExistencia - $cantidad;
+        $productoModificar->save();  
+        
+        return response($folio_v);
+    }
+
     
     
    

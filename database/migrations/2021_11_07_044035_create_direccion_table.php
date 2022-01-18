@@ -16,6 +16,17 @@ class CreateDireccionTable extends Migration
      */
     public function up()
     {
+        /*
+        | ------------------------------------------------------
+        |    Diccionario | Tabla de "direccion".
+        | ------------------------------------------------------
+        |
+        | iddireccion   -> Llave primaria de la tabla en la base de datos.
+        | calle         -> Nombre de la calle.    
+        | numero        -> Numero exterior de la calle
+        | idcoldirec    -> ID de la colonia a la que pertence.
+        |
+        */
         Schema::create('direccion', function (Blueprint $table) {
             $table->string('iddireccion', 30);
             $table->string('calle', 80);

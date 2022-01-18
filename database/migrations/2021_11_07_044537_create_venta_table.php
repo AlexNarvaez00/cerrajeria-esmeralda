@@ -14,11 +14,11 @@ class CreateVentaTable extends Migration
     public function up()
     {
         Schema::create('venta', function (Blueprint $table) {
-            $table->string('folio_v',30);
+            $table->string('folio_v',50);
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('idusuario',15);
 
-            $table->string('idclienteventa',20);
+            $table->string('idclienteventa',20)->nullable();
             $table->primary('folio_v');
             $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idclienteventa')->references('idcliente')->on('cliente');           

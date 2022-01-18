@@ -5,19 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @author Omar
- */
-  /** 
-     | ------------------------------------
-     |  productosModelo
-     | ------------------------------------
-     |
-     |  Modelo para recuperar los registros de los productos de la 
-     |  base de datos
-     |
-    */
-class productosModelo extends Model
+class pagoModelo extends Model
 {
     use HasFactory;
     /**
@@ -25,7 +13,7 @@ class productosModelo extends Model
      * 
      * @var string
      */
-    protected $table = 'productos'; 
+    protected $table = 'pago'; 
     /**
      * establece que no se creen automaticamento los campos created
      * 
@@ -37,11 +25,6 @@ class productosModelo extends Model
      * 
      * @var boolean
      */
-    public $incrementing = false;
-    /**
-     * Atributo para establecer la llave primaria de la tabla
-     * 
-     * @var boolean
-     */
-    protected $primaryKey = 'clave_producto';
+    public $incrementing = false;    
+    
 }

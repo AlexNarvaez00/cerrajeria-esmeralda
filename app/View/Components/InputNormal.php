@@ -25,21 +25,21 @@ class InputNormal extends Component
      * @var string
      */
     public $idInput;
-    
+
     /**
      * Tipo de input del componente, text, file, password, etc.
      * 
      * @var string
      */
     public $type;
-    
+
     /**
      * Texto de la etiquet del componente.
      * 
      * @var string
      */
     public $texto;
-     
+
     /**
      * Clase que determina si el input esta activo (es valido)
      * 
@@ -53,22 +53,27 @@ class InputNormal extends Component
      * @var string
      */
     public $valor;
-    
+
     /**
      * Nombre del input en el HTML
      * 
      * @var string
      */
     public $nombreInput;
-    
+
     /**
      * Nombre del error que mostrara, cuando el error ocurra
      * 
      * @var string
      */
     public $nombreError;
-    
-    
+
+    /**
+     * Indica si un campo es obligatorio o no
+     * 
+     * @var boolean
+     */
+    public $obligatorio;
 
     /**
      * Create a new component instance.
@@ -84,7 +89,7 @@ class InputNormal extends Component
      * 
      * @return void
      */
-    public function __construct($classesLabel = '', $type = 'text', $idInput, $texto, $valor = '', $nombreInput, $nombreError = '', $activeInput = '')
+    public function __construct($classesLabel = '', $type = 'text', $idInput, $texto, $valor = '', $nombreInput, $nombreError = '', $activeInput = '', $obligatorio = true)
     {
         $this->classesLabel = $classesLabel;
         $this->type = $type;
@@ -93,6 +98,7 @@ class InputNormal extends Component
         $this->valor = $valor;
         $this->nombreInput = $nombreInput;
         $this->nombreError = $nombreError;
+        $this->obligatorio = $obligatorio;
 
         if ($this->valor != '') {
             $this->activeInput = 'is-valid';

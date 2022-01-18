@@ -29,7 +29,7 @@
     <div class="container-fluid mb-4">
         <div class ="row">
             <div class="col-3 d-flex justify-content-start">        
-                <button type="button" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span id ="conProductos" class="badge">0</span></button>           
+                <button type="button" id ="btnCarrito" class="bi bi-cart4 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#carritoModal"> Ver carrito <span id ="conProductos" class="badge">0</span></button>           
             </div> 
             <form action="" class="col-9 d-flex justify-content-end">                   
                 <div class="col-5">
@@ -71,7 +71,7 @@
                             <td>
                                 <a class = "btnAgregarAlCarro">                                                     
                                     <button type="button" class="btn" >
-                                        <span><i  class="bi bi-cart4" style="font-size:20px;"  ></i></span>
+                                        <span><i  class="bi bi-cart4" style="font-size:20px;"></i></span>
                                     </button>  
                                 </a>                                                     
                             </td>                
@@ -82,7 +82,66 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
 <!-- modal para listar los productos en el carrito -->
+=======
+    @component('components.modalSimple')
+    @slot('idModal','verificarCompra')
+    @slot('tituloModal','Verifica que la venta sea correcta')
+    @slot('cuerpoModal')          
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Cantidad recibida $</label>
+                        <input type="number" value="0.00" class="form-control" id="cantidadRecibida" min="0" step="0.01" required>
+                        <div class="form-text">* Campo obligatorio</div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        
+        <div class="container-fluid">
+            <div class="col-12 text-center">
+                <table id = "tabla2" class="table table-warning table-striped">
+                    <thead>
+                        <tr>
+                        @foreach ($camposValidar as $campo)
+                            <th scope="col">{{$campo}}</th>
+                        @endforeach 
+                        </tr>
+                    </thead> 
+                    <tbody>
+                    </tbody>
+                </table>   
+            </div> 
+        </div> 
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroTotalConfirmacion">Total a pagar: $0.00</h4>
+                </div>                
+            </div>  
+            <div class="row">
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroCambio">Cambio: $0.00</h4>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 d-flex justify-content-center">
+                    <h5>No se aceptan devoluciones</h5>
+                </div>                
+            </div>                          
+        </div>   
+        @endslot
+    @slot('footerModal')        
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
+        <x-button-normal-form type="button" disabled="true" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+    @endslot    
+    @endcomponent
+    <!-- modal para listar los productos en el carrito -->
+>>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
     @component('components.modalSimple')
     @slot('idModal','carritoModal')
     @slot('tituloModal','Carrito de compras')
@@ -108,28 +167,20 @@
         </div> 
         <hr>
         <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
-                <h4 id="letreroTotal">Total a pagar: $0.00</h4>
-            </div>
-        </div>
             <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Cantidad recibida $</span>
-                        <input id ="inRecibido" type="number" min="1" step="0.01" class="form-control" value="0.00" placeholder="Cantidad recibida" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
-                    </div>
-                </div>
-
-
-            </div>
+                <div class="col-md-6 col-sm-12 d-flex justify-content-start">
+                    <h4 id="letreroTotal">Total a pagar: $0.00</h4>
+                </div>                
+            </div>                          
         </div>   
     @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Seguir comprando"  data-bs-dismiss="modal"/>
-        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
+        <x-button-normal-form type="button" id="btnRealizarVenta" estiloBoton="btn-outline-primary" texto="Realizar venta"  data-bs-target="#verificarCompra" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
     @endcomponent
+
+    <!--Modal detalle compra-->
     @component('components.modalSimple')
     @slot('idModal','detalleCompras')
     @slot('tituloModal','Detalle compra')
@@ -150,18 +201,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 col-sm-6  justify-content-start">
-                <h6>IdCompra:</h6> 
+                <h6 id="letreroIdCompra">IdCompra: </h6> 
                 </div>  
                 <div class="col-md-6 col-sm-6  justify-content-start">
-                <h6 id="idDetallecompra"><?php
-                    $DateAndTime = date('m-d-Y h:i:s a', time());  
-                    echo str_replace(" ","","COMP-".substr(auth()->user()->name,0,3).$DateAndTime);
-                ?></h6>
+                <h6 id="idDetallecompra"></h6>
                 </div>              
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6  justify-content-start">
-                idempleado: {{ auth()->user()->id}} 
+                <p id="letreroIdEmpleado">idempleado: {{ auth()->user()->id}}</p>
                 </div>
                 <div class="col-md-6 col-sm-6  d-flex justify-content-end">
                 <?php
@@ -171,7 +219,7 @@
                 </div>
             </div>
             <hr>
-            <div class="container-fluid">
+            <div class="container-fluid" id="descripcionProductosDetalleCompra">
                 <div class="row">
                     <div class="col-md-1 col-sm-1  justify-content-start">
                         Cant.
@@ -192,17 +240,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>recibido: $200.00</p>
+                    <p id="letreroCantidadRecibida">recibido: $200.00</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>cambio: $100.00</p>
+                    <p id="letreroCantidadCambio">cambio: $100.00</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p>total a pagar: $100.00</p>
+                    <p id="letreroTotalPagar">total a pagar: $100.00</p>
                 </div>
             </div>
             <hr>
@@ -216,11 +264,17 @@
         </div>
     @endslot
     @slot('footerModal')
+<<<<<<< HEAD
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal"/>
         <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo"/>        
 >>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
+=======
+        <x-button-normal-form  type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" id="btnCerrarTicket"/>
+        <x-button-normal-form  type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo" id="btnImprimirTicket"/>        
+>>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
     @endslot
     @endcomponent
+    
     <!-- modal para agregar un producto al carrito-->
     @component('components.modalSimple')
     @slot('idModal','agregarcarritoModal')
@@ -249,6 +303,7 @@
     @endslot
     @endcomponent
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <!-- modal para mostrar el detalle compra-->
     
@@ -268,6 +323,12 @@
     </div>
 <<<<<<< HEAD
 =======
+=======
+    <!-- modal para confirmar la compra-->
+    
+
+   
+>>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
     
 
 >>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
