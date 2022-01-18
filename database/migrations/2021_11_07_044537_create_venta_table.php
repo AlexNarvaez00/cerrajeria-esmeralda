@@ -12,8 +12,20 @@ class CreateVentaTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('venta', function (Blueprint $table) {
+    {   
+        /*
+        | -------------------------------------------------
+        |   Diccionario | Tabla de "venta".
+        | -------------------------------------------------
+        |
+        | folio_v       -> Llave primaria de la tabla en la base de datos.
+        | fechayhora    -> Fecha y hora en la que se registro el producto.  
+        | idusuario     -> 
+        | idclienteventa
+        | folio_v
+        | idusuario
+        */
+        Schema::create('venta', function (Blueprint $table) {    
             $table->string('folio_v',50);
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('idusuario',15);
