@@ -115,19 +115,6 @@
             </article>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-            <article class="card h-100 shadow">
-                <div class="card-img">
-                    <img src="./img/devolucion.jpeg" class="card-img-top img-menu" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Devoluciones</h5>
-                        <p class="card-text">En esta sección puedes agregar algún producto que haya sido regresado por el cliente </p>
-                        <a href="../devoluciones" class="btn btn-primary">Ir a las opciones</a>
-                    </div>
-                </div>
-            </article>
-        </div>
-
     </div>
 </div>
 

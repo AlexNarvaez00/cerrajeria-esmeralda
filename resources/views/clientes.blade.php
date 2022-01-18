@@ -3,22 +3,16 @@
 <!--Contenido del header.-->
 @section('header-seccion')
   <!--Esta es la prte del boton de log out -->
-  @component('components.header')
-    @slot('items')
-        @component('components.itemsNavBar')
-            @slot('active','clientes')
-        @endcomponent
-@endslot
-
-@slot('visible',true)
-@endcomponent
+  <x-header visible=true>
+    <x-slot name="items">
+        <x-itemsNavBar active='clientes' />
+        </x-slot>
+</x-header>
 @endsection
 
-
+<!-----------------------------Títulos de la tabla e información del usuario en sesión----------------------------->
 @section('contenido')
 
-
-<!--seccion titulo-->
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
         ¡Hola, {{ auth()->user()->name }}!
@@ -27,7 +21,7 @@
         <span>&#128101;</span>
         Clientes
     </h5>
-<!--cuerpo página-->
+<!------------------------------------- Cuerpo de la página ----------------------------------->
     <div class="container-fluid mb-4">
         <form method="GET" action="{{route('clientes.index')}}" class="row d-flex justify-content-end">
             <div class="col-5">
@@ -48,7 +42,7 @@
         </form>
     </div>
 
-<!--Seccion de la tabla-->
+<!-------------------------------------Seccion de la tabla---------------------------------->
     <div class="conteiner-fluid">
         <div class="col-12">
             <table class="table">
@@ -69,7 +63,7 @@
                         <tr>
                             <!--ID de la tabla clientes-->    
                             <th scope="col">{{$cliente->idcliente}}</th>
-                            <!--Los otros atributos de la tabla usuarios-->
+                            <!--Los otros atributos de la tabla clientes-->
                             <td>{{$cliente->nombre}}</td>
                             <td>{{$cliente->apellidoPaterno}}</td>
                             <td>{{$cliente->apellidoMaterno}}</td>
@@ -113,13 +107,12 @@
             {{$registrosVista->links()}}
         </div>
     </div>
-    @component('components.modal')
-    @slot('idModal','registroClienteModal')
-    @slot('tituloModal','Modulo para registrar un cliente')
-    @slot('rutaEnvio',route('clientes.store'))
-    @slot('metodoFormulario','POST')
 
-    @slot('cuerpoModal')
+    <!----------------------------------Modal de registro de un cliente------------------------------->
+
+    <x-modal idModal="registroClienteModal" tituloModal="Modulo para registrar un cliente" 
+    rutaEnvio="{{route('clientes.store')}}" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
         <p class="px-3">
             Formulario para registrar un cliente
         </p>
@@ -171,8 +164,12 @@
                     </div>
                 </div>
         </div>
-        @endslot
-    @slot('footerModal')
+        </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
+
+    <!--
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
@@ -181,38 +178,24 @@
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
-    @endslot
-    @endcomponent
+    -->
+    </x-slot>
+</x-modal>
 
-<!-- ####################################### Modal de confirmacion de un Cliente ####################################### -->
+<!----------------------------------Modal de confirmación de un cliente------------------------------->
+<x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
+    <x-slot name="cuerpoModal"></x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+    </x-slot>
+</x-modalSimple>
 
-@component('components.modalSimple')
-        @slot('idModal','confirmacionModal')
-        @slot('tituloModal','¿Seguro que quieres borrar este registro?')
-        @slot('cuerpoModal')
-            <!-- Cuerpo del modal-->
-            <p>¿Esta segunro que quiere borrar este registro?</p>
-        @endslot
-        @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
-                <span class="me-2">&#10004;</span>
-                Confirmar
-            </button>
-        @endslot
-    @endcomponent
-   <!-- ####################################### Modal de edicion de un cliente ####################################### -->
-    
-   @component('components.modal')
-        @slot('idModal','editarClientesModal')
-        @slot('tituloModal','Editar un cliente.')
-        @slot('rutaEnvio','')
-        @slot('metodoFormulario','POST')
+<!----------------------------------Modal de edición de un cliente------------------------------->
 
-        @slot('cuerpoModal')
+<x-modal idModal="editarClientesModal" tituloModal="Editar un cliente." 
+rutaEnvio="" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
         <p class="px-3">
             Formulario para registrar un cliente
         </p>
@@ -263,20 +246,14 @@
                     </div>
                 </div>
         </div>
-        @endslot
-        @slot('footerModal')
-            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-                <span class="me-2">&#10004;</span>
-                Registrar
-            </button>
-        @endslot
-    @endcomponent
+        </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Guardar" />
+    </x-slot>
+</x-modal>
 
-<!--Modal ADVERTENCIA -->
+<!---------------------------------------------------Modal ADVERTENCIA------------------------------------------------->
 @if('noValido')
         <div class="modal" tabindex="-1" id="negacionModal">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -309,7 +286,7 @@
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/modales/ModalConfirmClien.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
-    <script src="./js/modales/clientesConfirmacion.js"></script>
+
 
     @if($errors->hasAny('nombre', 'apellidoPaterno','apellidoMaterno', 'telefono'))
         <script>
@@ -331,4 +308,5 @@
             modalEdicion.show();
         </script>    
     @endif
+
 @endsection
