@@ -199,13 +199,10 @@ $("#formularioProveedor").on("submit", function (e) {
                     value: data.idproveedor,
                     text: data.idproveedor + " "+data.nombre,
                 })
-            );
-            
+            );            
             $("#proveedores option[value='"+data.idproveedor+"']").attr("selected", true);
             $("#agregarProveedor").modal('hide');
             $("#registroProductoModal").modal("show");
-            
-            
         }
        });
 });

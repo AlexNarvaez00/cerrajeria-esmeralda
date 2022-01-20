@@ -133,7 +133,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Cant. existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                        <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
     
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>                 
@@ -141,7 +141,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Stock</span>
-                        <input id ="inStock" min="0" type="number" class="form-control" placeholder="Stock" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_stock">
+                        <input id ="inStock" min="0" type="number" class="form-control" placeholder="Stock" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_stock" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                     </div>    
                     <label class="text-danger" for="basic-url">* Campo obligatorio</label>             
                 </div> 
@@ -384,7 +384,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero de tel.</span>
-                        <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" required>
+                        <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>
                 </div> 
@@ -409,7 +409,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero</span>
-                        <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" required>                        
+                        <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>                        
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>
                 </div>
