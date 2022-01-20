@@ -74,23 +74,25 @@
                         
                         <!--Botones-->
                         <td>
-                            <a class="btnDetalles">
-                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles">
+                            <a class="btnDetalles" data-bs-toggle="tooltip" data-bs-placement="top" title="ver detalles">
+                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
                                     <span>&#128065;</span>
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <a class="btnEditar">                                
+                            <a class="btnEditar" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">                                
                                 <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                                     <span>&#128394;</span>
                                 </button>
                             </a>
                         </td>
                         <td>
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                 <span>&#10060;</span>
                             </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -116,7 +118,7 @@
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>                       
                         <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="Clave del producto" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
                     </div>                    
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>  
+                    <label class="text-danger" for="basic-url" id="labelCampoClave">*Campo obligatorio</label>  
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
@@ -126,14 +128,12 @@
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label> 
                 </div>
             </div>
-
-            
             <br>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Cant. existencia</span>
-                        <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" required>
+                        <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
     
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>                 
@@ -141,7 +141,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Stock</span>
-                        <input id ="inStock" min="0" type="number" class="form-control" placeholder="Stock" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_stock">
+                        <input id ="inStock" min="0" type="number" class="form-control" placeholder="Stock" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_stock" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                     </div>    
                     <label class="text-danger" for="basic-url">* Campo obligatorio</label>             
                 </div> 
@@ -154,14 +154,14 @@
                         <span class="input-group-text" id="basic-addon1">Precio venta $</span>
                         <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio venta" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
-                    <label class="text-danger" for="basic-url">* Campo obligatorio</label>   
+                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>   
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Precio compra $</span>
                         <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio compra" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
                     </div>   
-                    <label class="text-danger" for="basic-url">* Campo obligatorio</label>                    
+                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>                    
                 </div>                
             </div>
             <br>
@@ -209,7 +209,6 @@
                 </div>
             </div>
         </div>
-
     @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />  
@@ -385,7 +384,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero de tel.</span>
-                        <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" required>
+                        <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>
                 </div> 
@@ -410,7 +409,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero</span>
-                        <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" required>                        
+                        <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>                        
                     </div>
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label>
                 </div>
@@ -463,7 +462,7 @@
     @slot('footerModal')
     @csrf
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" />    
-        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" /> 
+        <x-button-normal-form id="btnAgregarProveedor" type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
         </form>  
     @endslot
     @endcomponent
