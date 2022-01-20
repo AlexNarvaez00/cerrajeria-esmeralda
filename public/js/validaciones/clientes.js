@@ -1,3 +1,7 @@
+/**
+ * @author Santiago Solano Dafne
+ */
+
 const expresionesRegulares = {
     nombreCliente:/^[A-Z][a-zÀ-ÿ\s]/,
     ApellidoPCliente:/^[A-Z][a-zÀ-ÿ]{2,25}$/, 

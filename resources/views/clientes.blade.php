@@ -3,22 +3,16 @@
 <!--Contenido del header.-->
 @section('header-seccion')
   <!--Esta es la prte del boton de log out -->
-  @component('components.header')
-    @slot('items')
-        @component('components.itemsNavBar')
-            @slot('active','clientes')
-        @endcomponent
-@endslot
-
-@slot('visible',true)
-@endcomponent
+  <x-header visible=true>
+    <x-slot name="items">
+        <x-itemsNavBar active='clientes' />
+        </x-slot>
+</x-header>
 @endsection
 
-
+<!-----------------------------Títulos de la tabla e información del usuario en sesión----------------------------->
 @section('contenido')
 
-
-<!--seccion titulo-->
     <h5 class="h5 text-star mt-5 ps-3">
         <span>&#128075;</span>   
         ¡Hola, {{ auth()->user()->name }}!
@@ -27,8 +21,9 @@
         <span>&#128101;</span>
         Clientes
     </h5>
-<!--cuerpo página-->
+<!------------------------------------- Cuerpo de la página ----------------------------------->
     <div class="container-fluid mb-4">
+    <!--Botones principales de busqueda y agregar-->        
         <form method="GET" action="{{route('clientes.index')}}" class="row d-flex justify-content-end">
             <div class="col-5">
                 <input type="text" class="form-control" placeholder="Nombre del cliente que desea buscar" name="inputBusqueda">
@@ -48,7 +43,7 @@
         </form>
     </div>
 
-<!--Seccion de la tabla-->
+<!-------------------------------------Seccion de la tabla---------------------------------->
     <div class="conteiner-fluid">
         <div class="col-12">
             <table class="table">
@@ -69,7 +64,7 @@
                         <tr>
                             <!--ID de la tabla clientes-->    
                             <th scope="col">{{$cliente->idcliente}}</th>
-                            <!--Los otros atributos de la tabla usuarios-->
+                            <!--Los otros atributos de la tabla clientes-->
                             <td>{{$cliente->nombre}}</td>
                             <td>{{$cliente->apellidoPaterno}}</td>
                             <td>{{$cliente->apellidoMaterno}}</td>
@@ -113,66 +108,40 @@
             {{$registrosVista->links()}}
         </div>
     </div>
-    @component('components.modal')
-    @slot('idModal','registroClienteModal')
-    @slot('tituloModal','Modulo para registrar un cliente')
-    @slot('rutaEnvio',route('clientes.store'))
-    @slot('metodoFormulario','POST')
 
-    @slot('cuerpoModal')
+    <!----------------------------------Modal de registro de un cliente------------------------------->
+
+    <x-modal idModal="registroClienteModal" tituloModal="Modulo para registrar un cliente" 
+    rutaEnvio="{{route('clientes.store')}}" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
         <p class="px-3">
             Formulario para registrar un cliente
         </p>
+
+        <x-tag-obligatorios />
+
         <div class="container-fluid">
             <div class="row">
                 @csrf
                 
                 <!--Input oculto para el IDE del cliente-->
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDCliente" name="idcliente">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreCliente" type="text" texto="Nombre del Cliente" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                </div>
+                <div class="row">
                 <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
-                        <input type="text" class="form-control {{ ( old('nombre')!='' )? 'is-valid':'' }}" value="{{old('nombre')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre">
-                            @error('nombre')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                        </div>
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPCliente" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaterno')}}" nombreInput="apellidoPaterno" nombreError="apellidoPaterno" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMCliente" type="text" texto="Apellido Materno" valor="{{old('apellidoMaterno')}}" nombreInput="apellidoMaterno" nombreError="apellidoMaterno" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('telefono')}}" placeholder="Ej. 9514628538" nombreInput="telefono" nombreError="telefono" />
                 </div>
-                <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                    <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-                    <input type="text" class="form-control {{ ( old('apellidoPaterno')!='' )? 'is-valid':'' }}" value="{{old('apellidoPaterno')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoPaterno">
-                            @error('apellidoPaterno')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                        </div>
-                </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-                        <input type="text" class="form-control {{ ( old('apellidoMaterno')!='' )? 'is-valid':'' }}" value="{{old('apellidoMaterno')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMCliente" name="apellidoMaterno">
-                            @error('apellidoMaterno')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror 
-                    </div>
-                </div>
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
-                        <input type="number" class="form-control {{ ( old('telefono')!='' )? 'is-valid':'' }}" value="{{old('telefono')}}" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
-                            @error('telefono')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror 
-                    </div>
-                </div>
+           
         </div>
-        @endslot
-    @slot('footerModal')
+        </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" />
+
+    <!--
         <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
             <span class="me-2">&#10060;</span>
             Cancelar
@@ -181,102 +150,55 @@
             <span class="me-2">&#10004;</span>
             Registrar
         </button>
-    @endslot
-    @endcomponent
+    -->
+    </x-slot>
+</x-modal>
 
-<!-- ####################################### Modal de confirmacion de un Cliente ####################################### -->
+<!----------------------------------Modal de confirmación de un cliente------------------------------->
+<x-modalSimple idModal="confirmacionModal" tituloModal="¿Seguro que quieres borrar este registro?">
+    <x-slot name="cuerpoModal"></x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Confirmar" id="botonModalConfirmacion" />
+    </x-slot>
+</x-modalSimple>
 
-@component('components.modalSimple')
-        @slot('idModal','confirmacionModal')
-        @slot('tituloModal','¿Seguro que quieres borrar este registro?')
-        @slot('cuerpoModal')
-            <!-- Cuerpo del modal-->
-            <p>¿Esta segunro que quiere borrar este registro?</p>
-        @endslot
-        @slot('footerModal')
-            <button type="button" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" id="botonModalConfirmacion">
-                <span class="me-2">&#10004;</span>
-                Confirmar
-            </button>
-        @endslot
-    @endcomponent
-   <!-- ####################################### Modal de edicion de un cliente ####################################### -->
-    
-   @component('components.modal')
-        @slot('idModal','editarClientesModal')
-        @slot('tituloModal','Editar un cliente.')
-        @slot('rutaEnvio','')
-        @slot('metodoFormulario','POST')
+<!----------------------------------Modal de edición de un cliente------------------------------->
 
-        @slot('cuerpoModal')
+<x-modal idModal="editarClientesModal" tituloModal="Editar un cliente." 
+rutaEnvio="" metodoFormulario="POST">
+    <x-slot name="cuerpoModal">
         <p class="px-3">
-            Formulario para registrar un cliente
+            Formulario para editar un cliente
         </p>
+
+        <x-tag-obligatorios />
+
         <div class="container-fluid">
             <div class="row">
                 @csrf
+                <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <!--Checar método PUT-->
-                
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Nombre del cliente</span>
-                        <input type="text" class="form-control {{ ( old('nombreEditar')!='' )? 'is-valid':'' }}" value="{{old('nombreEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreClienteEditar" name="nombreEditar">
-                            @error('nombreEditar')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror                    
-                        </div>
+                <!--Input oculto para el IDE del cliente-->
+                <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDCliente" name="idcliente">
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreClienteEditar" type="text" texto="Nombre del Cliente" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
                 </div>
+                <div class="row">
                 <!--Columnas :v-->
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-                        <input type="text" class="form-control {{ ( old('apellidoPaternoEditar')!='' )? 'is-valid':'' }}" value="{{old('apellidoPaternoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPClienteEditar" name="apellidoPaternoEditar">
-                            @error('apellidoPaternoEditar')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                        </div>
-                </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-                        <input type="text" class="form-control {{ ( old('apellidoMaternoEditar')!='' )? 'is-valid':'' }}" value="{{old('apellidoMaternoEditar')}}" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoMClienteEditar" name="apellidoMaternoEditar">
-                            @error('apellidoMaternoEditar')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                        </div>
-                </div>
-            <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
-                        <input type="number" class="form-control {{ ( old('telefonoEditar')!='' )? 'is-valid':'' }}" value="{{old('telefonoEditar')}}" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefonoEditar" name="telefonoEditar">
-                            @error('telefonoEditar')
-                                <p class="col-12">{{$message}}</p>
-                            @enderror
-                    </div>
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPClienteEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaternoEditar')}}" nombreInput="apellidoPaternoEditar" nombreError="apellidoPaternoEditar" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMClienteEditar" type="text" texto="Apellido Materno" valor="{{old('apellidoMaternoEditar')}}" nombreInput="apellidoMaternoEditar" nombreError="apellidoMaternoEditar" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('telefonoEditar')}}" placeholder="Ej. 9514628538" nombreInput="telefonoEditar" nombreError="telefonoEditar" />
                 </div>
         </div>
-        @endslot
-        @slot('footerModal')
-            <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-                <span class="me-2">&#10060;</span>
-                Cancelar
-            </button>
-            <button type="submit" class="btn btn-light d-flex ps-3 pe-3">
-                <span class="me-2">&#10004;</span>
-                Registrar
-            </button>
-        @endslot
-    @endcomponent
+        </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />
+        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Guardar" />
+    </x-slot>
+</x-modal>
 
-<!--Modal ADVERTENCIA -->
+<!---------------------------------------------------Modal ADVERTENCIA------------------------------------------------->
 @if('noValido')
         <div class="modal" tabindex="-1" id="negacionModal">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -309,7 +231,7 @@
     <script src="./js/validaciones/clientes.js"></script>
     <script src="./js/modales/ModalConfirmClien.js"></script>
     <script src="./js/funciones/editarCliente.js"></script>
-    <script src="./js/modales/clientesConfirmacion.js"></script>
+
 
     @if($errors->hasAny('nombre', 'apellidoPaterno','apellidoMaterno', 'telefono'))
         <script>
@@ -331,4 +253,5 @@
             modalEdicion.show();
         </script>    
     @endif
+
 @endsection

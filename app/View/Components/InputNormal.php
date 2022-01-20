@@ -75,9 +75,6 @@ class InputNormal extends Component
      */
     public $obligatorio;
 
-
-
-
     /**
      * Create a new component instance.
      *
