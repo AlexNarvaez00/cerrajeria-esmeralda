@@ -137,23 +137,23 @@
                 <!--Columnas :v-->
                 @csrf
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedor" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
             </div>
             <div class="row">
             <!--Columnas :v-->
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedor" type="text" texto="Apellido Materno" valor="{{old('apellidomaterno')}}" nombreInput="apellidomaterno" nombreError="apellidomaterno" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('numtelefono')}}" nombreInput="numtelefono" nombreError="numtelefono" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoMProveedor" type="text" texto="Apellido Materno" valor="{{old('apellidomaterno')}}" nombreInput="apellidomaterno" nombreError="apellidomaterno" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('numtelefono')}}" nombreInput="numtelefono" nombreError="numtelefono" />
             </div>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo Electrónico" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCorreo" type="email" texto="Correo Electrónico" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -249,23 +249,23 @@
                 <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
             </div>
             <div class="row">
             <!--Columnas :v-->
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedorEditar" type="text" texto="Apellido Materno" valor="{{old('apellidomaternoEditar')}}" nombreInput="apellidomaternoEditar" nombreError="apellidomaternoEditar" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('numtelefonoEditar')}}" nombreInput="numtelefonoEditar" nombreError="numtelefonoEditar" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoMProveedorEditar" type="text" texto="Apellido Materno" valor="{{old('apellidomaternoEditar')}}" nombreInput="apellidomaternoEditar" nombreError="apellidomaternoEditar" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('numtelefonoEditar')}}" nombreInput="numtelefonoEditar" nombreError="numtelefonoEditar" />
             </div>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo Electrónico" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCorreoEditar" type="email" texto="Correo Electrónico" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar"/>
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
