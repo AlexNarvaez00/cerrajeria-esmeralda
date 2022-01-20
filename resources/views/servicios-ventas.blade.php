@@ -113,10 +113,11 @@
           </div>
           
           <div class="col-md-5 col-sm-12">
-            <div class="input-group mb-3 ">
+            <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">idCliente</span>
               <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" id="inputIdCliente" name="idCliente" required>
             </div>
+            <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
           </div>
 
             <div class="col-md-2 col-sm-12">
