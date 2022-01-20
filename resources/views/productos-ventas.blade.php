@@ -205,14 +205,8 @@
         </div>
     @endslot
     @slot('footerModal')
-<<<<<<< HEAD
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal"/>
         <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo"/>        
->>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
-=======
-        <x-button-normal-form  type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" id="btnCerrarTicket"/>
-        <x-button-normal-form  type="button" estiloBoton="btn-outline-primary" texto="Imprimir recibo" id="btnImprimirTicket"/>        
->>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
     @endslot
     @endcomponent
     
@@ -243,14 +237,6 @@
         
     @endslot
     @endcomponent
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    <!-- modal para mostrar el detalle compra-->
-    
-
-    <!--toast-->
->>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">    
@@ -262,17 +248,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
-=======
-    <!-- modal para confirmar la compra-->
-    
-
-   
->>>>>>> 5f5dd57d2ff7a3c48973741068c44625005059af
-    
-
->>>>>>> 0fb8a5ab18860ff684cd8ca77c7f53e83d9d5a3f
 
 @endsection
 
