@@ -292,12 +292,6 @@
     @endslot
     @endcomponent
     <!-- modal para confirmar la compra-->
-    
-
-   
-    
-
-
 @endsection
 
 
