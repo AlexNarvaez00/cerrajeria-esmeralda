@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ProveedorFactory extends Factory
 {
     public $listDirecciones;
-    public function __constructor(){
+    public function __construct(){
         $this->listDirecciones = direccionModelo::all(); 
     }
     /**

@@ -11,7 +11,7 @@ class DireccionFactory extends Factory
 
     private $limiteNumber;
     
-    public function __constructor(){
+    public function __construct(){
         $this->limiteNumber = coloniaModelo::count();
     }
 
