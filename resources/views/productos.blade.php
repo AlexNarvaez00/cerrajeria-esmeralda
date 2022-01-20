@@ -193,7 +193,7 @@
             </p>
             <div class="row">
                 <div class="col-md-6 col-sm-6">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <label class="input-group-text" for="inputGroupSelect01">Proveedores</label>
                         <select class="form-select" id="proveedores" name="idproveedor">
                             <option value = "0" selected>Seleccione un proveedor</option>
@@ -202,6 +202,7 @@
                             @endforeach
                         </select>
                     </div>
+                    <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <button type="button" class="btn btn-link" data-bs-target="#agregarProveedor" data-bs-toggle="modal" data-bs-dismiss="modal">agregar proveedor</button>
