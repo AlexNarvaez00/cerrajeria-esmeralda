@@ -63,7 +63,7 @@ class proveedorController extends Controller
         'numtelefono' => 'required|regex:/^[0-9]{10}$/',
         'correo' => 'required|email',
         'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
-        'numext' => 'required|regex:/^[0-2]+[0-9][0-9]$/' 
+        'numext' => 'required|regex:/^[0-9]{3,4}$/' 
     ];
 
     /**
