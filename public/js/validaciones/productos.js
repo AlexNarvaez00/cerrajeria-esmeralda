@@ -189,7 +189,8 @@ $("#formularioProveedor").on("submit", function (e) {
         data: {
             _token: document.querySelector('input[name="_token"]').value,
             proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
-        },        
+        },     
+        //= ="modal" data-bs-dismiss="modal"   
         success: function(data){   
             data = JSON.parse(data); 
             alert(data);     
@@ -201,6 +202,9 @@ $("#formularioProveedor").on("submit", function (e) {
             );
             
             $("#proveedores option[value='"+data.idproveedor+"']").attr("selected", true);
+            $("#agregarProveedor").modal('hide');
+            $("#registroProductoModal").modal("show");
+            
             
         }
        });

@@ -154,14 +154,14 @@
                         <span class="input-group-text" id="basic-addon1">Precio venta $</span>
                         <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio venta" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                     </div>
-                    <label class="text-danger" for="basic-url">* Campo obligatorio</label>   
+                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>   
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Precio compra $</span>
                         <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio compra" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
                     </div>   
-                    <label class="text-danger" for="basic-url">* Campo obligatorio</label>                    
+                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>                    
                 </div>                
             </div>
             <br>
@@ -462,7 +462,7 @@
     @slot('footerModal')
     @csrf
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" />    
-        <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Registrar" data-bs-target="#registroProductoModal" data-bs-toggle="modal" data-bs-dismiss="modal" /> 
+        <x-button-normal-form id="btnAgregarProveedor" type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
         </form>  
     @endslot
     @endcomponent
