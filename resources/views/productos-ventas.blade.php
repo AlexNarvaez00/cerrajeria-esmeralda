@@ -70,7 +70,7 @@
                             <!--Boton de carrito  -->
                             <td>
                                 <a class = "btnAgregarAlCarro">                                                     
-                                    <button type="button" class="btn" >
+                                    <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="right" title="Agregar al carrito">
                                         <span><i  class="bi bi-cart4" style="font-size:20px;"></i></span>
                                     </button>  
                                 </a>                                                     

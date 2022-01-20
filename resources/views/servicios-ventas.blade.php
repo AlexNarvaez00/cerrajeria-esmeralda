@@ -116,8 +116,7 @@
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">idCliente</span>
               <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" id="inputIdCliente" name="idCliente" required>
-            </div>
-            <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
+            </div>            
           </div>
 
             <div class="col-md-2 col-sm-12">
@@ -131,35 +130,39 @@
       <div class="row">
 
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-1">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
             <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre" required>
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
 
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-1">
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
             <input type="text" maxlength="30"  class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoP">
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
 
       </div>
-
+    <br>
       <div class="row">
 
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-1">
             <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
               <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoM">
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
 
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-1">
             <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
             <input type="number" maxlength="10"  class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
 
       </div>
@@ -173,23 +176,25 @@
 
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 col-md-12 col-sm-12">
+          <div class="input-group mb-1 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Calle</span>
             <input type="text" class="form-control" placeholder="ejem. Constitución" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle" required>
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 col-md-12 col-sm-12">
+          <div class="input-group mb-1 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Número ext</span>
             <input type="text" class="form-control" min="1" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numero" required>
           </div>
+          <label class="text-danger" for="basic-url">*Campo obligatorio</label>
         </div>
       </div>
-
+      <br>
       <div class="row">
 
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-3">
+        <div class="input-group mb-1">
           <label class="input-group-text" for="inputEstado">Estado</label>
             <select id="inputEstado" class="form-select" name="estados" value="">
               <option selected value="0">Selecciona un estado</option>
@@ -198,27 +203,31 @@
               @endforeach
             </select>
         </div>
+        <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
       </div> 
 
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-3">
+        <div class="input-group mb-1">
           <label class="input-group-text" for="idMunicipio">Municipio</label>
           <select id="idMunicipio" class="form-select" name="municipios">
             <option selected value="0">Selecciona un municipio</option>               
           </select>
         </div>
+        <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
       </div>
+      
 
     </div>
-
+    <br>
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-3">
+        <div class="input-group mb-1">
           <label class="input-group-text" for="idColonia">Colonia</label>
           <select id="idColonia" class="form-select" name="colonia">
             <option selected value="0">Selecciona una colonia</option>
           </select>
         </div>
+        <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
       </div>
     </div>
     <hr class="rounded"> 

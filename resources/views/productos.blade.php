@@ -74,23 +74,25 @@
                         
                         <!--Botones-->
                         <td>
-                            <a class="btnDetalles">
-                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles">
+                            <a class="btnDetalles" data-bs-toggle="tooltip" data-bs-placement="top" title="ver detalles">
+                                <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#verdetalles" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
                                     <span>&#128065;</span>
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <a class="btnEditar">                                
+                            <a class="btnEditar" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">                                
                                 <button type = "button" class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
                                     <span>&#128394;</span>
                                 </button>
                             </a>
                         </td>
                         <td>
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                 <span>&#10060;</span>
                             </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -116,7 +118,7 @@
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>                       
                         <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="Clave del producto" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
                     </div>                    
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>  
+                    <label class="text-danger" for="basic-url" id="labelCampoClave">*Campo obligatorio</label>  
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
@@ -126,8 +128,6 @@
                     <label class="text-danger" for="basic-url">*Campo obligatorio</label> 
                 </div>
             </div>
-
-            
             <br>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -209,7 +209,6 @@
                 </div>
             </div>
         </div>
-
     @endslot
     @slot('footerModal')        
         <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-dismiss="modal" />  

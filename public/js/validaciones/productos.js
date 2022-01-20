@@ -182,8 +182,7 @@ function limpiar() {
 //Agrega a un nuevo proveedor
 $("#formularioProveedor").on("submit", function (e) {
     e.preventDefault();
-    var datosFormulario = $(this).serializeArray();
-    //alert(datosFormulario);
+    var datosFormulario = $(this).serializeArray();    
     minAjax({
         url: "/agrega/proveedor",
         type: "POST",
@@ -192,13 +191,15 @@ $("#formularioProveedor").on("submit", function (e) {
             proveedor:datosFormulario.map(e=>`{"name":"${e.name}","value":"${e.value}"}`)
         },        
         success: function(data){   
-            data = JSON.parse(data);       
+            data = JSON.parse(data); 
+            alert(data);     
             $("#proveedores").append(
                 $("<option>", {
                     value: data.idproveedor,
                     text: data.idproveedor + " "+data.nombre,
                 })
             );
+            
             $("#proveedores option[value='"+data.idproveedor+"']").attr("selected", true);
             
         }
@@ -215,10 +216,11 @@ $('#inClaveProducto').on('keyup', function() {
             clave_producto: $('#inClaveProducto').val()
         },        
         success: function(data){  
-            if(data == "true"){                
-                alert("El producto ya se encuentra registrado");
+            if(data == "true"){  
+                $("#labelCampoClave").text("El producto ya se encuentra registrado"); 
                 $('#inClaveProducto').addClass("is-invalid");
             }else{
+                $("#labelCampoClave").text("*Campo obligatorio");   
                 $('#inClaveProducto').addClass("is-valid");
             }                      
         }

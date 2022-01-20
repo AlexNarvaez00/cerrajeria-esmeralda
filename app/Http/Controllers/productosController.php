@@ -9,6 +9,7 @@ use App\Models\municipiosModelo;
 use App\Models\direccionModelo;
 use App\Models\coloniaModelo;
 use App\Models\productosDescripcionModelo;
+use App\Models\telefonoModelo;
 
 use Illuminate\Http\Request;
 /**
@@ -190,7 +191,7 @@ class productosController extends Controller
      */
     public function setProveedor(Request $request){ 
         //Recupera los parametros que se solicitan para agrega un nuevo proveedor y su dirección       
-        $nombre= json_decode($request->proveedor[0])->value; //-> Esto ya lo puede convertir en JSON 
+        $nombre= json_decode($request->proveedor[0])->value; //-> Esto ya lo puede convertir en JSON         
         $apP= json_decode($request->proveedor[1])->value;
         $apM = json_decode($request->proveedor[2])->value;        
         $tel = json_decode($request->proveedor[3])->value;
@@ -230,7 +231,7 @@ class productosController extends Controller
         $telefono_prov->telefono = $tel;
         $telefono_prov->idproveedor = $llavePrimaria;
         $telefono_prov->save(); //Almacena el telefono del proveedor a la tabla
-
+    
         $retornarProveedor = proveedorModelo::find($llavePrimaria); //Busca al proveedor agregado recientemente 
         return response()->json($retornarProveedor);   //retorna al proveedor agregado recientemente en formato json              
     }
