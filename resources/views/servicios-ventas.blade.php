@@ -256,13 +256,11 @@
        
     @endslot
     @slot('footerModal')
-    <button type="reset" class="btn btn-light d-flex ps-3 pe-3" data-bs-dismiss="modal">
-      <span class="me-2">&#10060;</span>Cancelar
-    </button>
+    <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar"/>    
+        <x-button-normal-form id="btnAgregarProveedor" type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
+    
 
-    <button type="submit" class="btn btn-light d-flex ps-3 pe-3" >
-      <i class="bi bi-plus-lg " style="font-size:20px;"></i> Agregar servicio
-    </button>
+    
        
     @endslot
     @endcomponent
