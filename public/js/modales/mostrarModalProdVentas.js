@@ -44,14 +44,13 @@ $("#btnConfirmacionCarro").on("click", function() {
                     fila = "<tr>"
                                 +"<th>"+data.clave_producto+ "</th>"
                                 +'<td class="nombreProductosColumnas">'+data.nombre_producto+"</td>"
-                                +'<td class="inCantidadProductosCompras"></td>'
                                 +"<td>"+data.cantidad_existencia+"</td>"
+                                +'<td class="inCantidadProductosCompras"></td>'                               
                                 +"<td>"+data.cantidad_stock+"</td>"
                                 +'<td class="preciosProductosColumnas">'+'$'+data.precio_producto+"</td>"                            
                                 +'<td class="btnQuitar"></td>'
                             +"</tr>";
                     $('#tabla tr:last').after(fila);
-
                     $("#tabla tr:last").find(".btnQuitar").append(
                     '<a class = "btnQuitarCarro">'                                                     
                     +'<button type="button" class="btn" id="btn'+data.clave_producto+'">'
@@ -100,6 +99,7 @@ function validarCantidad(data){
         var cantTemp = $("#"+data.clave_producto).val();                      
         if(cantTemp > data.cantidad_existencia){   
             $("#"+data.clave_producto).val(data.cantidad_existencia); 
+            alert("Agregue mas productos al almacen");
         }else{
             if(cantTemp < data.cantidad_existencia){
                 $("#"+data.clave_producto).val(cantTemp.replace("-",""));
@@ -135,9 +135,9 @@ function obtenerTotal(){
             var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','');
             total +=  subtotal;
         }
-        $("#letreroTotal").text("Total a pagar: $" + total);
+        $("#letreroTotal").text("Subtotal: $" + total);
     }else{
-        $("#letreroTotal").text("Total a pagar: $0.00");
+        $("#letreroTotal").text("Subtotal: $0.00");
         $("#btnRealizarVenta").prop('disabled', true);
     }  
     

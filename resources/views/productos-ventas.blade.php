@@ -62,9 +62,9 @@
                         <tr>
                             <!--registros de las tablas-->    
                             <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
-                            <td class="dato">{{$producto->nombre_producto}}</td>                        
-                            <td class="dato">&#36;{{$producto->precio_producto}}</td>
+                            <td class="dato">{{$producto->nombre_producto}}</td>                     
                             <td class="dato">&#36;{{$producto->precio_compra}}</td>
+                            <td class="dato">&#36;{{$producto->precio_producto}}</td>
                             <td class="dato">{{$producto->cantidad_existencia}}</td>  
                             <td class="dato">{{$producto->cantidad_stock}}</td>                                                  
                             <!--Boton de carrito  -->
@@ -117,7 +117,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-12 d-flex justify-content-start">
-                    <h4 id="letreroTotalConfirmacion">Total a pagar: $0.00</h4>
+                    <h4 id="letreroTotalConfirmacion">Subtotal: $0.00</h4>
                 </div>                
             </div>  
             <div class="row">
@@ -127,12 +127,26 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 d-flex justify-content-center">
-                    <h5>No se aceptan devoluciones</h5>
+                    
                 </div>                
             </div>                          
-        </div>   
+        </div>  
+        <hr>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                <h6>Por politicas de la empresa:</h6>      
+            </div>
+            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                <h6>* No se aceptan devoluciones</h6>      
+            </div>
+            <div class="col-md-12 col-sm-12 d-flex justify-content-start">
+                <h6>* Solo se aceptan pagos en efectivo</h6>      
+            </div>                                       
+        </div>    
+    </div>     
         @endslot
-    @slot('footerModal')        
+    @slot('footerModal') 
         <x-button-normal-form type="reset" estiloBoton="btn-outline-success" texto="Regresar"  data-bs-target="#carritoModal" data-bs-toggle="modal" data-bs-dismiss="modal"/>
         <x-button-normal-form type="button" disabled="true" id="btnFinalizarCompra" estiloBoton="btn-outline-primary" texto="Finalizar compra"  data-bs-target="#detalleCompras" data-bs-toggle="modal" data-bs-dismiss="modal"/>         
     @endslot    
@@ -178,7 +192,7 @@
     <!--Modal detalle compra-->
     @component('components.modalSimple')
     @slot('idModal','detalleCompras')
-    @slot('tituloModal','Detalle compra')
+    @slot('tituloModal','Detalle venta')
     @slot('cuerpoModal') 
         <div class="container-fluid">
             <div class="row">
@@ -235,6 +249,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-sm-12  d-flex justify-content-end">
+                    <p id="letreroTotalPagar">total a pagar: $100.00</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12  d-flex justify-content-end">
                     <p id="letreroCantidadRecibida">recibido: $200.00</p>
                 </div>
             </div>
@@ -243,11 +262,7 @@
                     <p id="letreroCantidadCambio">cambio: $100.00</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12  d-flex justify-content-end">
-                    <p id="letreroTotalPagar">total a pagar: $100.00</p>
-                </div>
-            </div>
+            
             <hr>
             <div class="container-fluid">
                 <div class="row">
