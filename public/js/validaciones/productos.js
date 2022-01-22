@@ -221,7 +221,7 @@ $('#inClaveProducto').on('keyup', function() {
                 $("#labelCampoClave").text("El producto ya se encuentra registrado"); 
                 $('#inClaveProducto').addClass("is-invalid");
             }else{
-                $("#labelCampoClave").text("*Campo obligatorio");   
+                $("#labelCampoClave").text("");   
                 $('#inClaveProducto').addClass("is-valid");
             }                      
         }
@@ -233,7 +233,9 @@ $('#btnGuardar').on('click',function(e){
     e.preventDefault();
     $( "#inClaveProducto" ).prop( "disabled", false);
     let form = $("#registroProductoModal").find("form");
-    var datosFormulario = form.serializeArray();    
+    var datosFormulario = form.serializeArray();  
+    
+    alert(datosFormulario);  
     minAjax({
         url: "/producto/cambiar",
         type: "POST",

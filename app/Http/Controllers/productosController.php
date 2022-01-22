@@ -123,7 +123,7 @@ class productosController extends Controller
         $producto->precio_producto = $request->precio_producto;
         $producto->precio_compra = $request->precio_compra;
         $producto->cantidad_existencia = $request->cantidad_existencia;
-        $producto->cantidad_stock = $request->cantidad_stock;      
+        $producto->cantidad_stock = 5;      
         $producto->idproveedor = explode(" ",$request->idproveedor)[0];       
         $producto->save();//Guarda un nuevo registro en la tabla producto de la base de datos
 
@@ -249,12 +249,12 @@ class productosController extends Controller
         $clave_producto = json_decode($request->producto[1])->value;
         $nombre_producto = json_decode($request->producto[2])->value;
         $existencia = json_decode($request->producto[3])->value;
-        $stock = json_decode($request->producto[4])->value;
-        $clasificacion = json_decode($request->producto[7])->value;
+        //$stock = json_decode($request->producto[4])->value;
+        $clasificacion = json_decode($request->producto[4])->value;
         $precio_venta = json_decode($request->producto[5])->value;
         $precio_compra = json_decode($request->producto[6])->value;
-        $descripcion = json_decode($request->producto[8])->value;
-        $idProveedor = json_decode($request->producto[9])->value;        
+        $descripcion = json_decode($request->producto[7])->value;
+        $idProveedor = json_decode($request->producto[8])->value;        
         //actualiza un registro de la tabla productos
         productosModelo::where('clave_producto',$clave_producto)->update([
             'nombre_producto'=>$nombre_producto,
@@ -262,7 +262,7 @@ class productosController extends Controller
             'precio_producto'=>$precio_venta,
             'precio_compra'=>$precio_compra,
             'cantidad_existencia'=>$existencia,
-            'cantidad_stock'=>$stock,
+            //'cantidad_stock'=>$stock,
             'idproveedor'=>$idProveedor
         ]);
         //actualiza un registro de la tabla productosDescripcion
