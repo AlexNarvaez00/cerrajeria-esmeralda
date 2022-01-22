@@ -235,7 +235,7 @@ $('#btnGuardar').on('click',function(e){
     let form = $("#registroProductoModal").find("form");
     var datosFormulario = form.serializeArray();  
     
-    alert(datosFormulario);  
+     
     minAjax({
         url: "/producto/cambiar",
         type: "POST",
