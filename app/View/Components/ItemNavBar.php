@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-
 /**
  * @author Narvaez Ruiz Alexis 
  * 
@@ -38,7 +37,9 @@ class ItemNavBar extends Component
      */
     public function __construct($active)
     {
+
         $this->active = $active;
+
     }
 
     /**

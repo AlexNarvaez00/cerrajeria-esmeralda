@@ -16,6 +16,16 @@ class CreateMinucipioTable extends Migration
      */
     public function up()
     {
+        /*
+        | ------------------------------------------------------
+        |   Diccionario | Tabla de "municipio".
+        | ------------------------------------------------------
+        | idmunicipio   -> Llave primaria de la tabla en la base de datos
+        | nombre        -> Nombre del Municipio 
+        | idestado      -> ID del estado al que pertenece.
+        |
+        |
+        */
         Schema::create('municipio', function (Blueprint $table) {
             $table->increments('idmunicipio');
             $table->string('nombre', 100);

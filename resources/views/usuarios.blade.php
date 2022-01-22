@@ -1,5 +1,7 @@
 @extends('rootview')
-
+<!--
+---- Rama de omar tiene pedos 
+-->
 <!--Contenido del header.-->
 @section('header-seccion')
 <x-header visible=true>

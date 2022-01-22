@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+
 use App\Models\productosModelo;
 use Illuminate\View\Component;
 
@@ -57,6 +58,7 @@ class Toast extends Component
      * @var productosModelo
      */
     public $producto;
+
 
     /**
      * Create a new component instance.

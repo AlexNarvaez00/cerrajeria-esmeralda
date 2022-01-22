@@ -6,9 +6,6 @@ const expresionesRegulares = {
     password: /^[A-Za-z0-9\_]{8,30}$/, //Contraseñas
 };
 
-
-//Asignacion de las validaciones a los Input
-
 validator([
     [document.getElementById("inputIDUsuario"), expresionesRegulares.idUsuario],
     [

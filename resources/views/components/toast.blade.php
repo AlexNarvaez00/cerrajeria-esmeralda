@@ -10,7 +10,6 @@
   </div>
   <div class="toast-body pb-4">
     <p>El producto <strong>{{$nombreProducto}}</strong> {{$conclusion}}</p> 
-    <a href="{{route('productos.index',$producto)}}" class="btn btn-outline-primary rounded-pill px-3 me-3">Resolver conflicto</a>
     <button type="button" class="btn btn-outline-danger rounded-pill px-3" 
             data-bs-dismiss="toast" 
             aria-label="Close"

@@ -310,5 +310,3 @@ $("#btnCerrarTicket").on("click",function(event){
 function refrescar(){
     window.location.reload();
 }
-
-

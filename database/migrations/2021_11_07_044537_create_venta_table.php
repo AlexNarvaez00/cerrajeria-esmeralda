@@ -13,6 +13,17 @@ class CreateVentaTable extends Migration
      */
     public function up()
     {
+        /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "Venta".
+        | ------------------------------------------------------------
+        |
+        | folio_v               -> Llave primaria de la tabla en la base de datos.
+        | fechayhora            -> Fecha y hora en el que se realizo la venta
+        | idusuario             -> ID del usuario que realizó la venta (Llave foranea)
+        | idclienteventa        -> ID del cliente al que se le realiza la venta (llave foranea)
+        |       
+        */
         Schema::create('venta', function (Blueprint $table) {
             $table->string('folio_v',50);
             $table->dateTime('fechayhora', $precision = 0);

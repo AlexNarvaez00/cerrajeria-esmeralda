@@ -13,6 +13,19 @@ class CreateServicioTable extends Migration
      */
     public function up()
     {
+         /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "Servicio".
+        | ------------------------------------------------------------
+        |
+        | idservicio            -> Llave primaria de la tabla en la base de datos.
+        | fechayhora            -> Fecha y hora en el que se realizo la venta
+        | iddirección           -> ID de la dirección donde se realizó el servicio (Llave foranea)
+        | monto                 -> Monto que se cobró por el servicio
+        | descripcion           -> Descripción y detalles del servicio que se realizó
+        | idclientee            -> ID del cliente al que se le realiza la venta (llave foranea)
+        |
+         */
         Schema::create('servicio', function (Blueprint $table) {
             $table->string('idservicio',7);
             $table->dateTime('fechayhora', $precision = 0);

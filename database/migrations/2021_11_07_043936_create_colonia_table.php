@@ -16,6 +16,16 @@ class CreateColoniaTable extends Migration
      */
     public function up()
     {
+        /*
+        | ---------------------------------------------------------------------
+        |   Diccionario | Tabla de "colonia".
+        | ---------------------------------------------------------------------
+        | idcolonia     -> Llave primaria d ela tabla en la base de datos.
+        | nombre        -> Nombre de la colonia.
+        | codigopostal  -> Codigo postal
+        | idmunicol     -> ID del municipio al que pertenece.
+        |
+        */
         Schema::create('colonia', function (Blueprint $table) {
             $table->increments('idcolonia');
             $table->string('nombre', 60);

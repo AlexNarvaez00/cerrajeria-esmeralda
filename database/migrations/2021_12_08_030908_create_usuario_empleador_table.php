@@ -13,6 +13,15 @@ class CreateUsuarioEmpleadorTable extends Migration
      */
     public function up()
     {
+         /*
+        | ------------------------------------------------------------
+        |   Diccionario | Tabla de "usuario_empleador".
+        | ------------------------------------------------------------
+        |
+        | idEmpleador           -> Llave primaria de la tabla en la base de datos.
+        | idEmpleado            -> ID del empleado que hace uso del sistema
+        |
+         */
         Schema::create('usuario_empleador', function (Blueprint $table) {
             $table->string('idEmpleador',7);//El jefe
             $table->string('idEmpleado',7);//El empleado 

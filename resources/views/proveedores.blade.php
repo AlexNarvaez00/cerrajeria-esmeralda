@@ -131,33 +131,37 @@
         <p class="px-3">
             Información del Proveedor
         </p>
+        <x-tag-obligatorios />
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
                 @csrf
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedor" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
             </div>
             <div class="row">
             <!--Columnas :v-->
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedor" type="text" texto="Apellido Materno" valor="{{old('apellidomaterno')}}" nombreInput="apellidomaterno" nombreError="apellidomaterno" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('numtelefono')}}" nombreInput="numtelefono" nombreError="numtelefono" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoMProveedor" type="text" texto="Apellido Materno" valor="{{old('apellidomaterno')}}" nombreInput="apellidomaterno" nombreError="apellidomaterno" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('numtelefono')}}" nombreInput="numtelefono" nombreError="numtelefono" />
             </div>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo Electrónico" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCorreo" type="email" texto="Correo Electrónico" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstado">Estado</label>
+                        <label class="input-group-text" for="inputEstado">
+                            Estado
+                        <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="inputEstado" class="form-select {{ (old('estados'))? 'is-valid':'' }}" name="estados" value="{{old('estados')}}">
                                 <option selected value="0">Selecciona un estado</option>
                                 @foreach($registroEstados as $proveedor)
@@ -171,7 +175,10 @@
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipio">Municipio</label>
+                        <label class="input-group-text" for="idMunicipio">
+                            Municipio
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="idMunicipio" class="form-select {{ (old('municipios'))? 'is-valid':'' }}" disabled="true" name="municipios" value="{{old('municipios')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
@@ -184,7 +191,10 @@
 
             <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idColonia">Colonia</label>
+                <label class="input-group-text" for="idColonia">
+                    Colonia
+                    <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                </label>
                     <select id="idColonia" class="form-select {{ (old('colonias'))? 'is-valid':'' }}" disabled="true" name="colonias" value="{{old('colonias')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
@@ -231,6 +241,7 @@
         <p class="px-3">
             Información del Proveedor
         </p>
+        <x-tag-obligatorios />
         <div class="container-fluid">
             <div class="row">
                 <!--Columnas :v-->
@@ -238,28 +249,31 @@
                 <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
+                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
             </div>
             <div class="row">
             <!--Columnas :v-->
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMProveedorEditar" type="text" texto="Apellido Materno" valor="{{old('apellidomaternoEditar')}}" nombreInput="apellidomaternoEditar" nombreError="apellidomaternoEditar" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('numtelefonoEditar')}}" nombreInput="numtelefonoEditar" nombreError="numtelefonoEditar" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoMProveedorEditar" type="text" texto="Apellido Materno" valor="{{old('apellidomaternoEditar')}}" nombreInput="apellidomaternoEditar" nombreError="apellidomaternoEditar" />
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('numtelefonoEditar')}}" nombreInput="numtelefonoEditar" nombreError="numtelefonoEditar" />
             </div>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo Electrónico" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCorreoEditar" type="email" texto="Correo Electrónico" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar"/>
             </div> 
             <p class="px-3">
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
+            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputEstadoEditar">Estado</label>
+                        <label class="input-group-text" for="inputEstadoEditar">
+                            Estado
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="inputEstadoEditar" class="form-select" name="estadosEditar" value="{{old('estadosEditar')}}">
                                 <option selected value="0">Selecciona un estado</option>
                                 @foreach($registroEstados as $proveedor)
@@ -273,7 +287,10 @@
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="idMunicipioEditar">Municipio</label>
+                        <label class="input-group-text" for="idMunicipioEditar">
+                            Municipio
+                            <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                        </label>
                             <select id="idMunicipioEditar" class="form-select" disabled="true" name="municipiosEditar" value="{{old('municipiosEditar')}}">
                                 <option selected value="0">Selecciona un municipio</option>               
                             </select>
@@ -285,7 +302,10 @@
             </div>
             <div class="col-md-12 col-sm-12">
                 <div class="input-group mb-3">
-                <label class="input-group-text" for="idColoniaEditar">Colonia</label>
+                <label class="input-group-text" for="idColoniaEditar">
+                    Colonia
+                <span class="text-danger ms-1 fs-5 fw-bold">*</span>
+                </label>
                     <select id="idColoniaEditar" class="form-select" disabled="true" name="coloniasEditar" value="{{old('coloniasEditar')}}">
                         <option selected value="0">Selecciona una colonia</option>
                     </select>
