@@ -106,7 +106,13 @@
     @slot('tituloModal','Registrar un nuevo producto')
     @slot('rutaEnvio',route('productos.store'))
     @slot('metodoFormulario','POST')
-    @slot('cuerpoModal')       
+    @slot('cuerpoModal')    
+    <div class="container-fluid">
+        <div class="row">
+        <label class="text-danger" for="basic-url">* Campos obligatorios</label>  
+        </div>
+    </div>   
+    <hr>
         <div class="container-fluid">
             <p class="px-3">
                 <h6 id="letreroInstruccion">Agregue la información sobre el producto</h6>
@@ -114,75 +120,62 @@
             <div class="row">
             @csrf                
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1 ">
+                    <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Clave producto</span>                       
-                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="Clave del producto" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
+                        <input id ="inClaveProducto" maxlength="10" type="text" class="form-control" placeholder="Ejemp. TUJJ-YH" aria-label="Username" aria-describedby="basic-addon1" name="clave_producto" required>
+                        <h5 class="text-danger" for="basic-url">*</h5>  
                     </div>                    
-                    <label class="text-danger" for="basic-url" id="labelCampoClave">*Campo obligatorio</label>  
+                    <label class="text-danger" for="basic-url" id="labelCampoClave"></label>  
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
-                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>                        
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label> 
+                        <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="Ejemp. Candado" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>  
+                        <h5 class="text-danger" for="basic-url">*</h5>                       
+                    </div>                    
                 </div>
-            </div>
-            <br>
+            </div>            
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Cant. existencia</span>
                         <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
-    
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>                 
+                        <h5 class="text-danger" for="basic-url">*</h5>  
+                    </div>                                    
                 </div> 
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Stock</span>
-                        <input id ="inStock" min="0" type="number" class="form-control" placeholder="Stock" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_stock" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
-                    </div>    
-                    <label class="text-danger" for="basic-url">* Campo obligatorio</label>             
-                </div> 
-                
-            </div>           
-            <br>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
+                        <input id ="inClasificacion" maxlength="20" type="text" class="form-control" placeholder="Ejemp. Candados" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>
+                </div>                
+            </div>          
+            
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Precio venta $</span>
                         <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio venta" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>   
+                        <h5 class="text-danger" for="basic-url">*</h5>  
+                    </div>                    
                 </div> 
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Precio compra $</span>
                         <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio compra" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
-                    </div>   
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>                    
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                                      
                 </div>                
-            </div>
-            <br>
-
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Clasificación</span>
-                        <input id ="inClasificacion" maxlength="20" type="text" class="form-control" placeholder="Clasificación" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
-                </div>
-            </div>
-            <br>
+            </div>           
+          
             <div class = "row">
                 <div class="col-md-12 col-sm-12"> 
                     <div class="input-group">
                         <span class="input-group-text">Descripcion</span>
                         <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
-                    </div> 
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                     
                 </div>
             </div>           
         </div>
@@ -201,8 +194,8 @@
                             <option value="{{$proveedor->idproveedor}}">{{$proveedor->idproveedor}} {{$proveedor->nombre}}</option>                    
                             @endforeach
                         </select>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Seleccion obligatoria</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <button type="button" class="btn btn-link" data-bs-target="#agregarProveedor" data-bs-toggle="modal" data-bs-dismiss="modal">agregar proveedor</button>
@@ -353,6 +346,10 @@
     @slot('cuerpoModal')
     <form id="formularioProveedor" method="POST">
         <div class="container-fluid">
+            <label class="text-danger" for="basic-url">* Campos obligatorios</label>  
+        </div>
+        
+        <div class="container-fluid">
             <p class="px-3">
                 <h6>Información básica del proveedor</h6>
             </p>
@@ -361,15 +358,15 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Nombre</span>
                         <input id="txtNombreProveedor" maxlength="50" placeholder="Nombre del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNombreProveedor" required>                     
-                    </div>   
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>                 
+                        <h5 class="text-danger" for="basic-url">*</h5>    
+                    </div>                                    
                 </div>                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
                         <input id="txtApellidoPProveedor" maxlength="50" placeholder="Apellido paterno del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtApellidoPProveedor" required>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                   
                 </div> 
             </div>      
             <br>      
@@ -378,15 +375,15 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
                         <input id="txtApellidoMProveedor" maxlength="50" placeholder="Apellido materno del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtApellidoMProveedor" required>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero de tel.</span>
                         <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div> 
             </div>
             <br>
@@ -395,8 +392,8 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
                         <input type="email" maxlength="30" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="txtCorreoProveedor" name="txtCorreoProveedor" required>                        
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div>                
             </div>
         </div>
@@ -410,15 +407,15 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero</span>
                         <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>                        
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">calle</span>
                         <input id="calleProveedor" type="text" placeholder="calle del lugar" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="calleProveedor" required>                        
-                    </div>
-                    <label class="text-danger" for="basic-url">*Campo obligatorio</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div> 
             </div>
             <br>
@@ -431,9 +428,9 @@
                             @foreach($listaEstados as $estado)
                                 <option value = "{{$estado->id}}" selected>{{$estado->nombre}}</option>
                             @endforeach                        
-                        </select>                        
-                    </div>
-                    <label class="text-danger" for="basic-url">*Selección obligatoria</label>
+                        </select>  
+                        <h5 class="text-danger" for="basic-url">*</h5>                    
+                    </div>                 
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
@@ -441,8 +438,8 @@
                         <select  id="muncipioProveedor" disabled="true" class="form-select"  name="muncipioProveedor">
                             <option value = "0" selected>Seleccione un municipio</option>                        
                         </select>
-                    </div>
-                    <label class="text-danger" for="basic-url">*Selección obligatoria</label>
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>                    
                 </div>
             </div>
             <br>
@@ -453,8 +450,9 @@
                         <select class="form-select" disabled="true" id="coloniaProveedor" name="coloniaProveedor">
                             <option value = "0" selected>Seleccione una colonia</option>                        
                         </select>
+                        <h5 class="text-danger" for="basic-url">*</h5>
                     </div>
-                    <label class="text-danger" for="basic-url">*Selección obligatoria</label>
+                    
                 </div>                
             </div>
         </div>
