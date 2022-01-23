@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/estado/todo', [proveedorController::class, 'getCiudades'])->name('estados.todo');
     Route::post('/municipio/todo', [proveedorController::class, 'getColonias'])->name('municipios.todo');
-    
+    Route::get('/users/get/{email}',[usuarioController::class,'isExists'])->name('user.exists');
     
    //Rutas para el modulo de ventas servicios
     Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');

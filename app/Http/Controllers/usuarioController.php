@@ -58,9 +58,10 @@ class usuarioController extends Controller
      * @var array 
      */
     private $rules = [
+        'id' => 'unique:App\Models\User,id',
         'nombreUsuario' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasena' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
-        'correo' => 'required|email',
+        'correo' => 'required|email|unique:App\Models\User,email',
         'rolUser' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -72,9 +73,10 @@ class usuarioController extends Controller
      * @var array 
      */
     private $rules2 = [
+        'id' => 'unique:App\Models\User,id',
         'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
-        'correoEditar' => 'required|email',
+        'correoEditar' => 'required|email|unique:App\Models\User,email',
         'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -127,23 +129,28 @@ class usuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $idUser =  'USU-' .
+        strtoupper($request->nombreUsuario[0]) .
+        strtoupper($request->nombreUsuario[1]) .
+        strtoupper($request->rolUser[0]) .
+        strtoupper($request->rolUser[1]) . '-' .
+        date('dmy');
+
+        $request->id = $idUser; 
+
         //Validacion de los campos
         $request->validate($this->rules);
 
-        $llavePrimaria = 'USU-' .
-            strtoupper($request->nombreUsuario[0]) .
-            strtoupper($request->nombreUsuario[1]) .
-            strtoupper($request->rolUser[0]) .
-            strtoupper($request->rolUser[1]) . '-' .
-            date('dmy');
-
         //Nombre del campo BD----- Nombre input formulario
         $usuario = new User();
-        $usuario->id =  $llavePrimaria;
+        $usuario->id =  $idUser;
         $usuario->name = $request->nombreUsuario;
         $usuario->password = Hash::make($request->contrasena);
         $usuario->email = $request->correo;
         $usuario->rol = $request->rolUser;
+        //Verificamos que la "LLave primaria" y el correo NO EXISTAN
+        //$this->verifyPrimaryKeyAndEmail($usuario);
+
         $usuario->save();
         return redirect()->route('usuarios.index');
     }
@@ -186,16 +193,19 @@ class usuarioController extends Controller
      */
     public function update(Request $request, User $usuario)
     {
+
+        $idUser =  'USU-' .
+        strtoupper($request->nombreUsuario[0]) .
+        strtoupper($request->nombreUsuario[1]) .
+        strtoupper($request->rolUser[0]) .
+        strtoupper($request->rolUser[1]) . '-' .
+        date('dmy');
+
+        $request->id = $idUser;
+
         $request->validate($this->rules2);
 
-        $llavePrimaria = 'USU-' .
-            strtoupper($request->nombreUsuarioEditar[0]) .
-            strtoupper($request->nombreUsuarioEditar[1]) .
-            strtoupper($request->rolUserEditar[0]) .
-            strtoupper($request->rolUserEditar[1]) . '-' .
-            date('dmy');
-
-        $usuario->id = $llavePrimaria;
+        $usuario->id = $$idUser;
         $usuario->name = $request->nombreUsuarioEditar;
         $usuario->password = Hash::make($request->contrasenaEditar);
         $usuario->email = $request->correoEditar;
@@ -204,6 +214,18 @@ class usuarioController extends Controller
 
         return redirect()->route('usuarios.index');
     }
+
+
+    public function isExists($email){
+        $userEmailExist = User::where('email',$email)
+                            ->get()
+                            ->count() == 1;
+        $arrayInformation = [
+            'exist' => $userEmailExist
+        ];
+        return response()->json($arrayInformation);
+    }
+
 
     /**
      * Función vacia (No hace nada)
