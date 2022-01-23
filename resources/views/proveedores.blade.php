@@ -73,6 +73,7 @@
                             <td class="data">{{$proveedor->iddirecproveedor}}</td> 
                             <!--Botones-->
                             <td>
+                            <a class="btneditar" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                             <button class="btn boton-editar" 
                                 data-id="{{$proveedor->idproveedor}}"
                                 data-nombre="{{$proveedor->nombre}}"
@@ -88,6 +89,7 @@
                             </button>
                         </td>
                         <td>
+                        <a class="btnborrar" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <form class="form-detele" action="{{route('proveedores.destroy',$proveedor)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
