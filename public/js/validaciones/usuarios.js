@@ -46,3 +46,37 @@ validator([
     ],
     [document.getElementById("inputRolUsuarioEditar"), "0"], //El otro selector xd
 ]);
+
+//-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
+/**
+ * 
+ * @param {Object} event Evento que dispara el input de "correo" 
+ */
+const verificarCorreo = async (event) => {
+    const URL = `${document.location.origin}/users/get/`;
+    let correo = event.target.value;
+    if(!correo){
+        return;
+    }
+    let promesa = await fetch(URL+correo);
+    let data = await promesa.json();
+
+    if(data.exist){
+        //Si el usario existe el input se pone de rojo
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid");
+        event.target.title="El correo ya esta en uso"
+    }else{
+        //Si no, se queda en verde
+        
+    }
+}
+let inputCorreo = document.getElementById('inputCorreo');
+let inputCorreoEditar = document.getElementById('inputCorreoEditar');
+
+inputCorreo.addEventListener('blur',verificarCorreo);
+inputCorreoEditar.addEventListener('blur',verificarCorreo);
+
+
+
+

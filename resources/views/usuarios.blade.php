@@ -77,9 +77,8 @@
 
                     <!--Botones-->
                     <td>
-
                         <button class="btn boton-editar" data-id="{{$usuario->id}}" data-nombre="{{$usuario->name}}" data-correo="{{$usuario->email}}" data-rol="{{$usuario->rol}}" data-route-url="{{route('usuarios.update',$usuario)}}" data-bs-toggle="modal" data-bs-target="#editarUsuariosModal">
-                            <span>&#128394;</span>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right" title="Editar"> &#128394;</span>
                         </button>
                     </td>
                     <td>
@@ -89,11 +88,11 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn delete" data-id="{{$usuario->id}}" data-nombre="{{$usuario->name}}" data-rol="{{$usuario->rol}}" data-creado="{{$usuario->created_at}}" data-modificado="{{$usuario->updated_at}}" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
-                                <span>&#10060;</span>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Borrar">&#10060;</span>
                             </button>
                         </form>
                         @else
-                        <a href="#" class="btn">
+                        <a href="#" class="btn" data-bs-toggle="tooltip" data-bs-placement="right" title="Accion no permitida">
                             <span>&#10060;</span>
                         </a>
                         @endif
@@ -112,6 +111,9 @@
         <p class="px-3">
             Informacion básica del usuario.
         </p>
+        @error('id')
+            <p class="col-12 text-danger ps-2"> {{$message}} ó existen datos duplicados</p>
+        @enderror
 
         <x-tag-obligatorios />
 
@@ -122,16 +124,16 @@
             <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
             <!--Columnas :v-->
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
+                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
+                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
+                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
             </div>
         </div>
         <p class="px-3">
@@ -141,7 +143,7 @@
             <div class="row">
                 <!--Columnas :v-->
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputRolUsuario">
+                    <label class="input-group-text col-lg-3 col-md-12 col-sm-12 col-12" for="inputRolUsuario">
                         Roles
                         <span class="text-danger ms-1 fs-5 fw-bold">*</span>
                     </label>
@@ -281,7 +283,7 @@
 <!--Pero esta madre se necesita para hacer AJAX mas simple -->
 <!-- <script type="text/javascript" src="./js/minAjax.js"></script> -->
 <!--Este script se ejecuta si existe algun error en los datos-->
-@if($errors->hasAny('nombreUsuario', 'contrasena', 'rolUser'))
+@if($errors->hasAny('nombreUsuario', 'correo','contrasena', 'rolUser'))
 <script>
     let modalRegistro = new bootstrap.Modal(document.getElementById('registroUsuariosModal'), null);
     modalRegistro.show();
@@ -291,7 +293,7 @@
 </script>
 @endif
 
-@if($errors->hasAny('nombreUsuarioEditar', 'contrasenaEditar', 'rolUserEditar'))
+@if($errors->hasAny('nombreUsuarioEditar','correoEditar', 'contrasenaEditar', 'rolUserEditar'))
 <script>
     let modalEdicion = new bootstrap.Modal(document.getElementById('editarUsuariosModal'), null);
     modalEdicion.show();
