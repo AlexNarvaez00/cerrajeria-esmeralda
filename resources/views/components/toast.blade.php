@@ -15,7 +15,7 @@
             aria-label="Close"
             data-bs-toggle="tooltip" 
             data-bs-placement="bottom" 
-            title="Esta accion solo quita la notifición, pero no la resulve"
+            title="Esta accion solo quita la notifición, pero no la resuelve"
             >Descartar</button>
   </div>
 </div>

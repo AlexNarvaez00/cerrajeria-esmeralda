@@ -76,7 +76,6 @@ class usuarioController extends Controller
         //'id' => 'unique:App\Models\User,id',
         'nombreUsuarioEditar' => 'required|regex:/^[A-Z][a-z]{2,14}$/',
         'correoEditar' => 'required|email|unique:App\Models\User,email',
-        'contrasenaEditar' => 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/',
         'rolUserEditar' => 'required|in:Administrador,Empleado,Ayudante'
     ];
 
@@ -196,30 +195,28 @@ class usuarioController extends Controller
         # El id del usuaurio no puede cambiar segun yo, bueno por 
         # por cosas de logica NO  :,,,,,,v ya llevabme diosito
         // $idUser =  'USU-' .
-        // strtoupper($request->nombreUsuarioEditar[0]) .
-        // strtoupper($request->nombreUsuarioEditar[1]) .
-        // strtoupper($request->rolUserEditar[0]) .
-        // strtoupper($request->rolUserEditar[1]) . '-' .
-        // date('dmy');
-
-        //$request->validate($this->rules2);
 
         $correoNuevo = $request->correoEditar;
-        //Buscamos si existe un correo igual
-        $uniqueEmail = User::whereNot('email',$usuario->email)
+        $uniqueEmail = User::where('email','!=',$usuario->email)
                 ->where('email',$correoNuevo) 
                 ->get()
                 ->count() > 0;
-        if(!$uniqueEmail){
+        if($uniqueEmail){
             //Correo se repitio
             $this->rules2['correoEditar'] = 'required|email|unique:App\Models\User,email';
         }else{
+            //No lo modifico
             $this->rules2['correoEditar'] = 'required|email';
         }
-        $request->validate($this->rules2);
 
+        if($request->contrasenaEditar){
+            //Si la constraseña contiene algo.
+            $this->rules2['contrasenaEditar'] = 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/';
+            $usuario->password = Hash::make($request->contrasenaEditar);
+        }
+        $request->validate($this->rules2);
+        
         $usuario->name = $request->nombreUsuarioEditar;
-        $usuario->password = Hash::make($request->contrasenaEditar);
         $usuario->email = $request->correoEditar;
         $usuario->rol = $request->rolUserEditar;
         $usuario->save();
