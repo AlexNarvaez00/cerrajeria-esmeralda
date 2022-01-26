@@ -91,7 +91,8 @@
                             <button class="btn btn-information-sales" 
                                     data-url-query="{{ route('servicios.folio',$servicio) }}"
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#InformacionModalServicios" >
+                                    data-bs-target="#InformacionModalServicios" 
+                                    title="ver detalles">
                                       <span>&#128065;</span>  
                                 </button>
                         </td>

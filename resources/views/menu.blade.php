@@ -172,7 +172,7 @@
 
 @component('components.modalSimple')
         @slot('idModal','irreportes')
-        @slot('tituloModal','¿Vas a realizar una venta?')
+        @slot('tituloModal','¿Vas a realizar una Consulta?')
         /**Agregar estas dos cosas a sus modales*/
             @slot('rutaEnvio','')
             @slot('metodoFormulario','')

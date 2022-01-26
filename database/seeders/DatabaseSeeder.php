@@ -78,10 +78,10 @@ class DatabaseSeeder extends Seeder
         $productoDescripcion->descripcion = "Es una llave color rojo marca phillips";
         $productoDescripcion->clave_producto= 'YUJJ';
         $productoDescripcion->save();
-        $this->call([
-            ventasSeeder::class,
-            detalleVentaSeeder::class,
-        ]);
+       // $this->call([
+         //   ventasSeeder::class,
+           // detalleVentaSeeder::class,
+        //]);
 
         //\App\Models\User::factory(10)->create();
         //usuariosModel::factory(50)->create();
