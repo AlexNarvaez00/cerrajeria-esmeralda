@@ -19,8 +19,9 @@ class serviciosController extends Controller{
         $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente','Info cliente','Detalle servicio']; //Almacena todos los campos de la tabla de la vista
     }   
 
-    public function show(){     
-            
+    public function show(Request $request){     
+        $servicio = servicioModelo::find($request->id);
+        return response()->json($servicio);
     }
     //Obtiene un cliente especificado
     public function getCliente(Request $request){            

@@ -128,6 +128,27 @@ $("#idMunicipio").on("change", function() {
     }
 });
 
+$(".btnDetalleServicio").on("click", function(event){    
+    let fila = $(this).closest("tr").find(".data");
+    var idServicio = fila[0].innerHTML;
+    minAjax({
+        url:"/servicio/show", 
+        type:"POST",
+    data:{
+        _token: document.querySelector('input[name="_token"]').value,
+        id:idServicio
+    },                    
+    success: function(data){
+        data = JSON.parse(data);            
+        $("#inDetalleIDservicio").val(data.idservicio);
+        $("#inSubtotal").val(data.monto);
+        $("#inareaDescripcionDetalle").val(data.descripcion);
+        $("#letreroDetalleFecha").text("Fecha y hora en que se solicito el servicio: " + data.fechayhora);
+    }
+    }); 
+
+});
+
         
        
         
