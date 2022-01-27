@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\clienteModelo;
 use App\Models\direccionModelo;
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
-use App\Models\productosDescripcionModelo;
+use App\Models\servicioModelo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -29,59 +28,42 @@ class DatabaseSeeder extends Seeder
         $admin->rol = 'Administrador'; 
         $admin->save();
 
-        //Guardamos un cliente de prueba.
-        $cliente = new clienteModelo();
-        $cliente->idcliente = 'cl-avuz';
-        $cliente->nombre='Dafene xd';
-        $cliente->apellidoPaterno='Solano';
-        $cliente->apellidoMaterno='Solano xd';
-        $cliente->telefono='9512364567';
-        $cliente->save();
+        //Creamos a los clientes.
+        
 
         //Cargamos los estado, municipios y colonias
         $this->call([
+            ClienteSeeder::class,
             estadosSeeder::class,
             municipiosSeeder::class,
-            coloniasSeeder::class,]);
+            coloniasSeeder::class,
+            DireccionSeeder::class,
+            ProveedorSeeder::class,
+            ProductoSeeder::class]);
 
-        //Direccion del proveedor
-        $direccion = new direccionModelo();
-        $direccion->iddireccion='DIC-12Jk-In';
-        $direccion->calle='mdeeo';
-        $direccion->numero=122;
-        $direccion->idcoldirec=1;
-        $direccion->save();
+        servicioModelo::factory(100)->create();
+            
 
-        //Agregamos un proveedor de prueba
-        $proveedor = new proveedorModelo();
-        $proveedor->idproveedor='PROV-Jk-In12'; 
-        $proveedor->nombre='Roberto'; 
-        $proveedor->apellidopaterno='Jknkn';
-        $proveedor->apellidomaterno='Innmlm';
-        $proveedor->correo='corroe@corrreo.com';
-        $proveedor->iddirecproveedor='DIC-12Jk-In';
-        $proveedor->save();
-        
         //Agregamos un prodcuto de prueba.
-        $producto = new productosModelo();
-        $producto->clave_producto = 'YUJJ';
-        $producto->nombre_producto = 'LLave';
-        $producto->clasificacion = 'Llave';
-        $producto->precio_producto = 50.0;
-        $producto->precio_compra = 25.0;
-        $producto->cantidad_existencia = 51;
-        $producto->cantidad_stock = 5;
-        $producto->idproveedor = 'PROV-Jk-In12';
-        $producto->save();
+        // $producto = new productosModelo();
+        // $producto->clave_producto = 'YUJJ';
+        // $producto->nombre_producto = 'LLave';
+        // $producto->clasificacion = 'Llave';
+        // $producto->precio_producto = 50.0;
+        // $producto->precio_compra = 25.0;
+        // $producto->cantidad_existencia = 51;
+        // $producto->cantidad_stock = 5;
+        // $producto->idproveedor = 'PROV-Jk-In12';
+        // $producto->save();
 
-        $productoDescripcion = new productosDescripcionModelo();
-        $productoDescripcion->descripcion = "Es una llave color rojo marca phillips";
-        $productoDescripcion->clave_producto= 'YUJJ';
-        $productoDescripcion->save();
-        $this->call([
-            ventasSeeder::class,
-            detalleVentaSeeder::class,
-        ]);
+        // $productoDescripcion = new productosDescripcionModelo();
+        // $productoDescripcion->descripcion = "Es una llave color rojo marca phillips";
+        // $productoDescripcion->clave_producto= 'YUJJ';
+        // $productoDescripcion->save();
+        // $this->call([
+        //     ventasSeeder::class,
+        //     detalleVentaSeeder::class,
+        // ]);
 
         //\App\Models\User::factory(10)->create();
         //usuariosModel::factory(50)->create();

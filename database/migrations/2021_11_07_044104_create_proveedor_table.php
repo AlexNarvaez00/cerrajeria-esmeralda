@@ -34,7 +34,7 @@ class CreateProveedorTable extends Migration
             $table->string('nombre', 50);
             $table->string('apellidopaterno', 50);
             $table->string('apellidomaterno', 50);
-            $table->string('correo', 30);
+            $table->string('correo');
             $table->string('iddirecproveedor', 30);
             $table->timestamps();
             $table->primary('idproveedor');
