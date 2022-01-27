@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,6 +18,8 @@ class telefonoModelo extends Model
      |  base de datos, estos registros son usados para
      |  verificar que los números de telefonos existen en el sistema
      */
+
+    use softDeletes;
     /**
      * Nombre de la tabla a la cual hace referencia
      * @var string

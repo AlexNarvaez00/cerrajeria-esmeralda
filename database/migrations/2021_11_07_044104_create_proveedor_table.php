@@ -36,6 +36,7 @@ class CreateProveedorTable extends Migration
             $table->string('apellidomaterno', 50);
             $table->string('correo', 30);
             $table->string('iddirecproveedor', 30);
+            $table->softDeletes();
             $table->timestamps();
             $table->primary('idproveedor');
                             //Nombre de la FK       Nombre PK tabla externa    nombre-tabla      

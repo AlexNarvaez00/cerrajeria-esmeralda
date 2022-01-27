@@ -29,6 +29,7 @@ class CreateTelefonoProveedorTable extends Migration
             $table->string('telefono', 20);
             $table->string('idproveedor', 15);
             $table->foreign('idproveedor')->references('idproveedor')->on('proveedor');
+            $table->softDeletes();
         });
     }
 

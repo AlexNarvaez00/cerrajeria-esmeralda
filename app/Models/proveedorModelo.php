@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,6 +23,7 @@ class proveedorModelo extends Model
      |
      */
 
+     use softDeletes;
     /**
      * Nombre de la tabla a la cual hace referencia
      * @var string
