@@ -65,23 +65,27 @@
       <!--Inicio de la Fila-->
       <tr>
         <!--ID de la tabla Proveedor-->    
-        <th scope="col">{{$servicio->idservicio}}</th>
+        <th scope="col" class="data">{{$servicio->idservicio}}</th>
         <!--Los otros atributos de la tabla proveedor-->
         <td class="data">{{$servicio->fechayhora}}</td>
         <td class="data">{{$servicio->iddireccion}}</td>
-        <td class="data">{{$servicio->monto}}</td>
+        <td class="data">${{$servicio->monto}}</td>
         <td class="data">{{$servicio->descripcion}}</td>
         <td class="data">{{$servicio->idcliente}}</td> 
         <!--Botones--> 
-        <td class="btnEditar">
-          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
+        <td class="data">
+        <a class="btnDetalleCliente">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#modalcliente">
             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Informacion del cliente">&#128065;</span>
           </button>
+        </a>
         </td> 
-        <td class="btnEditar">
-          <button class="btn" data-bs-toggle="modal" data-bs-target="#registroProductoModal">
-            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detalle servicio">&#128736;</span>
-          </button>
+        <td class="data">
+          <a class="btnDetalleServicio">
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#modalservicio">
+              <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detalle servicio">&#128736;</span>
+            </button>
+          </a>
         </td>                                          
       </tr>
       @endforeach        
@@ -263,11 +267,108 @@
     @endslot
     @slot('footerModal')
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar"/>    
-        <x-button-normal-form id="btnAgregarProveedor" type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
+    <x-button-normal-form id="btnAgregarProveedor" type="submit" estiloBoton="btn-outline-primary" texto="Registrar" /> 
+    @endslot
+    @endcomponent
+    @component('components.modalSimple')
+    @slot('idModal','modalservicio')
+    @slot('tituloModal','Detalles del servicio')
+    @slot('cuerpoModal')
+    <div class="container-fluid">
+    <h6 id="letreroDetalleFecha"></h6>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3 ">
+            <span class="input-group-text" id="basic-addon1">id del servicio</span>
+            <input id ="inDetalleIDservicio" type="text" disabled="true" min="1" step="0.01" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>            
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3 ">
+            <span class="input-group-text" id="basic-addon1">Subtotal del servicio $</span>
+            <input id ="inSubtotal" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" required>
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group">
+          <span class="input-group-text">Descripción</span>
+          <textarea id="inareaDescripcionDetalle" class="form-control" placeholder="Puedes agregar referencias del lugar o alguna observación" aria-label="With textarea" required></textarea>
+          <h5 class="text-danger" for="basic-url">*</h5>
+        </div> 
+        </div>    
+    </div>
     
+    @endslot
+    @slot('footerModal')
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar"/>    
+      <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Realizar venta" /> 
+    @endslot
+    @endcomponent
 
-    
-       
+    @component('components.modalSimple')
+    @slot('idModal','modalcliente')
+    @slot('tituloModal','Detalles del cliente')
+    @slot('cuerpoModal')
+    <div class="container-fluid">
+    <h5>Datos del cliente</h5>
+      <div class = "row">
+        <div class="col-md-5 col-sm-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">idCliente</span>
+              <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>            
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre</span>
+            <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1"  required>
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div>   
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
+            <input type="text" maxlength="30"  class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" required>
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div>       
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
+              <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1">
+              <h5 class="text-danger" for="basic-url">*</h5>
+            </div>          
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
+            <input type="number" maxlength="10"  class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1">
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div>          
+        </div>
+      </div>
+      <hr>
+      <h5>Datos del lugar</h5>
+
+
+    </div>
+    @endslot
+    @slot('footerModal')
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar"/>  
+   
     @endslot
     @endcomponent
 @endsection

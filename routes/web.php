@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
    //Rutas para el modulo de ventas servicios
     Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');
     Route::post('/municipio/servicio',[serviciosController::class,'getColonias'])->name('municipio.servicio');
+    Route::post('/servicio/show', [serviciosController::class,'show'])->name('servicio.show');
 
     Route::post('/cliente/todo', [serviciosController::class, 'getCliente'])->name('cliente.todo');
     //Rutas para el modulo de ventas de productos

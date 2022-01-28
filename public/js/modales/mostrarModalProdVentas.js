@@ -108,6 +108,7 @@ function validarCantidad(data){
         $("#"+data.clave_producto).on("blur",function(){
             if($("#"+data.clave_producto).val() == ""){
                 $("#"+data.clave_producto).val("1");
+                obtenerTotal();
             }
         });
         obtenerTotal();
