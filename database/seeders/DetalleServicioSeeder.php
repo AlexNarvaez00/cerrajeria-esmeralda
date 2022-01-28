@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\detalleServicioModelo;
 use Illuminate\Database\Seeder;
 
 class DetalleServicioSeeder extends Seeder
@@ -13,6 +14,6 @@ class DetalleServicioSeeder extends Seeder
      */
     public function run()
     {
-        //
+        detalleServicioModelo::factory(300)->create();
     }
 }

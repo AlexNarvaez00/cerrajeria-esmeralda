@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\direccionModelo;
+use App\Models\productosDescripcionModelo;
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
 use App\Models\servicioModelo;
@@ -39,9 +40,15 @@ class DatabaseSeeder extends Seeder
             coloniasSeeder::class,
             DireccionSeeder::class,
             ProveedorSeeder::class,
-            ProductoSeeder::class]);
+            ProductoSeeder::class,
+            ServicioSeeder::class,
+            DetalleServicioSeeder::class,
+            ventasSeeder::class,
+            detalleVentaSeeder::class,
+            ProductoDescrcipcionSeeder::class
+        ]);
 
-        servicioModelo::factory(100)->create();
+        
             
 
         //Agregamos un prodcuto de prueba.

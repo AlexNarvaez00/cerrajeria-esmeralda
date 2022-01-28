@@ -9,6 +9,6 @@ class productosDescripcionModelo extends Model
 {
     use HasFactory;
     protected $table = 'productodescripcion';
-    protected $primaryKey = 'clave_producto';
     public $timestamps = false;
+    public $incrementing = false;
 }

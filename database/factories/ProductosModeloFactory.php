@@ -49,8 +49,8 @@ class ProductosModeloFactory extends Factory
             "clave_producto" => $llavePrimaria,
             "nombre_producto" => $this->faker->firstNameFemale(),
             "clasificacion" => $this->faker->word(),
-            "precio_producto" => $precioCompra,
-            "precio_compra" => $precioCompra * 2.3,
+            "precio_producto" => $precioCompra * 2.3,
+            "precio_compra" => $precioCompra ,
             "cantidad_existencia" => $cantidad_existencia,
             "cantidad_stock" => $cantidad_existencia + 5,
             "idproveedor" => $idProveedor

@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class detalleServicioModelo extends Model
 {
     use HasFactory;
-    protected $table = 'venta';
-    protected $primaryKey = 'folio_v';
+    protected $table = 'detalleservicio';
     public $incrementing = false;
     public $timestamps = false;
 }

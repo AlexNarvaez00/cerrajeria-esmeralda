@@ -43,7 +43,7 @@ class DireccionModeloFactory extends Factory
             "iddireccion" => $llavePrimaria,
             "calle" => $this->faker->text(30),
             "numero" => $this->faker->numberBetween(100,999),
-            "idcoldirec" => $this->faker->numberBetween(0, $this->limiteNumber)
+            "idcoldirec" => $this->faker->numberBetween(1, $this->limiteNumber)
         ];
     }
 }

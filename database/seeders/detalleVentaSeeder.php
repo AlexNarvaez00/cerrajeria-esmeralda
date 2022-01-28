@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\detalleVentaModelo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,6 @@ class detalleVentaSeeder extends Seeder
      */
     public function run()
     {
-        $sql =  database_path('sql/detalleventa.sql');
-        DB::unprepared(file_get_contents($sql));
+        detalleVentaModelo::factory(300)->create();
     }
 }

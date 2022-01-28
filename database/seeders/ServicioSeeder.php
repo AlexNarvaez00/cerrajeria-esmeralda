@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ventaModelo;
+use App\Models\servicioModelo;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class ventasSeeder extends Seeder
+class ServicioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class ventasSeeder extends Seeder
      */
     public function run()
     {
-        ventaModelo::factory(500)->create();
+        servicioModelo::factory(100)->create();
     }
 }
