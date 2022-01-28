@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
             DetalleServicioSeeder::class,
             ventasSeeder::class,
             detalleVentaSeeder::class,
-            ProductoDescrcipcionSeeder::class
+            ProductoDescrcipcionSeeder::class,
+            PagoModeloSeeder::class
         ]);
 
         
