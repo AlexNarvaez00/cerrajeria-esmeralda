@@ -33,7 +33,7 @@ class ProductosModeloFactory extends Factory
                         ]->idproveedor;
 
 
-        $precioCompra = $this->faker->randomDigit();
+        $precioCompra = $this->faker->randomNumber(2);
         $cantidad_existencia = $this->faker->randomDigit();
         $llavePrimaria = 'PRDC-' .$this->faker->regexify('[A-Z0-9]{5}');
             
