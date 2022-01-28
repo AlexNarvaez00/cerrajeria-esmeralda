@@ -153,7 +153,7 @@ class proveedorController extends Controller
         strtoupper($request->numext[0]).
         strtoupper($request->numext[1]);
 
-        //Nombre del campo BD----- Nombre input formulario
+            //Nombre del campo BD----- Nombre input formulario
         $proveedor->idproveedor =  $llavePrimaria;
         $proveedor->nombre = $request->nombre;
         $proveedor->apellidopaterno = $request->apellidopaterno;
@@ -182,7 +182,7 @@ class proveedorController extends Controller
         
         //Con este metodo lo guradamos, ya no necesitamos consultas SQL 
         $proveedor->save();
-
+        
         //Guardamos el telefono en la tabla telefono, al utilizar una llave foranea (idproveedor) 
         //tiene que ir en esta parte, cuando ya se ha creado la llave.
         $telefono_prov = new telefonoModelo();

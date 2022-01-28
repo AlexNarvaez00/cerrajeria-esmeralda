@@ -35,6 +35,7 @@ class CreateDireccionTable extends Migration
             
             $table->primary('iddireccion'); 
             $table->foreign('idcoldirec')->references('idcolonia')->on('colonia');
+            $table->softDeletes();
         });
     }
 
