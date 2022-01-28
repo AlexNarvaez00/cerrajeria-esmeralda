@@ -87,7 +87,6 @@
                     <td>{{$servicio->descripcion}}</td>
                     <td>{{$servicio->idcliente}}</td>
                     <td>
-
                         <button class="btn btn-information-sales" data-url-query="{{ route('servicios.folio',$servicio) }}" data-bs-toggle="modal" data-bs-target="#InformacionModalServicios">
                             <span>&#128065;</span>
                         </button>

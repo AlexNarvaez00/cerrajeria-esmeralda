@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
         //     detalleVentaSeeder::class,
         // ]);
 
+
         //\App\Models\User::factory(10)->create();
         //usuariosModel::factory(50)->create();
     }
