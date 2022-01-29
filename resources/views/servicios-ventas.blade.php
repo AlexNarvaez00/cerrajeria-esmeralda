@@ -335,7 +335,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-            <input disabled="true" type="text" id="infoAP" class="form-control" aria-label="Username" aria-describedby="basic-addon1">           
+            <input disabled="true" id="infoAP" type="text" id="infoAP" class="form-control" aria-label="Username" aria-describedby="basic-addon1">           
           </div>       
         </div>
 
@@ -365,7 +365,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-1 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Calle</span>
-            <input disabled="true" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+            <input disabled="true" id="infoCalle" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
           </div>          
         </div>
         <div class="col-md-6 col-sm-12">
@@ -380,35 +380,27 @@
       <div class="row">
 
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-1">
-          <label class="input-group-text" for="inputEstado">Estado</label>
-            <select disabled="true" id="inputEstado" class="form-select" value="">
-              <option selected value="0">Selecciona un estado</option>             
-            </select>
-          
-        </div>        
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Estado</span>
+            <input disabled="true" id="infoEstado" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>       
       </div> 
 
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-1">
-          <label class="input-group-text" for="idMunicipio">Municipio</label>
-          <select disabled="true" id="idMunicipio" class="form-select">
-            <option selected value="0">Selecciona un municipio</option>               
-          </select>
-          
-        </div>       
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Muncipio</span>
+            <input disabled="true" id="infoMunicipio" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>   
       </div>     
 
     </div>
     <br>
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <div class="input-group mb-1">
-          <label class="input-group-text" for="idColonia">Colonia</label>
-          <select disabled="true" id="idColonia" class="form-select" name="colonia">
-            <option selected value="0">Selecciona una colonia</option>
-          </select>         
-        </div>        
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Colonia</span>
+            <input disabled="true" id="infoColonia" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>          
       </div>
     </div>
 

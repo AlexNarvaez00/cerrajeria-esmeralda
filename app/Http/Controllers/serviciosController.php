@@ -24,9 +24,13 @@ class serviciosController extends Controller{
         return response()->json($servicio);
     }
     //Obtiene un cliente especificado
-    public function getCliente(Request $request){            
-        $cliente = clienteModelo::findOrFail($request->id);
-        return response()->json($cliente);
+    public function getInfoCliente(Request $request){      
+        $cliente = clienteModelo::find($request->id);
+        $direccion = direccionModelo::find($request->idDireccion);
+        $colonia = coloniaModelo::find($direccion->idcoldirec);
+        $municipio = municipiosModelo::find($colonia->idmunicol);
+        $estado = estadosModelo::find($municipio->idestado);
+        return response()->json(['data' => ['cliente'=>$cliente, 'direccion'=>$direccion, 'colonia' => $colonia,'municipio'=>$municipio,'estado'=>$estado]]);
     }
 
     public function store(Request $request){
