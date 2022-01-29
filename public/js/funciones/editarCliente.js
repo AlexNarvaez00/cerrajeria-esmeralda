@@ -17,6 +17,12 @@ const mostarInformacion = (e) =>{
 
     let formulario = modal.getElementsByTagName('form')[0];
     formulario.action = data.routeUrl;
+    document.getElementById('urlTemp').value = data.routeUrl;
+
+    document.getElementById('inputNombreClienteEditar').value = data.nombre;
+    document.getElementById('inputApellidoPClienteEditar').value = data.apellidop;
+    document.getElementById('inputApellidoMClienteEditar').value = data.apellidom;
+    document.getElementById('inputNumTelefonoEditar').value = data.tel;
 
 };
 

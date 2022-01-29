@@ -65,18 +65,19 @@
                             <!--ID de la tabla clientes-->    
                             <th scope="col">{{$cliente->idcliente}}</th>
                             <!--Los otros atributos de la tabla clientes-->
-                            <td>{{$cliente->nombre}}</td>
-                            <td>{{$cliente->apellidoPaterno}}</td>
-                            <td>{{$cliente->apellidoMaterno}}</td>
-                            <td>{{$cliente->telefono}}</td>
+                            <td class="data">{{$cliente->nombre}}</td>
+                            <td class="data">{{$cliente->apellidoPaterno}}</td>
+                            <td class="data">{{$cliente->apellidoMaterno}}</td>
+                            <td class="data">{{$cliente->telefono}}</td>
                             <!--Botones-->
                                 <td>
+                                <a class="btneditar" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                     <button class="btn boton-editar" 
                                         data-id="{{$cliente->idcliente}}"
                                         data-nombre="{{$cliente->nombre}}"
-                                        data-nombre="{{$cliente->apellidoPaterno}}"
-                                        data-nombre="{{$cliente->apellidoMaterno}}"
-                                        data-nombre="{{$cliente->telefono}}"
+                                        data-apellidop="{{$cliente->apellidoPaterno}}"
+                                        data-apellidom="{{$cliente->apellidoMaterno}}"
+                                        data-tel="{{$cliente->telefono}}"
                                         data-bs-toggle="modal"
                                         data-route-url="{{route('clientes.update',$cliente)}}" 
                                         data-bs-target="#editarClientesModal">
@@ -84,6 +85,7 @@
                                     </button>
                                 </td>
                             <td>
+                            <a class="btnborrar" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <form class="form-detele" action="{{route('clientes.destroy',$cliente)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -91,9 +93,9 @@
                                     class="btn delete" 
                                     data-id="{{$cliente->idcliente}}"
                                     data-nombre="{{$cliente->nombre}}"
-                                    data-nombre="{{$cliente->apellidoPaterno}}"
-                                    data-nombre="{{$cliente->apellidoMaterno}}"
-                                    data-nombre="{{$cliente->telefono}}"
+                                    data-apellidop="{{$cliente->apellidoPaterno}}"
+                                    data-apellidom="{{$cliente->apellidoMaterno}}"
+                                    data-tel="{{$cliente->telefono}}"
 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#confirmacionModal">
@@ -177,6 +179,7 @@ rutaEnvio="" metodoFormulario="POST">
         <div class="container-fluid">
             <div class="row">
                 @csrf
+                
                 <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <!--Checar método PUT-->

@@ -28,7 +28,7 @@ const mostarInformacion = (e) =>{
 
     document.getElementById('inputNombreProveedorEditar').value = data.nombre;
     document.getElementById('inputApellidoPProveedorEditar').value = data.apellidop;
-    document.getElementById('inputApellidoMProveedorEditar').value = data.apellidom;
+    document.getElementById('inputApellidoMProveedorEditar').value = data.apellidom; //pendiente porque no jalan
     document.getElementById('inputNumTelefonoEditar').value = data.numtelefono;
     document.getElementById('inputCorreoEditar').value = data.correo;
 };
