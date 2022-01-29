@@ -91,7 +91,7 @@
       @endforeach        
       </tbody>
     </table>
-
+    {{$serviciosLista->links()}}
   
   </div>
 </div>
@@ -304,7 +304,7 @@
     
     @endslot
     @slot('footerModal')
-      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar"/>    
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar" data-bs-dismiss="modal"/>    
       <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Realizar venta" /> 
     @endslot
     @endcomponent
@@ -319,7 +319,7 @@
         <div class="col-md-5 col-sm-12">
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">idCliente</span>
-              <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" required>
+              <input disabled="true" id="infoIdCliente" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
             </div>            
         </div>
       </div>
@@ -328,16 +328,14 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
-            <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1"  required>
-            <h5 class="text-danger" for="basic-url">*</h5>
+            <input disabled="true" id="infoNombre" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">            
           </div>   
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
-            <input type="text" maxlength="30"  class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" required>
-            <h5 class="text-danger" for="basic-url">*</h5>
+            <input disabled="true" id="infoAP" type="text" id="infoAP" class="form-control" aria-label="Username" aria-describedby="basic-addon1">           
           </div>       
         </div>
 
@@ -347,28 +345,70 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
-              <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1">
-              <h5 class="text-danger" for="basic-url">*</h5>
+              <input disabled="true" type="text" id="infoAM" class="form-control" aria-label="Username" aria-describedby="basic-addon1">              
             </div>          
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
-            <input type="number" maxlength="10"  class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1">
-            <h5 class="text-danger" for="basic-url">*</h5>
+            <input disabled="true" type="number" id="infoTel" class="form-control" aria-label="Username" aria-describedby="basic-addon1">            
           </div>          
         </div>
       </div>
       <hr>
-      <h5>Datos del lugar</h5>
+      <div class="container-fluid">
+
+      <h4 class="d-flex justify-content-center">Datos del lugar</h4>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Calle</span>
+            <input disabled="true" id="infoCalle" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>          
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Número ext</span>
+            <input disabled="true" type="text" id="infoNumEx" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>
+            
+          </div>          
+        </div>
+      </div>
+      <br>
+      <div class="row">
+
+      <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Estado</span>
+            <input disabled="true" id="infoEstado" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>       
+      </div> 
+
+      <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Muncipio</span>
+            <input disabled="true" id="infoMunicipio" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>   
+      </div>     
+
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Colonia</span>
+            <input disabled="true" id="infoColonia" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" required>           
+          </div>          
+      </div>
+    </div>
 
 
     </div>
     @endslot
     @slot('footerModal')
-      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar"/>  
-   
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar" data-bs-dismiss="modal"/>   
     @endslot
     @endcomponent
 @endsection

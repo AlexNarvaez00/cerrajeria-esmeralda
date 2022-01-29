@@ -49,7 +49,7 @@
     <!--Seccion de la tabla-->
     <div class="conteiner-fluid">
         <div class="col-12 text-center">
-            <table class="table">
+            <table class="table" id="tablaProductos">
                 <thead>
                     <tr>
                     @foreach ($camposVista as $campo)
@@ -99,6 +99,7 @@
                    
                 </tbody>
             </table>
+            {{$registrosProductos->appends(request()->input())->links()}}
         </div>
     </div>
     @component('components.modal')

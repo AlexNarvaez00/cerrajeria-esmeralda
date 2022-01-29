@@ -90,12 +90,11 @@ class productosController extends Controller
         $estadosLista = estadosModelo::all(); //Recupera todos los estados de la tabla estados de la bas de datos
         //Verifica si no se realizo una busqueda en la vista de productos retorna todos los productos si no cumple la condición      
         if(count($request->all()) >= 0){
-            $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')
-                                     ->get();
+            $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')->paginate(10);
             $this->listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%')
-                                         ->get();
+            ->get();
         }else{        
-            $this->listaProductos = productosModelo::all();
+            $this->listaProductos = productosModelo::paginate(10);
         }       
         return view('productos') //retorna la vista productos          
             ->with('camposVista',$this->camposVista)//retiorna Campos de la tablas
@@ -142,11 +141,13 @@ class productosController extends Controller
      * 
      * @return response retorna la información solicitada desde la vista
      */
-    public function getDetalles(Request $request){        
+    public function getDetalles(Request $request){           
         $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);//recupera la descripcion de un producto
-        $proveedor = proveedorModelo::find($request->idproveedor); //busca a un proveedor
+        $proveedor = proveedorModelo::findOrFail($request->idproveedor); //busca a un proveedor
         //Retorna al proveedor y la descripcion en formato json
+       
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
+        
     }
 
     /**

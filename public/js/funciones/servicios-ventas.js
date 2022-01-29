@@ -149,6 +149,36 @@ $(".btnDetalleServicio").on("click", function(event){
 
 });
 
+$(".btnDetalleCliente").on("click", function(event){
+    let fila = $(this).closest("tr").find(".data");
+    var idCliente = fila[5].innerHTML;
+    var idDireccion = fila[2].innerHTML;
+    minAjax({
+        url:"/servicio/infoCliente", 
+        type:"POST",
+    data:{
+        _token: document.querySelector('input[name="_token"]').value,
+        id:idCliente,
+        idDireccion:idDireccion
+    },                    
+    success: function(data){
+        data = JSON.parse(data); 
+        $("#infoIdCliente").val(data.data.cliente.idcliente);
+        $("#infoNombre").val(data.data.cliente.nombre);
+        $("#infoAP").val(data.data.cliente.apellidoPaterno);
+        $("#infoAM").val(data.data.cliente.apellidoMaterno);
+        $("#infoAM").val(data.data.cliente.apellidoMaterno);
+        $("#infoTel").val(data.data.cliente.telefono);
+        $("#infoCalle") .val(data.data.direccion.calle); 
+        $("#infoNumEx") .val(data.data.direccion.numero); 
+        $("#infoColonia") .val(data.data.colonia.nombre);  
+        $("#infoMunicipio") .val(data.data.municipio.nombre);  
+        $("#infoEstado") .val(data.data.estado.nombre);  
+            
+    }
+    });
+});
+
         
        
         

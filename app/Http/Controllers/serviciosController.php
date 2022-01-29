@@ -15,7 +15,7 @@ class serviciosController extends Controller{
     protected  $serviciosLista;//Esta variables para guardar la lista de usuarios     
 
     public function __construct(){        
-        $this->serviciosLista = servicioModelo::all(); //Obtiene todos los registros de la tabla servicios
+        $this->serviciosLista = servicioModelo::paginate(10); //Obtiene todos los registros de la tabla servicios
         $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente','Info cliente','Detalle servicio']; //Almacena todos los campos de la tabla de la vista
     }   
 
@@ -24,10 +24,13 @@ class serviciosController extends Controller{
         return response()->json($servicio);
     }
     //Obtiene un cliente especificado
-    public function getCliente(Request $request){            
-
+    public function getInfoCliente(Request $request){      
         $cliente = clienteModelo::find($request->id);
-        return response()->json($cliente);
+        $direccion = direccionModelo::find($request->idDireccion);
+        $colonia = coloniaModelo::find($direccion->idcoldirec);
+        $municipio = municipiosModelo::find($colonia->idmunicol);
+        $estado = estadosModelo::find($municipio->idestado);
+        return response()->json(['data' => ['cliente'=>$cliente, 'direccion'=>$direccion, 'colonia' => $colonia,'municipio'=>$municipio,'estado'=>$estado]]);
     }
 
     public function store(Request $request){
@@ -100,5 +103,7 @@ class serviciosController extends Controller{
         $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
         return response()->json($listaColonias);
     }
+
+    
 
 }
