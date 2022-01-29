@@ -142,10 +142,12 @@ class productosController extends Controller
      * @return response retorna la información solicitada desde la vista
      */
     public function getDetalles(Request $request){           
-        $descripcionProducto = productosDescripcionModelo::findOrFail($request->clave_producto);//recupera la descripcion de un producto
+        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);//recupera la descripcion de un producto
         $proveedor = proveedorModelo::findOrFail($request->idproveedor); //busca a un proveedor
         //Retorna al proveedor y la descripcion en formato json
+       
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
+        
     }
 
     /**

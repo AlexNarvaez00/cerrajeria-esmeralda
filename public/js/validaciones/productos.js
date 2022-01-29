@@ -64,7 +64,7 @@ $(".btnEditar").on("click", function () {
 //Opción para el boton ver detalles
 $(".btnDetalles").on("click", function () {
     let fila = $(this).closest("tr").find(".dato");
-    var claveproducto = fila[0].innerHTML;
+    var claveproducto = fila[0].innerHTML;    
     var claveProveedor = fila[6].innerHTML;    
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
@@ -82,8 +82,7 @@ $(".btnDetalles").on("click", function () {
             idproveedor: claveProveedor,
         },
         success: function (data) {
-            data = JSON.parse(data);
-            alert("Hola");
+            data = JSON.parse(data);                      
             $("#detalleDescripcion").val(data.data.descripcion.descripcion);
             $("#detalleIdProveedor").val(data.data.proveedor.idproveedor);
             $("#detalleNombreProveedor").val(data.data.proveedor.nombre);        
