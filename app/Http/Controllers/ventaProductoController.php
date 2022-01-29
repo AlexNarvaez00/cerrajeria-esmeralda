@@ -28,7 +28,7 @@ class ventaProductoController extends Controller
         $this->productosjoin = productosModelo::leftJoin("productodescripcion","productodescripcion.clave_producto", "=", "productos.clave_producto")
         ->select("*")
         ->get();
-        $this->productos = productosModelo::all();
+        $this->productos = productosModelo::paginate(10);
         //Son los campos de las tablas
         $this->camposproductosCarrito = ['Clave Producto','Nombre Producto','Productos disponibles','Cantidad','Stock','Precio individual','Quitar'];
         $this->camposProductos = ['Clave Producto','Nombre Producto','Precio compra','Precio venta','Existencia','Stock','Agregar al carrito'];

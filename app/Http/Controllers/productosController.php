@@ -90,12 +90,11 @@ class productosController extends Controller
         $estadosLista = estadosModelo::all(); //Recupera todos los estados de la tabla estados de la bas de datos
         //Verifica si no se realizo una busqueda en la vista de productos retorna todos los productos si no cumple la condición      
         if(count($request->all()) >= 0){
-            $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')
-                                     ->get();
+            $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')->paginate(10);
             $this->listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%')
                                          ->get();
         }else{        
-            $this->listaProductos = productosModelo::all();
+            $this->listaProductos = productosModelo::paginate(3);
         }       
         return view('productos') //retorna la vista productos          
             ->with('camposVista',$this->camposVista)//retiorna Campos de la tablas

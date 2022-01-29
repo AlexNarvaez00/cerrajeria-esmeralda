@@ -15,7 +15,7 @@ class serviciosController extends Controller{
     protected  $serviciosLista;//Esta variables para guardar la lista de usuarios     
 
     public function __construct(){        
-        $this->serviciosLista = servicioModelo::all(); //Obtiene todos los registros de la tabla servicios
+        $this->serviciosLista = servicioModelo::paginate(10); //Obtiene todos los registros de la tabla servicios
         $this->camposTabla = ['idServicio','fecha y hora','idDirección','monto','Descripción','idCliente','Info cliente','Detalle servicio']; //Almacena todos los campos de la tabla de la vista
     }   
 
