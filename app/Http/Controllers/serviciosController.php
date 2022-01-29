@@ -25,8 +25,7 @@ class serviciosController extends Controller{
     }
     //Obtiene un cliente especificado
     public function getCliente(Request $request){            
-
-        $cliente = clienteModelo::find($request->id);
+        $cliente = clienteModelo::findOrFail($request->id);
         return response()->json($cliente);
     }
 
@@ -100,5 +99,7 @@ class serviciosController extends Controller{
         $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();
         return response()->json($listaColonias);
     }
+
+    
 
 }

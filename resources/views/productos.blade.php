@@ -99,7 +99,7 @@
                    
                 </tbody>
             </table>
-            {{$registrosProductos->links()}}
+            {{$registrosProductos->appends(request()->input())->links()}}
         </div>
     </div>
     @component('components.modal')

@@ -149,6 +149,13 @@ $(".btnDetalleServicio").on("click", function(event){
 
 });
 
+$(".btnDetalleCliente").on("click", function(event){
+    let fila = $(this).closest("tr").find(".data");
+    var idCliente = fila[5].innerHTML;
+    alert(idCliente);
+
+});
+
         
        
         
