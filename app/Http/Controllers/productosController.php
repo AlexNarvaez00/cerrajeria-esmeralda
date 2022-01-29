@@ -92,9 +92,9 @@ class productosController extends Controller
         if(count($request->all()) >= 0){
             $this->listaProductos = productosModelo::where('nombre_producto','like',$request->inputBusqueda.'%')->paginate(10);
             $this->listaDescripciones = productosDescripcionModelo::where('clave_producto','like',$request->inputBusqueda.'%')
-                                         ->get();
+            ->get();
         }else{        
-            $this->listaProductos = productosModelo::paginate(3);
+            $this->listaProductos = productosModelo::paginate(10);
         }       
         return view('productos') //retorna la vista productos          
             ->with('camposVista',$this->camposVista)//retiorna Campos de la tablas
@@ -141,9 +141,9 @@ class productosController extends Controller
      * 
      * @return response retorna la información solicitada desde la vista
      */
-    public function getDetalles(Request $request){        
-        $descripcionProducto = productosDescripcionModelo::find($request->clave_producto);//recupera la descripcion de un producto
-        $proveedor = proveedorModelo::find($request->idproveedor); //busca a un proveedor
+    public function getDetalles(Request $request){           
+        $descripcionProducto = productosDescripcionModelo::findOrFail($request->clave_producto);//recupera la descripcion de un producto
+        $proveedor = proveedorModelo::findOrFail($request->idproveedor); //busca a un proveedor
         //Retorna al proveedor y la descripcion en formato json
         return response()->json(['data' => ['descripcion'=>$descripcionProducto,'proveedor'=>$proveedor]]);
     }

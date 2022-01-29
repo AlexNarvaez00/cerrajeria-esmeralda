@@ -64,9 +64,8 @@ $(".btnEditar").on("click", function () {
 //Opción para el boton ver detalles
 $(".btnDetalles").on("click", function () {
     let fila = $(this).closest("tr").find(".dato");
-
     var claveproducto = fila[0].innerHTML;
-    var claveProveedor = fila[6].innerHTML;
+    var claveProveedor = fila[6].innerHTML;    
     $("#detalleClave").val(claveproducto);
     $("#detalleNombreProducto").val(fila[1].innerHTML);
     $("#detalleClasificacion").val(fila[2].innerHTML);
@@ -84,9 +83,10 @@ $(".btnDetalles").on("click", function () {
         },
         success: function (data) {
             data = JSON.parse(data);
+            alert("Hola");
             $("#detalleDescripcion").val(data.data.descripcion.descripcion);
             $("#detalleIdProveedor").val(data.data.proveedor.idproveedor);
-            $("#detalleNombreProveedor").val(data.data.proveedor.nombre);
+            $("#detalleNombreProveedor").val(data.data.proveedor.nombre);        
             $("#detalleApellidoP").val(data.data.proveedor.apellidopaterno);
             $("#detalleapellidoM").val(data.data.proveedor.apellidomaterno);
             $("#detalleCorreo").val(data.data.proveedor.correo);
@@ -248,11 +248,4 @@ $('#btnGuardar').on('click',function(e){
             window.location.reload();            
         }
        });
-});
-
-$("#tablaProductos").bootstrapTable({
-    paginación: verdadero, // Si se muestra la barra de paginación
-    pageSize: 3, // Número de filas que se muestran en una página
-    paginationLoop: false, // Si se abre el bucle infinito de la barra de paginación, haga clic en la página siguiente cuando la última página se convierta en la primera página
-    pageList: [5, 10, 20] // Seleccione cuántas filas se muestran en cada página. Si los datos son demasiado pequeños, puede ser ineficaz
 });
