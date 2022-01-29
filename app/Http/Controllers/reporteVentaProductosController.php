@@ -59,7 +59,10 @@ class reporteVentaProductosController extends Controller
             //se rellena con todos los registros
             $listaReporte = ventaModelo::paginate(10);
         }
-        $aniosDisponible = ventaModelo::selectRaw('year(fechayhora) as anio')->groupBy('anio')->get();
+        $aniosDisponible = ventaModelo::selectRaw('year(fechayhora) as anio')
+                                    ->groupBy('anio')
+                                    ->orderBy('anio')
+                                    ->get();
 
         return view('reporteVentaProductos')
             ->with('camposVista', $this->camposVista)
@@ -110,10 +113,14 @@ class reporteVentaProductosController extends Controller
      */
     public function getProductsAtFolio(ventaModelo $folio_v)
     {
-        $query1 = productosModelo::join('detalleventa as dv', 'dv.clave_producto', '=', 'productos.clave_producto')
-            ->where('dv.folio_v', '=', $folio_v->folio_v)
-            ->get();
-        return response()->json($query1);
+        $query2 = ventaModelo::join('detalleventa','detalleventa.folio_v','venta.folio_v')
+                            ->join('productos' ,'productos.clave_producto','detalleventa.clave_producto')
+                            ->where('detalleventa.folio_v',$folio_v->folio_v)->get();
+
+        // $query1 = productosModelo::join('detalleventa as dv', 'dv.clave_producto', '=', 'productos.clave_producto')
+        //     ->where('dv.folio_v', '=', $folio_v->folio_v)
+        //     ->get();
+        return response()->json($query2);
     }
 
 

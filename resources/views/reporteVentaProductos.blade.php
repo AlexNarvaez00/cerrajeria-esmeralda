@@ -135,7 +135,7 @@
 <!-- ########################## MODLA DE INFORMACION DE LA VENTA ################################################-->
 <x-modalSimple idModal="InformacionModalProductos" tituloModal="Informaicon basica de la venta" >
     <x-slot name="cuerpoModal">
-        <div class="container-information overflow-auto">
+        <div class="container-information">
 
         </div>
     </x-slot >

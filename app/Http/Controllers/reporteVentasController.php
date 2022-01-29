@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\servicioModelo;
 use App\Models\productosModelo;
+use App\Models\ventaModelo;
 use Illuminate\Http\Request;
 
 /**
@@ -48,7 +49,7 @@ class reporteVentasController extends Controller
     public function index(Request $request)
     {
         $listaReporte = null;
-        if (count($request->all()) >= 0) {
+        if (count($request->all()) >= 1) {
             $listaReporte = $this->getServiciosPorConsulta($request);
         } else {
             //se rellena con todos los registros
@@ -110,6 +111,32 @@ class reporteVentasController extends Controller
         return response()->json($query1);
     }
 
+    public function getResumen($mes,$anio)
+    {
+        if ($mes > 0 && $anio == 0) {
+            $ventasPorMes = servicioModelo::selectRaw('SUM(servicio.monto) as ganancia, SUM(ds.cantidad) as materialesUtilizados')
+                ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+            return response()->json($ventasPorMes);
+        }
+        if ($mes == 0 && $anio > 0) {
+            $ventasPorAnio = servicioModelo::selectRaw('SUM(servicio.monto) AS ganancia, SUM(ds.cantidad) AS materialesUtilizados')
+                ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->whereYear('fechayhora', $anio)
+                ->get();
+            return response()->json($ventasPorAnio);
+        }
+        if ($mes > 0 && $anio > 0) {
+            $ventasPorMesAnio = servicioModelo::selectRaw('SUM(servicio.monto) as ganancia, SUM(ds.cantidad) as materialesUtilizados')
+                ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->whereYear('fechayhora', $anio)
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+            return response()->json($ventasPorMesAnio);
+        }
+        return  response()->json([]);
+    }
     /**
      * @param Request $request Este objeto se ecarga de recibir la informacion
      * que enviamos por el formulario.

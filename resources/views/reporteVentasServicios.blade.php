@@ -18,7 +18,7 @@
 <h5 class="h5 text-star mt-3 mb-5 ps-3 ">Reporte de Ventas de servicios</h5>
 
 <div class="container-fluid mb-4">
-    <form action="" class="row d-flex justify-content-end">
+    <form action="" class="row justify-content-end">
         <div class="col-5">
             <input type="text" class="form-control" placeholder="PlaceHolder">
         </div>
@@ -64,6 +64,14 @@
             </button>
         </div>
     </form>
+    <div class="row justify-content-end mt-4">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-light d-flex ps-3 pe-3" name="resumir" id="btn-resumir" data-bs-toggle="modal" data-bs-target="#InformacionResumida">
+                <span class="me-3">&#x1f4dd;</span>
+                Resumir
+            </button>
+        </div>
+    </div>
 </div>
 
 <!--Seccion de la tabla-->
@@ -95,13 +103,14 @@
                 @endforeach
             </tbody>
         </table>
+        {{$registrosVista->withQueryString()->links()}}
     </div>
 </div>
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Secccion de Modales $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 <!-- ########################## MODLA DE INFORMACION DE LA VENTA ################################################-->
 <x-modalSimple idModal="InformacionModalServicios" tituloModal="Informaicon basica del servicio">
     <x-slot name="cuerpoModal">
-        <div class="container-information overflow-auto">
+        <div class="container-information px-5">
 
         </div>
     </x-slot>
@@ -109,7 +118,22 @@
         <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Aceptar" data-bs-dismiss="modal" />
     </x-slot>
 </x-modalSimple>
+
+<!-------------------------------------  Seccion del modal de informacion resumida. -------------------------------------->
+<x-modalSimple idModal="InformacionResumida" tituloModal="Resumen de la consulta.">
+    <x-slot name="cuerpoModal">
+        <div class="container-information">
+
+        </div>
+    </x-slot>
+    <x-slot name="footerModal">
+        <x-button-normal-form type="button" estiloBoton="btn-outline-primary" texto="Cerrar" data-bs-dismiss="modal" />
+    </x-slot>
+</x-modalSimple>
+
+
 @endsection
 @section('scritps')
 <script src="./js/funciones/informacionServicios.js"></script>
+<script src="./js/reporteResumenes/resumenServicios.js"></script>
 @endsection
