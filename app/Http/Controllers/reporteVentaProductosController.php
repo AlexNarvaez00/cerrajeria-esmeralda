@@ -60,9 +60,9 @@ class reporteVentaProductosController extends Controller
             $listaReporte = ventaModelo::paginate(10);
         }
         $aniosDisponible = ventaModelo::selectRaw('year(fechayhora) as anio')
-                                    ->groupBy('anio')
-                                    ->orderBy('anio')
-                                    ->get();
+            ->groupBy('anio')
+            ->orderBy('anio')
+            ->get();
 
         return view('reporteVentaProductos')
             ->with('camposVista', $this->camposVista)
@@ -113,14 +113,76 @@ class reporteVentaProductosController extends Controller
      */
     public function getProductsAtFolio(ventaModelo $folio_v)
     {
-        $query2 = ventaModelo::join('detalleventa','detalleventa.folio_v','venta.folio_v')
-                            ->join('productos' ,'productos.clave_producto','detalleventa.clave_producto')
-                            ->where('detalleventa.folio_v',$folio_v->folio_v)->get();
+        $query2 = ventaModelo::join('detalleventa', 'detalleventa.folio_v', 'venta.folio_v')
+            ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
+            ->where('detalleventa.folio_v', $folio_v->folio_v)->get();
 
         // $query1 = productosModelo::join('detalleventa as dv', 'dv.clave_producto', '=', 'productos.clave_producto')
         //     ->where('dv.folio_v', '=', $folio_v->folio_v)
         //     ->get();
         return response()->json($query2);
+    }
+
+
+    public function getResumen($mes, $anio)
+    {
+        if ($mes > 0 && $anio == 0) {
+            
+            $ventasPorMes = ventaModelo::selectRaw('SUM(dv.importe) as ganancia, SUM(dv.cantidad) as materialesUtilizados')
+                ->join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+
+            $informacion =  ventaModelo::join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->join('productos AS p', 'p.clave_producto', 'dv.clave_producto')
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+
+            $returno = [
+                'resumen' => $ventasPorMes,
+                'informacion' => $informacion
+            ];
+
+            return response()->json($returno);
+        }
+        if ($mes == 0 && $anio > 0) {
+
+            $ventasPorAnio = ventaModelo::selectRaw('SUM(dv.importe) as ganancia, SUM(dv.cantidad) as materialesUtilizados')
+                ->join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->whereYear('fechayhora', $anio)
+                ->get();
+
+            $informacion = ventaModelo::join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->join('productos AS p', 'p.clave_producto', 'dv.clave_producto')
+                ->whereYear('fechayhora', $anio)
+                ->get();
+
+            $returno = [
+                'resumen' => $ventasPorAnio,
+                'informacion' => $informacion
+            ];
+
+            return response()->json($returno);
+        }
+        if ($mes > 0 && $anio > 0) {
+            $ventasPorMesAnio = ventaModelo::selectRaw('SUM(dv.importe) as ganancia, SUM(dv.cantidad) as materialesUtilizados')
+                ->join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->whereYear('fechayhora', $anio)
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+            $informacion = ventaModelo::join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
+                ->join('productos AS p', 'p.clave_producto', 'dv.clave_producto')
+                ->whereYear('fechayhora', $anio)
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+            $returno = [
+                'resumen' => $ventasPorMesAnio,
+                'informacion' => $informacion
+            ];
+
+            return response()->json($returno);
+        }
+        return  response()->json([]);
     }
 
 

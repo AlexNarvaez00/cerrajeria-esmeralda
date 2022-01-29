@@ -55,7 +55,10 @@ class reporteVentasController extends Controller
             //se rellena con todos los registros
             $listaReporte = servicioModelo::paginate(10);
         }
-        $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')->groupBy('anio')->get();
+        $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')
+                                                ->groupBy('anio')
+                                                ->orderBy('anio')
+                                                ->get();
         return view('reporteVentasServicios') //Nombre de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('aniosDisponibles', $aniosDisponible)
@@ -118,14 +121,34 @@ class reporteVentasController extends Controller
                 ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
                 ->whereMonth('fechayhora', $mes)
                 ->get();
-            return response()->json($ventasPorMes);
+
+            $informacion =  servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+
+            $returno = ['resumen' => $ventasPorMes,
+                        'informacion' =>$informacion
+                    ];
+
+            return response()->json($returno);
         }
         if ($mes == 0 && $anio > 0) {
             $ventasPorAnio = servicioModelo::selectRaw('SUM(servicio.monto) AS ganancia, SUM(ds.cantidad) AS materialesUtilizados')
                 ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
                 ->whereYear('fechayhora', $anio)
                 ->get();
-            return response()->json($ventasPorAnio);
+            
+            $informacion = servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->whereYear('fechayhora', $anio)
+                ->get();
+
+            $returno = ['resumen' => $ventasPorAnio,
+                'informacion' =>$informacion
+            ];
+
+            return response()->json($returno);
         }
         if ($mes > 0 && $anio > 0) {
             $ventasPorMesAnio = servicioModelo::selectRaw('SUM(servicio.monto) as ganancia, SUM(ds.cantidad) as materialesUtilizados')
@@ -133,7 +156,16 @@ class reporteVentasController extends Controller
                 ->whereYear('fechayhora', $anio)
                 ->whereMonth('fechayhora', $mes)
                 ->get();
-            return response()->json($ventasPorMesAnio);
+            $informacion = servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
+                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->whereYear('fechayhora', $anio)
+                ->whereMonth('fechayhora', $mes)
+                ->get();
+            $returno = ['resumen' => $ventasPorMesAnio,
+                'informacion' =>$informacion
+            ];
+
+            return response()->json($returno);
         }
         return  response()->json([]);
     }

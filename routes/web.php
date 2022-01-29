@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/municipio/todo', [proveedorController::class, 'getColonias'])->name('municipios.todo');
     Route::get('/users/get/{email}',[usuarioController::class,'isExists'])->name('user.exists');
     Route::get('/reporte-ventas-servicios/servicios/por/{mes}/{anio}',[reporteVentasController::class,'getResumen'])->name('resumen.servicios');
+    Route::get('/reporte-venta-productos/productos/por/{mes}/{anio}',[reporteVentaProductosController::class,'getResumen'])->name('resumen.productos');
     
    //Rutas para el modulo de ventas servicios
     Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');

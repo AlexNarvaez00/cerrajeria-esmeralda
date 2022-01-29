@@ -16,6 +16,8 @@ const meses = [
     "Noviembre",
     "Diciembre",
 ];
+
+
 const createRow = (rowDB) => {
     //Creamos un TR
     let tr = document.createElement("tr");
@@ -28,7 +30,7 @@ const createRow = (rowDB) => {
         document.createElement("td"), //4
     ];
     tds[0].innerHTML = rowDB.nombre_producto;
-    tds[1].innerHTML = rowDB.descripcion;
+    tds[1].innerHTML = rowDB.observaciones;
     tds[2].innerHTML = rowDB.clasificacion;
     tds[3].innerHTML = rowDB.precio_producto;
     tds[4].innerHTML = rowDB.cantidad;
@@ -38,6 +40,10 @@ const createRow = (rowDB) => {
     });
     return tr;
 };
+
+
+
+
 
 const createTable = (datos) => {
     //Tabla para mostrar los de las registro
@@ -49,7 +55,7 @@ const createTable = (datos) => {
     tablaInformacion.appendChild(tablaInformacionHead);
     let tablaInformacionHeaders = [
         "nombre_producto",
-        "descripcion",
+        "observaciones",
         "clasificacion",
         "precio_producto",
         "cantidad",
@@ -76,6 +82,7 @@ const createTable = (datos) => {
 };
 
 
+
 const colocarResultados = async (e) => {
     bodyModalResumen.innerHTML = "";
     let selectorMes = document.getElementById("inputSelectorMes");
@@ -85,9 +92,7 @@ const colocarResultados = async (e) => {
     let anio = selectorAnio.value;
 
     if (mes == 0 && anio == 0) return;
-    //document.location.origin      -> 'http://127.0.0.1:8000'
-    //document.location.pathname    -> '/reporte-ventas-servicios'
-    let URL = `${document.location.origin}${document.location.pathname}/servicios/por/${mes}/${anio}`;
+    let URL = `${document.location.origin}${document.location.pathname}/productos/por/${mes}/${anio}`;
     let peticionFecth = await fetch(URL);
     let datos = await peticionFecth.json();
     let p = document.createElement("p");
@@ -160,3 +165,6 @@ const colocarResultados = async (e) => {
 };
 
 botonResumir.addEventListener("click", colocarResultados);
+
+
+

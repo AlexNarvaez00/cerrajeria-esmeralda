@@ -122,7 +122,7 @@
 <!-------------------------------------  Seccion del modal de informacion resumida. -------------------------------------->
 <x-modalSimple idModal="InformacionResumida" tituloModal="Resumen de la consulta.">
     <x-slot name="cuerpoModal">
-        <div class="container-information">
+        <div class="container-information px-3">
 
         </div>
     </x-slot>
