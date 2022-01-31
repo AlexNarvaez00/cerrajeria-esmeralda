@@ -173,10 +173,32 @@ $(".btnDetalleCliente").on("click", function(event){
         $("#infoNumEx") .val(data.data.direccion.numero); 
         $("#infoColonia") .val(data.data.colonia.nombre);  
         $("#infoMunicipio") .val(data.data.municipio.nombre);  
-        $("#infoEstado") .val(data.data.estado.nombre);  
-            
+        $("#infoEstado") .val(data.data.estado.nombre);
     }
     });
+});
+
+$("#btnRealizarVenta").on("click",function(event){
+    var total = $("#inSubtotal").val();
+   $("#inTotalPagar").val(total);
+});
+
+$("#inMontoRecibido").on("keyup",function(event){
+    var montoRecibido = parseFloat($("#inMontoRecibido").val());
+    var totalPagar = parseFloat($("#inTotalPagar").val());
+    var cambio = montoRecibido - totalPagar;
+    if(montoRecibido > 0){
+        $("#letreroCambio").text("Cambio $"+cambio);
+        if(montoRecibido >= totalPagar){
+            $("#btnTerminarV").prop("disabled",false);
+        }else{
+            $("#btnTerminarV").prop("disabled",true);
+        }
+    }else{
+        $("#letreroCambio").text("Cambio $0.00");
+        $("#btnTerminarV").enable("disabled",true);
+    }
+
 });
 
         

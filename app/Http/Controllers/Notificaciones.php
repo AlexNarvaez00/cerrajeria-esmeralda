@@ -27,13 +27,13 @@ class Notificaciones extends Controller
      */
     private function getNotify()
     {
-        $productos = productosModelo::whereBetween('cantidad_existencia', [0, 5])->paginate(10);
+        $productos = productosModelo::whereBetween('cantidad_stock', [0, 2])->paginate(10);
         $informacionNotificacion = array();
         for ($index = 0; $index < count($productos); $index++) {
             $titulo = '';
             $conclusion = '';
 
-            if ($productos[$index]->cantidad_existencia == 0) {
+            if ($productos[$index]->cantidad_stock == 0) {
                 $titulo = 'El producto se ha terminado.';
                 $conclusion='se ha terminado';
             } else {
@@ -54,7 +54,7 @@ class Notificaciones extends Controller
 
 
     public function existsNotify(){
-        $data = productosModelo::whereBetween('cantidad_existencia',[0,5])->get()->count();
+        $data = productosModelo::whereBetween('cantidad_stock',[0,2])->get()->count();
         $resut= ["cantidad"=>$data];
         return response()->json($resut);
     }

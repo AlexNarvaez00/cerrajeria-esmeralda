@@ -7,6 +7,7 @@ use App\Models\productosDescripcionModelo;
 use App\Models\productosModelo;
 use App\Models\proveedorModelo;
 use App\Models\servicioModelo;
+use App\Models\telefonoModelo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -34,22 +35,22 @@ class DatabaseSeeder extends Seeder
 
         //Cargamos los estado, municipios y colonias
         $this->call([
-            ClienteSeeder::class,
+            //ClienteSeeder::class,
             estadosSeeder::class,
             municipiosSeeder::class,
             coloniasSeeder::class,
-            DireccionSeeder::class,
-            ProveedorSeeder::class,
-            ProductoSeeder::class,
-            ServicioSeeder::class,
-            DetalleServicioSeeder::class,
-            ventasSeeder::class,
-            detalleVentaSeeder::class,
-            ProductoDescrcipcionSeeder::class,
-            PagoModeloSeeder::class
+            //DireccionSeeder::class,
+            //ProveedorSeeder::class,
+            //ProductoSeeder::class,
+            //ServicioSeeder::class,
+            //DetalleServicioSeeder::class,
+            //ventasSeeder::class,
+            //detalleVentaSeeder::class,
+            //ProductoDescrcipcionSeeder::class,
+            //PagoModeloSeeder::class
         ]);
 
-        
+        //telefonoModelo::factory(10)->create();
             
 
         //Agregamos un prodcuto de prueba.

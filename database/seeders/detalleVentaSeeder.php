@@ -15,6 +15,6 @@ class detalleVentaSeeder extends Seeder
      */
     public function run()
     {
-        detalleVentaModelo::factory(300)->create();
+        detalleVentaModelo::factory(100)->create();
     }
 }
