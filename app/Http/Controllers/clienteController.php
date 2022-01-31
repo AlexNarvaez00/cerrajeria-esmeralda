@@ -122,7 +122,8 @@ class clienteController extends Controller
         $cliente = new clienteModelo();
 
         //Nombre del campo BD----- Nombre input formulario        
-        $cliente->idcliente = "cl-".$request->apellidoPaterno[1].$request->apellidoPaterno[2].$request->apellidoMaterno[1].$request->apellidoMaterno[2];
+        $cliente->idcliente = "CL-".$request->apellidoPaterno[0].date('Ymd-His');
+        //"cl-".$request->apellidoPaterno[1].$request->apellidoPaterno[2].date('Y-m-d H:i:s');
         $cliente->nombre = $request->nombre;  
         $cliente->apellidoPaterno = $request->apellidoPaterno; #checar input
         $cliente->apellidoMaterno = $request->apellidoMaterno; #checar nombre input
@@ -158,7 +159,7 @@ class clienteController extends Controller
     {
         $request->validate($this->rules2);
 
-        $cliente->idcliente = "cl-".$request->apellidoPaternoEditar[1].$request->apellidoPaternoEditar[2].$request->apellidoMaternoEditar[1].$request->apellidoMaternoEditar[2];
+        $cliente->idcliente = "CL-".$request->apellidoPaternoEditar[0].date('Ymd-His');
         $cliente->nombre = $request->nombreEditar; 
         $cliente->apellidoPaterno = $request->apellidoPaternoEditar; #checar input
         $cliente->apellidoMaterno = $request->apellidoMaternoEditar; #checar nombre input
