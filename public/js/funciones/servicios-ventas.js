@@ -190,13 +190,13 @@ $("#inMontoRecibido").on("keyup",function(event){
     if(montoRecibido > 0){
         $("#letreroCambio").text("Cambio $"+cambio);
         if(montoRecibido >= totalPagar){
-            $("#btnFinalizarVenta").prop("disabled",false);
+            $("#btnTerminarV").prop("disabled",false);
         }else{
-            $("#btnFinalizarVenta").prop("disabled",true);
+            $("#btnTerminarV").prop("disabled",true);
         }
     }else{
         $("#letreroCambio").text("Cambio $0.00");
-        $("#btnFinalizarVenta").enable("true");
+        $("#btnTerminarV").enable("disabled",true);
     }
 
 });

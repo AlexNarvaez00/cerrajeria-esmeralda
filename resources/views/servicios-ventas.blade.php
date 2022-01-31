@@ -418,7 +418,7 @@
           </div>
           <div class="modal-footer">
             <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-target="#confirmacionventaservicio" data-bs-toggle="modal" data-bs-dismiss="modal"/>  
-            <x-button-normal-form type="submit" id="btnFinalizarVenta" estiloBoton="btn-outline-primary" texto="Finalizar venta" /> 
+            <x-button-normal-form type="submit" id="btnFinalizarVenta" estiloBoton="btn-outline-primary" texto="Confirmar" data-bs-dismiss="modal"/> 
           </div>
         </div>
       </div>
@@ -455,7 +455,7 @@
     @endslot
     @slot('footerModal')     
       <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#modalservicio" data-bs-toggle="modal" data-bs-dismiss="modal"/>   
-      <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Finalizar venta" data-bs-target="#btnTerminarVenta" data-bs-toggle="modal" data-bs-dismiss="modal" /> 
+      <x-button-normal-form type="submit" id="btnTerminarV" estiloBoton="btn-outline-primary" texto="Realizar venta" data-bs-target="#btnTerminarVenta" data-bs-toggle="modal" data-bs-dismiss="modal" disabled="true"/> 
     @endslot
     @endcomponent
 
