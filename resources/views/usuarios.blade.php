@@ -112,7 +112,7 @@
             Informacion básica del usuario.
         </p>
         @error('id')
-            <p class="col-12 text-danger ps-2"> {{$message}} ó existen datos duplicados</p>
+        <p class="col-12 text-danger ps-2"> {{$message}} ó existen datos duplicados</p>
         @enderror
 
         <x-tag-obligatorios />
@@ -124,13 +124,13 @@
             <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDUsuario" name="idUsuario">
             <!--Columnas :v-->
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
+                <x-input-normal expresion="Error, valor no admitido, Ejemplo: Oscar" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
             </div>
             <div class="row">
                 <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena" />
+                <x-input-normal expresion="Error, valor no admitido, Cantidad minima de letras 8, con mayusculas, minusculas y numeros" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena"/>
             </div>
             <div class="row">
                 <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
@@ -147,7 +147,7 @@
                         Roles
                         <span class="text-danger ms-1 fs-5 fw-bold">*</span>
                     </label>
-                    <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value="{{old('rolUser')}}">
+                    <select class="form-select {{ (old('rolUser'))? 'is-valid':'' }}" id="inputRolUsuario" name="rolUser" value="{{old('rolUser')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Seleccione un valor">>
                         <option selected value="0">Selecciones rol de Usuario</option>
                         @foreach ($listaRoles as $rol)
                         <option value="{{$rol}}">{{$rol}}</option>

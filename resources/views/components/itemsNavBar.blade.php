@@ -48,7 +48,9 @@
     <i class="bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menú"></i>
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdownSesion">
+        @if(auth()->user()->rol == "Administrador")
         <li><a class="dropdown-item" href="../usuarios">Usuarios</a></li>
+        @endif
         <li>
             <form action="{{route('logout')}}" method="post">
                 @csrf
