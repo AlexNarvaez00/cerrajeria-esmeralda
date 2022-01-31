@@ -53,6 +53,7 @@ class reporteVentasController extends Controller
             $listaReporte = $this->getServiciosPorConsulta($request);
         } else {
             //se rellena con todos los registros
+            
             $listaReporte = servicioModelo::paginate(10);
         }
         $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')

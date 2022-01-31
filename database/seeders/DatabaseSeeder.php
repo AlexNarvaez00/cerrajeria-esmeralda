@@ -35,19 +35,19 @@ class DatabaseSeeder extends Seeder
 
         //Cargamos los estado, municipios y colonias
         $this->call([
-            ClienteSeeder::class,
+            //ClienteSeeder::class,
             estadosSeeder::class,
             municipiosSeeder::class,
             coloniasSeeder::class,
-            DireccionSeeder::class,
-            ProveedorSeeder::class,
-            ProductoSeeder::class,
-            ServicioSeeder::class,
-            DetalleServicioSeeder::class,
-            ventasSeeder::class,
-            detalleVentaSeeder::class,
-            ProductoDescrcipcionSeeder::class,
-            PagoModeloSeeder::class
+            //DireccionSeeder::class,
+            //ProveedorSeeder::class,
+            //ProductoSeeder::class,
+            //ServicioSeeder::class,
+            //DetalleServicioSeeder::class,
+            //ventasSeeder::class,
+            //detalleVentaSeeder::class,
+            //ProductoDescrcipcionSeeder::class,
+            //PagoModeloSeeder::class
         ]);
 
         telefonoModelo::factory(10)->create();
