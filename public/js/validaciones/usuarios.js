@@ -11,7 +11,7 @@ validator([
     [
         document.getElementById("inputNombreUsuario"),
         expresionesRegulares.nombreUsuario,
-        20
+        20,
     ],
     [document.getElementById("inputCorreo"), expresionesRegulares.correo],
     [
@@ -32,10 +32,7 @@ validator([
         document.getElementById("inputNombreUsuarioEditar"),
         expresionesRegulares.nombreUsuario,
     ],
-    [
-        document.getElementById("inputCorreoEditar"),
-        expresionesRegulares.correo,
-    ],
+    [document.getElementById("inputCorreoEditar"), expresionesRegulares.correo],
     [
         document.getElementById("inputPasswordUsuarioEditar"),
         expresionesRegulares.password,
@@ -49,34 +46,34 @@ validator([
 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
 /**
- * 
- * @param {Object} event Evento que dispara el input de "correo" 
+ *
+ * @param {Object} event Evento que dispara el input de "correo"
  */
-const verificarCorreo = async (event) => {
+const verificarCorreo = async (event,valuePrimary = '0=0') => {
     const URL = `${document.location.origin}/users/get/`;
     let correo = event.target.value;
-    if(!correo){
+    if (!correo) {
         return;
     }
-    let promesa = await fetch(URL+correo);
+    let promesa = await fetch(URL + correo+'/'+valuePrimary);
     let data = await promesa.json();
 
-    if(data.exist){
+    if (data.exist) {
         //Si el usario existe el input se pone de rojo
         event.target.classList.add("is-invalid");
         event.target.classList.remove("is-valid");
-        event.target.title="El correo ya esta en uso"
-    }else{
+        event.target.title = "El correo ya esta en uso";
+    } else {
         //Si no, se queda en verde
-        
     }
-}
-let inputCorreo = document.getElementById('inputCorreo');
-let inputCorreoEditar = document.getElementById('inputCorreoEditar');
+};
+let inputCorreo = document.getElementById("inputCorreo");
+let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+let emailChange = null;
 
-inputCorreo.addEventListener('blur',verificarCorreo);
-inputCorreoEditar.addEventListener('blur',verificarCorreo);
-
-
-
-
+inputCorreo.addEventListener("blur", verificarCorreo);
+inputCorreoEditar.addEventListener("blur", (e) => {
+    let valuePrimary = document.getElementById("urlTemp").value;
+    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
+    verificarCorreo(e,valuePrimary);
+});

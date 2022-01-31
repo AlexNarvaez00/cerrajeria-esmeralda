@@ -15,6 +15,6 @@ class ventasSeeder extends Seeder
      */
     public function run()
     {
-        ventaModelo::factory(500)->create();
+        ventaModelo::factory(100)->create();
     }
 }

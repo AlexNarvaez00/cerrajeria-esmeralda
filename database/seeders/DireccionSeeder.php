@@ -14,6 +14,6 @@ class DireccionSeeder extends Seeder
      */
     public function run()
     {
-        direccionModelo::factory(100)->create();
+        direccionModelo::factory(30)->create();
     }
 }
