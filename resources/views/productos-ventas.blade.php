@@ -80,7 +80,7 @@
                 </tbody>
                 <!---->
             </table>
-            {{$productos->links()}}
+            
         </div>
     </div>
     @component('components.modalSimple')
