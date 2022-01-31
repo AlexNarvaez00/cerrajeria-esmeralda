@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             //PagoModeloSeeder::class
         ]);
 
-        telefonoModelo::factory(10)->create();
+        //telefonoModelo::factory(10)->create();
             
 
         //Agregamos un prodcuto de prueba.
