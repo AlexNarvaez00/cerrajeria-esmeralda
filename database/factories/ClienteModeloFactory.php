@@ -20,7 +20,7 @@ class ClienteModeloFactory extends Factory
      */
     public function definition()
     {
-        $number = $this->faker->isbn10();
+        $number = $this->faker->ean8();
         $llavePrimaria = 'CLI-'.
                         $this->faker->buildingNumber().'-'.
                         $this->faker->buildingNumber().'-'.
