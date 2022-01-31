@@ -46,7 +46,7 @@ validator([
 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
 /**
- *
+ * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
  * @param {Object} event Evento que dispara el input de "correo"
  */
 const verificarCorreo = async (event,valuePrimary = '0=0') => {
@@ -69,11 +69,45 @@ const verificarCorreo = async (event,valuePrimary = '0=0') => {
 };
 let inputCorreo = document.getElementById("inputCorreo");
 let inputCorreoEditar = document.getElementById("inputCorreoEditar");
-let emailChange = null;
 
 inputCorreo.addEventListener("blur", verificarCorreo);
 inputCorreoEditar.addEventListener("blur", (e) => {
     let valuePrimary = document.getElementById("urlTemp").value;
     valuePrimary = valuePrimary.replace(document.location.href + "/", "");
     verificarCorreo(e,valuePrimary);
+});
+
+
+//------------------Input de la contraseña---------------------------------------------------------------------------------
+
+let inputContraseniaConfirm = document.getElementById("inputPasswordUsuarioCon");
+let inputContrasenia = document.getElementById("inputPasswordUsuario");
+
+inputContraseniaConfirm.addEventListener('keyup',e=>{
+    let value = e.target.value;
+    e.target.title="Las constraseñas con coinciden";
+    var tooltip = new bootstrap.Tooltip(e.target, {
+        title: "Las constraseñas con coinciden" 
+    });
+    if(value != inputContrasenia.value){
+        //Las constraseñas son diferentes
+        
+        e.target.classList.add("is-invalid");
+        e.target.classList.remove("is-valid");
+    }else{
+        //Las constraseñas son iguales
+        e.target.classList.add("is-valid");
+        e.target.classList.remove("is-invalid");
+    }
+});
+
+inputContraseniaConfirm.addEventListener('blur',e=>{
+    let value = e.target.value;
+    if(value != inputContrasenia.value){
+        e.target.classList.add("is-invalid");
+        e.target.classList.remove("is-valid");
+    }
+    var tooltip = new bootstrap.Tooltip(e.target, {});
+    tooltip.hide();
+    tooltip.disable();
 });
