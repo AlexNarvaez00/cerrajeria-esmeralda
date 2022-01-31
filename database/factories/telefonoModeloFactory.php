@@ -30,7 +30,7 @@ class telefonoModeloFactory extends Factory
         $proveedor = $proveedores[$this->faker->numberBetween(0, $limiteVenta)];
         return [
             'idtelefono' =>  substr($this->faker->uuid(), 0, 20),
-            'telefono' => $this->faker->tollFreePhoneNumber(),
+            'telefono' => $this->faker->ean8(),
             'idproveedor' => $proveedor->idproveedor
         ];
     }
