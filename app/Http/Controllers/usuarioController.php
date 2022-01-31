@@ -129,13 +129,13 @@ class usuarioController extends Controller
     public function store(Request $request)
     {
         $idUser =  'USU-' .
-        strtoupper($request->nombreUsuario[0]) .
-        strtoupper($request->nombreUsuario[1]) .
-        strtoupper($request->rolUser[0]) .
-        strtoupper($request->rolUser[1]) . '-' .
-        date('dmy');
+            strtoupper($request->nombreUsuario[0]) .
+            strtoupper($request->nombreUsuario[1]) .
+            strtoupper($request->rolUser[0]) .
+            strtoupper($request->rolUser[1]) . '-' .
+            date('dmy');
 
-        $request->id = $idUser; 
+        $request->id = $idUser;
 
         //Validacion de los campos
         $request->validate($this->rules);
@@ -197,25 +197,25 @@ class usuarioController extends Controller
         // $idUser =  'USU-' .
 
         $correoNuevo = $request->correoEditar;
-        $uniqueEmail = User::where('email','!=',$usuario->email)
-                ->where('email',$correoNuevo) 
-                ->get()
-                ->count() > 0;
-        if($uniqueEmail){
+        $uniqueEmail = User::where('email', '!=', $usuario->email)
+            ->where('email', $correoNuevo)
+            ->get()
+            ->count() > 0;
+        if ($uniqueEmail) {
             //Correo se repitio
             $this->rules2['correoEditar'] = 'required|email|unique:App\Models\User,email';
-        }else{
+        } else {
             //No lo modifico
             $this->rules2['correoEditar'] = 'required|email';
         }
 
-        if($request->contrasenaEditar){
+        if ($request->contrasenaEditar) {
             //Si la constraseña contiene algo.
             $this->rules2['contrasenaEditar'] = 'required|confirmed|regex:/^[A-Za-z0-9\_]{8,14}$/';
             $usuario->password = Hash::make($request->contrasenaEditar);
         }
         $request->validate($this->rules2);
-        
+
         $usuario->name = $request->nombreUsuarioEditar;
         $usuario->email = $request->correoEditar;
         $usuario->rol = $request->rolUserEditar;
@@ -225,10 +225,21 @@ class usuarioController extends Controller
     }
 
 
-    public function isExists($email){
-        $userEmailExist = User::where('email',$email)
-                            ->get()
-                            ->count() == 1;
+    public function isExists($email, $valuePrimary)
+    {
+        $userEmailExist = null;
+        if ($valuePrimary == '0=0') {
+            //Cuando se registra un usuaruo por primera vez
+            $userEmailExist = User::where('email', $email)
+                ->get()
+                ->count() == 1;
+        } else {
+            //Editamos la informacion del usuario 
+            $userEmailExist = User::where('id', '!=', $valuePrimary)
+                ->where('email', $email)
+                ->get()
+                ->count() == 1;
+        }
         $arrayInformation = [
             'exist' => $userEmailExist
         ];

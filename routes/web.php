@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/estado/todo', [proveedorController::class, 'getCiudades'])->name('estados.todo');
     Route::post('/municipio/todo', [proveedorController::class, 'getColonias'])->name('municipios.todo');
-    Route::get('/users/get/{email}',[usuarioController::class,'isExists'])->name('user.exists');
+    Route::get('/users/get/{email}/{valuePrimary}',[usuarioController::class,'isExists'])->name('user.exists');
     Route::get('/reporte-ventas-servicios/servicios/por/{mes}/{anio}',[reporteVentasController::class,'getResumen'])->name('resumen.servicios');
     Route::get('/reporte-venta-productos/productos/por/{mes}/{anio}',[reporteVentaProductosController::class,'getResumen'])->name('resumen.productos');
     
