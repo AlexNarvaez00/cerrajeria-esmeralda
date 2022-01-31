@@ -52,7 +52,7 @@ class ProductosModeloFactory extends Factory
             "precio_producto" => $precioCompra * 2.3,
             "precio_compra" => $precioCompra ,
             "cantidad_existencia" => $cantidad_existencia,
-            "cantidad_stock" => $cantidad_existencia + 5,
+            "cantidad_stock" => 5,
             "idproveedor" => $idProveedor
         ];
     }
