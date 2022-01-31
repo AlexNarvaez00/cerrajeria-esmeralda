@@ -248,7 +248,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Monto del servicio</span>
-            <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" name="monto" required>
+            <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" name="monto" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 190)" required>
             <h5 class="text-danger" for="basic-url">*</h5>
           </div>
         </div>
@@ -259,11 +259,7 @@
           <h5 class="text-danger" for="basic-url">*</h5>
         </div>    
       </div>
-    </div>
-    
-
-   
-       
+    </div> 
     @endslot
     @slot('footerModal')
     <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar"/>    
@@ -288,7 +284,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">Subtotal del servicio $</span>
-            <input id ="inSubtotal" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" required>
+            <input id ="inSubtotal" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57))" required>
             <h5 class="text-danger" for="basic-url">*</h5>
           </div>
         </div>
@@ -301,11 +297,11 @@
         </div> 
         </div>    
     </div>
-    
     @endslot
     @slot('footerModal')
-      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar" data-bs-dismiss="modal"/>    
-      <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Realizar venta" /> 
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar" data-bs-dismiss="modal"/>  
+      <!---->  
+      <x-button-normal-form type="submit" id="btnRealizarVenta" estiloBoton="btn-outline-primary" texto="Realizar venta" data-bs-toggle="modal" data-bs-target="#confirmacionventaservicio"/> 
     @endslot
     @endcomponent
 
@@ -403,14 +399,66 @@
           </div>          
       </div>
     </div>
-
-
     </div>
     @endslot
     @slot('footerModal')
       <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cerrar" data-bs-dismiss="modal"/>   
     @endslot
     @endcomponent
+    <!-- Modal -->
+    <div class="modal fade" id="btnTerminarVenta" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Confirmar venta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Verifica que los datos sean correctos
+          </div>
+          <div class="modal-footer">
+            <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Cancelar" data-bs-target="#confirmacionventaservicio" data-bs-toggle="modal" data-bs-dismiss="modal"/>  
+            <x-button-normal-form type="submit" id="btnFinalizarVenta" estiloBoton="btn-outline-primary" texto="Finalizar venta" /> 
+          </div>
+        </div>
+      </div>
+    </div>
+    @component('components.modalSimple')
+    @slot('idModal','confirmacionventaservicio')
+    @slot('tituloModal','Confirmar venta')
+    @slot('cuerpoModal')
+      <form>
+        <div class="container">
+          <h6>Ingrese el monto</h6>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3 ">
+                <span class="input-group-text" id="basic-addon1">Total a pagar $</span>
+                <input id ="inTotalPagar" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" readonly>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3 ">
+                <span class="input-group-text" id="basic-addon1">Monto recibido $</span>
+                <input id ="inMontoRecibido" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 190)" aria-describedby="basic-addon1" required>
+                <h5 class="text-danger" for="basic-url">*</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <h4 id="letreroCambio">Cambio $0.00</h4>
+            </div>
+          </div>
+        </div>     
+      </form>   
+    @endslot
+    @slot('footerModal')     
+      <x-button-normal-form type="reset" estiloBoton="btn-outline-danger" texto="Regresar" data-bs-target="#modalservicio" data-bs-toggle="modal" data-bs-dismiss="modal"/>   
+      <x-button-normal-form type="submit" estiloBoton="btn-outline-primary" texto="Finalizar venta" data-bs-target="#btnTerminarVenta" data-bs-toggle="modal" data-bs-dismiss="modal" /> 
+    @endslot
+    @endcomponent
+
 @endsection
 @section('scritps')
 <script src="./js/jquery-3.6.0.min.js"></script>

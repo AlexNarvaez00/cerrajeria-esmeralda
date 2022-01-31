@@ -23,6 +23,7 @@ $(".btnAgregarAlCarro").on("click", function() {
         $("#letreroConfirmacion").text("¿Deseas agregar a "+ fila[1].innerHTML+" al carrito?");
     }else{
         $("#liveToast").toast("show");
+        alert("Producto agotado");
     }        
 });
 

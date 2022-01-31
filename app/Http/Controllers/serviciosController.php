@@ -104,6 +104,10 @@ class serviciosController extends Controller{
         return response()->json($listaColonias);
     }
 
+    public function getVenta(Request $request){
+        
+    }
+
     
 
 }
