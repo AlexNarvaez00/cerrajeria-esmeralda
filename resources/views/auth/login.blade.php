@@ -43,14 +43,17 @@
         <label for="nombreUser" class="form-label">Correo/Nombre de usuario</label>
         <input type="email" name="email" class="form-control" id="nombreUser" aria-describedby="emailHelp" placeholder="">
         <!-- <div id="emailHelp" class="form-text">Ingrese el nombre de usuario</div> -->
-        @if($errors->has('email'))
-          <p class="invalid-feedback">{{$errors->email}}</p>
-        @endif
+        @error('email')
+          <p class="col-12 text-danger ps-2"> {{$message}}</p>
+        @enderror
       </div>
       <!--Inputs del propio formulario-->
       <div class="m-4">
         <label for="passwordUser" class="form-label">Contraseña</label>
         <input type="password" name="password" class="form-control" id="passwordUser" aria-describedby="emailHelp" placeholder="">
+        @error('password')
+          <p class="col-12 text-danger ps-2"> {{$message}}</p>
+        @enderror
         <!-- <div id="emailHelp" class="form-text">Ingrese la constraseña</div> -->
       </div>
       <!--Botones del formulario-->
