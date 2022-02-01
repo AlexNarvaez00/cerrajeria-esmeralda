@@ -102,6 +102,8 @@
             </article>
         </div>
         @endif
+
+        @if(auth()->user()->rol != "Ayudante")
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <article class="card h-100 shadow">
                 <div class="card-img">
@@ -114,6 +116,7 @@
                 </div>
             </article>
         </div>
+        @endif
 
     </div>
 </div>

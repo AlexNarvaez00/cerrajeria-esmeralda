@@ -70,8 +70,14 @@ class productosController extends Controller
         $this->productosLista = productosModelo::all();
         $this->proveedorLista = proveedorModelo::all();
         $this->descripcionLista = productosDescripcionModelo::all();
-        $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación',
-        'Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
+        $this->camposVista = [];
+        if(auth()->user()->rol == "Administrador"){
+            $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación',
+                            'Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar','Borrar'];
+        }else{
+            $this->camposVista = ['Clave Producto','Nombre Producto','Clasificación',
+                            'Precio venta','Precio compra','Existencia','idProveedor','stock','Ver detalles','Editar'];
+        }
     }
 
      /**

@@ -94,7 +94,10 @@ class proveedorController extends Controller
      */
     public function __construct()
     {
-        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar']; //Titulos de la tabla en la vista de proveedores
+        $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar']; //Titulos de la tabla en la vista de proveedores
+        if(auth()->user()->rol == "Administrador"){
+            $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar'];
+        }
     }
     
     /**
