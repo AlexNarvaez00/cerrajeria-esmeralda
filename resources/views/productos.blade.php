@@ -133,41 +133,46 @@
                         <span class="input-group-text" id="basic-addon1">Nombre de producto</span>
                         <input id ="inNomProducto" maxlength="20" type="text" class="form-control" placeholder="Ejemp. Candado" aria-label="Username" aria-describedby="basic-addon1" name="nombre_producto" required>  
                         <h5 class="text-danger" for="basic-url">*</h5>                       
-                    </div>                    
+                    </div> 
+                    <label class="text-danger" for="basic-url" id="labelNombreProducto"></label>                     
                 </div>
             </div>            
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Cant. existencia</span>
                         <input id ="inCantExistencia" type="number" class="form-control" min = "0" value="0" placeholder="Cantidad en existencia" aria-label="Username" aria-describedby="basic-addon1" name="cantidad_existencia" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
                         <h5 class="text-danger" for="basic-url">*</h5>  
-                    </div>                                    
+                    </div>    
+                    <label class="text-danger" for="basic-url" id="labelCantExistencia"></label>                                     
                 </div> 
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Clasificación</span>
                         <input id ="inClasificacion" maxlength="20" type="text" class="form-control" placeholder="Ejemp. Candados" aria-label="Username" aria-describedby="basic-addon1" name="clasificacion">
                         <h5 class="text-danger" for="basic-url">*</h5>
                     </div>
+                    <label class="text-danger" for="basic-url" id="labelClasificacion"></label>   
                 </div>                
             </div>          
             
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon1">Precio compra $</span>
+                        <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="0.00" placeholder="Precio compra" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
+                        <h5 class="text-danger" for="basic-url">*</h5>                                             
+                    </div>   
+                    <label class="text-danger" for="basic-url" id="labelPreciocompra"></label>                               
+                </div>  
+                <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Precio venta $</span>
                         <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio venta" aria-label="Username" aria-describedby="basic-addon1" name="precio_producto" required>
                         <h5 class="text-danger" for="basic-url">*</h5>  
-                    </div>                    
-                </div> 
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Precio compra $</span>
-                        <input id ="inPreciocompra" type="number" min="1" step="0.01" class="form-control" value="1.00" placeholder="Precio compra" aria-label="Username" aria-describedby="basic-addon1" name="precio_compra" required>
-                        <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                                      
-                </div>                
+                    </div>  
+                    <label class="text-danger" for="basic-url" id="labelPrecio"></label>                    
+                </div>                               
             </div>           
           
             <div class = "row">
@@ -176,7 +181,8 @@
                         <span class="input-group-text">Descripcion</span>
                         <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                     
+                    </div> 
+                    <label class="text-danger" for="basic-url" id="labelDescripcion"></label>                     
                 </div>
             </div>           
         </div>
@@ -198,8 +204,8 @@
                         <h5 class="text-danger" for="basic-url">*</h5>
                     </div>                    
                 </div>
-                <div class="col-md-6 col-sm-6">
-                    <button type="button" class="btn btn-link" data-bs-target="#agregarProveedor" data-bs-toggle="modal" data-bs-dismiss="modal">agregar proveedor</button>
+                <div class="col-md-6 col-sm-6">                    
+                    <x-button-normal-form type="button" estiloBoton="btn-outline-warning" texto="Agregar Proveedor" data-bs-target="#agregarProveedor" data-bs-toggle="modal" data-bs-dismiss="modal" />
                 </div>
             </div>
         </div>
@@ -357,44 +363,47 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Nombre</span>
-                        <input id="txtNombreProveedor" maxlength="50" placeholder="Nombre del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNombreProveedor" required>                     
+                        <span class="input-group-text" id="basic-addon1">Nombre(s)</span>
+                        <input id="txtNombreProveedor" maxlength="50" placeholder="Nombre(s) del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNombreProveedor" required>                     
                         <h5 class="text-danger" for="basic-url">*</h5>    
-                    </div>                                    
+                    </div>
+                    <label class="text-danger" for="basic-url" id="labelNombreProveedor"></label>                                     
                 </div>                
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
                         <input id="txtApellidoPProveedor" maxlength="50" placeholder="Apellido paterno del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtApellidoPProveedor" required>
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                   
+                    </div>     
+                    <label class="text-danger" for="basic-url" id="labelApellidoPProveedor"></label>                
                 </div> 
-            </div>      
-            <br>      
+            </div>         
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
                         <input id="txtApellidoMProveedor" maxlength="50" placeholder="Apellido materno del proveedor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtApellidoMProveedor" required>
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                    
+                    </div>  
+                    <label class="text-danger" for="basic-url" id="labelApellidoMProveedor"></label>                       
                 </div> 
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Numero de tel.</span>
                         <input id="txtNumeroProveedor" maxlength="10" type="number" placeholder="Numero de telefono" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="txtNumeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                    
+                    </div> 
+                    <label class="text-danger" for="basic-url" id="labelNumeroProveedor"></label>                      
                 </div> 
             </div>
-            <br>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">Correo Electrónico</span>
                         <input type="email" maxlength="30" class="form-control" placeholder="CHAPAS@hotmail.com" aria-label="Username" aria-describedby="basic-addon1" id="txtCorreoProveedor" name="txtCorreoProveedor" required>                        
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                    
+                    </div>     
+                    <label class="text-danger" for="basic-url" id="labelCorreoProveedor"></label>                 
                 </div>                
             </div>
         </div>
@@ -409,17 +418,18 @@
                         <span class="input-group-text" id="basic-addon1">Numero</span>
                         <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>                        
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                    
+                    </div>       
+                    <label class="text-danger" for="basic-url" id="labelnnumeroProveedor"></label>              
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">calle</span>
                         <input id="calleProveedor" type="text" placeholder="calle del lugar" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="calleProveedor" required>                        
                         <h5 class="text-danger" for="basic-url">*</h5>
-                    </div>                    
+                    </div>   
+                    <label class="text-danger" for="basic-url" id="labelcalleProveedor"></label>                  
                 </div> 
             </div>
-            <br>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">

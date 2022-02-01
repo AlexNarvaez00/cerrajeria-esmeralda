@@ -198,9 +198,19 @@ $("#inMontoRecibido").on("keyup",function(event){
         $("#letreroCambio").text("Cambio $0.00");
         $("#btnTerminarV").enable("disabled",true);
     }
-
 });
 
+$("#calleProveedor").on("blur",function(event){
+    var temp = $("#calleProveedor").val();
+    if(temp == ""){
+        $('#calleProveedor').addClass("is-invalid");
+        $("#labelcalleProveedor").text("El campo no debe estar vacio");
+    }
+});
+$("#calleProveedor").on("focus",function(event){
+        $("#labelcalleProveedor").text("");    
+});
+//--------------------
         
        
         

@@ -307,4 +307,14 @@ class productosController extends Controller
          }
          return response($bandera);
     }
+    public function existeCorreo(Request $request){
+        $bandera = "NULL";
+        //Si encuentra una clave primaria registrada el bdd retorna true
+        if (proveedorModelo::where('correo', "=",$request->correo)->exists()) {
+            $bandera = "true";
+         }else{
+             $bandera = "false";
+         }
+         return response($bandera);
+    }
 }
