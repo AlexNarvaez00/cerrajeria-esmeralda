@@ -62,7 +62,7 @@ class proveedorController extends Controller
         'apellidopaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'apellidomaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'numtelefono' => 'required|regex:/^[0-9]{10}$/',
-        'correo' => 'required|email',
+        'correo' => 'required|email|unique:App\Models\proveedorModelo,correo',
         'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
         'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/',
         'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/' 
@@ -139,11 +139,11 @@ class proveedorController extends Controller
      */
     public function store(Request $request){
 
-        //Creamos un nuevo objeto.
-        $proveedor = new proveedorModelo();
-
         //Validación de los campos
         $request->validate($this->reglaV);
+        
+        //Creamos un nuevo objeto.
+        $proveedor = new proveedorModelo();
 
         //Se crea una llave primaria para el proveedor a partir de los datos del formulario
         $llavePrimaria = "PROV-".
@@ -272,6 +272,28 @@ class proveedorController extends Controller
         $listaColonias = coloniaModelo::where('idmunicol','=',$llavePrimaria)->get();   //Lista de municipios que coincidan con la llave primaria
         return response()->json($listaColonias);
     }
+
+public function isExists($email, $valuePrimary)
+    {
+        $provEmailExist = null;
+        if ($valuePrimary == '0=0') {
+            //Cuando se registra un usuaruo por primera vez
+            $provEmailExist = proveedorModelo::where('correo', $email)
+                ->get()
+                ->count() == 1;
+        } else {
+            //Editamos la informacion del usuario 
+            $provEmailExist = proveedorModelo::where('idproveedor', '!=', $valuePrimary)
+                ->where('correo', $email)
+                ->get()
+                ->count() == 1;
+        }
+        $arrayInformation = [
+            'exist' => $provEmailExist
+        ];
+        return response()->json($arrayInformation);
+    }
+
 
     /**
      * Función vacia (No hace nada)
