@@ -283,27 +283,6 @@ class proveedorController extends Controller
     {
     }
 
-    public function isExists($email, $valuePrimary)
-    {
-        $provEmailExist = null;
-        if ($valuePrimary == '0=0') {
-            //Cuando se registra un usuaruo por primera vez
-            $provEmailExist = proveedorModelo::where('correo', $email)
-                ->get()
-                ->count() == 1;
-        } else {
-            //Editamos la informacion del usuario 
-            $provEmailExist = proveedorModelo::where('idproveedor', '!=', $valuePrimary)
-                ->where('correo', $email)
-                ->get()
-                ->count() == 1;
-        }
-        $arrayInformation = [
-            'exist' => $provEmailExist
-        ];
-        return response()->json($arrayInformation);
-    }
-
     /**
      * Función vacia (No hace nada).
      * @param Request $request Solicitud por parte del navegador.
