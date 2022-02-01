@@ -34,7 +34,7 @@ validator([
     [document.getElementById("inputApellidoPProveedor"), expresionesRegulares.ApellidoPProveedor],
     [document.getElementById("inputApellidoMProveedor"), expresionesRegulares.ApellidoMProveedor],
     [document.getElementById("inputNumTelefono"), expresionesRegulares.NumTelefono],
-    [document.getElementById("inputCorreo"), expresionesRegulares.Correo],
+    //[document.getElementById("inputCorreo"), expresionesRegulares.Correo],
     [document.getElementById("inputCalle"), expresionesRegulares.Calle],
     [document.getElementById("inputNumExt"), expresionesRegulares.NumExt],
     [document.getElementById("inputNumInt"), expresionesRegulares.NumInt],
@@ -54,3 +54,50 @@ validator([
     [document.getElementById("idMunicipioEditar"), "0"],
     [document.getElementById("idColoniaEditar"), "0"],
 ]);
+
+const verificarCorreo = async (event,valuePrimary = '0=0') => {
+    const URL = `${document.location.origin}/proveedores/get/`;
+    let correo = event.target.value;
+    if (!correo) {
+        return;
+    }
+    let promesa = await fetch(URL + correo+'/'+valuePrimary);
+    let data = await promesa.json();
+
+    var tooltip = new bootstrap.Tooltip(event.target, {
+        title: "El correo ya esta en uso"
+    });
+    tooltip.hide();
+    tooltip.disable();
+
+    if (data.exist) {
+        //Si el usario existe el input se pone de rojo
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid");
+        event.target.title = "El correo ya esta en uso";
+        tooltip.enable();
+        tooltip.show();
+    } else {
+        //Si no, se queda en verde
+        event.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
+        tooltip.hide();
+        tooltip.disable();
+    }
+    //tooltip.dispose();
+};
+let inputCorreo = document.getElementById("inputCorreo"); 
+let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+
+inputCorreo.addEventListener("keyup", verificarCorreo);
+inputCorreo.addEventListener("blur", event=>{
+    var tooltip = new bootstrap.Tooltip(event.target, {});
+    tooltip.hide();
+    tooltip.disable();
+    tooltip.dispose();
+});
+inputCorreoEditar.addEventListener("blur", (e) => {
+    let valuePrimary = document.getElementById("urlTemp").value;
+    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
+    verificarCorreo(e,valuePrimary);
+});
