@@ -82,6 +82,13 @@ let inputCorreo = document.getElementById("inputCorreo");
 let inputCorreoEditar = document.getElementById("inputCorreoEditar");
 
 inputCorreo.addEventListener("keyup", verificarCorreo);
+inputCorreo.addEventListener("blur", event=>{
+    var tooltip = new bootstrap.Tooltip(event.target, {
+        title: "El correo ya esta en uso"
+    });
+    tooltip.hide();
+    tooltip.disable();
+});
 inputCorreoEditar.addEventListener("blur", (e) => {
     let valuePrimary = document.getElementById("urlTemp").value;
     valuePrimary = valuePrimary.replace(document.location.href + "/", "");
