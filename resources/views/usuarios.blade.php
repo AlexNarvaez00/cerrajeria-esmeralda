@@ -267,7 +267,7 @@
     </div>
 </div>
 @endif
-
+<input type="hidden" name="jsonlaravel" value="@json($ALL_EMAILS)" id="jsonEmails">
 @endsection
 
 
@@ -275,7 +275,8 @@
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
 <script>
-    let ALL_EMAILS = @json($ALL_EMAILS);
+    let temp = document.getElementById('jsonEmails');
+    let ALL_EMAILS = JSON.parse(document.getElementById('jsonEmails').value);
 </script>
 <script src="./js/validaciones/usuarios.js"></script>
 <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
