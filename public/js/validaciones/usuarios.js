@@ -72,10 +72,11 @@ const verificarCorreo = async (event,valuePrimary = '0=0') => {
         tooltip.show();
     } else {
         //Si no, se queda en verde
+        event.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
         tooltip.hide();
         tooltip.disable();
     }
-    console.log(data);
 };
 let inputCorreo = document.getElementById("inputCorreo"); 
 let inputCorreoEditar = document.getElementById("inputCorreoEditar");
