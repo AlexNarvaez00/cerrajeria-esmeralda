@@ -75,6 +75,13 @@ class InputNormal extends Component
      */
     public $obligatorio;
 
+
+
+    /**
+     * 
+     */
+    public $expresion;
+
     /**
      * Create a new component instance.
      *
@@ -89,7 +96,7 @@ class InputNormal extends Component
      * 
      * @return void
      */
-    public function __construct($classesLabel = '', $type = 'text', $idInput, $texto, $valor = '', $nombreInput, $nombreError = '', $activeInput = '', $obligatorio = true)
+    public function __construct($classesLabel = '', $type = 'text', $idInput, $texto, $valor = '', $nombreInput, $nombreError = '', $activeInput = '', $obligatorio = true, $expresion = null)
     {
         $this->classesLabel = $classesLabel;
         $this->type = $type;
@@ -99,6 +106,12 @@ class InputNormal extends Component
         $this->nombreInput = $nombreInput;
         $this->nombreError = $nombreError;
         $this->obligatorio = $obligatorio;
+        if(!$expresion){
+            $this->expresion = "Valor no admitido";    
+        }else{
+            $this->expresion = $expresion;
+        }
+            
 
         if ($this->valor != '') {
             $this->activeInput = 'is-valid';

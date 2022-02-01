@@ -14,7 +14,9 @@
         <input type="{{$type}}" class="form-control {{$activeInput}}" 
                 value="{{ $valor }}" placeholder="" 
                 aria-label="Username" aria-describedby="basic-addon1" 
-                id="{{$idInput}}" name="{{$nombreInput}}">
+                id="{{$idInput}}" name="{{$nombreInput}}"
+                
+                data-bs-placement="top" title="{{$expresion}}">
          @if ($nombreError != '')
             @error($nombreError)
                 <p class="col-12 text-danger ps-2"> {{$message}}</p>
