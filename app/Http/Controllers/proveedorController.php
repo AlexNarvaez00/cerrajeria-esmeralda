@@ -62,7 +62,7 @@ class proveedorController extends Controller
         'apellidopaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'apellidomaterno' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'numtelefono' => 'required|regex:/^[0-9]{10}$/',
-        'correo' => 'required|email',
+        'correo' => 'required|email|unique:App\Models\proveedorModelo,correo',
         'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
         'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/',
         'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/' 
@@ -139,11 +139,11 @@ class proveedorController extends Controller
      */
     public function store(Request $request){
 
-        //Creamos un nuevo objeto.
-        $proveedor = new proveedorModelo();
-
         //Validación de los campos
         $request->validate($this->reglaV);
+        
+        //Creamos un nuevo objeto.
+        $proveedor = new proveedorModelo();
 
         //Se crea una llave primaria para el proveedor a partir de los datos del formulario
         $llavePrimaria = "PROV-".
