@@ -125,7 +125,6 @@ $("#btnEliminarCarrito").on("click", function() {
     obtenerTotal();
 
 });
-
 //Obteiene el total a pagar
 function obtenerTotal(){ 
     total = 0;
@@ -141,14 +140,8 @@ function obtenerTotal(){
     }else{
         $("#letreroTotal").text("Subtotal: $0.00");
         $("#btnRealizarVenta").prop('disabled', true);
-    }  
-    
-      
-    
-    
+    }      
 }
-
-
 //bloquea las entradas si la cantidad en el inventario es 0
 function bloquear(){
     $("#inCantExistencia").val("0");
@@ -178,7 +171,6 @@ function verificar(claveAgregada){
     }    
     return false;
 }
-
 $('#btnRealizarVenta').on("click", function() {
     $('#tabla2 tr:not(:first)').remove();  
     let valores = $(".inCantidad"); 
@@ -312,3 +304,4 @@ $("#btnCerrarTicket").on("click",function(event){
 function refrescar(){
     window.location.reload();
 }
+

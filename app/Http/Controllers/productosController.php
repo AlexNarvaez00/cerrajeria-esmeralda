@@ -122,7 +122,7 @@ class productosController extends Controller
         $producto->precio_producto = $request->precio_producto;
         $producto->precio_compra = $request->precio_compra;
         $producto->cantidad_existencia = $request->cantidad_existencia;
-        $producto->cantidad_stock = 5;      
+        $producto->cantidad_stock = 2;      
         $producto->idproveedor = explode(" ",$request->idproveedor)[0];       
         $producto->save();//Guarda un nuevo registro en la tabla producto de la base de datos
 
@@ -301,6 +301,16 @@ class productosController extends Controller
         $bandera = "NULL";
         //Si encuentra una clave primaria registrada el bdd retorna true
         if (productosModelo::where('clave_producto', "=",$request->clave_producto)->exists()) {
+            $bandera = "true";
+         }else{
+             $bandera = "false";
+         }
+         return response($bandera);
+    }
+    public function existeCorreo(Request $request){
+        $bandera = "NULL";
+        //Si encuentra una clave primaria registrada el bdd retorna true
+        if (proveedorModelo::where('correo', "=",$request->correo)->exists()) {
             $bandera = "true";
          }else{
              $bandera = "false";
