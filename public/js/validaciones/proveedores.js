@@ -54,31 +54,3 @@ validator([
     [document.getElementById("idMunicipioEditar"), "0"],
     [document.getElementById("idColoniaEditar"), "0"],
 ]);
-
-const verificarCorreo = async (event,valuePrimary = '0=0') => {
-    const URL = `${document.location.origin}/proveedores/get/`;
-    let Correo = event.target.value;
-    if (!Correo) {
-        return;
-    }
-    let promesa = await fetch(URL + Correo+'/'+valuePrimary);
-    let data = await promesa.json();
-
-    if (data.exist) {
-        //Si el usario existe el input se pone de rojo
-        event.target.classList.add("is-invalid");
-        event.target.classList.remove("is-valid");
-        event.target.title = "El correo ya esta en uso";
-    } else {
-        //Si no, se queda en verde
-    }
-};
-let inputCorreo = document.getElementById("inputCorreo");
-let inputCorreoEditar = document.getElementById("inputCorreoEditar");
-
-inputCorreo.addEventListener("blur", verificarCorreo);
-inputCorreoEditar.addEventListener("blur", (e) => {
-    let valuePrimary = document.getElementById("urlTemp").value;
-    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
-    verificarCorreo(e,valuePrimary);
-});
