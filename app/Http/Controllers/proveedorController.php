@@ -10,6 +10,7 @@ use App\Models\direccionModelo;
 use App\Models\telefonoModelo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 /** 
  * @author Roberto Alejandro Vásquez Alcántara
@@ -95,11 +96,7 @@ class proveedorController extends Controller
     public function __construct()
     {
         $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar']; //Titulos de la tabla en la vista de proveedores
-        if(auth()->user()->rol == "Administrador"){
-            $this->camposTabla = ['ID','Nombre','ApellidoPaterno','ApellidoMaterno','Número de Teléfono','Correo','ID Dirección','Editar','Borrar'];
-        }
     }
-    
     /**
      * Función que es ejecutada cuando la ruta de "proveedores" es 
      * solicitada por el navegador
