@@ -39,8 +39,8 @@ $(".btnEditar").on("click", function () {
     $("#inClaveProducto").val(fila[0].innerHTML);
     $("#inNomProducto").val(fila[1].innerHTML);
     $("#inClasificacion").val(fila[2].innerHTML);
-    $("#inPrecio").val(fila[3].innerHTML.replace("$", ""));
-    $("#inPreciocompra").val(fila[4].innerHTML.replace("$", ""));
+    $("#inPrecio").val(fila[3].innerHTML.replace("$", "").replace(" MXN",""));
+    $("#inPreciocompra").val(fila[4].innerHTML.replace("$", "").replace(" MXN",""));
     $("#inCantExistencia").val(fila[5].innerHTML);
     $("#inStock").val(fila[7].innerHTML);
 

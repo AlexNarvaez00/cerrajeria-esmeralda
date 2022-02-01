@@ -63,8 +63,8 @@
                             <!--registros de las tablas-->    
                             <th class="dato" scope="col">{{$producto->clave_producto}}</th>                        
                             <td class="dato">{{$producto->nombre_producto}}</td>                     
-                            <td class="dato">&#36;{{$producto->precio_compra}}</td>
-                            <td class="dato">&#36;{{$producto->precio_producto}}</td>
+                            <td class="dato">&#36;{{number_format($producto->precio_compra,2,'.','').' MXN'}}</td>
+                            <td class="dato">&#36;{{number_format($producto->precio_producto,2,'.','').' MXN'}}</td>
                             <td class="dato">{{$producto->cantidad_existencia}}</td>  
                             <td class="dato">{{$producto->cantidad_stock}}</td>                                                  
                             <!--Boton de carrito  -->
