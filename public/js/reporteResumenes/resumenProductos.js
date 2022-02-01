@@ -78,6 +78,26 @@ const createTable = (datos) => {
         tablaInformacionBody.appendChild(createRow(element));
     });
 
+    let sumaDELSubTotal = informacion.map(e=>e.subtotal);
+    sumaDELSubTotal = sumaDELSubTotal.reduce((acum,num) =>acum+num);
+
+    let sumaDELGanancia = informacion.map(e=>e.subtotal);
+    sumaDELGanancia = sumaDELGanancia.reduce((acum,num) =>acum+num);
+
+
+    let filaFinal = `<tr>
+                        <th colspan="2">
+                            Total:
+                        </th>
+                        <td>
+                            ${sumaDELSubTotal}
+                        </td>
+                        <td>
+                            ${sumaDELGanancia}
+                        </td>
+                    </tr>`;
+    tablaInformacionBody.innerHTML = tablaInformacionBody.innerHTML+filaFinal; 
+
     return tablaInformacion;
 };
 
