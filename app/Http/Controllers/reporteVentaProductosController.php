@@ -198,6 +198,7 @@ class reporteVentaProductosController extends Controller
             ->join('venta', 'venta.folio_v', 'detalleventa.folio_v')
             ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
             ->whereYear('venta.fechayhora',$anio)
+            ->whereMonth('venta.fechayhora',$mes)
             ->groupBy(
                 'venta.folio_v',
                 'detalleventa.clave_producto',
