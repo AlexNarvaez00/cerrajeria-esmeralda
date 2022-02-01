@@ -94,7 +94,7 @@
                                 <span>&#10060;</span>
                             </button>
                             </a>
-                        @elseif
+                        @else
                             <button data-bs-toggle="tooltip" data-bs-placement="top" title="Accion no permitida">
                                 <span>&#x2753;</span>
                             </button>
