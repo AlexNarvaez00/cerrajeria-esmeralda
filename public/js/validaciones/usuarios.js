@@ -77,17 +77,17 @@ const verificarCorreo = async (event,valuePrimary = '0=0') => {
         tooltip.hide();
         tooltip.disable();
     }
+    tooltip.dispose();
 };
 let inputCorreo = document.getElementById("inputCorreo"); 
 let inputCorreoEditar = document.getElementById("inputCorreoEditar");
 
 inputCorreo.addEventListener("keyup", verificarCorreo);
 inputCorreo.addEventListener("blur", event=>{
-    var tooltip = new bootstrap.Tooltip(event.target, {
-        title: "El correo ya esta en uso"
-    });
+    var tooltip = new bootstrap.Tooltip(event.target, {});
     tooltip.hide();
     tooltip.disable();
+    tooltip.dispose();
 });
 inputCorreoEditar.addEventListener("blur", (e) => {
     let valuePrimary = document.getElementById("urlTemp").value;
