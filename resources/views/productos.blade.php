@@ -180,7 +180,7 @@
             <div class = "row">
                 <div class="col-md-12 col-sm-12"> 
                     <div class="input-group">
-                        <span class="input-group-text">Descripcion</span>
+                        <span class="input-group-text">Descripción</span>
                         <textarea id="inDescripcion" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
                         <h5 class="text-danger" for="basic-url">*</h5>
                     </div> 
@@ -288,7 +288,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="input-group">
-                    <span class="input-group-text">Descripcion del producto</span>
+                    <span class="input-group-text">Descripción del producto</span>
                     <textarea id="detalleDescripcion" disabled="true" class="form-control" aria-label="With textarea" placeholder="Puedes agregar la marca, el color, etc." name="descripcion" required></textarea>
                 </div>                
             </div>
@@ -417,13 +417,23 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Numero</span>
-                        <input id="numeroProveedor" placeholder="numero del lugar" type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" required>                        
+                        <span class="input-group-text" id="basic-addon1">Numero exterior</span>
+                        <input id="numeroProveedor" placeholder="numero del lugar" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numeroProveedor" required>                        
                         <h5 class="text-danger" for="basic-url">*</h5>
                     </div>       
                     <label class="text-danger" for="basic-url" id="labelnnumeroProveedor"></label>              
                 </div>
                 <div class="col-md-6 col-sm-12">
+                    <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon1">Numero interior</span>
+                        <input id="numerointProveedor" placeholder="numero del lugar" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="numerointProveedor" required>                        
+                        <h5 class="text-danger" for="basic-url">*</h5>
+                    </div>       
+                    <label class="text-danger" for="basic-url" id="labelnnumeroProveedor"></label>              
+                </div>                
+            </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">calle</span>
                         <input id="calleProveedor" type="text" placeholder="calle del lugar" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="calleProveedor" required>                        
@@ -431,8 +441,6 @@
                     </div>   
                     <label class="text-danger" for="basic-url" id="labelcalleProveedor"></label>                  
                 </div> 
-            </div>
-            <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <label class="input-group-text" for="inputGroupSelect01">Estado</label>
@@ -444,8 +452,11 @@
                         </select>  
                         <h5 class="text-danger" for="basic-url">*</h5>                    
                     </div>                 
-                </div>
-                <div class="col-md-6 col-sm-12">
+                </div>                
+            </div>
+            
+            <div class="row">
+            <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <label class="input-group-text" for="inputGroupSelect01">Municipio</label>
                         <select  id="muncipioProveedor" disabled="true" class="form-select"  name="muncipioProveedor">
@@ -454,9 +465,6 @@
                         <h5 class="text-danger" for="basic-url">*</h5>
                     </div>                    
                 </div>
-            </div>
-            <br>
-            <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-group mb-1">
                         <label class="input-group-text" for="inputGroupSelect01">Colonia</label>

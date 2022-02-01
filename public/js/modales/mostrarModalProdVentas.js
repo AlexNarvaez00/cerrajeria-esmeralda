@@ -48,7 +48,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                                 +"<td>"+data.cantidad_existencia+"</td>"
                                 +'<td class="inCantidadProductosCompras"></td>'                               
                                 +"<td>"+data.cantidad_stock+"</td>"
-                                +'<td class="preciosProductosColumnas">'+'$'+data.precio_producto+"</td>"                            
+                                +'<td class="preciosProductosColumnas">'+'$'+parseFloat(data.precio_producto).toFixed(2)+"</td>"                            
                                 +'<td class="btnQuitar"></td>'
                             +"</tr>";
                     $('#tabla tr:last').after(fila);
@@ -136,7 +136,7 @@ function obtenerTotal(){
             var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','');
             total +=  subtotal;
         }
-        $("#letreroTotal").text("Subtotal: $" + total);
+        $("#letreroTotal").text("Subtotal: $" + parseFloat(total).toFixed(2) + " MXN");
     }else{
         $("#letreroTotal").text("Subtotal: $0.00");
         $("#btnRealizarVenta").prop('disabled', true);
@@ -186,12 +186,12 @@ $('#btnRealizarVenta').on("click", function() {
             +'<td class="nombreRealizarVenta">'+nombreTemp+"</td>"            
             +'<td class="cantidadRealizarVenta">'+cantidadTemp+"</td>"
             +'<td class="precioIndividualRealizaVenta">'+"$"+precioIndividualTemp+"</td>"                                     
-            +"<td>"+"$"+cantidadTemp*precioIndividualTemp+"</td>"
+            +"<td>"+"$"+parseFloat(cantidadTemp*precioIndividualTemp).toFixed(2)+"</td>"
             +"</tr>";
             $('#tabla2 tr:last').after(fila);
 
     }
-    $("#letreroTotalConfirmacion").text("Total a pagar $" + total);            
+    $("#letreroTotalConfirmacion").text("Total a pagar $" + parseFloat(total).toFixed(2));            
 
  });
 
@@ -211,14 +211,14 @@ $("#cantidadRecibida").on("keyup", function(event){
             $("#btnFinalizarCompra").prop("disabled",false);    
         }           
     }    
-    $("#letreroCambio").text("Cambio: $" + cambio);
+    $("#letreroCambio").text("Cambio: $" + parseFloat(cambio).toFixed(2));
 });
 
 $("#btnFinalizarCompra").on("click",function(event){  
     guardarVenta();
-    $("#letreroCantidadRecibida").text("Cantidad Recibida: $" + cantidadRecibida);
-    $("#letreroCantidadCambio").text("Cambio: $" + cambio );
-    $("#letreroTotalPagar").text("Total a pagar: $" + total);
+    $("#letreroCantidadRecibida").text("Cantidad Recibida: $" + parseFloat(cantidadRecibida).toFixed(2)+ " MXN");
+    $("#letreroCantidadCambio").text("Cambio: $" + parseFloat(cambio).toFixed(2)+ " MXN");
+    $("#letreroTotalPagar").text("Total a pagar: $" + parseFloat(total).toFixed(2)+ " MXN") ;
 
     let nombres = $(".nombreRealizarVenta");
     let cantidadProducto = $(".cantidadRealizarVenta");
@@ -232,11 +232,11 @@ $("#btnFinalizarCompra").on("click",function(event){
                         +'<div class="col-md-5 col-sm-5 justify-content-center">'
                             +carrito[i]+' '+nombres[i].innerHTML
                         +'</div>'
-                        +'<div class="col-md-3 col-sm-3  justify-content-center">'
-                            +precioUnitario[i].innerHTML
+                        +'<div class="col-md-3 col-sm-3  justify-content-center"> $'
+                            +parseFloat(precioUnitario[i].innerHTML.replace("$","")).toFixed(2)
                         +'</div>'
                         +'<div class="col-md-3 col-sm-3  justify-content-start">'
-                            +"$"+(cantidadProducto[i].innerHTML * precioUnitario[i].innerHTML.replace("$",""))
+                            +"$"+parseFloat((cantidadProducto[i].innerHTML * precioUnitario[i].innerHTML.replace("$",""))).toFixed(2)
                         +'</div>'
                     +'</div>'
         $("#descripcionProductosDetalleCompra").append(componente);
@@ -259,9 +259,7 @@ function guardarVenta(){
         },        
         success: function(data){  
             $("#idDetallecompra").text(data);            
-            guardarDetalleVenta(data); 
-            
-                          
+            guardarDetalleVenta(data);              
         }           
     }); 
      

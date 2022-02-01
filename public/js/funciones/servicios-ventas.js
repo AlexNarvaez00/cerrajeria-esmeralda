@@ -253,11 +253,11 @@ $("#inputNumTelefono").on("blur",function(event){
     var temp = $("#inputNumTelefono").val();
     if(temp == ""){
         $('#inputNumTelefono').addClass("is-invalid");
-        $("#labelApellidoMCliente").text("El campo no debe estar vacio");
+        $("#labelNumTelefono").text("El campo no debe estar vacio");
     }
 });
 $("#inputNumTelefono").on("focus",function(event){
-        $("#labelApellidoMCliente").text("");    
+        $("#labelNumTelefono").text("");    
 });
 //--------------------
        

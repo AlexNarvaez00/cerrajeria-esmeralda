@@ -201,8 +201,14 @@
           </div>          
         </div>
       </div>
-      <br>
       <div class="row">
+      <div class="col-md-6 col-sm-12">
+          <div class="input-group mb-1 col-md-12 col-sm-12">
+            <span class="input-group-text" id="basic-addon1">Número Int</span>
+            <input type="text" class="form-control" min="1" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumInt" name="numeroInt" required>
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div>          
+        </div>
 
       <div class="col-md-6 col-sm-12">
         <div class="input-group mb-1">
@@ -215,9 +221,11 @@
             </select>
             <h5 class="text-danger" for="basic-url">*</h5>
         </div>        
-      </div> 
-
-      <div class="col-md-6 col-sm-12">
+      </div>      
+ 
+    </div>
+    <div class="row">
+    <div class="col-md-6 col-sm-12">
         <div class="input-group mb-1">
           <label class="input-group-text" for="idMunicipio">Municipio</label>
           <select id="idMunicipio" class="form-select" name="municipios">
@@ -226,11 +234,6 @@
           <h5 class="text-danger" for="basic-url">*</h5>
         </div>       
       </div>
-      
-
-    </div>
-    <br>
-    <div class="row">
       <div class="col-md-6 col-sm-12">
         <div class="input-group mb-1">
           <label class="input-group-text" for="idColonia">Colonia</label>

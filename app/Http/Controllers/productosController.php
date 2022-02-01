@@ -198,8 +198,9 @@ class productosController extends Controller
         $tel = json_decode($request->proveedor[3])->value;
         $correo = json_decode($request->proveedor[4])->value;
         $num = json_decode($request->proveedor[5])->value;
-        $calle = json_decode($request->proveedor[6])->value;
-        $idcolonia = json_decode($request->proveedor[9])->value;
+        $numint = json_decode($request->proveedor[6])->value;
+        $calle = json_decode($request->proveedor[7])->value;
+        $idcolonia = json_decode($request->proveedor[8])->value;
         //Arma la llave primaria para el proveedor
         $llavePrimaria = "PROV-".
         strtoupper($apP[0]).
@@ -215,6 +216,7 @@ class productosController extends Controller
         $direccionProveedor->iddireccion = $llavePrimariaDireccion;
         $direccionProveedor->calle = $calle;
         $direccionProveedor->numero= $num;
+        $direccionProveedor->numeroint= $numint;
         $direccionProveedor->idcoldirec = $idcolonia;
         $direccionProveedor->save(); //Almacena la direccion del proveedor a la base de datos        
         //crea un nuevo modelo para almacenar un nuevo proveedor  

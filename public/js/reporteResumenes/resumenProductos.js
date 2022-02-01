@@ -135,16 +135,10 @@ const colocarResultados = async (e) => {
         //p.classList.add('');
         p.innerHTML = `Reporte del mes de <span class="fw-bolder">${meses[mes - 1]}</span> del año <span class="fw-bolder">${anio}</span>`;
         bodyModalResumen.appendChild(p);
-
         let resumen = document.createElement("p");
         resumen.innerHTML = `Las ganancias totales del mes de <span class="fw-bolder">${
             meses[mes - 1]
-        }</span> del año <span class="fw-bolder">${anio}</span> son de \$${
-            datos.resumen[0].ganancia
-        }, con un total de ${
-            datos.resumen[0].materialesUtilizados
-        } materiales utilizados`;
-
+        }</span> del año <span class="fw-bolder">`;
         bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
         return;
@@ -156,15 +150,15 @@ const colocarResultados = async (e) => {
         }</span> de <span class="fw-bolder">TODOS LOS AÑOS DISPONIBLES</span>`;
         bodyModalResumen.appendChild(p);
 
-        let resumen = document.createElement("p");
-        resumen.innerHTML = `Las ganancias totales del mes de <span class="fw-bolder">${
-            meses[mes - 1]
-        } </span> 
-        son de \$${datos.resumen[0].ganancia}, con un total de ${
-            datos.resumen[0].materialesUtilizados
-        } materiales utilizados`;
+        // let resumen = document.createElement("p");
+        // resumen.innerHTML = `Las ganancias totales del mes de <span class="fw-bolder">${
+        //     meses[mes - 1]
+        // } </span> 
+        // son de \$${datos.resumen[0].ganancia}, con un total de ${
+        //     datos.resumen[0].materialesUtilizados
+        // } materiales utilizados`;
 
-        bodyModalResumen.appendChild(resumen);
+        // bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
     }else if (anio != "0") {
         //Selecciono el año
@@ -174,23 +168,22 @@ const colocarResultados = async (e) => {
         }</span> de <span class="fw-bolder">TODOS LOS MESES</span>`;
         bodyModalResumen.appendChild(p);
 
-        let resumen = document.createElement("p");
-        resumen.innerHTML = `Las ganancias totales del año <span class="fw-bolder">${
-            anio
-        } </span> 
-        son de \$${datos.resumen[0].ganancia}, con un total de ${
-            datos.resumen[0].materialesUtilizados
-        } materiales utilizados`;
+        // let resumen = document.createElement("p");
+        // resumen.innerHTML = `Las ganancias totales del año <span class="fw-bolder">${
+        //     anio
+        // } </span> 
+        // son de \$${datos.resumen[0].ganancia}, con un total de ${
+        //     datos.resumen[0].materialesUtilizados
+        // } materiales utilizados`;
 
-        bodyModalResumen.appendChild(resumen);
+        // bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
     }else{
         p.innerHTML = `Reporte del dia de <span class="fw-bolder">HOY </span>`;
         bodyModalResumen.appendChild(p);
-        let resumen = document.createElement("p");
-        resumen.innerHTML = `Las ganancias totales del dia de <span class="fw-bolder">HOY</span> 
-        son de \$${datos[0].ganancia}`;
-        bodyModalResumen.appendChild(resumen);
+        // let resumen = document.createElement("p");
+        // resumen.innerHTML = ``;
+        // bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
 
     }

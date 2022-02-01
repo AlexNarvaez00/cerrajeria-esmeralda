@@ -189,7 +189,7 @@ class reporteVentaProductosController extends Controller
     public function reporteVentas($dia, $mes, $anio)
     {
         $query = [];
-        if ($dia == 0) {
+        if ($dia == 0 ) {
             $query = detalleVentaModelo::selectRaw(
                 'venta.folio_v,
                         detalleventa.clave_producto,

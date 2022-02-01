@@ -35,9 +35,7 @@
     @if(!Request::is('login') && !Request::is(''))
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/minAjax.js"></script>
-    @if(!auth()->user())
-        <script src="./js/funciones/verificarNotificaciones.js"></script>
-    @endif
+    <script src="./js/funciones/verificarNotificaciones.js"></script>
     @endif
 
     @yield('scritps')
