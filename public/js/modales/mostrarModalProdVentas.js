@@ -48,7 +48,7 @@ $("#btnConfirmacionCarro").on("click", function() {
                                 +"<td>"+data.cantidad_existencia+"</td>"
                                 +'<td class="inCantidadProductosCompras"></td>'                               
                                 +"<td>"+data.cantidad_stock+"</td>"
-                                +'<td class="preciosProductosColumnas">'+'$'+parseFloat(data.precio_producto).toFixed(2)+"</td>"                            
+                                +'<td class="preciosProductosColumnas">'+'$'+parseFloat(data.precio_producto).toFixed(2)+" MXN</td>"                            
                                 +'<td class="btnQuitar"></td>'
                             +"</tr>";
                     $('#tabla tr:last').after(fila);
@@ -133,7 +133,7 @@ function obtenerTotal(){
     if(carrito.length > 0){
         $("#btnRealizarVenta").prop('disabled', false);
         for(var i = 0; i < carrito.length; i++){
-            var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','');
+            var subtotal = valores[i].value * preciosIndividuales[i].innerHTML.replace('$','').replace(" MXN","");
             total +=  subtotal;
         }
         $("#letreroTotal").text("Subtotal: $" + parseFloat(total).toFixed(2) + " MXN");
@@ -178,7 +178,7 @@ $('#btnRealizarVenta').on("click", function() {
     let nombreProductos = $(".nombreProductosColumnas");
     for(var i = 0; i < carrito.length; i ++){
         var nombreTemp =  nombreProductos[i].innerHTML;
-        var precioIndividualTemp = preciosIndividuales[i].innerHTML.replace('$','');
+        var precioIndividualTemp = preciosIndividuales[i].innerHTML.replace('$','').replace(" MXN","");
         var cantidadTemp = valores[i].value;
 
         fila = "<tr>"
@@ -186,7 +186,7 @@ $('#btnRealizarVenta').on("click", function() {
             +'<td class="nombreRealizarVenta">'+nombreTemp+"</td>"            
             +'<td class="cantidadRealizarVenta">'+cantidadTemp+"</td>"
             +'<td class="precioIndividualRealizaVenta">'+"$"+precioIndividualTemp+"</td>"                                     
-            +"<td>"+"$"+parseFloat(cantidadTemp*precioIndividualTemp).toFixed(2)+"</td>"
+            +"<td>"+"$"+parseFloat(cantidadTemp*precioIndividualTemp).toFixed(2)+" MXN</td>"
             +"</tr>";
             $('#tabla2 tr:last').after(fila);
 
@@ -281,7 +281,7 @@ function guardarDetalleVenta(idVenta){
                 observaciones:carrito[i]+' '+nombres[i].innerHTML,
                 cantidad:cantidadProducto[i].innerHTML,
                 folio_v:idVenta,
-                importe:(cantidadProducto[i].innerHTML * (precioUnitario[i].innerHTML.replace("$","")))           
+                importe:(cantidadProducto[i].innerHTML * (precioUnitario[i].innerHTML.replace("$","").replace(" MXN","")))           
             },        
             success: function(data){ 
                 

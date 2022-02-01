@@ -27,7 +27,7 @@ class CreateServicioTable extends Migration
         |
          */
         Schema::create('servicio', function (Blueprint $table) {
-            $table->string('idservicio',7);
+            $table->string('idservicio',100);
             $table->dateTime('fechayhora', $precision = 0);
             $table->string('iddireccion',30);
             $table->double('monto',6,2);

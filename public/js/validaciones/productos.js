@@ -39,8 +39,8 @@ $(".btnEditar").on("click", function () {
     $("#inClaveProducto").val(fila[0].innerHTML);
     $("#inNomProducto").val(fila[1].innerHTML);
     $("#inClasificacion").val(fila[2].innerHTML);
-    $("#inPrecio").val(fila[3].innerHTML.replace("$", ""));
-    $("#inPreciocompra").val(fila[4].innerHTML.replace("$", ""));
+    $("#inPrecio").val(fila[3].innerHTML.replace("$", "").replace(" MXN",""));
+    $("#inPreciocompra").val(fila[4].innerHTML.replace("$", "").replace(" MXN",""));
     $("#inCantExistencia").val(fila[5].innerHTML);
     $("#inStock").val(fila[7].innerHTML);
 
@@ -194,7 +194,7 @@ $("#formularioProveedor").on("submit", function (e) {
         //= ="modal" data-bs-dismiss="modal"   
         success: function(data){   
             data = JSON.parse(data); 
-            alert(data);     
+               
             $("#proveedores").append(
                 $("<option>", {
                     value: data.idproveedor,
@@ -294,8 +294,8 @@ $("#inPrecio").on("blur",function(event){
 function compararPrecios(){
     var precio_compra = parseFloat($("#inPreciocompra").val());
     var precio_venta = parseFloat($("#inPrecio").val());
-    if(precio_venta < precio_compra){        
-        alert("El precio de la venta no puede ser mayor al precio de la compra");
+    if(precio_venta <= precio_compra){        
+        alert("El precio de la venta no puede ser mayor o igual al precio de la compra");
         $("#inPreciocompra").val("0.00");
         $("#inPrecio").val("1.00");
     }

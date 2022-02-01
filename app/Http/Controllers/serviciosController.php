@@ -41,7 +41,7 @@ class serviciosController extends Controller{
 
         //Si el cliente ya existe        
         if ($request->idCliente == null) {
-            $idclienteFormat = "cl-".$request->apellidoP[1].$request->apellidoP[3].$request->apellidoM[1].$request->apellidoM[3]; //Construye la llave primaria
+            $idclienteFormat = "cl-".$request->apellidoP[0].date('Ymd-His');
             $clienteServicio->idcliente = $idclienteFormat;
             $clienteServicio->nombre = $request->nombre;
             $clienteServicio->apellidoPaterno = $request->apellidoP;
@@ -53,9 +53,9 @@ class serviciosController extends Controller{
             $servicio->iddireccion = "DI-".substr($idclienteFormat,-4)."2021";
             $servicio->idcliente = $idclienteFormat;
          } else{
-            $direccionClienteServicio->iddireccion = "DI-".substr($request->idCliente,-4)."2021"; 
-            $servicio->idservicio = "SE-".substr($request->idCliente,-4);
-            $servicio->iddireccion = "DI-".substr($request->idCliente,-4)."2021";
+            $direccionClienteServicio->iddireccion = "DI-".substr($request->idCliente,-4).date('Ymd-His'); 
+            $servicio->idservicio = "SE-".substr($request->idCliente,-4).date('Ymd-His');
+            $servicio->iddireccion = "DI-".substr($request->idCliente,-4).date('Ymd-His');
             $servicio->idcliente = $request->idCliente;
          }              
         $direccionClienteServicio->calle=$request->calle;
@@ -105,7 +105,9 @@ class serviciosController extends Controller{
         return response()->json($listaColonias);
     }
 
-    public function getVenta(Request $request){
+    public function getCliente(Request $request){
+        $cliente = clienteModelo::find($request->id);
+        return response()->json($cliente);
         
     }
 
