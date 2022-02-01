@@ -60,6 +60,7 @@ class serviciosController extends Controller{
          }              
         $direccionClienteServicio->calle=$request->calle;
         $direccionClienteServicio->numero= $request->numero;
+        $direccionClienteServicio->numeroint= $request->numeroInt;
         $direccionClienteServicio->idcoldirec = $request->colonia;
         $direccionClienteServicio->save();
 
