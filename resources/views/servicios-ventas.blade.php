@@ -191,14 +191,16 @@
             <span class="input-group-text" id="basic-addon1">Calle</span>
             <input type="text" class="form-control" placeholder="ejem. Constitución" aria-label="Username" aria-describedby="basic-addon1" id="inputCalle" name="calle" required>
             <h5 class="text-danger" for="basic-url">*</h5>
-          </div>          
+          </div>   
+          <label class="text-danger" for="basic-url" id="labelcalle"></label>         
         </div>
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-1 col-md-12 col-sm-12">
             <span class="input-group-text" id="basic-addon1">Número ext</span>
             <input type="text" class="form-control" min="1" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumExt" name="numero" required>
             <h5 class="text-danger" for="basic-url">*</h5>
-          </div>          
+          </div>    
+          <label class="text-danger" for="basic-url" id="labelNumExt"></label>               
         </div>
       </div>
       <div class="row">
@@ -207,6 +209,7 @@
             <span class="input-group-text" id="basic-addon1">Número Int</span>
             <input type="text" class="form-control" min="1" placeholder="ejemp. 123" aria-label="Username" aria-describedby="basic-addon1" id="inputNumInt" name="numeroInt" required>
             <h5 class="text-danger" for="basic-url">*</h5>
+            <label class="text-danger" for="basic-url" id="labelNumInt"></label>  
           </div>          
         </div>
 
@@ -224,6 +227,7 @@
       </div>      
  
     </div>
+    <br>
     <div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="input-group mb-1">
@@ -257,6 +261,7 @@
             <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" name="monto" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 190)" required>
             <h5 class="text-danger" for="basic-url">*</h5>
           </div>
+          <label class="text-danger" for="basic-url" id="labelmonto"></label> 
         </div>
 
         <div class="input-group">

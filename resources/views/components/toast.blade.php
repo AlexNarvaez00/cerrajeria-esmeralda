@@ -10,12 +10,12 @@
   </div>
   <div class="toast-body pb-4">
     <p>El producto <strong>{{$nombreProducto}}</strong> {{$conclusion}}</p> 
-    <button type="button" class="btn btn-outline-danger rounded-pill px-3" 
+    {{--<button type="button" class="btn btn-outline-danger rounded-pill px-3" 
             data-bs-dismiss="toast" 
             aria-label="Close"
             data-bs-toggle="tooltip" 
             data-bs-placement="bottom" 
             title="Esta accion solo quita la notifición, pero no la resuelve"
-            >Descartar</button>
+            >Descartar</button>--}}
   </div>
 </div>
