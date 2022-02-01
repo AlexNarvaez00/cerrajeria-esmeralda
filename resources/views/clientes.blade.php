@@ -128,12 +128,12 @@
                 
                 <!--Input oculto para el IDE del cliente-->
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDCliente" name="idcliente">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreCliente" type="text" texto="Nombre del Cliente" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Alexis (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreCliente" type="text" texto="Nombre del Cliente" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
                 </div>
                 <div class="row">
                 <!--Columnas :v-->
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPCliente" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaterno')}}" nombreInput="apellidoPaterno" nombreError="apellidoPaterno" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMCliente" type="text" texto="Apellido Materno" valor="{{old('apellidoMaterno')}}" nombreInput="apellidoMaterno" nombreError="apellidoMaterno" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Ruiz (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPCliente" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaterno')}}" nombreInput="apellidoPaterno" nombreError="apellidoPaterno" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Pérez (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMCliente" type="text" texto="Apellido Materno" valor="{{old('apellidoMaterno')}}" nombreInput="apellidoMaterno" nombreError="apellidoMaterno" />
                 <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefono" type="number" texto="Número de Teléfono" valor="{{old('telefono')}}" placeholder="Ej. 9514628538" nombreInput="telefono" nombreError="telefono" />
                 </div>
            
@@ -185,12 +185,12 @@ rutaEnvio="" metodoFormulario="POST">
                 <!--Checar método PUT-->
                 <!--Input oculto para el IDE del cliente-->
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDCliente" name="idcliente">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreClienteEditar" type="text" texto="Nombre del Cliente" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Alexis (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreClienteEditar" type="text" texto="Nombre del Cliente" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
                 </div>
                 <div class="row">
                 <!--Columnas :v-->
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPClienteEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaternoEditar')}}" nombreInput="apellidoPaternoEditar" nombreError="apellidoPaternoEditar" />
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMClienteEditar" type="text" texto="Apellido Materno" valor="{{old('apellidoMaternoEditar')}}" nombreInput="apellidoMaternoEditar" nombreError="apellidoMaternoEditar" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Ruiz (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoPClienteEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidoPaternoEditar')}}" nombreInput="apellidoPaternoEditar" nombreError="apellidoPaternoEditar" />
+                <x-input-normal expresion="Error, valor no admitido. Ejemplo: Pérez (Debe iniciar en mayúsculas)" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputApellidoMClienteEditar" type="text" texto="Apellido Materno" valor="{{old('apellidoMaternoEditar')}}" nombreInput="apellidoMaternoEditar" nombreError="apellidoMaternoEditar" />
                 <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNumTelefonoEditar" type="number" texto="Número de Teléfono" valor="{{old('telefonoEditar')}}" placeholder="Ej. 9514628538" nombreInput="telefonoEditar" nombreError="telefonoEditar" />
                 </div>
         </div>
