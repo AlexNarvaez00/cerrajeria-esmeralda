@@ -34,7 +34,7 @@ validator([
     [document.getElementById("inputApellidoPProveedor"), expresionesRegulares.ApellidoPProveedor],
     [document.getElementById("inputApellidoMProveedor"), expresionesRegulares.ApellidoMProveedor],
     [document.getElementById("inputNumTelefono"), expresionesRegulares.NumTelefono],
-    //[document.getElementById("inputCorreo"), expresionesRegulares.Correo],
+    [document.getElementById("inputCorreo"), expresionesRegulares.Correo],
     [document.getElementById("inputCalle"), expresionesRegulares.Calle],
     [document.getElementById("inputNumExt"), expresionesRegulares.NumExt],
     [document.getElementById("inputNumInt"), expresionesRegulares.NumInt],
