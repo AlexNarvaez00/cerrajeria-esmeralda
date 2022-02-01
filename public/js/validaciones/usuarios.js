@@ -61,6 +61,7 @@ const verificarCorreo = async (event,valuePrimary = '0=0') => {
     var tooltip = new bootstrap.Tooltip(event.target, {
         title: "El correo ya esta en uso"
     });
+    tooltip.hide();
     tooltip.disable();
 
     if (data.exist) {
@@ -77,7 +78,6 @@ const verificarCorreo = async (event,valuePrimary = '0=0') => {
         tooltip.hide();
         tooltip.disable();
     }
-    tooltip.dispose();
 };
 let inputCorreo = document.getElementById("inputCorreo"); 
 let inputCorreoEditar = document.getElementById("inputCorreoEditar");
