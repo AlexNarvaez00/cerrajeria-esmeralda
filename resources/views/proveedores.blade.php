@@ -106,10 +106,6 @@
                                     <span>&#10060;</span>
                                 </button>
                             </form>
-                            @else
-                            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Accion no permitida">
-                                <span>&#x2753;</span>
-                            </button>
                         @endif
                         </td>
                     </tr>

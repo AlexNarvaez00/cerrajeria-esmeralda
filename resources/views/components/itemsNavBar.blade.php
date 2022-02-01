@@ -35,6 +35,7 @@
         <li><a class="dropdown-item" href="/reporte-ventas-servicios">Reportes ventas servicios</a></li>            
     </ul>
 </li>
+@if(auth()->user()->rol != "Ayudante")
 <li class="nav-item">
     <a class="nav-link fs-5 {{($active == 'notificaciones')?'active':''}}" href="../notificaciones" id="btnNoificaciones"
 
@@ -43,6 +44,7 @@
         Notificaciones
     </a>
 </li>
+@endif
 <li class="nav-item dropdown {{($active == 'usuarios')?'active':''}}">
     <a class="nav-link fs-5 dropdown-toggle" href="#" id="navbarDropdownSesion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menú"></i>
