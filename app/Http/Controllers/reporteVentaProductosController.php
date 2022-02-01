@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\detalleVentaModelo;
 use App\Models\productosModelo;
 use App\Models\ventaModelo;
 use Illuminate\Http\Request;
@@ -184,6 +185,32 @@ class reporteVentaProductosController extends Controller
         }
         return  response()->json([]);
     }
+
+    public function reporteVentas($mes,$anio)
+    {
+        $query = detalleVentaModelo::selectRaw(
+            'venta.folio_v,
+            detalleventa.clave_producto,
+            sum(detalleventa.cantidad) AS cantidadVendida,
+            (sum(productos.precio_producto)*detalleventa.cantidad) AS subtotal,
+            (( productos.precio_producto - productos.precio_compra )*sum(detalleventa.cantidad) ) AS ganancia'
+        )
+            ->join('venta', 'venta.folio_v', 'detalleventa.folio_v')
+            ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
+            ->whereYear('venta.fechayhora',$anio)
+            ->whereMonth('venta.fechayhora',$mes)
+            ->groupBy(
+                'venta.folio_v',
+                'detalleventa.clave_producto',
+                'productos.precio_producto',
+                'productos.precio_compra',
+                'detalleventa.cantidad'
+            )
+            ->get();
+            return response()->json($query);
+    }
+
+
 
 
     /* ---------------------------------------------------------------------------------------------------------------------*/

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\detalleVentaModelo;
 use App\Models\servicioModelo;
 use App\Models\productosModelo;
 use App\Models\ventaModelo;
@@ -53,13 +54,13 @@ class reporteVentasController extends Controller
             $listaReporte = $this->getServiciosPorConsulta($request);
         } else {
             //se rellena con todos los registros
-            
+
             $listaReporte = servicioModelo::paginate(10);
         }
         $aniosDisponible = servicioModelo::selectRaw('year(fechayhora) as anio')
-                                                ->groupBy('anio')
-                                                ->orderBy('anio')
-                                                ->get();
+            ->groupBy('anio')
+            ->orderBy('anio')
+            ->get();
         return view('reporteVentasServicios') //Nombre de la vista
             ->with('camposTabla', $this->camposTabla) //Campos de la tablas
             ->with('aniosDisponibles', $aniosDisponible)
@@ -115,7 +116,7 @@ class reporteVentasController extends Controller
         return response()->json($query1);
     }
 
-    public function getResumen($mes,$anio)
+    public function getResumen($mes, $anio)
     {
         if ($mes > 0 && $anio == 0) {
             $ventasPorMes = servicioModelo::selectRaw('SUM(servicio.monto) as ganancia, SUM(ds.cantidad) as materialesUtilizados')
@@ -124,13 +125,14 @@ class reporteVentasController extends Controller
                 ->get();
 
             $informacion =  servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
-                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->join('productos AS p', 'p.clave_producto', 'ds.clave_producto')
                 ->whereMonth('fechayhora', $mes)
                 ->get();
 
-            $returno = ['resumen' => $ventasPorMes,
-                        'informacion' =>$informacion
-                    ];
+            $returno = [
+                'resumen' => $ventasPorMes,
+                'informacion' => $informacion
+            ];
 
             return response()->json($returno);
         }
@@ -139,14 +141,15 @@ class reporteVentasController extends Controller
                 ->join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
                 ->whereYear('fechayhora', $anio)
                 ->get();
-            
+
             $informacion = servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
-                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->join('productos AS p', 'p.clave_producto', 'ds.clave_producto')
                 ->whereYear('fechayhora', $anio)
                 ->get();
 
-            $returno = ['resumen' => $ventasPorAnio,
-                'informacion' =>$informacion
+            $returno = [
+                'resumen' => $ventasPorAnio,
+                'informacion' => $informacion
             ];
 
             return response()->json($returno);
@@ -158,12 +161,13 @@ class reporteVentasController extends Controller
                 ->whereMonth('fechayhora', $mes)
                 ->get();
             $informacion = servicioModelo::join('detalleservicio AS ds', 'ds.idservicio', 'servicio.idservicio')
-                ->join('productos AS p','p.clave_producto','ds.clave_producto')
+                ->join('productos AS p', 'p.clave_producto', 'ds.clave_producto')
                 ->whereYear('fechayhora', $anio)
                 ->whereMonth('fechayhora', $mes)
                 ->get();
-            $returno = ['resumen' => $ventasPorMesAnio,
-                'informacion' =>$informacion
+            $returno = [
+                'resumen' => $ventasPorMesAnio,
+                'informacion' => $informacion
             ];
 
             return response()->json($returno);
@@ -178,7 +182,6 @@ class reporteVentasController extends Controller
     public function store(Request $request)
     {
     }
-
 
     /**
      * @param Request $request Solicitud por parte del navegador.
