@@ -5,7 +5,9 @@ const expresionesRegulares = {
     cantidades: /\d/,
     NumTelefono: /^[0-9]{10}$/,
     nombreProveedor: /^[a-zA-Z|-|\s]{1,50}$/,
-    Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+    Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    NumExt:/^[0-9]{3,4}[A-Z-]{0,3}$/, // Números exteriores 
+    NumInt:/^[0-9]{3,4}[A-Z-]{0,3}$/, // Números interiores 
 };
 validator([
     //[document.getElementById("inClaveProducto"),expresionesRegulares.claveProducto],
@@ -22,7 +24,8 @@ validator([
     //[document.getElementById("txtCorreoProveedor"), expresionesRegulares.Correo],
     [document.getElementById("numeroProveedor"), expresionesRegulares.cantidades],
     [document.getElementById("calleProveedor"), expresionesRegulares.caracteres],
-    [document.getElementById("inStock"), expresionesRegulares.cantidades]
+    [document.getElementById("numeroProveedor"), expresionesRegulares.NumExt],
+    [document.getElementById("numerointProveedor"), expresionesRegulares.NumExt]
 ]);
 //Opcion para el boton editar
 $(".btnEditar").on("click", function () {
