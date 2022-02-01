@@ -13,7 +13,7 @@ validator([
         expresionesRegulares.nombreUsuario,
         20,
     ],
-    [document.getElementById("inputCorreo"), expresionesRegulares.correo],
+    //[document.getElementById("inputCorreo"), expresionesRegulares.correo],
     [
         document.getElementById("inputPasswordUsuario"),
         expresionesRegulares.password,
@@ -45,71 +45,47 @@ validator([
 ]);
 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
-const verificarCorreo = (event) => {
-    let value = event.target.value;
-    let correos = ALL_EMAILS.map((e) => e.email);
+/**
+ * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
+ * @param {Object} event Evento que dispara el input de "correo"
+ */
+const verificarCorreo = async (event,valuePrimary = '0=0') => {
+    const URL = `${document.location.origin}/users/get/`;
+    let correo = event.target.value;
+    if (!correo) {
+        return;
+    }
+    let promesa = await fetch(URL + correo+'/'+valuePrimary);
+    let data = await promesa.json();
 
-    event.target.title = "El correo ya esta en uso";
-    var tooltip = new bootstrap.Tooltip(event.target,{title:event.target.title});
+    var tooltip = new bootstrap.Tooltip(event.target, {
+        title: "El correo ya esta en uso"
+    });
+    tooltip.disable();
 
-    console.log(value);
-
-    if (correos.indexOf(value) > -1) {
-        //Sino esta es que es unico
-        // event.target.classList.add("is-valid");
-        // event.target.classList.remove("is-invalid");
-        // tooltip.hide();
-        console.log("Si esta en alguna posion");
+    if (data.exist) {
+        //Si el usario existe el input se pone de rojo
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid");
+        event.target.title = "El correo ya esta en uso";
         tooltip.enable();
         tooltip.show();
     } else {
-        console.log("El valor es negativco")
+        //Si no, se queda en verde
+        tooltip.hide();
+        tooltip.disable();
     }
+    console.log(data);
 };
-let inputCorreo = document.getElementById("inputCorreo");
+let inputCorreo = document.getElementById("inputCorreo"); 
+let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+
 inputCorreo.addEventListener("keyup", verificarCorreo);
-
-// /**
-//  * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
-//  * @param {Object} event Evento que dispara el input de "correo"
-//  */
-// const verificarCorreo = async (event,valuePrimary = '0=0') => {
-//     const URL = `${document.location.origin}/users/get/`;
-//     let correo = event.target.value;
-//     if (!correo) {
-//         return;
-//     }
-//     let promesa = await fetch(URL + correo+'/'+valuePrimary);
-//     let data = await promesa.json();
-
-//     var tooltip = new bootstrap.Tooltip(event.target, {
-//         title: "El correo ya esta en uso"
-//     });
-//     tooltip.disable();
-
-//     if (data.exist) {
-//         //Si el usario existe el input se pone de rojo
-//         event.target.classList.add("is-invalid");
-//         event.target.classList.remove("is-valid");
-//         event.target.title = "El correo ya esta en uso";
-//         tooltip.enable();
-//         tooltip.show();
-//     } else {
-//         //Si no, se queda en verde
-//         tooltip.hide();
-//         tooltip.disable();
-//     }
-//     console.log(data);
-// };
-// let inputCorreo = document.getElementById("inputCorreo");
-// let inputCorreoEditar = document.getElementById("inputCorreoEditar");
-
-// inputCorreo.addEventListener("keyup", verificarCorreo);
-// inputCorreoEditar.addEventListener("blur", (e) => {
-//     let valuePrimary = document.getElementById("urlTemp").value;
-//     valuePrimary = valuePrimary.replace(document.location.href + "/", "");
-//     verificarCorreo(e,valuePrimary);
-// });
+inputCorreoEditar.addEventListener("blur", (e) => {
+    let valuePrimary = document.getElementById("urlTemp").value;
+    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
+    verificarCorreo(e,valuePrimary);
+});
 
 //------------------Input de la contraseña---------------------------------------------------------------------------------
 
