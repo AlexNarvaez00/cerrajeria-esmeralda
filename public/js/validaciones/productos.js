@@ -294,8 +294,8 @@ $("#inPrecio").on("blur",function(event){
 function compararPrecios(){
     var precio_compra = parseFloat($("#inPreciocompra").val());
     var precio_venta = parseFloat($("#inPrecio").val());
-    if(precio_venta < precio_compra){        
-        alert("El precio de la venta no puede ser mayor al precio de la compra");
+    if(precio_venta <= precio_compra){        
+        alert("El precio de la venta no puede ser mayor o igual al precio de la compra");
         $("#inPreciocompra").val("0.00");
         $("#inPrecio").val("1.00");
     }
