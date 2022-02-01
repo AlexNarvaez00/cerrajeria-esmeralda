@@ -89,6 +89,7 @@
                             </button>
                         </td>
                         <td>
+                        @if(auth()->user()->rol == "Administrador")
                         <a class="btnborrar" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <form class="form-detele" action="{{route('proveedores.destroy',$proveedor)}}" method="POST">
                                 @csrf
@@ -105,6 +106,11 @@
                                     <span>&#10060;</span>
                                 </button>
                             </form>
+                            @elseif
+                            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Accion no permitida">
+                                <span>&#x2753;</span>
+                            </button>
+                        @endif
                         </td>
                     </tr>
                     @endforeach

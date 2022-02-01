@@ -88,11 +88,17 @@
                             </a>
                         </td>
                         <td>
+                        @if(auth()->user()->rol == "Administrador")
                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar">
                             <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmacionModal">
                                 <span>&#10060;</span>
                             </button>
                             </a>
+                        @elseif
+                            <button data-bs-toggle="tooltip" data-bs-placement="top" title="Accion no permitida">
+                                <span>&#x2753;</span>
+                            </button>
+                        @endif
                         </td>
                     </tr>
                 @endforeach
