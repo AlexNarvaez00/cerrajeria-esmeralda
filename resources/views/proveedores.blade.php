@@ -139,7 +139,7 @@
                 <!--Columnas :v-->
                 @csrf
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedor" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedor" type="text" texto="Nombre del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
+                <x-input-normal expresion="Valor no admitido, Ejemplo: Oscar David" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedor" type="text" texto="Nombre(s) del Proveedor" valor="{{old('nombre')}}" nombreInput="nombre" nombreError="nombre" />
                 <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedor" type="text" texto="Apellido Paterno" valor="{{old('apellidopaterno')}}" nombreInput="apellidopaterno" nombreError="apellidopaterno" />
             </div>
             <div class="row">
@@ -154,8 +154,9 @@
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExt" type="number" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
+            <x-input-normal expresion="Valor no admitido, Ejemplo: Av. Benito Juarez" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalle" type="text" texto="Calle" valor="{{old('calle')}}" nombreInput="calle" nombreError="calle" />
+            <x-input-normal expresion="Valor no admitido, Ejemplo: 122 o 122-B" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExt" type="text" texto="Número Exterior" valor="{{old('numext')}}" nombreInput="numext" nombreError="numext" />
+            <x-input-normal expresion="Valor no admitido, Ejemplo: 004 o 004-C" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumInt" type="text" texto="Número Interior" valor="{{old('numint')}}" nombreInput="numint" nombreError="numint" />
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -251,7 +252,7 @@
                 <input type="hidden" name="urlTemp" value="{{old('urlTemp')}}" id="urlTemp">
                 @method('PUT')
                 <input type="hidden" class="" placeholder="" aria-label="" aria-describedby="" id="inputIDProveedorEditar" name="idProveedor">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedorEditar" type="text" texto="Nombre del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
+                <x-input-normal expresion="Valor no admitido, Ejemplo: Oscar David" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNombreProveedorEditar" type="text" texto="Nombre(s) del Proveedor" valor="{{old('nombreEditar')}}" nombreInput="nombreEditar" nombreError="nombreEditar" />
                 <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputApellidoPProveedorEditar" type="text" texto="Apellido Paterno" valor="{{old('apellidopaternoEditar')}}" nombreInput="apellidopaternoEditar" nombreError="apellidopaternoEditar" /> 
             </div>
             <div class="row">
@@ -266,8 +267,9 @@
             Dirección
             </p>
             <div class="row">
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
-            <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExtEditar" type="number" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
+            <x-input-normal expresion="Valor no admitido, Ejemplo: Av. Benito Juarez" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputCalleEditar" type="text" texto="Calle" valor="{{old('calleEditar')}}" nombreInput="calleEditar" nombreError="calleEditar"/>
+            <x-input-normal expresion="Valor no admitido, Ejemplo: 122 o 122-B" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumExtEditar" type="text" texto="Número Exterior" valor="{{old('numextEditar')}}" nombreInput="numextEditar" nombreError="numextEditar"/>
+            <x-input-normal expresion="Valor no admitido, Ejemplo: 004 o 004-C" class="col-md-12 col-sm-12" classesLabel="col-4" idInput="inputNumIntEditar" type="text" texto="Número Interior" valor="{{old('numintEditar')}}" nombreInput="numintEditar" nombreError="numintEditar"/>
             </div> 
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -368,7 +370,7 @@
 <script src="./js/funciones/cargarselectoresProv.js"></script>
 
 @if($errors->hasAny('nombre', 'apellidopaterno', 'apellidomaterno',
-'numtelefono', 'correo', 'calle', 'numext', 'estados', 'municipios', 'colonias'))
+'numtelefono', 'correo', 'calle', 'numext','numint', 'estados', 'municipios', 'colonias'))
         <script>
             let modalRegistro = new bootstrap.Modal(document.getElementById('registroProveedorModal'),null);
             modalRegistro.show();
@@ -378,7 +380,7 @@
     @endif
 
     @if($errors->hasAny('nombreEditar', 'apellidopaternoEditar', 'apellidomaternoEditar', 'numtelefonoEditar', 'correoEditar', 
-    'calleEditar', 'numextEditar', 'estadosEditar', 'municipiosEditar', 'coloniasEditar'))
+    'calleEditar', 'numextEditar','numintEditar', 'estadosEditar', 'municipiosEditar', 'coloniasEditar'))
         <script>
             let modalEdicion = new bootstrap.Modal(document.getElementById('editarProveedorModal'),null);
             modalEdicion.show();

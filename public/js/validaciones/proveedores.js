@@ -24,7 +24,8 @@ const expresionesRegulares = {
     NumTelefono:/^[0-9]{10}$/, //Los números de telefono tiene 10 números
     Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,   // Correo electrónico
     Calle: /^[A-Z][a-zÀ-ÿ\s]{1,40}/, //Letras y espacios, pueden llevar acentos
-    NumExt:/^[0-9]{3,4}$/, // Números exteriores 
+    NumExt:/^[0-9]{3,4}[A-Z-]{0,3}$/, // Números exteriores 
+    NumInt:/^[0-9]{3,4}[A-Z-]{0,3}$/, // Números interiores 
 };
 
 validator([
@@ -36,6 +37,7 @@ validator([
     [document.getElementById("inputCorreo"), expresionesRegulares.Correo],
     [document.getElementById("inputCalle"), expresionesRegulares.Calle],
     [document.getElementById("inputNumExt"), expresionesRegulares.NumExt],
+    [document.getElementById("inputNumInt"), expresionesRegulares.NumInt],
     [document.getElementById("inputEstado"), "0"],
     [document.getElementById("idMunicipio"), "0"],
     [document.getElementById("idColonia"), "0"],
@@ -47,7 +49,36 @@ validator([
     [document.getElementById("inputCorreoEditar"), expresionesRegulares.Correo],
     [document.getElementById("inputCalleEditar"), expresionesRegulares.Calle],
     [document.getElementById("inputNumExtEditar"), expresionesRegulares.NumExt],
+    [document.getElementById("inputNumIntEditar"), expresionesRegulares.NumInt],
     [document.getElementById("inputEstadoEditar"), "0"],
     [document.getElementById("idMunicipioEditar"), "0"],
     [document.getElementById("idColoniaEditar"), "0"],
 ]);
+
+const verificarCorreo = async (event,valuePrimary = '0=0') => {
+    const URL = `${document.location.origin}/proveedores/get/`;
+    let Correo = event.target.value;
+    if (!Correo) {
+        return;
+    }
+    let promesa = await fetch(URL + Correo+'/'+valuePrimary);
+    let data = await promesa.json();
+
+    if (data.exist) {
+        //Si el usario existe el input se pone de rojo
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid");
+        event.target.title = "El correo ya esta en uso";
+    } else {
+        //Si no, se queda en verde
+    }
+};
+let inputCorreo = document.getElementById("inputCorreo");
+let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+
+inputCorreo.addEventListener("blur", verificarCorreo);
+inputCorreoEditar.addEventListener("blur", (e) => {
+    let valuePrimary = document.getElementById("urlTemp").value;
+    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
+    verificarCorreo(e,valuePrimary);
+});

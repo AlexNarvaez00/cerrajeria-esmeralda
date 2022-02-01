@@ -63,7 +63,8 @@ class proveedorController extends Controller
         'numtelefono' => 'required|regex:/^[0-9]{10}$/',
         'correo' => 'required|email',
         'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
-        'numext' => 'required|regex:/^[0-9]{3,4}$/' 
+        'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/',
+        'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/' 
     ];
 
     /**
@@ -147,11 +148,8 @@ class proveedorController extends Controller
         //Se crea una llave primaria para el proveedor a partir de los datos del formulario
         $llavePrimaria = "PROV-".
         strtoupper($request->apellidopaterno[0]).
-        strtoupper($request->apellidopaterno[1]).
-        strtoupper("-".$request->apellidomaterno[0]).
-        strtoupper($request->apellidomaterno[1]).
-        strtoupper($request->numext[0]).
-        strtoupper($request->numext[1]);
+        strtoupper($request->apellidomaterno[0]).
+        date('H:i:s');
 
             //Nombre del campo BD----- Nombre input formulario
         $proveedor->idproveedor =  $llavePrimaria;
@@ -166,13 +164,10 @@ class proveedorController extends Controller
         $direccion->iddireccion = "DIC-".
         strtoupper($request->numext[0]).
         strtoupper($request->numext[1]).
-        strtoupper($request->apellidopaterno[0]).
-        strtoupper($request->apellidopaterno[1]).
-        strtoupper("-").
-        strtoupper($request->apellidomaterno[0]).
-        strtoupper($request->apellidomaterno[1]);
+        date('H:i:s');
         $direccion->calle=$request->calle;
         $direccion->numero= $request->numext;
+        $direccion->numeroint= $request->numint;
         $direccion->idcoldirec = $request->colonias;
         $PRYKEY = $direccion->iddireccion;
         $direccion->save();
@@ -189,10 +184,8 @@ class proveedorController extends Controller
         //Se crea un ID (llave primaria)para el registro en la tabla
         $telefono_prov->idtelefono = "Tel-".
         strtoupper($request->apellidopaterno[0]).
-        strtoupper($request->apellidopaterno[1]).
-        strtoupper("-").
         strtoupper($request->apellidomaterno[0]).
-        strtoupper($request->apellidomaterno[1]);
+        date('H:i:s');
         $telefono_prov->telefono = $request->numtelefono;                 //Número de telefono del proveedor que se almacena en la tabla telefono_proveedor
         $telefono_prov->idproveedor = $proveedor->idproveedor;            //Llave foranea (ID proveedor)
         $telefono_prov->save();                                           //Se guarda el registro
@@ -241,6 +234,7 @@ class proveedorController extends Controller
         $direccion = direccionModelo::find($proveedore->iddirecproveedor);              
         $direccion->calle=$request->calleEditar;                                        //Los datos a actualizar incluyen de igual manera los siguientes
         $direccion->numero= $request->numextEditar;
+        $direccion->numeroint= $request->numintEditar;
         $direccion->idcoldirec = $request->coloniasEditar;
         $direccion->save();                                                             //Se realiza el guardado de estos datos en la tabla dirección
         $proveedore->save();                                                            //Se realiza el guardado de estos datos en la tabla proveedor
@@ -287,6 +281,27 @@ class proveedorController extends Controller
      */
     public function edit(proveedorModelo $proveedore)
     {
+    }
+
+    public function isExists($email, $valuePrimary)
+    {
+        $provEmailExist = null;
+        if ($valuePrimary == '0=0') {
+            //Cuando se registra un usuaruo por primera vez
+            $provEmailExist = proveedorModelo::where('correo', $email)
+                ->get()
+                ->count() == 1;
+        } else {
+            //Editamos la informacion del usuario 
+            $provEmailExist = proveedorModelo::where('idproveedor', '!=', $valuePrimary)
+                ->where('correo', $email)
+                ->get()
+                ->count() == 1;
+        }
+        $arrayInformation = [
+            'exist' => $provEmailExist
+        ];
+        return response()->json($arrayInformation);
     }
 
     /**
