@@ -48,23 +48,22 @@ validator([
 const verificarCorreo = (event) => {
     let value = event.target.value;
     let correos = ALL_EMAILS.map((e) => e.email);
-    console.log(correos.indexOf(value));
-    event.target.title = "El correo ya existe";
-    var tooltip = bootstrap.Tooltip.getInstance(event.target);
-    console.log(tooltip);
-    if (correos.indexOf(value) >= 0) {
+
+    event.target.title = "El correo ya esta en uso";
+    var tooltip = new bootstrap.Tooltip(event.target,{title:event.target.title});
+
+    console.log(value);
+
+    if (correos.indexOf(value) > -1) {
         //Sino esta es que es unico
         // event.target.classList.add("is-valid");
         // event.target.classList.remove("is-invalid");
         // tooltip.hide();
-        // tooltip.disable();
-        console.log("Si esta en alguna posion")
+        console.log("Si esta en alguna posion");
+        tooltip.enable();
+        tooltip.show();
     } else {
-        console.log("El valor esnegativco")
-        // event.target.classList.add("is-invalid");
-        // event.target.classList.remove("is-valid");
-        // tooltip.enable();
-        // tooltip.show();
+        console.log("El valor es negativco")
     }
 };
 let inputCorreo = document.getElementById("inputCorreo");
