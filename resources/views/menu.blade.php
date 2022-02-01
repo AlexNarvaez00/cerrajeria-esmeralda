@@ -68,8 +68,8 @@
                 <div class="card-img">
                     <img src="./img/img3.jpg" class="card-img-top img-menu" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Reporte de Ventas</h5>
-                        <p class="card-text">En esta sección puedes consultar la sección de reportes. Visualiza los reportes de ventas.</p>
+                        <h5 class="card-title">Consulta de Ventas</h5>
+                        <p class="card-text">En esta sección puedes consultar las ventas realizadas de los productos y servicios brindados.</p>
                         <a href="../ventas" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#irreportes">Ir a las opciones</a>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                 <div class="card" style="width: 18rem;">
                     <img src="./img/productoscerrajeria.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Reporte de productos</h5>
+                        <h5 class="card-title">Colsulta de productos</h5>
                         <p class="card-text">¿Quieres realizar consultas sobre la venta de productos?</p>
                         <a href="../reporte-venta-productos" class="btn btn-primary">Ir</a>
                     </div>
@@ -202,7 +202,7 @@
                     <div class="card" style="width: 18rem;">
                         <img src="./img/serviciocerrajeria.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Reporte de servicio</h5>
+                            <h5 class="card-title">Consulta de servicio</h5>
                             <p class="card-text">¿Quieres realizar consultas sobre la ventas de un servicio?</p>
                             <a href="../reporte-ventas-servicios" class="btn btn-primary">Ir</a>
                         </div>
