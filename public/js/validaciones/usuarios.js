@@ -45,18 +45,28 @@ validator([
 ]);
 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
-const verificarCorreo = (event) =>{
+const verificarCorreo = (event) => {
     let value = event.target.value;
-    let correos = ALL_EMAILS.map(e=>e.email);
-    //console.log(correos.indexOf(value));
-    if(correos.indexOf(value)){
-        event.target.classList.add("is-invalid");
-        event.target.classList.remove("is-valid");
-    }else{
-        vent.target.classList.add("is-valid");
-        event.target.classList.remove("is-invalid");
+    let correos = ALL_EMAILS.map((e) => e.email);
+    console.log(correos.indexOf(value));
+    event.target.title = "El correo ya existe";
+    var tooltip = bootstrap.Tooltip.getInstance(event.target);
+    console.log(tooltip);
+    if (correos.indexOf(value) >= 0) {
+        //Sino esta es que es unico
+        // event.target.classList.add("is-valid");
+        // event.target.classList.remove("is-invalid");
+        // tooltip.hide();
+        // tooltip.disable();
+        console.log("Si esta en alguna posion")
+    } else {
+        console.log("El valor esnegativco")
+        // event.target.classList.add("is-invalid");
+        // event.target.classList.remove("is-valid");
+        // tooltip.enable();
+        // tooltip.show();
     }
-}
+};
 let inputCorreo = document.getElementById("inputCorreo");
 inputCorreo.addEventListener("keyup", verificarCorreo);
 
@@ -74,7 +84,7 @@ inputCorreo.addEventListener("keyup", verificarCorreo);
 //     let data = await promesa.json();
 
 //     var tooltip = new bootstrap.Tooltip(event.target, {
-//         title: "El correo ya esta en uso" 
+//         title: "El correo ya esta en uso"
 //     });
 //     tooltip.disable();
 
@@ -102,19 +112,20 @@ inputCorreo.addEventListener("keyup", verificarCorreo);
 //     verificarCorreo(e,valuePrimary);
 // });
 
-
 //------------------Input de la contraseña---------------------------------------------------------------------------------
 
-let inputContraseniaConfirm = document.getElementById("inputPasswordUsuarioCon");
+let inputContraseniaConfirm = document.getElementById(
+    "inputPasswordUsuarioCon"
+);
 let inputContrasenia = document.getElementById("inputPasswordUsuario");
 
-//Las contraseñas nnos las validad la de los correo lo voy a hace diferente alv ya me arte 
+//Las contraseñas nnos las validad la de los correo lo voy a hace diferente alv ya me arte
 
 // inputContraseniaConfirm.addEventListener('keyup',e=>{
 //     let value = e.target.value;
 //     e.target.title="Las constraseñas con coinciden";
 //     var tooltip = new bootstrap.Tooltip(e.target, {
-//         title: "Las constraseñas con coinciden" 
+//         title: "Las constraseñas con coinciden"
 //     });
 //     if(value != inputContrasenia.value){
 //         //Las constraseñas son diferentes
