@@ -1,3 +1,19 @@
+const expresionesRegulares = {
+    claveProducto: /^[a-zA-Z|\-|\d]{1,10}$/,
+    caracteres: /^[a-zA-Z|-|\s]{1,20}$/,
+    cantidades: /\d/,
+    NumTelefono: /^[0-9]{10}$/,
+    nombreProveedor: /^[a-zA-Z|-|\s]{1,50}$/,
+    Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+};
+
+validator([
+    [document.getElementById("inputNombreCliente"),expresionesRegulares.caracteres],
+    [document.getElementById("inputApellidoPCliente"),expresionesRegulares.caracteres]
+]);
+
+
+
 //establece si el cliente ya esta registrado o se va a registrar
 $("#flexSwitchCheckDefault").on("click", function() {
     var condicion = $("#flexSwitchCheckDefault").is(":checked");    
@@ -199,19 +215,51 @@ $("#inMontoRecibido").on("keyup",function(event){
         $("#btnTerminarV").enable("disabled",true);
     }
 });
-
-$("#calleProveedor").on("blur",function(event){
-    var temp = $("#calleProveedor").val();
+//----
+$("#inputNombreCliente").on("blur",function(event){
+    var temp = $("#inputNombreCliente").val();
     if(temp == ""){
-        $('#calleProveedor').addClass("is-invalid");
-        $("#labelcalleProveedor").text("El campo no debe estar vacio");
+        $('#inputNombreCliente').addClass("is-invalid");
+        $("#labelNombreCliente").text("El campo no debe estar vacio");
     }
 });
-$("#calleProveedor").on("focus",function(event){
-        $("#labelcalleProveedor").text("");    
+$("#inputNombreCliente").on("focus",function(event){
+        $("#labelNombreCliente").text("");    
 });
 //--------------------
-        
+$("#inputApellidoPCliente").on("blur",function(event){
+    var temp = $("#inputApellidoPCliente").val();
+    if(temp == ""){
+        $('#inputApellidoPCliente').addClass("is-invalid");
+        $("#labelApellidoPCliente").text("El campo no debe estar vacio");
+    }
+});
+$("#inputApellidoPCliente").on("focus",function(event){
+        $("#labelApellidoPCliente").text("");    
+});
+//--------------------
+$("#inputApellidoMCliente").on("blur",function(event){
+    var temp = $("#inputApellidoMCliente").val();
+    if(temp == ""){
+        $('#inputApellidoMCliente').addClass("is-invalid");
+        $("#labelApellidoMCliente").text("El campo no debe estar vacio");
+    }
+});
+$("#inputApellidoMCliente").on("focus",function(event){
+        $("#labelApellidoMCliente").text("");    
+});
+//--------------------
+$("#inputNumTelefono").on("blur",function(event){
+    var temp = $("#inputNumTelefono").val();
+    if(temp == ""){
+        $('#inputNumTelefono').addClass("is-invalid");
+        $("#labelApellidoMCliente").text("El campo no debe estar vacio");
+    }
+});
+$("#inputNumTelefono").on("focus",function(event){
+        $("#labelApellidoMCliente").text("");    
+});
+//--------------------
        
         
 
