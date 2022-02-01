@@ -63,8 +63,8 @@ class proveedorController extends Controller
         'numtelefono' => 'required|regex:/^[0-9]{10}$/',
         'correo' => 'required|email',
         'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
-        'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{2,3}$/',
-        'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{2,3}$/' 
+        'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/',
+        'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{0,3}$/' 
     ];
 
     /**
@@ -78,10 +78,7 @@ class proveedorController extends Controller
         'apellidopaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'apellidomaternoEditar' => 'required|regex:/^[A-Z][a-zÀ-ÿ]{2,25}$/',
         'numtelefonoEditar' => 'required|regex:/^[0-9]{10}$/',
-        'correoEditar' => 'required|email',
-        'calle' => 'required|regex:/^[A-Z][a-zÀ-ÿ\s]{1,40}/',
-        'numext' => 'required|regex:/^[0-9]{3,4}[A-Z-]{2,3}$/',
-        'numint' => 'required|regex:/^[0-9]{3,4}[A-Z-]{2,3}$/'
+        'correoEditar' => 'required|email'
     ];
 
 
@@ -284,6 +281,27 @@ class proveedorController extends Controller
      */
     public function edit(proveedorModelo $proveedore)
     {
+    }
+
+    public function isExists($email, $valuePrimary)
+    {
+        $provEmailExist = null;
+        if ($valuePrimary == '0=0') {
+            //Cuando se registra un usuaruo por primera vez
+            $provEmailExist = proveedorModelo::where('correo', $email)
+                ->get()
+                ->count() == 1;
+        } else {
+            //Editamos la informacion del usuario 
+            $provEmailExist = proveedorModelo::where('idproveedor', '!=', $valuePrimary)
+                ->where('correo', $email)
+                ->get()
+                ->count() == 1;
+        }
+        $arrayInformation = [
+            'exist' => $provEmailExist
+        ];
+        return response()->json($arrayInformation);
     }
 
     /**
