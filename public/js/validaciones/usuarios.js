@@ -18,10 +18,10 @@ validator([
         document.getElementById("inputPasswordUsuario"),
         expresionesRegulares.password,
     ],
-    [
-        document.getElementById("inputPasswordUsuarioCon"),
-        expresionesRegulares.password,
-    ],
+    // [
+    //     document.getElementById("inputPasswordUsuarioCon"),
+    //     expresionesRegulares.password,
+    // ],
     [document.getElementById("inputRolUsuario"), "0"], //Esto es un selector
     //Inpust de edicion
     [
@@ -37,13 +37,13 @@ validator([
         document.getElementById("inputPasswordUsuarioEditar"),
         expresionesRegulares.password,
     ],
-    [
-        document.getElementById("inputPasswordUsuarioConEditar"),
-        expresionesRegulares.password,
-    ],
-    [document.getElementById("inputRolUsuarioEditar"), "0"], //El otro selector xd
+    // [
+    //     document.getElementById("inputPasswordUsuarioConEditar"),
+    //     expresionesRegulares.password,
+    // ],
+    [document.getElementById("inputRolUsuarioEditar"), "0"] //El otro selector xd
 ]);
-
+ 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
 /**
  * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
@@ -102,34 +102,51 @@ let inputContraseniaConfirm = document.getElementById(
 );
 let inputContrasenia = document.getElementById("inputPasswordUsuario");
 
-//Las contraseñas nnos las validad la de los correo lo voy a hace diferente alv ya me arte
+inputContraseniaConfirm.title = "Las constraseñas no coinciden"
+var tooltipG = new bootstrap.Tooltip(inputContraseniaConfirm, {title: inputContraseniaConfirm.title});
 
-// inputContraseniaConfirm.addEventListener('keyup',e=>{
-//     let value = e.target.value;
-//     e.target.title="Las constraseñas con coinciden";
-//     var tooltip = new bootstrap.Tooltip(e.target, {
-//         title: "Las constraseñas con coinciden"
-//     });
-//     if(value != inputContrasenia.value){
-//         //Las constraseñas son diferentes
-//         e.target.classList.add("is-invalid");
-//         e.target.classList.remove("is-valid");
-//     }else{
-//         //Las constraseñas son iguales
-//         e.target.classList.add("is-valid");
-//         e.target.classList.remove("is-invalid");
-//         tooltip.hide();
-//         tooltip.disable();
-//     }
-// });
 
-// inputContraseniaConfirm.addEventListener('blur',e=>{
-//     let value = e.target.value;
-//     if(value != inputContrasenia.value){
-//         e.target.classList.add("is-invalid");
-//         e.target.classList.remove("is-valid");
-//     }
-//     var tooltip = new bootstrap.Tooltip(e.target, {});
-//     tooltip.hide();
-//     tooltip.disable();
-// });
+inputContraseniaConfirm.addEventListener('keyup',event=>{
+    let conformacion = event.target.value;
+    //tooltip.disable();
+    if(conformacion === inputContrasenia.value){
+        //Son las mismoas
+        event.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
+        tooltipG.hide();
+        tooltipG.disable();
+    }else{
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid"); 
+        tooltipG.enable();
+        tooltipG.show();
+    }
+    //tooltip.dispose();
+});
+
+
+//-----------------------------------INPT DE CONTRASEÑA DE EDITAR -------------------------------------
+
+let inputPasswordConfirmEdit = document.getElementById("inputPasswordUsuarioConEditar");
+
+inputPasswordConfirmEdit.title = "Las constraseñas no coinciden"
+var tooltipG_Confirm = new bootstrap.Tooltip(inputPasswordConfirmEdit, {title: inputPasswordConfirmEdit.title});
+let inputContraseniaEditr = document.getElementById("inputPasswordUsuarioEditar");
+
+inputPasswordConfirmEdit.addEventListener('keyup',event=>{
+    let conformacion = event.target.value;
+    //tooltip.disable();
+    if(conformacion === inputContraseniaEditr.value){
+        //Son las mismoas
+        event.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
+        tooltipG_Confirm.hide();
+        tooltipG_Confirm.disable();
+    }else{
+        event.target.classList.add("is-invalid");
+        event.target.classList.remove("is-valid"); 
+        tooltipG_Confirm.enable();
+        tooltipG_Confirm.show();
+    }
+    //tooltip.dispose();
+}); 

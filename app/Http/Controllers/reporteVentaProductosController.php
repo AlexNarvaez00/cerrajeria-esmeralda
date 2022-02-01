@@ -128,7 +128,7 @@ class reporteVentaProductosController extends Controller
     public function getResumen($mes, $anio)
     {
         if ($mes > 0 && $anio == 0) {
-            
+
             $ventasPorMes = ventaModelo::selectRaw('SUM(dv.importe) as ganancia, SUM(dv.cantidad) as materialesUtilizados')
                 ->join('detalleventa AS dv', 'dv.folio_v', 'venta.folio_v')
                 ->whereMonth('fechayhora', $mes)
@@ -186,28 +186,54 @@ class reporteVentaProductosController extends Controller
         return  response()->json([]);
     }
 
-    public function reporteVentas($mes,$anio)
+    public function reporteVentas($dia, $mes, $anio)
     {
-        $query = detalleVentaModelo::selectRaw(
-            'venta.folio_v,
-            detalleventa.clave_producto,
-            sum(detalleventa.cantidad) AS cantidadVendida,
-            (sum(productos.precio_producto)*detalleventa.cantidad) AS subtotal,
-            (( productos.precio_producto - productos.precio_compra )*sum(detalleventa.cantidad) ) AS ganancia'
-        )
-            ->join('venta', 'venta.folio_v', 'detalleventa.folio_v')
-            ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
-            ->whereYear('venta.fechayhora',$anio)
-            ->whereMonth('venta.fechayhora',$mes)
-            ->groupBy(
-                'venta.folio_v',
-                'detalleventa.clave_producto',
-                'productos.precio_producto',
-                'productos.precio_compra',
-                'detalleventa.cantidad'
+        $query = [];
+        if ($dia == 0) {
+            $query = detalleVentaModelo::selectRaw(
+                'venta.folio_v,
+                        detalleventa.clave_producto,
+                        sum(detalleventa.cantidad) AS cantidadVendida,
+                        (sum(productos.precio_producto)*detalleventa.cantidad) AS subtotal,
+                        (( productos.precio_producto - productos.precio_compra )*sum(detalleventa.cantidad) ) AS ganancia'
             )
-            ->get();
-            return response()->json($query);
+                ->join('venta', 'venta.folio_v', 'detalleventa.folio_v')
+                ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
+                ->whereYear('venta.fechayhora', $anio)
+                ->whereMonth('venta.fechayhora', $mes)
+                ->groupBy(
+                    'venta.folio_v',
+                    'detalleventa.clave_producto',
+                    'productos.precio_producto',
+                    'productos.precio_compra',
+                    'detalleventa.cantidad'
+                )
+                ->get();
+        } else {
+            $query = detalleVentaModelo::selectRaw(
+                'venta.folio_v,
+                        detalleventa.clave_producto,
+                        sum(detalleventa.cantidad) AS cantidadVendida,
+                        (sum(productos.precio_producto)*detalleventa.cantidad) AS subtotal,
+                        (( productos.precio_producto - productos.precio_compra )*sum(detalleventa.cantidad) ) AS ganancia'
+            )
+                ->join('venta', 'venta.folio_v', 'detalleventa.folio_v')
+                ->join('productos', 'productos.clave_producto', 'detalleventa.clave_producto')
+                ->whereDay('venta.fechayhora', $dia)
+                ->whereYear('venta.fechayhora', $anio)
+                ->whereMonth('venta.fechayhora', $mes)
+                ->groupBy(
+                    'venta.folio_v',
+                    'detalleventa.clave_producto',
+                    'productos.precio_producto',
+                    'productos.precio_compra',
+                    'detalleventa.cantidad'
+                )
+                ->get();
+        }
+
+
+        return response()->json($query);
     }
 
 

@@ -29,11 +29,11 @@ const createRow = (rowDB) => {
         document.createElement("td"), //3
         document.createElement("td"), //4
     ];
-    tds[0].innerHTML = rowDB.nombre_producto;
-    tds[1].innerHTML = rowDB.observaciones;
-    tds[2].innerHTML = rowDB.clasificacion;
-    tds[3].innerHTML = rowDB.precio_producto;
-    tds[4].innerHTML = rowDB.cantidad;
+    tds[0].innerHTML = rowDB.folio_v;
+    tds[1].innerHTML = rowDB.clave_producto;
+    tds[2].innerHTML = rowDB.cantidadVendida;
+    tds[3].innerHTML = rowDB.subtotal;
+    tds[4].innerHTML = rowDB.ganancia;
 
     tds.forEach((td) => {
         tr.appendChild(td);
@@ -54,11 +54,11 @@ const createTable = (datos) => {
     let tablaInformacionHead = document.createElement("thead");
     tablaInformacion.appendChild(tablaInformacionHead);
     let tablaInformacionHeaders = [
-        "nombre_producto",
-        "observaciones",
-        "clasificacion",
-        "precio_producto",
-        "cantidad",
+        "Folio de venta",
+        "Clave producto",
+        "Cantidad Vendida",
+        "Subtotal",
+        "Ganancia"
     ];
     let tablaInformacionHeadRow = document.createElement("tr");
     tablaInformacionHead.appendChild(tablaInformacionHeadRow);
@@ -73,7 +73,7 @@ const createTable = (datos) => {
     tablaInformacion.appendChild(tablaInformacionBody);
 
     //Es un arreglo -------------------------
-    let informacion = datos.informacion;
+    let informacion = datos;
     informacion.forEach((element) => {
         tablaInformacionBody.appendChild(createRow(element));
     });
@@ -90,14 +90,19 @@ const colocarResultados = async (e) => {
 
     let mes = selectorMes.value;
     let anio = selectorAnio.value;
-
-    if (mes == 0 && anio == 0) return;
-    let URL = `${document.location.origin}${document.location.pathname}/productos/por/${mes}/${anio}`;
+    let URL = `${document.location.origin}/consultalarga/productos/por/0/${mes}/${anio}`;
+    if (mes == 0 && anio == 0) {
+        let fecha =new  Date();
+        URL = `${document.location.origin}/consultalarga/productos/por/${fecha.getMonth()}/${ fecha.getDay()}/${fecha.getFullYear()}`;
+    }
+    console.log(URL);
+    ///consultalarga/productos/por/{dia}/{mes}/{anio}
     let peticionFecth = await fetch(URL);
     let datos = await peticionFecth.json();
     let p = document.createElement("p");
 
-    if(datos.informacion.length == 0){
+
+    if(datos.length == 0){
         p.innerHTML ="No existen datos para resumir &#x274c;, intenta con otra consulta";
         bodyModalResumen.appendChild(p);
         return 
@@ -123,8 +128,7 @@ const colocarResultados = async (e) => {
         bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
         return;
-    }
-    if (mes != "0") {
+    } else  if (mes != "0") {
         //Selecciono el mes
         //p.classList.add('');
         p.innerHTML = `Reporte del mes de <span class="fw-bolder">${
@@ -142,9 +146,8 @@ const colocarResultados = async (e) => {
 
         bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
-    }
-    if (anio != "0") {
-        //Selecciono el mes
+    }else if (anio != "0") {
+        //Selecciono el año
         //p.classList.add('');
         p.innerHTML = `Reporte del año de <span class="fw-bolder">${
             anio
@@ -161,7 +164,17 @@ const colocarResultados = async (e) => {
 
         bodyModalResumen.appendChild(resumen);
         bodyModalResumen.appendChild(createTable(datos));
+    }else{
+        p.innerHTML = `Reporte del dia de <span class="fw-bolder">HOY </span>`;
+        bodyModalResumen.appendChild(p);
+        let resumen = document.createElement("p");
+        resumen.innerHTML = `Las ganancias totales del dia de <span class="fw-bolder">HOY</span> 
+        son de \$${datos[0].ganancia}`;
+        bodyModalResumen.appendChild(resumen);
+        bodyModalResumen.appendChild(createTable(datos));
+
     }
+
 };
 
 botonResumir.addEventListener("click", colocarResultados);

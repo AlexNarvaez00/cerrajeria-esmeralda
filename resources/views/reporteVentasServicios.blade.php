@@ -68,7 +68,7 @@
         <div class="col-auto">
             <button type="submit" class="btn btn-light d-flex ps-3 pe-3" name="resumir" id="btn-resumir" data-bs-toggle="modal" data-bs-target="#InformacionResumida">
                 <span class="me-3">&#x1f4dd;</span>
-                Resumir
+                Ver reporte
             </button>
         </div>
     </div>

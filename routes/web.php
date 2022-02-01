@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/get/{email}/{valuePrimary}',[usuarioController::class,'isExists'])->name('user.exists');
     Route::get('/reporte-ventas-servicios/servicios/por/{mes}/{anio}',[reporteVentasController::class,'getResumen'])->name('resumen.servicios');
     Route::get('/reporte-venta-productos/productos/por/{mes}/{anio}',[reporteVentaProductosController::class,'getResumen'])->name('resumen.productos');
-    Route::get('/consultalarga/productos/por/{mes}/{anio}',[reporteVentaProductosController::class,'reporteVentas'])->name('resumen.productos2');
+    Route::get('/consultalarga/productos/por/{dia}/{mes}/{anio}',[reporteVentaProductosController::class,'reporteVentas'])->name('resumen.productos2');
     
    //Rutas para el modulo de ventas servicios
     Route::post('/estado/servicio',[serviciosController::class,'getCiudades'])->name('estado.servicio');

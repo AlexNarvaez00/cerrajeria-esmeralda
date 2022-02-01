@@ -127,10 +127,10 @@
                 <x-input-normal expresion="Error, valor no admitido, Ejemplo: Oscar" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
             </div>
             <div class="row">
-                <x-input-normal expresion="Correo electronio valido, Ejemplo sis@gmail.com" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+                <x-input-normal expresion="Correo electronio no valido, Ejemplo sis@gmail.com" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div>
             <div class="row">
-                <x-input-normal expresion="Error, valor no admitido, Cantidad minima de letras 8, con mayusculas, minusculas y numeros" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena"/>
+                <x-input-normal expresion="Error, valor no admitido, Cantidad minima de letras es 8, con mayusculas, minusculas y numeros" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena"/>
             </div>
             <div class="row">
                 <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuarioCon" type="password" texto="Confirmar Contraseña" nombreInput="contrasena_confirmation" nombreError="contrsenaConfirmada" />
@@ -201,13 +201,13 @@
 
             <div class="row">
                 <!--Columnas :v-->
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuarioEditar" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuarioEditar')}}" nombreInput="nombreUsuarioEditar" nombreError="nombreUsuarioEditar" />
+                <x-input-normal expresion="Error, valor no admitido, Ejemplo: Oscar" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputNombreUsuarioEditar" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuarioEditar')}}" nombreInput="nombreUsuarioEditar" nombreError="nombreUsuarioEditar" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar" />
+                <x-input-normal expresion="Correo electronio no valido, Ejemplo sis@gmail.com" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputCorreoEditar" type="email" texto="Correo" valor="{{old('correoEditar')}}" nombreInput="correoEditar" nombreError="correoEditar" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioEditar" type="password" texto="Contraseña" nombreInput="contrasenaEditar" nombreError="contrasenaEditar" />
+                <x-input-normal expresion="Error, valor no admitido, Cantidad minima de letras es 8, con mayusculas, minusculas y numeros" class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioEditar" type="password" texto="Contraseña" nombreInput="contrasenaEditar" nombreError="contrasenaEditar" />
             </div>
             <div class="row">
                 <x-input-normal class="col-md-12 col-sm-12" classesLabel="col-3" idInput="inputPasswordUsuarioConEditar" type="password" texto="Confirmar Contraseña" valor="{{old('contrsenaConfirmadaEditar')}}" nombreInput="contrasenaEditar_confirmation" nombreError="contrsenaConfirmadaEditar" />
