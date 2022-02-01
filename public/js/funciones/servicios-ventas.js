@@ -4,12 +4,15 @@ const expresionesRegulares = {
     cantidades: /\d/,
     NumTelefono: /^[0-9]{10}$/,
     nombreProveedor: /^[a-zA-Z|-|\s]{1,50}$/,
-    Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+    Correo:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    NumExt:/^[0-9]{3,4}[A-Z-]{0,3}$/
 };
 
 validator([
     [document.getElementById("inputNombreCliente"),expresionesRegulares.caracteres],
-    [document.getElementById("inputApellidoPCliente"),expresionesRegulares.caracteres]
+    [document.getElementById("inputApellidoPCliente"),expresionesRegulares.caracteres],
+    [document.getElementById("numero"),expresionesRegulares.NumExt],
+    [document.getElementById("numeroInt"),expresionesRegulares.NumExt]
 ]);
 
 
