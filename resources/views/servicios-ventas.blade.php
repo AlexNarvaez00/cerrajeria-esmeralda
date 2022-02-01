@@ -256,20 +256,25 @@
       <div class="row">
 
         <div class="col-md-6 col-sm-12">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-1 ">
             <span class="input-group-text" id="basic-addon1">Monto del servicio</span>
             <input id ="inPrecio" type="number" min="1" step="0.01" class="form-control" value="0.00"  aria-label="Username" aria-describedby="basic-addon1" name="monto" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 190)" required>
             <h5 class="text-danger" for="basic-url">*</h5>
           </div>
           <label class="text-danger" for="basic-url" id="labelmonto"></label> 
-        </div>
-
-        <div class="input-group">
-          <span class="input-group-text">Descripción</span>
-          <textarea id="areaDescripcion" class="form-control" placeholder="Puedes agregar referencias del lugar o alguna observación" aria-label="With textarea" name="descripcion" required></textarea>
-          <h5 class="text-danger" for="basic-url">*</h5>
-        </div>    
+        </div>        
       </div>
+      <div class = "row">
+        <div class="col-md-12 col-sm-12">
+          <div class="input-group">
+            <span class="input-group-text">Descripción</span>
+            <textarea id="areaDescripcion" class="form-control" placeholder="Puedes agregar referencias del lugar o alguna observación" aria-label="With textarea" name="descripcion" required></textarea>
+            <h5 class="text-danger" for="basic-url">*</h5>
+          </div> 
+          <label class="text-danger" for="basic-url" id="areaDescripcion"></label> 
+        </div>   
+      </div>
+        
     </div> 
     @endslot
     @slot('footerModal')

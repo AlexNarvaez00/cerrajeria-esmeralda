@@ -11,8 +11,11 @@ const expresionesRegulares = {
 validator([
     [document.getElementById("inputNombreCliente"),expresionesRegulares.caracteres],
     [document.getElementById("inputApellidoPCliente"),expresionesRegulares.caracteres],
-    [document.getElementById("numero"),expresionesRegulares.NumExt],
-    [document.getElementById("numeroInt"),expresionesRegulares.NumExt]
+    [document.getElementById("inputApellidoMCliente"),expresionesRegulares.caracteres],
+    [document.getElementById("inputNumTelefono"),expresionesRegulares.NumTelefono],
+    [document.getElementById("inputCalle"),expresionesRegulares.caracteres],
+    [document.getElementById("inputNumExt"),expresionesRegulares.NumExt],
+    [document.getElementById("inputNumInt"),expresionesRegulares.NumExt]
 ]);
 
 
