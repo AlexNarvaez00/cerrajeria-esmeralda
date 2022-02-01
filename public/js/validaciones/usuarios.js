@@ -45,37 +45,62 @@ validator([
 ]);
 
 //-------------------------------------Validacion esta del input del correo--------------------------------------------------------------------
-/**
- * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
- * @param {Object} event Evento que dispara el input de "correo"
- */
-const verificarCorreo = async (event,valuePrimary = '0=0') => {
-    const URL = `${document.location.origin}/users/get/`;
-    let correo = event.target.value;
-    if (!correo) {
-        return;
-    }
-    let promesa = await fetch(URL + correo+'/'+valuePrimary);
-    let data = await promesa.json();
-
-    if (data.exist) {
-        //Si el usario existe el input se pone de rojo
+const verificarCorreo = (event) =>{
+    let value = event.target.value;
+    let correos = ALL_EMAILS.map(e=>e.email);
+    //console.log(correos.indexOf(value));
+    if(correos.indexOf(value)){
         event.target.classList.add("is-invalid");
         event.target.classList.remove("is-valid");
-        event.target.title = "El correo ya esta en uso";
-    } else {
-        //Si no, se queda en verde
+    }else{
+        vent.target.classList.add("is-valid");
+        event.target.classList.remove("is-invalid");
     }
-};
+}
 let inputCorreo = document.getElementById("inputCorreo");
-let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+inputCorreo.addEventListener("keyup", verificarCorreo);
 
-inputCorreo.addEventListener("blur", verificarCorreo);
-inputCorreoEditar.addEventListener("blur", (e) => {
-    let valuePrimary = document.getElementById("urlTemp").value;
-    valuePrimary = valuePrimary.replace(document.location.href + "/", "");
-    verificarCorreo(e,valuePrimary);
-});
+// /**
+//  * Estra funcion comprueba que el correo sea unico, si ya existe en la base de datos genera un error
+//  * @param {Object} event Evento que dispara el input de "correo"
+//  */
+// const verificarCorreo = async (event,valuePrimary = '0=0') => {
+//     const URL = `${document.location.origin}/users/get/`;
+//     let correo = event.target.value;
+//     if (!correo) {
+//         return;
+//     }
+//     let promesa = await fetch(URL + correo+'/'+valuePrimary);
+//     let data = await promesa.json();
+
+//     var tooltip = new bootstrap.Tooltip(event.target, {
+//         title: "El correo ya esta en uso" 
+//     });
+//     tooltip.disable();
+
+//     if (data.exist) {
+//         //Si el usario existe el input se pone de rojo
+//         event.target.classList.add("is-invalid");
+//         event.target.classList.remove("is-valid");
+//         event.target.title = "El correo ya esta en uso";
+//         tooltip.enable();
+//         tooltip.show();
+//     } else {
+//         //Si no, se queda en verde
+//         tooltip.hide();
+//         tooltip.disable();
+//     }
+//     console.log(data);
+// };
+// let inputCorreo = document.getElementById("inputCorreo");
+// let inputCorreoEditar = document.getElementById("inputCorreoEditar");
+
+// inputCorreo.addEventListener("keyup", verificarCorreo);
+// inputCorreoEditar.addEventListener("blur", (e) => {
+//     let valuePrimary = document.getElementById("urlTemp").value;
+//     valuePrimary = valuePrimary.replace(document.location.href + "/", "");
+//     verificarCorreo(e,valuePrimary);
+// });
 
 
 //------------------Input de la contraseña---------------------------------------------------------------------------------
@@ -83,31 +108,34 @@ inputCorreoEditar.addEventListener("blur", (e) => {
 let inputContraseniaConfirm = document.getElementById("inputPasswordUsuarioCon");
 let inputContrasenia = document.getElementById("inputPasswordUsuario");
 
-inputContraseniaConfirm.addEventListener('keyup',e=>{
-    let value = e.target.value;
-    e.target.title="Las constraseñas con coinciden";
-    var tooltip = new bootstrap.Tooltip(e.target, {
-        title: "Las constraseñas con coinciden" 
-    });
-    if(value != inputContrasenia.value){
-        //Las constraseñas son diferentes
-        
-        e.target.classList.add("is-invalid");
-        e.target.classList.remove("is-valid");
-    }else{
-        //Las constraseñas son iguales
-        e.target.classList.add("is-valid");
-        e.target.classList.remove("is-invalid");
-    }
-});
+//Las contraseñas nnos las validad la de los correo lo voy a hace diferente alv ya me arte 
 
-inputContraseniaConfirm.addEventListener('blur',e=>{
-    let value = e.target.value;
-    if(value != inputContrasenia.value){
-        e.target.classList.add("is-invalid");
-        e.target.classList.remove("is-valid");
-    }
-    var tooltip = new bootstrap.Tooltip(e.target, {});
-    tooltip.hide();
-    tooltip.disable();
-});
+// inputContraseniaConfirm.addEventListener('keyup',e=>{
+//     let value = e.target.value;
+//     e.target.title="Las constraseñas con coinciden";
+//     var tooltip = new bootstrap.Tooltip(e.target, {
+//         title: "Las constraseñas con coinciden" 
+//     });
+//     if(value != inputContrasenia.value){
+//         //Las constraseñas son diferentes
+//         e.target.classList.add("is-invalid");
+//         e.target.classList.remove("is-valid");
+//     }else{
+//         //Las constraseñas son iguales
+//         e.target.classList.add("is-valid");
+//         e.target.classList.remove("is-invalid");
+//         tooltip.hide();
+//         tooltip.disable();
+//     }
+// });
+
+// inputContraseniaConfirm.addEventListener('blur',e=>{
+//     let value = e.target.value;
+//     if(value != inputContrasenia.value){
+//         e.target.classList.add("is-invalid");
+//         e.target.classList.remove("is-valid");
+//     }
+//     var tooltip = new bootstrap.Tooltip(e.target, {});
+//     tooltip.hide();
+//     tooltip.disable();
+// });

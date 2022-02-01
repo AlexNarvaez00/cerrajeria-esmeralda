@@ -80,6 +80,9 @@ class usuarioController extends Controller
     ];
 
 
+
+    public $atributtes = [];
+
     /**
      * -------------------------------------
      *  Constructor
@@ -92,6 +95,12 @@ class usuarioController extends Controller
     {
         $this->camposVista = ['ID', 'Nombre', 'Rol', 'Creado', 'Modificado', 'Editar', 'Borrar'];
         $this->listaRoles = ['Administrador', 'Empleado', 'Ayudante'];
+
+        $this->atributtes=[
+            'listaRoles' =>$this->listaRoles,
+            'camposVista' =>$this->camposVista,
+            'ALL_EMAILS' => User::select('email')->get()
+        ];
     }
 
     /**
@@ -112,10 +121,10 @@ class usuarioController extends Controller
             $listaUsuarios = User::paginate(6);
         }
 
+        $this->atributtes['registrosVista'] = $listaUsuarios;
+
         return view('usuarios') //Nombre de la vista
-            ->with('camposVista', $this->camposVista) //Campos de la tablas
-            ->with('registrosVista', $listaUsuarios) //Registros de la tabla
-            ->with('listaRoles', $this->listaRoles); // //Campos de la tablas
+            ->with($this->atributtes); //Campos de la tablas
     }
 
     /**

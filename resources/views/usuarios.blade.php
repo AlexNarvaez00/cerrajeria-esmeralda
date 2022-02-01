@@ -274,6 +274,9 @@
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
+<script>
+    let ALL_EMAILS = @json($ALL_EMAILS);
+</script>
 <script src="./js/validaciones/usuarios.js"></script>
 <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
 <script src="./js/funciones/editarUsuario.js"></script>
