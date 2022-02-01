@@ -81,7 +81,7 @@ const createTable = (datos) => {
     let sumaDELSubTotal = informacion.map(e=>e.subtotal);
     sumaDELSubTotal = sumaDELSubTotal.reduce((acum,num) =>acum+num);
 
-    let sumaDELGanancia = informacion.map(e=>e.subtotal);
+    let sumaDELGanancia = informacion.map(e=>e.ganancia);
     sumaDELGanancia = sumaDELGanancia.reduce((acum,num) =>acum+num);
 
 
@@ -89,6 +89,7 @@ const createTable = (datos) => {
                         <th colspan="2">
                             Total:
                         </th>
+                        <td>
                         <td>
                             ${sumaDELSubTotal}
                         </td>
