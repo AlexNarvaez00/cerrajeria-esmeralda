@@ -193,8 +193,7 @@ $("#formularioProveedor").on("submit", function (e) {
         },     
         //= ="modal" data-bs-dismiss="modal"   
         success: function(data){   
-            data = JSON.parse(data); 
-               
+            data = JSON.parse(data);     
             $("#proveedores").append(
                 $("<option>", {
                     value: data.idproveedor,
