@@ -124,7 +124,7 @@
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">idCliente</span>
               <input disabled="true" type="text" class="form-control" placeholder="Ejemp. cl-atat" aria-label="Username" aria-describedby="basic-addon1" id="inputIdCliente" name="idCliente" required>
-            </div>            
+            </div>             
           </div>
 
             <div class="col-md-2 col-sm-12">
@@ -139,10 +139,11 @@
 
         <div class="col-md-6 col-sm-12">
           <div class="input-group mb-1">
-            <span class="input-group-text" id="basic-addon1">Nombre</span>
+            <span class="input-group-text" id="basic-addon1">Nombre(s)</span>
             <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Juan" aria-label="Username" aria-describedby="basic-addon1" id="inputNombreCliente" name="nombre" required>
             <h5 class="text-danger" for="basic-url">*</h5>
           </div>   
+          <label class="text-danger" for="basic-url" id="labelNombreCliente"></label>  
         </div>
 
         <div class="col-md-6 col-sm-12">
@@ -150,11 +151,11 @@
             <span class="input-group-text" id="basic-addon1">Apellido Paterno</span>
             <input type="text" maxlength="30"  class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1" id="inputApellidoPCliente" name="apellidoP">
             <h5 class="text-danger" for="basic-url">*</h5>
-          </div>       
+          </div>    
+          <label class="text-danger" for="basic-url" id="labelApellidoPCliente"></label>     
         </div>
 
       </div>
-    <br>
       <div class="row">
 
         <div class="col-md-6 col-sm-12">
@@ -162,7 +163,8 @@
             <span class="input-group-text" id="basic-addon1">Apellido Materno</span>
               <input type="text" maxlength="30" class="form-control" placeholder="Ejemp. Martinez" aria-label="Username" aria-describedby="basic-addon1"id="inputApellidoMCliente" name="apellidoM">
               <h5 class="text-danger" for="basic-url">*</h5>
-            </div>          
+            </div>    
+            <label class="text-danger" for="basic-url" id="labelApellidoMCliente"></label>          
         </div>
 
         <div class="col-md-6 col-sm-12">
@@ -170,7 +172,8 @@
             <span class="input-group-text" id="basic-addon1">Número de teléfono</span>
             <input type="number" maxlength="10"  class="form-control" placeholder="Ej. 9514628538" aria-label="Username" aria-describedby="basic-addon1" id="inputNumTelefono" name="telefono">
             <h5 class="text-danger" for="basic-url">*</h5>
-          </div>          
+          </div>  
+          <label class="text-danger" for="basic-url" id="labelNumTelefono"></label>        
         </div>
 
       </div>

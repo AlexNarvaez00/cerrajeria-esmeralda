@@ -127,7 +127,7 @@
                 <x-input-normal expresion="Error, valor no admitido, Ejemplo: Oscar" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputNombreUsuario" type="text" texto="Nombre de Usuario" valor="{{old('nombreUsuario')}}" nombreInput="nombreUsuario" nombreError="nombreUsuario" />
             </div>
             <div class="row">
-                <x-input-normal class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
+                <x-input-normal expresion="Correo electronio valido, Ejemplo sis@gmail.com" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputCorreo" type="email" texto="Correo" valor="{{old('correo')}}" nombreInput="correo" nombreError="correo" />
             </div>
             <div class="row">
                 <x-input-normal expresion="Error, valor no admitido, Cantidad minima de letras 8, con mayusculas, minusculas y numeros" class="col-md-12 col-sm-12 col-10" classesLabel="col-lg-3 col-md-12 col-sm-12 col-12" idInput="inputPasswordUsuario" type="password" texto="Contraseña" nombreInput="contrasena" nombreError="contrasena"/>
@@ -273,9 +273,6 @@
 
 <!--En esta seccion van los scripts para cada una de las vistas-->
 @section('scritps')
-<script>
-    let ALL_EMAILS = @json($ALL_EMAILS);
-</script>
 <script src="./js/validaciones/usuarios.js"></script>
 <script src="./js/modales/mostrarModalConfirmUsuarios.js"></script>
 <script src="./js/funciones/editarUsuario.js"></script>
